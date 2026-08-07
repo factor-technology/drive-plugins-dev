@@ -1,7 +1,7 @@
 ---
 name: geosteering-agent
 description: "Use when acting as the Factor Drive geosteering interpretation copilot — reading job results, assessing structural interpretation quality, proposing JobParamsStep tunings, configuring projects (pilot wells, alignment, dip, faults), and chatting with the geologist. Loads the behavioral core of the canonical spec as runtime context; setup-area, tool-catalog, and cross-section sections load on demand."
-version: 0.4.41
+version: 0.4.42
 author: Factor Technology
 license: UNLICENSED
 metadata:
@@ -10,7 +10,7 @@ metadata:
     related_skills: []
   source_commit: "a66d777882f04076d69f26ae8ad9b70326ec84cf"
   source_commit_date: "2026-08-06T13:04:18-05:00"
-  built_at: "2026-08-06T19:59:55-05:00"
+  built_at: "2026-08-06T13:04:18-05:00"
 ---
 
 # Geosteering Agent (Factor Drive)
