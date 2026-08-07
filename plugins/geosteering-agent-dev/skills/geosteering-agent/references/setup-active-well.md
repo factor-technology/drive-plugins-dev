@@ -81,7 +81,9 @@ parse the rows yourself and pass `waypoints` inline (§1.1).
 user forwards LAS / Excel attachments to a project-specific address and
 Drive extracts the designated GR curve on receipt. Configured via
 `set_email_config({curve_mnemonic, is_enabled?})`, which wraps
-`PUT /email-config`. The tool also returns the computed fmail address:
+`PUT /email-config`. `is_enabled: false` pauses only the automatic job
+run on arrival; attachments still update the well data.
+The tool also returns the computed fmail address:
 `<base32(scope/name)>[+host]@fmail.factor.technology` (the `+host`
 suffix is omitted when the Drive host starts with `drive`; for dev /
 staging hosts it routes each install to its own inbox). If the encoded

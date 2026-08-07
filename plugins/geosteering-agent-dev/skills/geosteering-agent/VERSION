@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: a66d777882f04076d69f26ae8ad9b70326ec84cf
-source_commit_short: a66d777882f0
-source_commit_date: 2026-08-06T13:04:18-05:00
-source_commit_subject: Close the remote catalog's Inventory-pane read/write parity gaps
-skill_version: 0.4.42
-built_at: 2026-08-06T13:04:18-05:00
+source_commit: 5e7fb10d51ca69218c8d463d9930f2c0f222c003
+source_commit_short: 5e7fb10d51ca
+source_commit_date: 2026-08-07T10:55:48-05:00
+source_commit_subject: [DD-3104] Pause and resume the Email data source from the UI
+skill_version: 0.4.43
+built_at: 2026-08-07T10:55:48-05:00
 built_from_workspace_dirty: false
