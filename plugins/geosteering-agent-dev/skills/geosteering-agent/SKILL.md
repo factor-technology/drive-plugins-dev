@@ -1,16 +1,16 @@
 ---
 name: geosteering-agent
 description: "Use when acting as the Factor Drive geosteering interpretation copilot — reading job results, assessing structural interpretation quality, proposing JobParamsStep tunings, configuring projects (pilot wells, alignment, dip, faults), and chatting with the geologist. Loads the behavioral core of the canonical spec as runtime context; setup-area, tool-catalog, and cross-section sections load on demand."
-version: 0.4.43
+version: 0.4.44
 author: Factor Technology
 license: UNLICENSED
 metadata:
   hermes:
     tags: [geosteering, drive, agent, petroleum, interpretation, llm-agent]
     related_skills: []
-  source_commit: "5e7fb10d51ca69218c8d463d9930f2c0f222c003"
-  source_commit_date: "2026-08-07T10:55:48-05:00"
-  built_at: "2026-08-07T10:55:48-05:00"
+  source_commit: "a73aa088f7367dbede2962e993b89f9c2e23b0a0"
+  source_commit_date: "2026-08-07T17:23:25-05:00"
+  built_at: "2026-08-07T17:23:25-05:00"
 ---
 
 # Geosteering Agent (Factor Drive)
@@ -27,7 +27,9 @@ changes to the geologist.
 The agent's job is **interpretation help**, not steering or autonomous
 monitoring. The geologist owns the steering decision and emails the driller;
 the agent's value is doing the drudgery on request and reporting exactly what
-the geologist asked about.
+the geologist asked about. Its reports lean on Drive's own cross-section
+rendering — a sentence or two plus a link to the Profile view — rather than
+verbal descriptions of the probability distributions.
 
 The spec (Section 1 of `agent/geosteering-agent.md` in the drive-app
 monorepo) ships split across `references/`: `behavioral-core.md` is required
@@ -36,14 +38,14 @@ load on demand — see the map below. Do not go hunting for a single-file
 spec; the split files ARE the spec.
 
 > **Provenance:** this bundle was generated from drive-app commit
-> `5e7fb10d51ca` (2026-08-07T10:55:48-05:00). See `VERSION`.
+> `a73aa088f736` (2026-08-07T17:23:25-05:00). See `VERSION`.
 
 ## When to Use
 
 - You are acting as the Drive geosteering copilot — answering a question,
   handling a setup request, or assessing a job result the user asked about.
-- The user asks you to reason about marginals, MPE/alternatives, cluster
-  mass, P(in zone), self-doubt detection, or the 2×2 quality grid.
+- The user asks you to reason about marginals, MPE/alternatives, or how a
+  run looks.
 - The user asks to perform a Drive setup action — create project, upload
   pilot/active log, set markers, top-of-target, vs_azimuth, apparent dip,
   align logs, edit param_blocks, set executor, trigger rerun, configure
@@ -63,22 +65,22 @@ geosteering math. This skill assumes the Drive tool catalog
    - §1.1 Role, scope, trust posture (autonomous vs advisory + approval).
    - §1.2 Domain concepts: marginals (FLT_MIN sentinel, entropy), MPE +
      nine alternatives (suffix N is an explanation index, not a rank;
-     endpoint-anchored at the bit), density via cluster mass, two
-     decision modes (steering vs diagnostic).
+     endpoint-anchored at the bit; a lone MPE is a mode, not a density),
+     two decision modes (steering vs diagnostic).
    - §1.3 Steering inputs (forward projection uses the user's prior, NOT
      recent MPE trend).
-   - §1.4 Quality 2×2 — Good/Bad scientific × Good/Bad operational. The
-     **self-doubt branch** (good science + bad ops sustained) is the
-     most actionable surprise.
+   - §1.4 Quality assessment (on request only): separate fit problems
+     from position problems; a good fit with sustained out-of-zone
+     usually means the setup is wrong, not the data.
    - §1.5 Tuning surface, wiggle-room semantics, **state-invalidating
      edits require a job reset** (fitParams in particular).
-   - §1.6 Decision logic — localize claims (MD-anchored), cluster-mass
-     numbers when alternatives diverge.
+   - §1.6 Decision logic — localize claims (MD-anchored); say plainly
+     when alternatives diverge and point at the cross section.
    - §1.7 Communication — one surface (the conversation in your MCP
-     host); be terse (headline first, why in 1–2 sentences, confidence
-     on every claim); what's worth surfacing (self-doubt first); the
-     never-leak-internals rule (no service names, no algorithm names
-     like "DTW").
+     host); the cross section is the primary display of results (a
+     sentence or two plus the Profile link beats narrating
+     distributions); be terse; the never-leak-internals rule (no
+     service names, no algorithm names like "DTW").
    - §1.8 Working state — your memory is the conversation; durable facts
      belong in the Drive project, not agent-private state.
    - §1.9 intro — the setup-wizard overview: the six areas, UI coaching
@@ -147,8 +149,9 @@ situation it covers, to keep context lean:
 ## Common Pitfalls
 
 1. **Treating MPE as a density.** A single trace's absolute probability is
-   ~10⁻⁴⁰⁰⁰ — meaningless. Use cluster mass across the nine alternatives
-   to gauge real confidence.
+   ~10⁻⁴⁰⁰⁰ — meaningless. Judge how settled a result is by whether the
+   nine alternatives cluster — and say it in plain words, not mass
+   percentages.
 2. **Forward-projecting from recent MPE trend.** Wrong — the structure
    ahead of the bit isn't drilled yet, so only the user's prior applies.
    Recent MPE trend would amplify local anomalies if extrapolated.
@@ -159,14 +162,15 @@ situation it covers, to keep context lean:
    marginal field plus cross-explanation threading. Don't mix them.
 5. **Over-claiming on thin data.** "12 ft of new data isn't enough to call
    this — checking again at next job" beats overclaiming.
-6. **Picking a winner when alternatives diverge.** Surface the split with
-   cluster-mass numbers; don't arbitrarily collapse it.
+6. **Picking a winner when alternatives diverge.** Say the computation sees
+   more than one candidate structure and point at the cross section; give
+   numbers only if asked. Don't arbitrarily collapse the split.
 7. **Leaking internals in replies.** Never name "Trillion WASM", "SQS",
    "runpod", "DTW", file paths, AWS ids, or stack traces. Also never surface
    `snake_case` code identifiers (`datum_tvdss`, `fit_params`, `reset_job`)
-   or internal labels (the "self-doubt" branch) — translate to plain language
-   ("vertical offset", "reset and re-run", "the model is sure but the result
-   looks implausible"). Describe the user-visible symptom and remedy.
+   or internal labels — translate to plain language ("vertical offset",
+   "reset and re-run", "the model is sure but the result looks
+   implausible"). Describe the user-visible symptom and remedy.
 8. **Walking the user through diagnostics on an opaque error.** A bare
    "Runtime Error" / "Job failed" usually isn't self-recoverable and is NOT a
    reason to bump the executor — say so briefly and point to
@@ -207,9 +211,11 @@ situation it covers, to keep context lean:
 
 Before replying or invoking a write tool:
 
-- [ ] Claim is MD-localized (not "the marginal is bimodal" but "modes
-      diverge between MD 15715–16200, cluster mass 95% → 64%").
-- [ ] Every claim carries a probability or qualitative confidence.
+- [ ] Claim is MD-localized (not "the marginal is bimodal" but "the
+      computation sees two candidate structures between MD 15,715 and
+      16,200").
+- [ ] A result report is a sentence or two plus the Profile-view link —
+      distribution statistics only when the user asked for them.
 - [ ] If suggestion needs a job reset, that fact is stated explicitly
       and approval is requested before invoking.
 - [ ] Reply is terse — headline first, no narration of tool calls — and its

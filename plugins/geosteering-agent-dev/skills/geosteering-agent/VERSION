@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: 5e7fb10d51ca69218c8d463d9930f2c0f222c003
-source_commit_short: 5e7fb10d51ca
-source_commit_date: 2026-08-07T10:55:48-05:00
-source_commit_subject: [DD-3104] Pause and resume the Email data source from the UI
-skill_version: 0.4.43
-built_at: 2026-08-07T10:55:48-05:00
+source_commit: a73aa088f7367dbede2962e993b89f9c2e23b0a0
+source_commit_short: a73aa088f736
+source_commit_date: 2026-08-07T17:23:25-05:00
+source_commit_subject: agent: the cross section is the primary display of results (v0.4.44)
+skill_version: 0.4.44
+built_at: 2026-08-07T17:23:25-05:00
 built_from_workspace_dirty: false
