@@ -1,0 +1,8 @@
+source: drive-app/agent/geosteering-agent.md
+source_commit: a66d777882f04076d69f26ae8ad9b70326ec84cf
+source_commit_short: a66d777882f0
+source_commit_date: 2026-08-06T13:04:18-05:00
+source_commit_subject: Close the remote catalog's Inventory-pane read/write parity gaps
+skill_version: 0.4.41
+built_at: 2026-08-06T19:59:55-05:00
+built_from_workspace_dirty: false
