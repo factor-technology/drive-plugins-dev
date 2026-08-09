@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: 28623638228abfe2f0f9d51b32896b9570d89fea
-source_commit_short: 28623638228a
-source_commit_date: 2026-08-08T21:25:39-05:00
-source_commit_subject: [DD-3110] Abbreviate Type log TVD as TVDTL everywhere user-facing
-skill_version: 0.4.46
-built_at: 2026-08-08T21:25:39-05:00
+source_commit: 6b228c8634ce9c0f156a0f6d3b5d0eb843ff9340
+source_commit_short: 6b228c8634ce
+source_commit_date: 2026-08-09T10:09:09-05:00
+source_commit_subject: Teach the agent skills TVDTL and the vertical-type-log assumption
+skill_version: 0.4.47
+built_at: 2026-08-09T10:09:09-05:00
 built_from_workspace_dirty: false

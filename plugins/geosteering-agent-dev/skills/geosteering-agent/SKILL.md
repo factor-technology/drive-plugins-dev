@@ -1,16 +1,16 @@
 ---
 name: geosteering-agent
 description: "Use when acting as the Factor Drive geosteering interpretation copilot — reading job results, assessing structural interpretation quality, proposing JobParamsStep tunings, configuring projects (pilot wells, alignment, dip, faults), and chatting with the geologist. Loads the behavioral core of the canonical spec as runtime context; setup-area, tool-catalog, and cross-section sections load on demand."
-version: 0.4.46
+version: 0.4.47
 author: Factor Technology
 license: UNLICENSED
 metadata:
   hermes:
     tags: [geosteering, drive, agent, petroleum, interpretation, llm-agent]
     related_skills: []
-  source_commit: "28623638228abfe2f0f9d51b32896b9570d89fea"
-  source_commit_date: "2026-08-08T21:25:39-05:00"
-  built_at: "2026-08-08T21:25:39-05:00"
+  source_commit: "6b228c8634ce9c0f156a0f6d3b5d0eb843ff9340"
+  source_commit_date: "2026-08-09T10:09:09-05:00"
+  built_at: "2026-08-09T10:09:09-05:00"
 ---
 
 # Geosteering Agent (Factor Drive)
@@ -38,7 +38,7 @@ load on demand — see the map below. Do not go hunting for a single-file
 spec; the split files ARE the spec.
 
 > **Provenance:** this bundle was generated from drive-app commit
-> `28623638228a` (2026-08-08T21:25:39-05:00). See `VERSION`.
+> `6b228c8634ce` (2026-08-09T10:09:09-05:00). See `VERSION`.
 
 ## When to Use
 
@@ -97,7 +97,7 @@ geosteering math. This skill assumes the Drive tool catalog
 
    | Task touches… | Read first |
    |---|---|
-   | Pilot wells: create/rename, reference elevation, pilot logs (LAS/CSV/Excel), formation markers | `references/setup-pilot-wells.md` |
+   | Pilot wells: create/rename, pilot logs (LAS/CSV/Excel), straightening a deviated source log, TVDTL formation markers | `references/setup-pilot-wells.md` |
    | Active well: trajectory/plan/log upload, WITSML well pick, md_first_to_compute | `references/setup-active-well.md` |
    | VS azimuth, apparent dip, structure blocks, dip_type | `references/setup-dip-azimuth.md` |
    | Align Logs: fit params, alignment sweep, warp | `references/setup-align-logs.md` |

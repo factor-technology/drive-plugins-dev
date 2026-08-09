@@ -6,7 +6,8 @@ A **pilot well** is an offset well — located some distance away from the
 **active well** being geosteered. It serves as a reference / type-log for
 the computation's calibration. Each pilot well carries:
 
-- A vertical gamma ray (GR) log, stored in positive-down pilot TVD.
+- A vertical gamma ray (GR) log, stored in positive-down pilot TVD — the
+  frame the user reads and writes as **TVDTL** (§1.1).
 - An MD range over which it applies.
 
 A project always has at least one pilot well. The first one starts at
@@ -14,11 +15,18 @@ A project always has at least one pilot well. The first one starts at
 the lateral, each covering a contiguous MD range. APIs expose these MD
 ranges.
 
-**Log storage and straightening.** Logs are **stored as vertical**. If the
-source log was acquired from a deviated well, the user supplies a
-trajectory at ingest; the server uses it to "straighten" the log to
-vertical, then **the trajectory is discarded**. Only the resulting
-vertical log is part of the persistent pilot well.
+**The type log is assumed vertical — and stored that way.** Drive takes a
+pilot log to be a vertical section through the stratigraphy: its depth axis
+is true vertical depth (TVDTL), so a thickness read off it is a true
+thickness. A log from a deviated hole reaches that state one of two ways, and
+the user has to have done one of them: either they **straightened it to
+vertical themselves** before upload, or they supply the source well's
+**deviation survey** (the pilot well trajectory) at ingest and the server
+straightens the log. The survey is used once and then **discarded** — only
+the resulting vertical log persists as part of the pilot well. A deviated
+hole's log uploaded raw, with neither, reads as tops that are too deep and
+layers that are too thick, in proportion to hole angle; if a user's answers
+suggest that's what happened, say so rather than letting it through.
 
 **File formats — your responsibility in chat.** Drive's HTTP API serves
 and accepts custom JSON for both logs and trajectories. Real users have:
@@ -35,15 +43,16 @@ mnemonic** to use from the user. Useful pattern: parse the file, list
 the available mnemonics with brief descriptions if present in the LAS
 header, let the user pick.
 
-**Verticalization trajectory — prompt as optional.** If the source log
-was acquired from a deviated well, Drive uses a trajectory CSV to
-straighten the log to vertical at ingest (and discards the trajectory
-after). Ask the user **once** whether they have such a trajectory
-file. If they don't — the common case, since pilot source wells are
-typically vertical — proceed with an empty trajectory and no
-transformation is applied. When the user provides one, parse it like
-any other trajectory CSV (collect column indexes per the rule below)
-and pass via `trajectory_waypoints` (default `[]`).
+**Deviation survey — prompt as optional.** If the source log was acquired
+from a deviated well and the user has not already straightened it, Drive
+uses that well's deviation survey (a trajectory CSV) to straighten the log
+to vertical at ingest, then discards the survey. Ask the user **once**
+whether they have such a file. If they don't — the common case, since pilot
+source wells are typically vertical, or were straightened upstream —
+proceed with an empty trajectory and no transformation is applied. When the
+user provides one, parse it like any other trajectory CSV (collect column
+indexes per the rule below) and pass via `trajectory_waypoints` (default
+`[]`).
 
 **CSV/Excel trajectories — collect the column indexes.** You must collect
 the **column numbers** for measured depth, inclination, and azimuth. Useful
@@ -133,11 +142,13 @@ vertical and `index_domain` is `"TVD"`. Marker storage is
 per-marker patch/delete endpoint. Markers have no server-side ids;
 they're identified by `name` within the list.
 
-**Coordinate convention — no translation.** The user speaks **Type Log
-TVD**: positive feet downward, the very numbers in the pilot-well grid
-(a top at 14,385 ft means 14,385). `depth_index` stores exactly that
-number — write and read it as-is, with `index_domain: "TVD"`. Never
-negate in either direction.
+**Coordinate convention — no translation.** The user speaks **type log TVD
+(TVDTL)**: positive feet downward, the very numbers in the Formation Tops
+grid (a top at 14,385 ft means 14,385). On a single-pilot project that
+grid's depth column is headed **Depth (TVDTL)**; with several pilots each
+column is headed by its MD span instead, and the depths in all of them are
+still TVDTL. `depth_index` stores exactly that number — write and read it
+as-is, with `index_domain: "TVD"`. Never negate in either direction.
 
 **Top of target — project-level pointer, not a marker attribute.** The
 project carries a `tot_name` field that names one of the pilot-well
@@ -154,7 +165,7 @@ more than one pilot well:
   all other pilots share it. Non-first pilots tell you nothing about
   structure — only ToT structure is computed.
 - **ToT must be flattened across pilots**: the user must enter the
-  **same type-log TVD (TVDTL) depth** for the ToT marker on every pilot well. The UI
+  **same type log TVD (TVDTL) depth** for the ToT marker on every pilot well. The UI
   does not enforce this — when you see/edit pilot markers, verify and
   flag mismatches.
 - **Same marker set on every pilot**: every formation on the first

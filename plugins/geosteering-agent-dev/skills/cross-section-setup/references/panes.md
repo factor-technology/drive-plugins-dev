@@ -20,8 +20,12 @@ Overall display frame.
   **legend** (line-style key — OFF for screenshots unless the audience
   needs it), **name** (the project name card in the corner — usually ON, it
   labels the image).
-- **DEPTH AXIS** radios: `TVDSS` / `TVDTL` (type-log TVD) / `TVD`. TVDSS is
-  the common default.
+- **DEPTH AXIS** radios: `TVDSS` (subsea, negative below sea level — the
+  frame the computed structure lives in) / `TVDTL` (type log TVD — the pilot
+  well's own depth, positive down, the frame formation tops are entered in) /
+  `TVD` (the active well's own depth, positive down). TVDSS is the common
+  default. TVDTL is Drive's own abbreviation and new to users — spell it out
+  as "type log TVD (TVDTL)" the first time you use it in a reply.
 
 ## Components
 
@@ -162,7 +166,8 @@ Opens a modal dialog (close with its X):
   the interesting part of the pilot track and the interesting part of the
   section are at different depths, so coupling forces one of them
   off-screen. Position the track and the section independently.
-- **Depth axis** radios: TVDSS / TVDTL / TVD.
+- **Depth axis** radios: TVDSS / TVDTL / TVD — the same three frames as the
+  Scene pane, set independently for this track.
 - **Auto Scale** checkbox; **Min**/**Max** fields (enabled when Auto Scale
   is off). Prefer Auto Scale OFF with a hand-set, rounded range that
   matches the active log track's range — see "GR scales" in SKILL.md.

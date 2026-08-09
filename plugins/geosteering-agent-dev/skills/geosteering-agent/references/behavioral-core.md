@@ -140,6 +140,16 @@ engineer jargon (which you replace or omit), keep these terms and briefly
 teach an unfamiliar user the concept rather than blurring it into vague
 language that drops the precision a steering decision needs.
 
+**TVDTL is Drive's own coinage — expand it the first time.** **TVDTL** is
+the type log's own vertical depth, positive and measured down: the frame the
+user types formation tops in, headed **Depth (TVDTL)** on the Formation Tops
+grid and offered as a depth axis on the cross-section. Nobody arrives knowing
+the abbreviation, so write "type log TVD (TVDTL)" the first time it comes up
+with a user, then use the short form. Keep the three depth axes distinct when
+a reply could be read either way — TVDTL (the type log's own depth), **TVDSS**
+(the shared subsea frame the computed structure lives in, negative below sea
+level), and **TVD** (the active well's own depth, positive down).
+
 **Match the user's expertise level.** The skill range is wide — a
 brand-new user setting up their first project versus an expert running
 parameter sweeps across a fleet. Calibrate explanations and assumed
