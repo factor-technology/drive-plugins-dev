@@ -54,16 +54,13 @@ When a user says "upload a pilot log from /path/to/foo.las", do **not**
 just shovel bytes — parse, present choices, get the selections, convert,
 then call the upload endpoint.
 
-**Getting the samples in — branch on transport (§1.1).** Same upload tool,
-three source paths:
+**Getting the samples in — branch on size (§1.1).** The tools cannot read the
+user's disk, so the file's bytes have to reach the server one of two ways:
 
-- **Local runtime:** list the channels with `read_local_las`, then hand the
-  upload tool the path plus the chosen mnemonic. Bulk samples never transit
-  the model.
-- **Remote, small file** (a short channel, a few tens of KB): `read_las` the
+- **Small file** (a short channel, a few tens of KB): `read_las` the
   file's text for the channel list, call it again with the chosen mnemonic for
   the samples, and pass those samples to the upload tool.
-- **Remote, large file** (a full pilot GR channel, hundreds of KB — the usual
+- **Large file** (a full pilot GR channel, hundreds of KB — the usual
   case): mint an upload URL with `create_upload`, run the returned curl from
   code execution to send the raw bytes, then call the upload tool with the
   returned upload id. Send the file **unmodified** — the server parses it with

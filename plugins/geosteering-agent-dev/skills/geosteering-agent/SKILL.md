@@ -1,16 +1,16 @@
 ---
 name: geosteering-agent
 description: "Use when acting as the Factor Drive geosteering interpretation copilot — reading job results, assessing structural interpretation quality, proposing JobParamsStep tunings, configuring projects (pilot wells, alignment, dip, faults), and chatting with the geologist. Loads the behavioral core of the canonical spec as runtime context; setup-area, tool-catalog, and cross-section sections load on demand."
-version: 0.4.44
+version: 0.4.45
 author: Factor Technology
 license: UNLICENSED
 metadata:
   hermes:
     tags: [geosteering, drive, agent, petroleum, interpretation, llm-agent]
     related_skills: []
-  source_commit: "a73aa088f7367dbede2962e993b89f9c2e23b0a0"
-  source_commit_date: "2026-08-07T17:23:25-05:00"
-  built_at: "2026-08-07T17:23:25-05:00"
+  source_commit: "dbe9ea656cb6a2db672f530d8bd23d1764c6c0d2"
+  source_commit_date: "2026-08-08T18:41:09-05:00"
+  built_at: "2026-08-08T18:41:09-05:00"
 ---
 
 # Geosteering Agent (Factor Drive)
@@ -38,7 +38,7 @@ load on demand — see the map below. Do not go hunting for a single-file
 spec; the split files ARE the spec.
 
 > **Provenance:** this bundle was generated from drive-app commit
-> `a73aa088f736` (2026-08-07T17:23:25-05:00). See `VERSION`.
+> `dbe9ea656cb6` (2026-08-08T18:41:09-05:00). See `VERSION`.
 
 ## When to Use
 
@@ -117,12 +117,8 @@ geosteering math. This skill assumes the Drive tool catalog
 These are **not** required reading — pull one in only for the specific
 situation it covers, to keep context lean:
 
-- **`references/drive-http-fallback.md`** — **local runtime only** (it is all
-  `drive_http_request`, which the remote connector doesn't carry): bulk
-  MPE/result extraction across many projects. Not for plain listing or name
-  search — use `list_projects` for those.
-- **`references/installing-drive-mcp.md`** — setup walkthrough for both the
-  local drive-mcp server and the remote connector.
+- **`references/installing-drive-mcp.md`** — setup walkthrough for the Drive
+  connector: adding it by hand, or installing the plugin that carries it.
 - **`references/user-guide/`** — the end-user & admin User Guide, the same
   pages published at `/help/` on the Drive host. Load the relevant page when
   the geologist asks a UI how-to the spec doesn't cover: Projects-page
@@ -191,7 +187,7 @@ situation it covers, to keep context lean:
    `#job-parameters`, `#run-job`.
 10. **Pre-flight asking on a configured project.** "Do step 4" on a
     project that already has pilots, markers, logs, and trajectory means
-    run align_logs with the current inputs — not re-collect them. Read
+    run the alignment with the current inputs — not re-collect them. Read
     first via `read_project`, `list_pilot_wells`, `read_pilot_well_markers`,
     `read_fit_params`, `read_active_trajectory` etc.
 11. **Switching dip_type without clearing/setting blocks.** `delete_structure`
@@ -203,9 +199,7 @@ situation it covers, to keep context lean:
 13. **Shelling out to list projects.** Use the `list_projects` tool — it
     spans all scopes by default, with optional `scope` and `name_contains`
     filters. It is the one cross-project tool; every other tool needs a
-    `{scope, name}` you already hold. The direct-HTTP fallback in
-    `references/drive-http-fallback.md` is now only for bulk MPE/result
-    extraction across many projects, not for plain listing or name search.
+    `{scope, name}` you already hold.
 
 ## Verification Checklist
 
@@ -228,41 +222,27 @@ Before replying or invoking a write tool:
 ## Tool Bundle (drive-mcp)
 
 The Drive tools the spec relies on (`start_align_logs`, `update_param_block`,
-`upload_pilot_log`, `trigger_job_rerun`, etc.) reach you two ways: a **local**
-MCP server built from `agent/mcp/` (an adapter over the `agent-src` catalog)
-running on the user's own machine, or the **remote connector** — the same
-catalog served over HTTP by the Drive server, authorized per user via OAuth,
-nothing installed and no token pasted. Only the local one can read the user's
-files, carry `drive_http_request`, or run `align_logs` /
-`refresh_witsml_server` synchronously; §1.1 of `behavioral-core.md` has the
-detection rule and what to do instead.
+`upload_pilot_log`, `trigger_job_rerun`, etc.) reach you one way: the **Drive
+connector** — the tool catalog served over HTTP by the Drive server itself,
+authorized per user via OAuth, with nothing installed on the user's machine and
+no token pasted. It runs inside the Drive server, not on the user's computer, so
+it cannot read their files and long-runners are started and polled rather than
+waited on; §1.1 of `behavioral-core.md` has the consequences.
 
 This skill ships inside the **Factor Drive plugin**, which also wires the
-remote connector (`https://drive-app-dev.factor.technology/mcp`) — so you are on the **remote**
-runtime and the tools are already connected. Nothing was installed on the
-user's machine and no token was pasted: the host runs the authorization flow
-on the first tool call and the user approves Factor Drive there. A tool you
-expected and cannot see is the remote catalog, not a broken install.
+remote connector (`https://drive-app-dev.factor.technology/mcp`) — so the tools are already connected.
+Nothing was installed on the user's machine and no token was pasted: the host
+runs the authorization flow on the first tool call and the user approves
+Factor Drive there. A tool you expected and cannot see is the shape of the
+catalog, not a broken install.
 
-This skill supersedes the in-protocol guidance both servers carry for hosts
+This skill supersedes the in-protocol guidance the server carries for hosts
 with no skill mechanism: the connect-time instructions and `get_guidance` are a
 compressed subset of what you have already read. Don't call `get_guidance`.
 
-See `references/installing-drive-mcp.md` for the full setup walkthrough (local
-install, JWT generation, Hermes / Claude Desktop config, connecting the remote
-connector, troubleshooting, and which tools each bundle carries).
-
-Plain listing and name search are now the `list_projects` tool's job. For the
-remaining cross-project task the MCP doesn't cover — bulk MPE/result extraction
-across many projects, **local runtime only** —
-see `references/drive-http-fallback.md`. It documents the
-manifest → MPE-blob URL chain for bulk result pulls, a copy-paste curl+python
-recipe, the Python-urllib User-Agent gotcha (default UA gets 403'd, must
-override to `curl/8.0`), and how to recognize token-rotation 401s vs other auth
-failures.
-
-For packaging the skill + drive-mcp into a portable tarball pair for a
-fresh Hermes machine, see `references/portable-bundle.md`.
+See `references/installing-drive-mcp.md` for the full setup walkthrough
+(adding the connector, installing the plugin that carries it, permission
+scopes, and troubleshooting).
 
 ## See Also
 
@@ -271,6 +251,5 @@ fresh Hermes machine, see `references/portable-bundle.md`.
   `<!-- agent-context-end -->` is the canonical runtime system prompt;
   Section 2 is for humans). This skill's references are auto-generated
   from that doc by `agent/scripts/build-skill.mjs`.
-- Tool bundle source: `~/drive/drive-app/agent/mcp/`
-  (`bin.js` MCP entrypoint, an adapter over `agent-src/tool-bundle.js`);
-  built with `yarn workspace agent build:mcp-bundle`.
+- Tool catalog source: `~/drive/drive-app/agent/src/` (`agent-src`), served by
+  the remote MCP adapter in `~/drive/drive-app/server/mcp/`.

@@ -64,18 +64,16 @@ using the wizard's `md_last = min(last_traj_md, last_log_md)` rule
 (skipped if the trajectory hasn't been uploaded yet). The persisted
 despike pair — `is_despike` / `despike_window`, the Define Log Curve
 modal's "Apply despiking filter" controls — is editable via
-`update_project`. Its LAS reaches the tool by the same three transport
-paths as the pilot log (§1.9.1); on the remote connector mint the upload
-with `kind: "active_log"`.
+`update_project`. Its LAS reaches the tool by the same two paths as the
+pilot log (§1.9.1); mint the staged upload with `kind: "active_log"`.
 
 Column-index selection for trajectory CSV/Excel is a chat-layer
-concern: the agent inspects the file, presents the user with the
-columns, and gets MD/incl/azi (and optional) selections. Pass them to
-`upload_active_trajectory` as file-mode `columns` (or `column_indexes`
-alongside inline waypoints); the tool persists the layout to the
-project, where fmail email ingest reuses it to parse emailed CSVs.
-Surveys are small, so the remote connector has no staged path for them:
-parse the rows yourself and pass `waypoints` inline (§1.1).
+concern: the agent inspects the file's rows, presents the user with the
+columns, and gets MD/incl/azi (and optional) selections. Surveys are
+small enough to pass as tool arguments, so parse the rows yourself and
+send `waypoints` inline. Pass the source file's layout alongside them as
+`column_indexes`; the tool persists it to the project, where fmail email
+ingest reuses it to parse emailed CSVs.
 
 **Email mode — `fmail` attachments.** Instead of manual upload, the
 user forwards LAS / Excel attachments to a project-specific address and
@@ -114,9 +112,8 @@ server's record. The agent exposes:
 3. `browse_witsml_crawl` — walks the crawl tree by path, returning the
    next level of detail (wells / wellbores / trajectories+logs / curves).
 4. `start_refresh_witsml_server` — re-crawl a server (~90 s); it returns a
-   handle you poll with `get_operation_status` every ~15–20 s. The
-   synchronous `refresh_witsml_server` is local-runtime only (§1.1) and can
-   outrun a host's tool-call timeout even there.
+   handle you poll with `get_operation_status` every ~15–20 s. There is no
+   synchronous form: a ~90 s crawl outruns a host's tool-call timeout.
 5. `delete_witsml_server` — remove a server (per-user: it vanishes for
    every project at once, credentials and crawl gone for good). Warn
    first — project pollers still pointing at it are orphaned until

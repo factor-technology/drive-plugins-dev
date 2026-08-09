@@ -13,8 +13,7 @@ paired follow-up writes, destructiveness, when to prefer a sibling tool — in
 its own description and parameter docs, delivered with the tool list by your
 MCP host. This section does not repeat them; it holds only the rules that
 span tools. (Wire-level endpoint paths are deliberately undocumented per
-tool; when an endpoint's shape matters, GET `/download/openapi.json` via
-`drive_http_request` on the local runtime — its description has the recipe.)
+tool; they are not something you call directly.)
 
 **Inspect before asking.** When the user asks you to do a setup task ("do
 step 4", "align the logs", "configure the pilot"), do not enumerate
@@ -44,19 +43,13 @@ Cross-tool rules:
 - **Prefer clone-then-experiment.** For any change you'd otherwise gate
   behind approval, `copy_project` to a clearly-named sandbox, experiment
   there, report back.
-- **Bulk samples should never transit the model.** On the local runtime that
-  means `file_path` plus the `read_local_*` readers; on the remote connector
-  it means the `create_upload` staged send for anything large (§1.9.1).
+- **Bulk samples should never transit the model.** Anything large goes through
+  the `create_upload` staged send (§1.9.1).
 - **Long-runners are handles, not calls.** Alignment and WITSML re-crawls run
   minutes: use `start_align_logs` / `start_refresh_witsml_server` and poll
-  `get_operation_status` every ~15–20 s. Their synchronous twins are
-  local-runtime only.
-- **`drive_http_request` is the last resort** for the long tail no curated
-  tool wraps; administrative/security writes are refused by design. Local
-  runtime only — the remote connector doesn't carry it.
+  `get_operation_status` every ~15–20 s.
 
-The catalog, by area (names only — contracts live in the schemas). Entries
-marked **local** are absent from the remote connector's list (§1.1):
+The catalog, by area (names only — contracts live in the schemas):
 
 - Job results & status: `read_job_status`, `read_latest_job_result`,
   `read_marginal`, `read_mpe_slice`, `get_operation_status`
@@ -77,8 +70,8 @@ marked **local** are absent from the remote connector's list (§1.1):
 - Dip & azimuth (§1.9.3): `set_vs_azimuth`, `set_apparent_dip`,
   `set_dip_structure_mode`, `upload_structure`, `delete_structure`,
   `set_structure_from_interpretation`
-- Align logs (§1.9.4): `start_align_logs`, `align_logs` (**local**),
-  `set_fit_params`, `set_warp_display`
+- Align logs (§1.9.4): `start_align_logs`, `set_fit_params`,
+  `set_warp_display`
 - Job parameters (§1.9.5): `update_param_block`, `add_param_block`,
   `delete_param_block`, `move_param_block`, `set_project_job_params`,
   `reset_job_params`
@@ -92,16 +85,14 @@ marked **local** are absent from the remote connector's list (§1.1):
 - Background (seismic) image: `read_seismic_image`, `upload_seismic_image`,
   `set_seismic_image_registration`, `delete_seismic_image`
 - WITSML: `list_witsml_servers`, `add_witsml_server`,
-  `start_refresh_witsml_server`, `refresh_witsml_server` (**local**),
-  `delete_witsml_server`, `browse_witsml_crawl`,
-  `list_witsml_pollers`, `set_witsml_trajectory_poller`,
-  `set_witsml_log_poller`, `refresh_witsml_pollers`,
-  `set_witsml_polling_enabled`
-- File ingest (§1.9.1): `create_upload`, `read_las`,
-  `read_local_las` (**local**), `read_local_text` (**local**)
-- Links & fallback: `project_links`, `drive_http_request` (**local**),
-  `get_guidance` (an in-protocol digest of this spec for hosts that can't
-  load a skill — redundant while you have this one; don't call it)
+  `start_refresh_witsml_server`, `delete_witsml_server`,
+  `browse_witsml_crawl`, `list_witsml_pollers`,
+  `set_witsml_trajectory_poller`, `set_witsml_log_poller`,
+  `refresh_witsml_pollers`, `set_witsml_polling_enabled`
+- File ingest (§1.9.1): `create_upload`, `read_las`
+- Links: `project_links`, `get_guidance` (an in-protocol digest of this spec
+  for hosts that can't load a skill — redundant while you have this one;
+  don't call it)
 
 The tool catalog is the contract: if you need an action that's not in the
 list, ask the geologist to add it rather than inventing a workaround.

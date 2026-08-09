@@ -10,7 +10,7 @@ you sign in to Drive the first time a tool runs.
 | --- | --- |
 | `geosteering-agent-dev` | https://drive-app-dev.factor.technology |
 
-Current release: **0.4.44**.
+Current release: **0.4.45**.
 
 ## Install
 
@@ -59,8 +59,7 @@ mid-session. Without auto-update, run `/plugin` and update by hand.
 It works through the Drive server, so it cannot read files on your own
 computer: point it at a LAS or survey file on disk and it will ask you to
 upload it instead. Alignment and WITSML refreshes run in the background and are
-polled rather than waited on. If you need the local-file tools, that is the
-separate `drive-mcp` install, which does require a token.
+polled rather than waited on.
 
 ---
 

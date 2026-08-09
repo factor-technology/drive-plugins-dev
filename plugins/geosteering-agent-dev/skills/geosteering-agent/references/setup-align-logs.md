@@ -48,10 +48,8 @@ choice is togglable via `set_warp_display`.
   inputs — returns a handle; poll `get_operation_status` every ~15–20 s (no
   faster) until it succeeds or fails. Warn the user first that it typically
   takes **1–3 minutes** (the solver runs up to ~40 GPU passes on a serverless
-  endpoint, including cold start), which is why the synchronous `align_logs`
-  can outrun a host's tool-call timeout; that one is local-runtime only
-  (§1.1). The result is identical either way, so everything below applies to
-  both.
+  endpoint, including cold start) — which is why it is a handle rather than a
+  blocking call: that much work outruns a host's tool-call timeout.
 - It aligns the **MD-0 pilot only** (the server's flow). For additional
   pilots, use `set_fit_params` with numbers the geologist supplies.
 - **Corroborated result:** relay the fit params in geologist language
@@ -118,8 +116,7 @@ Tools:
    md_first_to_compute). Long-running (1–3 min). The finished operation
    carries fit params, the per-window diagnostic table, corroboration info,
    and a review_url the agent must surface. `corroborated: false` + the table
-   means no alignment exists; nothing is persisted in that case. (`align_logs`
-   is the same call run synchronously — local runtime only.)
+   means no alignment exists; nothing is persisted in that case.
 4. `set_warp_display({project_id, pilot_well_id?, enabled})` — the
    Align Logs "Alignment:" radio — Auto (depth-warped) vs Manual
    (offset). Flips the saved warp's enabled flag and swaps datum_tvdss
