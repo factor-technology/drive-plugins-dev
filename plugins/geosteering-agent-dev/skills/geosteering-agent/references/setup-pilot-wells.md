@@ -154,7 +154,7 @@ more than one pilot well:
   all other pilots share it. Non-first pilots tell you nothing about
   structure — only ToT structure is computed.
 - **ToT must be flattened across pilots**: the user must enter the
-  **same type-log TVD depth** for the ToT marker on every pilot well. The UI
+  **same type-log TVD (TVDTL) depth** for the ToT marker on every pilot well. The UI
   does not enforce this — when you see/edit pilot markers, verify and
   flag mismatches.
 - **Same marker set on every pilot**: every formation on the first

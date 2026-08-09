@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: dbe9ea656cb6a2db672f530d8bd23d1764c6c0d2
-source_commit_short: dbe9ea656cb6
-source_commit_date: 2026-08-08T18:41:09-05:00
-source_commit_subject: Expunge what the stdio removal orphaned
-skill_version: 0.4.45
-built_at: 2026-08-08T18:41:09-05:00
+source_commit: 28623638228abfe2f0f9d51b32896b9570d89fea
+source_commit_short: 28623638228a
+source_commit_date: 2026-08-08T21:25:39-05:00
+source_commit_subject: [DD-3110] Abbreviate Type log TVD as TVDTL everywhere user-facing
+skill_version: 0.4.46
+built_at: 2026-08-08T21:25:39-05:00
 built_from_workspace_dirty: false

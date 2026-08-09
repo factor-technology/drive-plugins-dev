@@ -19,7 +19,7 @@ On the [Projects page](./projects-page.md), choose **Add Project**. Pick an owne
 
 ## 2 · Pilot well
 
-In [Setup step 1](./setup/pilot-well.md), upload the pilot's LAS file and pick the gamma-ray curve. Then fill in the **Formation Tops** grid: name, color, and depth (type-log TVD, positive down) for each top, and tick **Target** on the one the well is steering in. You can paste tops straight from a spreadsheet.
+In [Setup step 1](./setup/pilot-well.md), upload the pilot's LAS file and pick the gamma-ray curve. Then fill in the **Formation Tops** grid: name, color, and depth (**TVDTL** — type-log TVD, positive down) for each top, and tick **Target** on the one the well is steering in. You can paste tops straight from a spreadsheet.
 
 ## 3 · Active well
 

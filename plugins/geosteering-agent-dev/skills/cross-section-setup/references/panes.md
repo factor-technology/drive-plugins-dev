@@ -20,8 +20,8 @@ Overall display frame.
   **legend** (line-style key — OFF for screenshots unless the audience
   needs it), **name** (the project name card in the corner — usually ON, it
   labels the image).
-- **DEPTH AXIS** radios: `TVDSS` / `Type log TVD` / `TVD`. TVDSS is the
-  common default.
+- **DEPTH AXIS** radios: `TVDSS` / `TVDTL` (type-log TVD) / `TVD`. TVDSS is
+  the common default.
 
 ## Components
 
@@ -162,7 +162,7 @@ Opens a modal dialog (close with its X):
   the interesting part of the pilot track and the interesting part of the
   section are at different depths, so coupling forces one of them
   off-screen. Position the track and the section independently.
-- **Depth axis** radios: TVDSS / Type log TVD / TVD.
+- **Depth axis** radios: TVDSS / TVDTL / TVD.
 - **Auto Scale** checkbox; **Min**/**Max** fields (enabled when Auto Scale
   is off). Prefer Auto Scale OFF with a hand-set, rounded range that
   matches the active log track's range — see "GR scales" in SKILL.md.

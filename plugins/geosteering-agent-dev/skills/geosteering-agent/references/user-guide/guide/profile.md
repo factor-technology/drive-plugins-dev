@@ -8,7 +8,7 @@ The Profile tab is Drive's main working view: an interactive cross section of th
 
 ### Scene
 
-Overall display: the **Lateral Domain** (MD or VS along the horizontal axis), toggles for the active log, type log, correlations, cursor info, legend and names, and the **Depth axis** — **TVDSS** or **Type log TVD** (see [depth frames](./concepts.md#depth-frames)).
+Overall display: the **Lateral Domain** (MD or VS along the horizontal axis), toggles for the active log, type log, correlations, cursor info, legend and names, and the **Depth axis** — **TVDSS**, **TVDTL** (type-log TVD), or **TVD** (see [depth frames](./concepts.md#depth-frames)).
 
 ### Components
 

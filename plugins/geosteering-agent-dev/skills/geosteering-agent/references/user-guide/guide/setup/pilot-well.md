@@ -16,7 +16,7 @@ For each pilot, use the upload affordance to load its log. In the *Define Log Cu
 - Pick the **gamma-ray curve** by mnemonic.
 - If the pilot's source well was deviated, supply its trajectory so Drive can straighten the log to vertical. The trajectory is used once at upload and then discarded.
 
-Pilot wells have no reference elevation — the stored log is in plain type-log TVD, positive and measured down.
+Pilot wells have no reference elevation — the stored log is in plain type-log TVD (TVDTL), positive and measured down.
 
 ## Formation tops
 
@@ -26,7 +26,7 @@ The **Formation Tops** grid holds the named tops for every pilot:
 |---|---|
 | **Color** | Display color of the formation on the cross section. |
 | **Formation Name** | The top's name. On multi-pilot projects, every name on the first pilot must appear on all pilots. |
-| *(one depth column per pilot)* | The top's depth in **type-log TVD** — positive, measured down, in the project's spatial unit. |
+| **Depth (TVDTL)** *(one column per pilot)* | The top's depth in **TVDTL** — positive, measured down, in the project's spatial unit. |
 | **Target** | Tick exactly one row: the formation the well is steering in. This sets the project's **top of target**. |
 
 Toolbar buttons: **Add Top**, **Delete Top**, **Undo** (Ctrl+Z), **Redo** (Ctrl+Y). The grid accepts paste from a spreadsheet, so you can prepare tops in Excel and paste the block in. Edits save as you make them.

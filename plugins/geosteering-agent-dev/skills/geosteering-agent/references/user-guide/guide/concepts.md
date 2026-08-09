@@ -10,7 +10,7 @@ This page defines the terms Drive uses. The definitions are precise; several dif
 
 **Pilot well** (also called an offset well). A reference well whose vertical gamma-ray log serves as the **type log** the computation matches against. Each pilot carries a vertical gamma log, formation tops, and the MD range of the lateral over which it applies. Every project has at least one pilot; the first starts at MD 0 and defines the project's depth frame. Pilot logs are stored vertically, in the pilot's own TVD (positive, measured down) — if the source well was deviated, Drive straightens the log at upload time using a trajectory you supply, then discards that trajectory.
 
-**Formation tops (markers).** Named depth picks on a pilot well, each with a color. You enter them in **type-log TVD** — positive feet (or meters), measured down.
+**Formation tops (markers).** Named depth picks on a pilot well, each with a color. You enter them in **type-log TVD (TVDTL)** — positive feet (or meters), measured down.
 
 **Top of target (ToT).** One formation top is designated the target. This is a project-level setting (the *Target* checkbox in the Formation Tops grid), and it names the single horizon the computation solves for. Drive models only the top of the target — there is no base-of-target concept in the computation.
 
@@ -18,7 +18,7 @@ This page defines the terms Drive uses. The definitions are precise; several dif
 
 Drive works in two depth frames, and the cross section can display three depth axes (Profile → Scene → Depth axis):
 
-- **Type log TVD** — the pilot well's own vertical depth, positive down. This is what you type when entering formation tops, and what you read off the pilot log. Pilot data is stored exactly this way: positive, increasing downward.
+- **TVDTL** — type-log TVD: the pilot well's own vertical depth, positive down. This is what you type when entering formation tops, and what you read off the pilot log. Pilot data is stored exactly this way: positive, increasing downward.
 - **TVDSS** — true vertical depth subsea, the shared frame of the active well's trajectory and the computed structure. Negative values are below sea level.
 - **TVD** — the active well's own vertical depth, positive down: the active well's reference elevation minus TVDSS.
 
@@ -33,7 +33,7 @@ The active well's reference elevation is optional: set it if you want subsea dep
 Most projects use one pilot. When the geology changes character along a long lateral you can add pilots, each covering a contiguous MD range. Three rules apply, and Drive relies on you to observe them:
 
 1. The first pilot (MD 0) defines the project depth frame.
-2. The top-of-target marker must be entered at the same type-log TVD depth on every pilot (flattened on ToT).
+2. The top-of-target marker must be entered at the same TVDTL depth on every pilot (flattened on ToT).
 3. Every formation named on the first pilot must appear, by the same name, on every other pilot.
 
 Between adjacent pilots Drive builds an interpolated type log by warping each layer's thickness and blending gamma values.
