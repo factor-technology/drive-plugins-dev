@@ -41,9 +41,11 @@ Show/hide each scene element.
 - **formations** — formation top lines/bands. Usually on.
 - **prior structure** — the user's prior model. Show when there's no
   computed structure, or when comparing prior vs computed is the point.
-- **background image**: **display** + **crop** — the seismic/background
-  image uploaded on the Background tab. Greyed if none uploaded. Crop
-  limits it to its registered extent.
+- **background image**: **display** + **crop** checkboxes and an
+  **opacity** slider (10–100%) — the seismic/background image uploaded on
+  the Background tab. Greyed if none uploaded. Crop limits it to its
+  registered extent. Lower the opacity when the image competes with the
+  marginals or the interpretation for the eye; 100% is the default.
 
 ## Zoom
 

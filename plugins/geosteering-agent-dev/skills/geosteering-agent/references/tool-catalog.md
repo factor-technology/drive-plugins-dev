@@ -83,7 +83,10 @@ The catalog, by area (names only — contracts live in the schemas):
   `copy_computed_interpretation`
 - Target line: `set_target_line`, `delete_target_line`
 - Background (seismic) image: `read_seismic_image`, `upload_seismic_image`,
-  `set_seismic_image_registration`, `delete_seismic_image`
+  `set_seismic_image_registration`, `delete_seismic_image`. How the image
+  displays — the show/hide, crop, and opacity controls on the Profile's
+  Components pane — is per-user view state in the browser, not a tool
+  surface; coach the geologist to those controls instead.
 - WITSML: `list_witsml_servers`, `add_witsml_server`,
   `start_refresh_witsml_server`, `delete_witsml_server`,
   `browse_witsml_crawl`, `list_witsml_pollers`,

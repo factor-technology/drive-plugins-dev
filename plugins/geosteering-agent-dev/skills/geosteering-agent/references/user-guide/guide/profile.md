@@ -12,7 +12,7 @@ Overall display: the **Lateral Domain** (MD or VS along the horizontal axis), to
 
 ### Components
 
-Show/hide each element of the scene: wellbore, well plan, projected trajectory, pilot wells, interpolated type logs, formations, prior structure — and the background image (with crop controls, once one is uploaded on the [Background tab](./background.md)).
+Show/hide each element of the scene: wellbore, well plan, projected trajectory, pilot wells, interpolated type logs, formations, prior structure — and the background image (once one is uploaded on the [Background tab](./background.md)), with a crop toggle and an **opacity** slider that fades the image so the overlays read against a busy section.
 
 ### Zoom
 

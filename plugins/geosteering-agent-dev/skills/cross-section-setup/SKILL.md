@@ -314,7 +314,10 @@ formations. **Off by default:** projected trajectory (useful while drilling),
 prior structure (show when there's no computed structure, or when
 prior-vs-computed is the point), interpolated type logs (turn on when a
 structure exists and the section is long enough that they read as a
-correlation panel rather than clutter).
+correlation panel rather than clutter). A registered **background image**
+(seismic) shows when it's part of the story; if it fights the marginals or
+the interpretation for the eye, lower its **opacity** slider rather than
+hiding it.
 
 **Interpretations:** show the MPE unless the user asks for alternatives —
 never leave it on a 0%-probability alternative, which happens by accident and

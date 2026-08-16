@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: 6b228c8634ce9c0f156a0f6d3b5d0eb843ff9340
-source_commit_short: 6b228c8634ce
-source_commit_date: 2026-08-09T10:09:09-05:00
-source_commit_subject: Teach the agent skills TVDTL and the vertical-type-log assumption
-skill_version: 0.4.50
-built_at: 2026-08-09T10:09:09-05:00
+source_commit: 627eef30404b24ffebc9dda0f078a8dbc4856500
+source_commit_short: 627eef30404b
+source_commit_date: 2026-08-16T11:01:57-05:00
+source_commit_subject: [DD-3134] Background image opacity slider
+skill_version: 0.4.51
+built_at: 2026-08-16T11:01:57-05:00
 built_from_workspace_dirty: false
