@@ -16,7 +16,13 @@ Show/hide each element of the scene: wellbore, well plan, projected trajectory, 
 
 ### Zoom
 
-Scale, vertical exaggeration, and horizontal exaggeration controls with editable levels, plus **locate toe** and **reset**. Keyboard and mouse-wheel equivalents are listed under [keyboard shortcuts](#keyboard-shortcuts).
+Three rows of framing controls, plus a **Toe** button (center the view on the trajectory toe) and a **Reset** button (restore the default scale values, keeping the view centered):
+
+- **Scale** — the overall zoom buttons. Zooming in converges on the wellbore at the middle of the view; zooming out keeps the view centered.
+- **V Exaggeration** — the vertical stretch as a multiplier (e.g. **8.0 ×**).
+- **Horizontal** — the horizontal scale in real-world units per screen inch (e.g. **1 in = 200 ft**); editing it keeps the vertical exaggeration.
+
+The two numbers are click-to-edit (Enter or Tab commits and moves to the next field) and together define the section's scale — to match another scene, copy its two numbers. Keyboard and mouse-wheel equivalents are listed under [keyboard shortcuts](#keyboard-shortcuts).
 
 ### Target
 

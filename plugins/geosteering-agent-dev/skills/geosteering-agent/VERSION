@@ -3,6 +3,6 @@ source_commit: 6b228c8634ce9c0f156a0f6d3b5d0eb843ff9340
 source_commit_short: 6b228c8634ce
 source_commit_date: 2026-08-09T10:09:09-05:00
 source_commit_subject: Teach the agent skills TVDTL and the vertical-type-log assumption
-skill_version: 0.4.47
+skill_version: 0.4.50
 built_at: 2026-08-09T10:09:09-05:00
 built_from_workspace_dirty: false

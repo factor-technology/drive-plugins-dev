@@ -49,14 +49,17 @@ Show/hide each scene element.
 
 Framing. All three values are click-to-edit with −/+ steppers.
 
-- **SCALE** — overall zoom level.
-- **VERTICAL** — vertical exaggeration. The single most important number
-  for a good-looking section.
-- **HORIZONTAL** — horizontal exaggeration/compression (steppers only in
-  some builds).
-- **Pin button** — locate toe: recenters the viewport on the toe. Use after
-  every zoom change that loses the scene.
-- **Circular-arrow button** — reset zoom to defaults. Escape hatch.
+- **SCALE** — the overall zoom −/+ buttons (no number): + converges on
+  the wellbore, − keeps the view centered.
+- **V EXAGGERATION** — vertical exaggeration multiplier (e.g.
+  "8.0 ×"). The single most important number for a good-looking section.
+- **HORIZONTAL** — horizontal scale as real-world units per screen inch
+  ("1 in = 200 ft"); editing it preserves VE. Its −/+ steppers stretch
+  the horizontal axis only.
+- **Toe** button — recenters the viewport on the toe. The escape hatch
+  when the scene is lost.
+- **Reset** button — reset the scale values to defaults (1 in = 500 ft,
+  or 150 m on SI projects; VE 8), keeping the view centered where it is.
 
 Wheel equivalents: wheel = vertical scroll, shift+wheel = horizontal,
 ctrl/⌘+wheel = zoom. Keys: ctrl/⌘ + `+`/`−`.

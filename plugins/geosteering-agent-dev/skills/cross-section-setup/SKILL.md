@@ -108,18 +108,19 @@ These are specific to this app and each one has bitten someone:
   switches panes. Close the pane before judging framing, and before any
   capture.
 - **Numeric values are click-to-edit.** Click the number itself (e.g. the
-  Zoom pane's VERTICAL "12.0"): it becomes a focused input with the value
-  selected. Type a new value, press Enter.
-- **SCALE and VERTICAL are logarithmic — roughly 1.5× per unit.** Estimating
-  them linearly is a trap: typing 28 when 13 was right zooms by a factor of
-  hundreds and throws the scene clean out of frame. Step with the −/+
-  buttons a unit at a time and re-read the depth axis after each step, and
-  keep direct entry for small corrections near a value you already trust.
-- **Zoom changes can lose the scene.** Changing SCALE/VERTICAL/HORIZONTAL
-  re-anchors the viewport and content can scroll clean out of frame (a wall
-  of empty grey). Don't undo — click the **locate-toe pin** in the Zoom pane
-  to recenter, then re-screenshot. The circular-arrow button resets zoom to
-  defaults, a good escape hatch.
+  Zoom pane's V EXAGGERATION "8.0"): it becomes a focused input with
+  the value selected. Type a new value; Enter or Tab commits and moves to
+  the next field.
+- **HORIZONTAL and V EXAGGERATION are literal.** HORIZONTAL is the
+  horizontal scale as real-world units per screen inch ("1 in = 200 ft" —
+  bigger number = more ground per inch = zoomed further out); V
+  EXAGGERATION is the vertical multiplier. Type target values directly;
+  the −/+ buttons step by 1.5×, and the SCALE row's −/+ zoom both axes.
+- **Zoom keeps the view anchored.** Zoom-in converges on the wellbore at
+  the viewport's horizontal midpoint; zoom-out and typed values keep the
+  view centered. If the scene is ever lost anyway, the Zoom pane's **Toe**
+  button recenters on the toe — the escape hatch. Its **Reset** button
+  restores the default scale values without moving the view center.
 - **Panning.** Wheel over the cross-section scrolls it vertically. Horizontal
   panning (shift+wheel) is unreliable through the automation bridge — prefer
   adjusting SCALE plus locate-toe over trying to drag sideways.
