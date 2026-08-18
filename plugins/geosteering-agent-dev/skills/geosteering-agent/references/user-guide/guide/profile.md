@@ -45,7 +45,7 @@ Fill and color controls for the formation bands, and the top-of-target display.
 
 ### Traces
 
-Interpolated type-log traces — copies of the type log posted periodically along the section and warped onto the current interpretation, so you can read the interpreted section like a correlation panel. **display** shows or hides the traces (the same toggle as on the Components pane). **curve** toggles the thin trace line, with its color picker alongside. **fill** toggles a color fill from each curve to the left or right edge of its slot, coloring every depth by its GR value through the chosen color table — the same fill offered on the [type log track](#the-log-tracks). The fill side and color table are shared with the track's fill; each view's fill turns on and off independently. **Trace throw** scales trace width.
+Interpolated type-log traces — copies of the type log posted periodically along the section and warped onto the current interpretation, so you can read the interpreted section like a correlation panel. **display** shows or hides the traces (the same toggle as on the Components pane). **curve** toggles the thin trace line, with its color picker alongside. **fill** paints each trace's full slot with color — adjacent slots tile the section with no daylight between them — coloring every depth by its GR value through the chosen color table; the curve draws over the fill. **opacity** fades the fill so the marginals and structure read through it. The color table is shared with the [type log track](#the-log-tracks)'s fill; each view's fill turns on and off independently. **Trace throw** scales the curve's excursion; the fill is unaffected. Traces appear only along the interval the current interpretation covers — they stop where the displayed computed structure or manual interpretation ends.
 
 ### Derived
 
@@ -57,7 +57,7 @@ The keyboard shortcut reference (also reproduced below).
 
 ## The log tracks
 
-The **type log track** — the vertical track on the left edge of the section — shows the pilot type log (and, when shown, the active log hung beside it). Its gear icon opens the track settings: the GR display scale (**Auto Scale**, or a manual **Min**/**Max** — a manual scale also fixes the GR-to-color mapping of the color fills, on the track and traces alike), a **Color fill** of the log — on/off, **Left**/**Right** side, and color table — plus scroll coupling, the depth-axis choice, and the track width. The fill's side and color table are shared with the [Traces](#traces) fill; the on/off switch is the track's own.
+The **type log track** — the vertical track on the left edge of the section — shows the pilot type log (and, when shown, the active log hung beside it). Its gear icon opens the track settings: the GR display scale (**Auto Scale**, or a manual **Min**/**Max** — a manual scale also fixes the GR-to-color mapping of the color fills, on the track and traces alike), a **Color fill** of the log — on/off, **Left**/**Right** side, and color table — plus scroll coupling, the depth-axis choice, and the track width. The fill's color table is shared with the [Traces](#traces) fill; the side and the on/off switch are the track's own.
 
 The **active log track** — the horizontal strip across the top — shows the active well's gamma log along the lateral. Its gear icon holds just the GR display scale and the track height.
 

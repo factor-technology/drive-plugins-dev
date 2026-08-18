@@ -140,16 +140,19 @@ like a correlation panel.
   interpolated type logs).
 - **curve** checkbox + color swatch — the thin trace line. Black means
   theme foreground.
-- **fill** checkbox + **Left**/**Right** radios — shades from each curve to
-  its slot edge, colored by GR value through the color table below. The
-  fill side and color table are SHARED with the type log track's fill
-  (each view's on/off is independent).
+- **fill** checkbox — paints each trace's full slot (slots tile with no
+  gap, a continuous color panel), colored by GR value through the color
+  table below; the curve draws on top. The color table is SHARED with the
+  type log track's fill (each view's on/off is independent).
 - Color table dropdown (e.g. `earth tones`).
+- **opacity** slider (10–100%) — fades the fill; applies to the
+  cross-section fill only, not the type log track's.
 - **TRACE THROW** slider — trace width; 100% = the shared GR range spans
   one station interval.
 
-Traces hang flat before any structure is computed/picked — pointless to
-show on an uncomputed project.
+Traces render only along the displayed interpretation's lateral extent
+(the manual one when shown, else the selected computed structure) — they
+stop where it ends, and an uncomputed, unpicked project shows none at all.
 
 ## Derived
 
@@ -181,7 +184,8 @@ Opens a modal dialog (close with its X):
   color fills on both the track and the traces — set one when fills need
   to stay comparable across projects or screenshots.
 - **Color fill**: **Fill** checkbox, **Left**/**Right** radios, color table
-  dropdown — shared side/table with the Traces fill.
+  dropdown — the table is shared with the Traces fill; the side and on/off
+  are the track's own.
 - Track width dropdown: SKINNY / MEDIUM / etc.
 
 ## Active log track settings (gear icon on the top strip)

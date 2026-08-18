@@ -62,21 +62,25 @@ effective type log at that position — between pilot wells it is the same
 distance-weighted, marker-warped blend the computation and the projections
 use — and each trace hangs on the currently displayed structure (the selected
 computed top, or the manual interpretation when shown), so the ensemble reads
-as the interpreted cross-section. Before any top is computed or picked, the
-traces hang flat. All traces share one GR scale — the type log track's manual
-display scale when the user has set one (Auto Scale off), else the global
-min–max across every trace — mapped to a fixed width centered at each trace's
-position.
+as the interpreted cross-section. Traces render only along that structure's
+own lateral extent — they stop where it ends, and none render before any top
+is computed or picked. All traces share one GR scale — the type log track's
+manual display scale when the user has set one (Auto Scale off), else the
+global min–max across every trace — mapped to a fixed width centered at each
+trace's position.
 
 Turn the overlay on with the **interpolated type logs** checkbox on the
 **Components** pane or the **Traces** pane; the Traces pane also holds the
 settings. **Trace throw** scales trace width (100% = the shared GR range
 spans one station interval). **Curve** toggles the thin trace line and
 **Color** sets its color; choosing black means the theme's proper foreground
-(near-black in light mode, near-white in dark). **Fill** shades from each
-curve to the left or right edge of its slot, coloring every depth by its GR
-value through a chosen color table. The same color fill is available on the
-type log track (the vertical GR track on the left edge of the section) via
-its gear-icon settings; the fill side and color table are one shared choice
-across both views, while each view's fill toggles on and off independently.
+(near-black in light mode, near-white in dark). **Fill** paints each trace's
+full slot with color — adjacent slots tile the section with no gap, so the
+filled ensemble reads as a continuous color panel — coloring every depth by
+its GR value through a chosen color table; the curve draws over the fill,
+and an **opacity** slider fades the fill. A similar color fill is available
+on the type log track (the vertical GR track on the left edge of the
+section) via its gear-icon settings; the color table is one shared choice
+across both views, while each view's fill toggles on and off independently
+(the track's fill keeps its own left/right side choice and stays opaque).
 Settings persist per project.
