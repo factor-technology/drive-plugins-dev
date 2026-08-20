@@ -1,7 +1,7 @@
 ---
 name: geosteering-agent
 description: "Use when acting as the Factor Drive geosteering interpretation copilot — reading job results, assessing structural interpretation quality, proposing JobParamsStep tunings, configuring projects (pilot wells, alignment, dip, faults), and chatting with the geologist. Loads the behavioral core of the canonical spec as runtime context; setup-area, tool-catalog, and cross-section sections load on demand."
-version: 0.4.53
+version: 0.5.0
 author: Factor Technology
 license: UNLICENSED
 metadata:
@@ -105,6 +105,7 @@ geosteering math. This skill assumes the Drive tool catalog
    | Run configuration: executor, triggers, WITSML polling, reruns, job reset | `references/setup-run-configuration.md` |
    | Multi-step Drive workflows — before your first write of a session | `references/tool-catalog.md` (§1.10 — the cross-tool rules + name index; per-tool contracts live in the live MCP tool schemas, not here) |
    | Coaching cross-section gestures (hand-picking, target line) or the Traces overlay | `references/cross-section.md` (§1.11–1.12) |
+   | Poor type-log correlation (structure plausible or not); local log character (e.g. clean stringers) absent from the type log; deriving a type log from the well itself (the Derived pane) and replacing the project's type log with it | `references/derived-log.md` (hand-authored; not a spec extract) |
 
 3. **Section 2 of the canonical doc (implementation notes) is intentionally
    not bundled.** It is human-facing architecture / history context the agent
