@@ -49,7 +49,7 @@ Interpolated type-log traces — copies of the type log posted periodically alon
 
 ### Derived
 
-Derive a new type log by back-projecting the active log through an interpretation — useful when no good pilot exists near the lateral.
+Derive a new type log by back-projecting the active log through an interpretation — useful when no good pilot exists near the lateral. The pane works from the backprojections currently displayed (the selected computed interpretation, or the manual interpretation when shown, windowed if the type-log window is on). Choose the statistic — **Mean**, **Median**, **Shallowest MD**, or **Deepest MD** — that picks the value where the interpretation maps more than one active-log sample to the same depth. The derived curve is merged into the current type log and **Save as LAS...** writes it in pilot TVD, calibrated so the pilot's fit params reproduce the active log. The same computation is available programmatically as the `derive_type_log` agent tool / `POST .../derive-type-log` API.
 
 ### Help
 

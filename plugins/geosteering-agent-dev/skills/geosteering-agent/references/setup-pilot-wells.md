@@ -179,3 +179,14 @@ more than one pilot well:
   work). Workaround for high-fidelity early-lateral: insert a duplicate
   of the MD 0 pilot at the lateral's start MD, so MD ≈ VS over the
   interesting range.
+
+**Deriving a type log** (the Profile InfoBar's **Derived** pane). When no
+good pilot exists near the lateral, `derive_type_log` back-projects the
+active log through an interpretation to synthesize one, with the same
+implementation the pane runs. It is functional and read-only: fetch the
+inputs first (interpretation, windowed active-log samples, raw trajectory
+stations, project fields, fit params — the tool schema lists the source of
+each) and pass them in; nothing on the project changes. The result comes
+back in canonical pilot TVD ready for `upload_pilot_log` (that replace is
+the destructive step, taken only with the geologist's approval) or for
+writing a LAS.

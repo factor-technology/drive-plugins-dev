@@ -62,7 +62,7 @@ The catalog, by area (names only — contracts live in the schemas):
   `update_project`
 - Pilot wells (§1.9.1): `create_pilot_well`, `rename_pilot_well`,
   `delete_pilot_well`, `upload_pilot_log`, `set_pilot_well_markers`,
-  `set_top_of_target`
+  `set_top_of_target`, `derive_type_log`
 - Active well (§1.9.2): `upload_active_trajectory`,
   `delete_active_trajectory`, `upload_well_plan`, `delete_well_plan`,
   `upload_active_log`, `delete_active_log`, `clear_well_data`,
