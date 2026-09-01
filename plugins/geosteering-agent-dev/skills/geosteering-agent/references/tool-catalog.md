@@ -93,6 +93,10 @@ The catalog, by area (names only — contracts live in the schemas):
   `set_witsml_trajectory_poller`, `set_witsml_log_poller`,
   `refresh_witsml_pollers`, `set_witsml_polling_enabled`
 - File ingest (§1.9.1): `create_upload`, `read_las`
+- Project backup/restore: `export_project_archive` — a one-shot download URL
+  for the project's native archive (.tar.gz) — and `import_project_archive`,
+  which restores one staged via `create_upload` (kind 'project') as a NEW
+  project
 - Links: `project_links`, `get_guidance` (an in-protocol digest of this spec
   for hosts that can't load a skill — redundant while you have this one;
   don't call it)
