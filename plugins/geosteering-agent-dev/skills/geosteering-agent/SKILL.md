@@ -1,16 +1,16 @@
 ---
 name: geosteering-agent
 description: "Use when acting as the Factor Drive geosteering interpretation copilot — reading job results, assessing structural interpretation quality, proposing JobParamsStep tunings, configuring projects (pilot wells, alignment, dip, faults), and chatting with the geologist. Loads the behavioral core of the canonical spec as runtime context; setup-area, tool-catalog, and cross-section sections load on demand."
-version: 0.5.3
+version: 0.5.4
 author: Factor Technology
 license: UNLICENSED
 metadata:
   hermes:
     tags: [geosteering, drive, agent, petroleum, interpretation, llm-agent]
     related_skills: []
-  source_commit: "fd5b25b2e6ee2b38289783e8926d33d3df814afd"
-  source_commit_date: "2026-09-01T11:42:34-05:00"
-  built_at: "2026-09-01T11:42:34-05:00"
+  source_commit: "c7de8499a66c34a206ed408b7f8341ed04d14f1c"
+  source_commit_date: "2026-09-02T12:41:30-05:00"
+  built_at: "2026-09-02T12:41:30-05:00"
 ---
 
 # Geosteering Agent (Factor Drive)
@@ -38,7 +38,7 @@ load on demand — see the map below. Do not go hunting for a single-file
 spec; the split files ARE the spec.
 
 > **Provenance:** this bundle was generated from drive-app commit
-> `fd5b25b2e6ee` (2026-09-01T11:42:34-05:00). See `VERSION`.
+> `c7de8499a66c` (2026-09-02T12:41:30-05:00). See `VERSION`.
 
 ## When to Use
 
@@ -64,9 +64,10 @@ geosteering math. This skill assumes the Drive tool catalog
    context (a single Read covers it). It is the source of truth for:
    - §1.1 Role, scope, trust posture (autonomous vs advisory + approval).
    - §1.2 Domain concepts: marginals (FLT_MIN sentinel, entropy), MPE +
-     nine alternatives (suffix N is an explanation index, not a rank;
-     endpoint-anchored at the bit; a lone MPE is a mode, not a density),
-     two decision modes (steering vs diagnostic).
+     the auto-picked horizons (grouped by the bit marginal's peaks and
+     ranked by mass, P1, P2, …; each group's lead is endpoint-anchored at
+     the bit; a lone MPE is a mode, not a density), two decision modes
+     (steering vs diagnostic).
    - §1.3 Steering inputs (forward projection uses the user's prior, NOT
      recent MPE trend).
    - §1.4 Quality assessment (on request only): separate fit problems
@@ -147,7 +148,7 @@ situation it covers, to keep context lean:
 
 1. **Treating MPE as a density.** A single trace's absolute probability is
    ~10⁻⁴⁰⁰⁰ — meaningless. Judge how settled a result is by whether the
-   nine alternatives cluster — and say it in plain words, not mass
+   auto-picked groups cluster — and say it in plain words, not mass
    percentages.
 2. **Forward-projecting from recent MPE trend.** Wrong — the structure
    ahead of the bit isn't drilled yet, so only the user's prior applies.

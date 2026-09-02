@@ -133,9 +133,9 @@ These are specific to this app and each one has bitten someone:
   to "focus" or dismiss something. Leave the floating button bar at the
   bottom center alone unless the user asked for interpretation edits. A stray
   pick undoes with Ctrl/⌘+Z.
-- **Useful keys:** `0`–`3` switch the displayed computed interpretation
-  (none / MPE / alternatives); `m` toggles manual interpretations; `?` opens
-  the shortcut reference.
+- **Useful keys:** `0` shows/hides the computed interpretation (the MPE);
+  `1`–`9` show/hide the lead horizon of auto-picked group P1–P9; `m` toggles
+  manual interpretations; `?` opens the shortcut reference.
 - **Settings persist per project**, in browser localStorage under the key
   `<org>/<project>`. You are editing the geologist's saved scene, not a
   throwaway view: screenshot a pane before changing it so you can restore
@@ -319,11 +319,12 @@ correlation panel rather than clutter). A registered **background image**
 the interpretation for the eye, lower its **opacity** slider rather than
 hiding it.
 
-**Interpretations:** show the MPE unless the user asks for alternatives —
-never leave it on a 0%-probability alternative, which happens by accident and
-quietly shows a structure nobody believes. Show a manual interpretation if
-the project maintains one; hide a pile of stale auto-generated ones that
-overprint the structure band.
+**Interpretations:** show the MPE. Uncheck the auto-picked horizons (every
+row shows when a run's picks first arrive) unless the user asks for
+alternatives; then show a group's lead (P1, P2, …), not a low-mass one,
+which quietly shows a structure nobody believes. Show a
+manual interpretation if the project maintains one; hide a pile of stale
+copies that overprint the structure band.
 
 **Marginals:** when a computation exists, color marginals on — Drive's
 signature view. `hot` is a solid default, dB scale on, ~20 dB range. Wavelet

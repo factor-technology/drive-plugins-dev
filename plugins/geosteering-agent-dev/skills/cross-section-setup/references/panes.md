@@ -101,14 +101,12 @@ a job has produced results.
 
 Two columns.
 
-**COMPUTED** — which computed structure the scene displays:
+**COMPUTED** — the computed structure:
 
-- Radios: **none** / **MPE** / **P1 n%** / **P2 n%** / **P3 n%**. The
-  percentages are each alternative's global probability; alternatives are
-  greyed when the computation found none. Hotkeys `0`–`3`.
-- **copy to manual** button — snapshots the current computed interpretation
-  into a new manual interpretation. Not a display setting; use only on
-  request.
+- **show MPE** checkbox — displays the computed interpretation (the MPE).
+  Hotkey `0` toggles it.
+- **copy to manual** button — snapshots the MPE into a new manual
+  interpretation. Not a display setting; use only on request.
 
 **MANUAL** — the hand-picked interpretations:
 
@@ -122,6 +120,16 @@ Two columns.
   scene setup; a stray canvas click while armed drops a pick (Ctrl/⌘+Z
   undoes).
 - **snap to structure** — picking aid; irrelevant while not picking.
+- **Auto-picked** (below the manual rows) — the horizons Drive picks after
+  every run, grouped by the peak of the last marginal each ends in and
+  ranked by mass: each group reads `P n · depth — pct% · count` (P1 is the
+  heaviest peak). A group's rows are its lead horizon first, then its
+  alternatives. Per-row show checkbox — every row shows when a run's picks
+  first arrive; unchecks are remembered per browser. Hotkeys `1`–`9`
+  show/hide group P1–P9's lead horizon. A **Copy to Manual** button per row
+  makes an editable manual copy — creation, not display; only on request.
+  A `stale` tag means the picks come from an older run than the computed
+  result; an empty section means the run picked nothing yet.
 
 ## Formations
 
@@ -220,7 +228,8 @@ while any of them is active.
 | `m` | Show/hide manual interpretations |
 | `p` | Toggle picking (avoid) |
 | `z` | Toggle on-scene zoom controls |
-| `0`–`3` | Computed interpretation: none / MPE / alternatives |
+| `0` | Show/hide the computed interpretation (MPE) |
+| `1`–`9` | Show/hide auto-picked group P1–P9's lead horizon |
 | `Ctrl/⌘ + +`/`−` | Zoom in/out |
 | wheel / `shift`+wheel / `Ctrl/⌘`+wheel | Scroll ↕ / scroll ↔ / zoom |
 | `Ctrl/⌘ + z` / `Ctrl/⌘ + shift + z` | Undo / redo |

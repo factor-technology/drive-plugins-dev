@@ -6,21 +6,21 @@ A job run produces three related outputs. Reading them together — not just the
 
 ## The MPE
 
-The **Most Probable Explanation** is the single most probable trace of the target-formation top along the whole lateral. It is what the Profile tab shows when you select **MPE** under Interpretations → Computed.
+The **Most Probable Explanation** is the single most probable trace of the target-formation top along the whole lateral. It is what the Profile tab shows when you check **show MPE** under Interpretations → Computed.
 
 The MPE depth at each MD is the top of the **target geologic structure** — not the bit, and not the wellbore.
 
 ## The alternatives
 
-Alongside the MPE, the computation reports **nine alternative explanations**, each a complete, coherent structure trace with a global probability (the percentages shown as **P1 %**, **P2 %**, … in the Interpretations pane; they sum to roughly 100 together with the MPE's cluster).
+After every run the server also **auto-picks** alternative structure traces from the marginals. Each is a complete, coherent trace, and they are grouped by the peak of the last marginal each one ends in: **P1** is the peak carrying the most probability mass, **P2** the next, and so on. The Profile tab lists them under **Auto-picked** in Interpretations → Manual, each group labeled with its terminal depth, its share of the last marginal, and its member count; see [The Cross Section](./profile.md#interpretations).
 
 How to read them:
 
-- If the top alternatives cluster tightly around the MPE, the interpretation is robust — the data admits essentially one story.
+- If the groups cluster tightly around the MPE, the interpretation is robust — the data admits essentially one story.
 - If they form **two clusters**, the data genuinely supports two competing interpretations; look at where they diverge, and what (a fault? a dip change?) distinguishes them.
-- Three or more scattered clusters mean high ambiguity: treat any single line, including the MPE, with caution.
+- Three or more scattered groups mean high ambiguity: treat any single line, including the MPE, with caution.
 
-The alternatives are anchored at the current end of the wellbore — they are constructed to span the plausible depths of the structure at the bit, which makes them directly useful for the "where is the bit relative to the target *right now*" question.
+The picks are anchored at the current end of the wellbore — each group ends at one peak of the last marginal, so together they span the plausible depths of the structure at the bit — which makes them directly useful for the "where is the bit relative to the target *right now*" question.
 
 ## Marginals
 

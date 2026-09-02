@@ -52,6 +52,6 @@ A project is not one computation — it is a series of jobs over time, one per d
 
 ## Interpretations
 
-**Computed interpretation.** The output of the job: the most probable explanation (MPE) of structure-top depth along the lateral, nine alternative explanations with their probabilities, and per-MD probability distributions (marginals). See [Understanding the Results](./results.md).
+**Computed interpretation.** The output of the job: the most probable explanation (MPE) of structure-top depth along the lateral, the auto-picked alternative traces (grouped P1, P2, … by the probability share of the last marginal's peaks), and per-MD probability distributions (marginals). See [Understanding the Results](./results.md).
 
 **Manual interpretation.** A horizon you draw by hand on the cross section — starting from scratch, from an import, or by copying the MPE. Manual interpretations can also feed back into the computation: as a prior structure, or as an interpretation the job extends. See [The Cross Section](./profile.md).

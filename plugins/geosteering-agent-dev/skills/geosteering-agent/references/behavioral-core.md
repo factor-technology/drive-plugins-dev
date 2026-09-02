@@ -249,7 +249,9 @@ A job run produces:
 - **Per-MD posterior marginals** of structure-top depth — a 1-D probability
   distribution P(top_depth) at each lateral MD.
 - A **most probable explanation (MPE)** — a single trace through the well.
-- **Nine alternative explanations** with associated global probabilities.
+- **Auto-picked horizons** — threadings through the marginals, grouped by
+  the peak of the bit marginal each ends in and ranked by probability mass
+  (P1, P2, …). The server picks them a few seconds after every run.
 
 ### 1.2.2 Marginals
 
@@ -278,37 +280,45 @@ there.
 
 **Lateral connectivity is NOT encoded in the marginals.** Many different
 alternative structures — each a different way of connecting peaks across
-neighboring MDs — are all consistent with the same marginal field. The mode
-estimates (MPE + alternatives) are the computation's own attempts to connect
+neighboring MDs — are all consistent with the same marginal field. The MPE
+and the auto-picked horizons are the computation's own attempts to connect
 those peaks into whole structures; that's where connectivity lives.
 
-### 1.2.3 MPE and the nine alternatives
+### 1.2.3 MPE and the auto-picked horizons
 
 The MPE JSON is keyed by zero-padded MD strings (lexically sortable). Each
-entry contains:
+entry's `formation_tvd` is the MPE depth at that MD — the joint most-probable
+depth considering the structure as a whole, not just this MD. The Computed
+pane shows the MPE alone. (The engine's file also carries legacy per-MD
+threading keys and a top-level probability array; the tools strip them and
+you never read or cite them.)
 
-- `formation_tvd`: the MPE depth at that MD — the joint most-probable depth
-  considering the structure as a whole, not just this MD.
-- `pmax_1` … `pmax_9`: depth at this MD according to alternative
-  explanations 1–9 (posterior modes).
-- `pmean_1` … `pmean_9`: posterior means for the same. Usually equal to
-  `pmax` when the per-MD posterior is sharp.
+**The alternatives are the run's auto-picked horizons.** After every run
+the server traces horizons through the marginal field and stores them with
+the run; the Interpretations pane lists them in its Auto-picked section and
+`read_autopicks` returns the same list. Each horizon (`Auto NNN`) is one
+complete, internally coherent trace.
 
-At top level: `probs_pct` is an array of length 10. Index 0 is a placeholder
-(1-indexed). Indices 1–9 are the **global probabilities** (%) of each
-alternative across the whole result; they sum to ~100.
+**They are grouped by the peak of the bit marginal each ends in, ranked by
+mass.** The last marginal (at the current end of the wellbore) has several
+peaks; the one carrying the most probability mass is P1, the next P2, and so
+on. Group P n's **lead** horizon is its first member: the endpoint-anchored
+trace that ends at that peak when the pick kept one, otherwise its
+lowest-numbered alternative. The other members are alternative threadings
+that fork from an anchor MD and end in the same basin. The pane labels
+each group "P n · terminal depth — pct% · count", pct being that peak's
+share of the bit marginal's probability (`weight_pct`). Horizons ending
+below the mass bar are listed last, unranked. So the groups span the bit's
+depth distribution: P n is a rank, and a mode discarded as a fault candidate
+leaves a gap rather than renumbering.
 
-**The suffix N is an explanation index, not a rank or percentile.** To trace
-explanation N laterally, read `pmax_N` at every MD. Each numbered explanation
-is internally coherent — explanation 4 at MD 15715 is the same explanation as
-explanation 4 at MD 16282.
-
-**Alternatives are endpoint-anchored at the bit.** Specifically: the last
-marginal (at the current end of the wellbore) has multiple peaks; call the
-largest p1, second-largest p2, etc. Explanation N is the trace of one
-"sort of maximal" structure that ends at the depth of pN at the last MD.
-This means the nine alternatives are constructed to span the bit's depth
-distribution efficiently.
+The scene draws the autos shifted so the Top of Target sits where the MPE
+crosses the wellbore (the render shift); `read_autopicks` and
+`copy_autopick` report and copy in that drawn frame. Picks land 10–40 s
+after a run completes, so they can be absent or **stale** (from an older run
+than the computed result) — say so instead of reading old picks as current.
+A run can legitimately pick nothing when every mode was discarded as a fault
+candidate.
 
 ### 1.2.4 MPE is a mode, not a density
 
@@ -317,18 +327,17 @@ lateral). Any single point's absolute probability is on the order of 10^-4000.
 An isolated mode in such a space is essentially noise; what matters is
 **density** — a region of high-probability structures all clustered nearby.
 
-Density isn't directly computable, but **the nine alternatives are a sparse
-sample from the posterior** that you can use as a proxy: when the
-alternatives near the MPE also carry most of `probs_pct`, the result is
-settled; when they split into two or more distinct depth bands, the
-computation genuinely hasn't picked a winner. A high-MPE result whose
-alternatives are scattered everywhere is unreliable even when the MPE
-probability looks high.
+Density isn't directly computable, but **the auto-picked groups are a sparse
+sample from the posterior** that you can use as a proxy: when the groups
+near the MPE also carry most of the mass, the result is settled; when they
+split into two or more distinct depth bands, the computation genuinely
+hasn't picked a winner. A high-MPE result whose groups are scattered
+everywhere is unreliable even when the MPE probability looks high.
 
 Use this to calibrate your own wording — "settled" versus "two candidate
 structures" — not as statistics to recite. The geologist sees the
-alternatives drawn in the cross section (§1.7); mass percentages belong in a
-reply only when they ask for them.
+auto-picked horizons drawn in the cross section (§1.7); mass percentages
+belong in a reply only when they ask for them.
 
 ### 1.2.5 Two decision modes
 
@@ -336,9 +345,9 @@ Distinguish cleanly:
 
 - **Steering question** ("where should the bit go next?"): collapses to the
   bit's marginal + the bit's known wellbore depth + structure thickness +
-  user's prior structure shape projected ahead. The nine alternatives at the
-  last MD efficiently sample bit-depth distribution. The path the structure
-  took to get here doesn't matter.
+  user's prior structure shape projected ahead. The auto-picked groups'
+  terminal depths and masses sample the bit-depth distribution. The path the
+  structure took to get here doesn't matter.
 - **Diagnostic question** ("are our priors wrong / did we miss a fault?"):
   needs the full upstream marginal field + how the alternative structures
   diverge across it. The path matters here; the bit doesn't.
@@ -486,17 +495,17 @@ Localized claims drive concrete actions ("test a fault near MD 15,715").
 
 ### 1.6.2 Mode-estimate disagreement is your strongest signal
 
-When the top alternatives diverge meaningfully, the computation isn't
+When the top auto-picked groups diverge meaningfully, the computation isn't
 picking a winner. Say so plainly — "the computation sees two candidate
 structures here, one about 9 ft shallower than the other" — and point the
 user at the cross section, where the disagreement is drawn. Don't pick a
-winner for them; use the `probs_pct` masses to calibrate your own wording
+winner for them; use the groups' masses to calibrate your own wording
 (dominant versus genuinely split), not as percentages to recite unless the
 user asks.
 
 ### 1.6.3 When MPE is operationally implausible
 
-Scan the alternatives. If a credible alternative puts the bit in target, say
+Scan the auto-picked groups. If a credible one puts the bit in target, say
 so plainly: "the most probable reading has the bit below the zone, but a
 credible alternative — the shallower branch in the cross section — puts you
 in it." Present it as an observation; whether to explore priors that would

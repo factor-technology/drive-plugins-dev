@@ -34,8 +34,10 @@ interpretations shown you edit instead of draw: click a segment between two
 picks to insert one, drag a pick to move it, drag inside a block to shift the
 whole block, drag a box to select, `↑`/`↓` nudge the selected block by one
 depth unit, and **Delete**/**Backspace** removes the selection. `Ctrl/⌘-Z`
-undoes, `Ctrl/⌘-Shift-Z` redoes, **Esc** cancels the draw in progress; `0`–`3`
-show the computed top and its alternatives; `?` lists every key. For the
+undoes, `Ctrl/⌘-Shift-Z` redoes, **Esc** cancels the draw in progress; `0`
+shows or hides the computed top (the MPE) and `1`–`9` show or hide the lead
+horizon of auto-picked group P1–P9 (turning interpretations on if they were
+hidden); `?` lists every key. For the
 **target line**, turn **Extend** on and click to add points ahead of the bit;
 turn **Extend** off to adjust — hover a point and drag it.
 

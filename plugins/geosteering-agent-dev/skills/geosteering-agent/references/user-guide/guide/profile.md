@@ -36,8 +36,9 @@ The per-depth probability field from the computation, displayed as color or as w
 
 Two sub-panes:
 
-- **Computed** — choose what the section displays: nothing, the **MPE**, or one of the probability-ranked alternatives (**P1 %**, **P2 %**, **P3 %** — the percentage is each alternative's global probability). Keys 0–3 switch between them. A copy button snapshots the current computed interpretation into a new manual interpretation.
+- **Computed** — **show MPE** displays the computed interpretation, the [MPE](./results.md#the-mpe); key `0` toggles it. A copy button snapshots the MPE into a new manual interpretation.
 - **Manual** — create (**Add**), **Import** (paste depth picks), show/hide, recolor, and rename manual interpretations; select one for editing; toggle **picking** and **snap to structure**.
+- **Auto-picked** (under Manual) — the horizons Drive picks automatically after every run, grouped as **P1**, **P2**, … by the probability mass of the last marginal's peaks; each group is labeled with its end depth, its percentage, and its member count. Check a horizon to display it, and **Copy to Manual** turns one into a manual interpretation. Keys `1`–`9` show or hide the lead horizon of group P1..P9. A note appears when the picks come from an older run than the current computation.
 
 ### Formations
 
@@ -49,7 +50,7 @@ Interpolated type-log traces — copies of the type log posted periodically alon
 
 ### Derived
 
-Derive a new type log by back-projecting the active log through an interpretation — useful when no good pilot exists near the lateral. The pane works from the backprojections currently displayed (the selected computed interpretation, or the manual interpretation when shown, windowed if the type-log window is on). Choose the statistic — **Mean**, **Median**, **Shallowest MD**, or **Deepest MD** — that picks the value where the interpretation maps more than one active-log sample to the same depth. The derived curve is merged into the current type log and **Save as LAS...** writes it in pilot TVD, calibrated so the pilot's fit params reproduce the active log. The same computation is available programmatically as the `derive_type_log` agent tool / `POST .../derive-type-log` API.
+Derive a new type log by back-projecting the active log through an interpretation — useful when no good pilot exists near the lateral. The pane works from the backprojections currently displayed (the MPE when shown, or the manual interpretation when shown, windowed if the type-log window is on). Choose the statistic — **Mean**, **Median**, **Shallowest MD**, or **Deepest MD** — that picks the value where the interpretation maps more than one active-log sample to the same depth. The derived curve is merged into the current type log and **Save as LAS...** writes it in pilot TVD, calibrated so the pilot's fit params reproduce the active log. The same computation is available programmatically as the `derive_type_log` agent tool / `POST .../derive-type-log` API.
 
 ### Help
 
@@ -94,4 +95,5 @@ Undo/redo (Ctrl/⌘+Z, Ctrl/⌘+Shift+Z) applies to interpretation edits.
 | mouse wheel | Scroll up/down |
 | `shift` + wheel | Scroll left/right |
 | `Ctrl/⌘` + wheel | Zoom in/out |
-| `0`–`3` | Select computed interpretation (none / MPE / alternatives) |
+| `0` | Show / hide the computed top (MPE) |
+| `1`–`9` | Show / hide the lead pick of auto-picked group P1..P9 |

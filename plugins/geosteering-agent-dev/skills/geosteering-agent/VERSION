@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: fd5b25b2e6ee2b38289783e8926d33d3df814afd
-source_commit_short: fd5b25b2e6ee
-source_commit_date: 2026-09-01T11:42:34-05:00
-source_commit_subject: [DD-3164] mcp: import_project_archive — restore a native archive as a new project
-skill_version: 0.5.3
-built_at: 2026-09-01T11:42:34-05:00
+source_commit: c7de8499a66c34a206ed408b7f8341ed04d14f1c
+source_commit_short: c7de8499a66c
+source_commit_date: 2026-09-02T12:41:30-05:00
+source_commit_subject: agent: read_autopicks and copy_autopick bring the tools to pane parity
+skill_version: 0.5.4
+built_at: 2026-09-02T12:41:30-05:00
 built_from_workspace_dirty: false

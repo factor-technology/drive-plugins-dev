@@ -29,9 +29,10 @@ the alignment with the current inputs, not re-collect them.
 Cross-tool rules:
 
 - **Result reading is tiered.** `read_latest_job_result` returns a compact
-  summary (run ID, MD range, probs_pct, MPE tail); the data lives behind the
-  targeted readers `read_marginal` (one MD) and `read_mpe_slice` (an MD
-  window). Prefer the targeted readers — far less context, and claims stay
+  summary (run ID, MD range, MPE tail, the auto-picked groups); the data
+  lives behind the targeted readers `read_marginal` (one MD),
+  `read_mpe_slice` (an MD window) and `read_autopicks` (one horizon's path).
+  Prefer the targeted readers — far less context, and claims stay
   MD-localized (§1.6.1).
 - **Cross-project work starts at `list_projects`** — the only cross-project
   tool; every other tool needs a `{scope, name}` you already hold.
@@ -52,7 +53,8 @@ Cross-tool rules:
 The catalog, by area (names only — contracts live in the schemas):
 
 - Job results & status: `read_job_status`, `read_latest_job_result`,
-  `read_marginal`, `read_mpe_slice`, `get_operation_status`
+  `read_marginal`, `read_mpe_slice`, `read_autopicks`,
+  `get_operation_status`
 - Project inspection: `read_project`, `read_job_params`, `read_user_prior`,
   `read_structure`, `read_fit_params`, `read_pilot_well_markers`,
   `read_active_trajectory`, `read_well_plan`, `read_active_log`,
@@ -80,7 +82,8 @@ The catalog, by area (names only — contracts live in the schemas):
   `trigger_job_rerun`
 - Manual interpretations: `create_interpretation`, `update_interpretation`,
   `rename_interpretation`, `delete_interpretation`,
-  `copy_computed_interpretation`
+  `copy_computed_interpretation` (the MPE only), `copy_autopick` (one
+  auto-picked horizon, as the pane's Copy to Manual)
 - Target line: `set_target_line`, `delete_target_line`
 - Background (seismic) image: `read_seismic_image`, `upload_seismic_image`,
   `set_seismic_image_registration`, `delete_seismic_image`. How the image
