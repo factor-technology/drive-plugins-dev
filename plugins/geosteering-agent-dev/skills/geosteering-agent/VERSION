@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: c7de8499a66c34a206ed408b7f8341ed04d14f1c
-source_commit_short: c7de8499a66c
-source_commit_date: 2026-09-02T12:41:30-05:00
-source_commit_subject: agent: read_autopicks and copy_autopick bring the tools to pane parity
-skill_version: 0.5.4
-built_at: 2026-09-02T12:41:30-05:00
+source_commit: 43d79b02018c9bf96852ccb874c4dfe247acbdc6
+source_commit_short: 43d79b02018c
+source_commit_date: 2026-09-02T17:57:37-05:00
+source_commit_subject: app: the Interpretations pane is two like tables, Computed and Manual
+skill_version: 0.5.7
+built_at: 2026-09-02T17:57:37-05:00
 built_from_workspace_dirty: false

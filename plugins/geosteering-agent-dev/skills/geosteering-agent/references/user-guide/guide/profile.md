@@ -34,11 +34,10 @@ The per-depth probability field from the computation, displayed as color or as w
 
 ### Interpretations
 
-Two sub-panes:
+Two tables, side by side and alike: **Computed**, the horizons the computation produced, and **Manual**, the ones you pick by hand. Every row reads the same way — a checkbox that displays it, a color swatch, its name — and a copy icon on a computed row saves an editable copy into Manual.
 
-- **Computed** — **show MPE** displays the computed interpretation, the [MPE](./results.md#the-mpe); key `0` toggles it. A copy button snapshots the MPE into a new manual interpretation.
-- **Manual** — create (**Add**), **Import** (paste depth picks), show/hide, recolor, and rename manual interpretations; select one for editing; toggle **picking** and **snap to structure**.
-- **Auto-picked** (under Manual) — the horizons Drive picks automatically after every run, grouped as **P1**, **P2**, … by the probability mass of the last marginal's peaks; each group is labeled with its end depth, its percentage, and its member count. Check a horizon to display it, and **Copy to Manual** turns one into a manual interpretation. Keys `1`–`9` show or hide the lead horizon of group P1..P9. A note appears when the picks come from an older run than the current computation.
+- **Computed** — the [MPE](./results.md#the-mpe) heads the table (key `0` also toggles its checkbox), and under it come the horizons Drive auto-picks after every run. A **show autopicks** row between them turns the auto-picks on and off as a group — it is the Manual **show** checkbox (key `m`), offered here as well as there. The auto-picks are grouped by the peak of the last marginal each one ends in, by probability mass: a group's tag, **P1** for the heaviest peak, **P2** next, sits to the left of its rows, which share a tint of one color. Its caret folds the alternatives away under the group's lead horizon. A lead row reads its end depth and the group's share of the last marginal; an alternative reads the measured depth where it forks from the lead. Keys `1`–`9` show or hide the lead horizon of group P1..P9. A row's radio sends its horizon to the log tracks in place of the selected manual interpretation, and hovering a row previews it on the section. A note appears when the picks come from an older run than the current computation.
+- **Manual** — create (**New**), **Import** (paste depth picks), show/hide, recolor, and rename manual interpretations; select one for editing; toggle **picking** and **snap to structure**. Its **show** checkbox governs the whole manual side of the section, the auto-picked horizons included — the Computed table's **show autopicks** row is that same switch; the MPE draws either way.
 
 ### Formations
 

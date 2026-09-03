@@ -101,12 +101,31 @@ a job has produced results.
 
 Two columns.
 
-**COMPUTED** — the computed structure:
+**COMPUTED** — one table of the run's computed horizons:
 
-- **show MPE** checkbox — displays the computed interpretation (the MPE).
-  Hotkey `0` toggles it.
-- **copy to manual** button — snapshots the MPE into a new manual
-  interpretation. Not a display setting; use only on request.
+- **MPE** row at the top: show checkbox (hotkey `0` toggles it too; the MPE
+  draws whether or not the Manual **show** flag is on), swatch, name, and a
+  copy icon that snapshots the MPE into a new manual interpretation. Not a
+  display setting; use only on request. The row has no tracks radio.
+- **show autopicks** row under the MPE — the Manual **show** flag itself,
+  mirrored here, governing the auto-picked rows as a group. Toggling it
+  here is the same act as toggling Manual **show** or pressing `m`. The row
+  appears once a run has picks.
+- **Auto-picked rows** under the MPE — the horizons Drive picks after
+  every run, grouped by the peak of the last marginal each ends in and
+  ranked by mass. A group takes no row of its own: its rows share a hue
+  wash, and its tag (`P1` is the heaviest peak) sits in a gutter left of
+  the table with a caret that folds the alternatives under the lead row.
+  The lead row reads `depth · pct%`; an alternative reads `MD nnnn` where
+  it forks. Per-row: tracks radio, show checkbox, swatch, name, copy icon
+  (an editable manual copy — creation, not display; only on request).
+  Every row shows when a run's picks first arrive; unchecks are remembered
+  per browser. **Select all** / **Deselect all** edit every row's show
+  checkbox. Hotkeys `1`–`9` show/hide group P1–P9's lead horizon. The rows
+  enable only while the Manual **show** flag is on (the **show autopicks**
+  row is that flag). A `stale` note means
+  the picks come from an older run than the computed result; "no horizons
+  picked" means the run picked nothing yet.
 
 **MANUAL** — the hand-picked interpretations:
 
@@ -114,22 +133,12 @@ Two columns.
 - **+** (create new) and **Import interpretation** (paste picks) — creation
   tools, not display; only on request.
 - Per-interpretation rows: selection radio (which one is being edited),
-  show checkbox, color swatch, a locate button, a trash button (deletes —
-  never without explicit instruction), name field.
+  show checkbox, color swatch, name field, a simplify button, a trash
+  button (deletes — never without explicit instruction).
 - **enable picking** — arms click-to-pick on the canvas. Leave OFF during
   scene setup; a stray canvas click while armed drops a pick (Ctrl/⌘+Z
   undoes).
 - **snap to structure** — picking aid; irrelevant while not picking.
-- **Auto-picked** (below the manual rows) — the horizons Drive picks after
-  every run, grouped by the peak of the last marginal each ends in and
-  ranked by mass: each group reads `P n · depth — pct% · count` (P1 is the
-  heaviest peak). A group's rows are its lead horizon first, then its
-  alternatives. Per-row show checkbox — every row shows when a run's picks
-  first arrive; unchecks are remembered per browser. Hotkeys `1`–`9`
-  show/hide group P1–P9's lead horizon. A **Copy to Manual** button per row
-  makes an editable manual copy — creation, not display; only on request.
-  A `stale` tag means the picks come from an older run than the computed
-  result; an empty section means the run picked nothing yet.
 
 ## Formations
 

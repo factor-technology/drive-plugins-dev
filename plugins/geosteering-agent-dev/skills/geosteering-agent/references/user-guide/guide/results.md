@@ -6,13 +6,13 @@ A job run produces three related outputs. Reading them together — not just the
 
 ## The MPE
 
-The **Most Probable Explanation** is the single most probable trace of the target-formation top along the whole lateral. It is what the Profile tab shows when you check **show MPE** under Interpretations → Computed.
+The **Most Probable Explanation** is the single most probable trace of the target-formation top along the whole lateral. It is what the Profile tab shows when you check the **MPE** row under Interpretations → Computed.
 
 The MPE depth at each MD is the top of the **target geologic structure** — not the bit, and not the wellbore.
 
 ## The alternatives
 
-After every run the server also **auto-picks** alternative structure traces from the marginals. Each is a complete, coherent trace, and they are grouped by the peak of the last marginal each one ends in: **P1** is the peak carrying the most probability mass, **P2** the next, and so on. The Profile tab lists them under **Auto-picked** in Interpretations → Manual, each group labeled with its terminal depth, its share of the last marginal, and its member count; see [The Cross Section](./profile.md#interpretations).
+After every run the server also **auto-picks** alternative structure traces from the marginals. Each is a complete, coherent trace, and they are grouped by the peak of the last marginal each one ends in: **P1** is the peak carrying the most probability mass, **P2** the next, and so on. The Profile tab lists them under the MPE in Interpretations → Computed, each group tagged P1, P2, … beside its rows and its lead horizon labeled with its terminal depth and its share of the last marginal; see [The Cross Section](./profile.md#interpretations).
 
 How to read them:
 

@@ -288,15 +288,15 @@ those peaks into whole structures; that's where connectivity lives.
 
 The MPE JSON is keyed by zero-padded MD strings (lexically sortable). Each
 entry's `formation_tvd` is the MPE depth at that MD — the joint most-probable
-depth considering the structure as a whole, not just this MD. The Computed
-pane shows the MPE alone. (The engine's file also carries legacy per-MD
+depth considering the structure as a whole, not just this MD. The MPE heads
+the Computed table. (The engine's file also carries legacy per-MD
 threading keys and a top-level probability array; the tools strip them and
 you never read or cite them.)
 
 **The alternatives are the run's auto-picked horizons.** After every run
 the server traces horizons through the marginal field and stores them with
-the run; the Interpretations pane lists them in its Auto-picked section and
-`read_autopicks` returns the same list. Each horizon (`Auto NNN`) is one
+the run; the Interpretations pane lists them under the MPE in its Computed
+table and `read_autopicks` returns the same list. Each horizon (`Auto NNN`) is one
 complete, internally coherent trace.
 
 **They are grouped by the peak of the bit marginal each ends in, ranked by
