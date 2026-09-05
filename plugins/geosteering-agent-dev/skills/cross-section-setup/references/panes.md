@@ -101,21 +101,21 @@ a job has produced results.
 
 Two columns, one model. Every row reads the same way — radio, show
 checkbox, swatch, name — and the pane's legend says it: **radio = what the
-cross section follows; checkbox = what it shows.** Neither edits anything:
-editing is **manual mode** (under MANUAL below).
+cross section follows; checkbox = what it shows.** A manual interpretation
+on the radio is **manual mode**: its picks show for editing (under MANUAL
+below).
 
 - **The radio** is ONE group across both columns: the structure the cross
   section hangs on. The formation stack, the log tracks' correlations and
   forward projections, the traces and the cursor readouts follow the lit
   row — the MPE (the default), an auto-picked horizon, or a manual
-  interpretation. A followed manual interpretation is a plain ribbon until
-  manual mode is on. **Leave it on the MPE during setup** unless the user
+  interpretation. **Leave it on the MPE during setup** unless the user
   asks to see a horizon's correlations or to edit a manual interpretation;
   moving it changes the formation bands and the tracks.
-- **The checkbox** is display only, never gated by the radio, manual mode or
-  picking. A followed auto-pick or manual interpretation is always drawn
-  (its checkbox is checked and disabled); the MPE can be hidden while the
-  cross section still hangs on it, and its formation bands hide with it.
+- **The checkbox** is display only, never gated by the radio or picking. A
+  followed auto-pick or manual interpretation is always drawn (its checkbox
+  is checked and disabled); the MPE can be hidden while the cross section
+  still hangs on it, and its formation bands hide with it.
 - **Select all** / **Deselect all** at the top of the pane act on every
   checkbox — the MPE, the auto-picks and the manual interpretations;
   Deselect all leaves a followed auto-pick or manual interpretation
@@ -143,14 +143,17 @@ editing is **manual mode** (under MANUAL below).
 
 **MANUAL** — the hand-picked interpretations:
 
-- **manual mode** — shows the pick handles of the manual interpretation on
-  the radio, to drag, select and delete picks (hotkey `m`). Independent of
-  the radio: on with the MPE or an auto lit it shows nothing. Leave OFF
-  during scene setup; a stray drag while on moves a pick (Ctrl/⌘+Z undoes).
+- **Manual mode** is a manual interpretation on the radio: its pick handles
+  show, to drag, select and delete picks. The list's **none** row is manual
+  mode off: lit while the MPE or an auto holds the radio, and choosing it
+  from a manual interpretation returns the cross section to the MPE (hotkey
+  `m` moves the radio between the MPE and the last manual interpretation).
+  Keep the radio on **none** during scene setup; a stray drag while a manual
+  interpretation holds it moves a pick (Ctrl/⌘+Z undoes).
 - **enable picking** — arms click-to-pick on the canvas: adds picks to the
-  manual interpretation on the radio (disabled until one holds it) and turns
-  manual mode on. Leave OFF during scene setup; a stray canvas click while
-  armed drops a pick (Ctrl/⌘+Z undoes).
+  manual interpretation on the radio (disabled until one holds it). Leave
+  OFF during scene setup; a stray canvas click while armed drops a pick
+  (Ctrl/⌘+Z undoes).
 - **snap to structure** — picking aid; irrelevant while not picking.
 - **New…** and **Import…** (paste picks) — creation tools, not display; only
   on request.
@@ -247,11 +250,11 @@ can be compared honestly.
 
 ## The floating on-canvas bar (bottom center)
 
-Interpretation-editing controls: Manual mode (highlighter — shows the picks
-of the manual interpretation on the radio, same as `m`), Pick (pencil),
-extend target line, undo, redo, fault, delete. These arm live canvas
-gestures — scene setup never needs them. Don't click them; don't click the
-canvas while any of them is active.
+Interpretation-editing controls: Manual mode (highlighter — moves the radio
+between the MPE and the last manual interpretation, same as `m`), Pick
+(pencil), extend target line, undo, redo, fault, delete. These arm live
+canvas gestures — scene setup never needs them. Don't click them; don't
+click the canvas while any of them is active.
 
 ## Keyboard shortcuts
 
@@ -259,7 +262,7 @@ canvas while any of them is active.
 |---|---|
 | `?` | Shortcuts reference |
 | `esc` | Cancel picking (does NOT close panes) |
-| `m` | Manual mode: show/hide the picks of the manual interpretation on the radio (avoid during setup) |
+| `m` | Manual mode: move the radio between the MPE and the last manual interpretation (avoid during setup) |
 | `p` | Toggle picking — adds picks to the manual interpretation on the radio (avoid) |
 | `z` | Toggle on-scene zoom controls |
 | `0` | Show/hide the computed interpretation (MPE) |

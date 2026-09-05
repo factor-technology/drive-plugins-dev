@@ -18,12 +18,13 @@ other off (only one is active at a time):
 
 - **Pick** (manual interpretation) — the **Pick** button on the on-canvas bar,
   or the `P` key: it adds picks to the manual interpretation whose radio is
-  lit in the Interpretations pane, and needs one there. Separately, **Manual
-  mode** (the bar's toggle, the Manual table's checkbox, or `M`) shows that
-  interpretation's pick handles for editing; the pane's radio — what the
-  formation bands, the log tracks, the traces and the readouts hang on —
-  never edits anything by itself. Display is each row's own checkbox,
-  whatever the cross section follows.
+  lit in the Interpretations pane, and needs one there. A manual
+  interpretation on the radio is **manual mode**: its pick handles show for
+  editing, and the formation bands, the log tracks, the traces and the
+  readouts hang on it; the bar's toggle or `M` moves the radio between the
+  MPE and the last manual interpretation, and the Manual table's **none**
+  row is the same off switch. Display is each row's own checkbox, whatever
+  the cross section follows.
 - **Extend target line** — the **Extend target line** button on the on-canvas
   bar, the **extend** checkbox in the side panel's Target Line section, or the
   `T` key. Extending needs the well's azimuth set and a measured toe; the
@@ -34,8 +35,8 @@ picks; three or more make a block. While picking: hold **Alt** to snap new
 picks to the computed structure; hold **F** to open a fault — a horizontal line
 tracks the cursor depth from the nearest block edge, click once to set the
 throw, again to drop the offset block. (`A` auto-picks the current selection;
-`R` builds a new block from the selected picks.) With **Pick** off but
-manual mode on and a manual interpretation on the radio you edit instead of draw:
+`R` builds a new block from the selected picks.) With **Pick** off and a
+manual interpretation on the radio (manual mode) you edit instead of draw:
 click a segment between two picks to insert one, drag a pick to move it, drag inside a block to shift the
 whole block, drag a box to select, `↑`/`↓` nudge the selected block by one
 depth unit, and **Delete**/**Backspace** removes the selection. `Ctrl/⌘-Z`
@@ -49,10 +50,10 @@ turn **Extend** off to adjust — hover a point and drag it.
 bar never reach the canvas, so they can't drop a stray pick); long-press any
 button to read its label without firing it. Before picking, the bar offers
 **Manual mode** and **Extend target line**, plus **Pick** while a manual
-interpretation holds the radio; in manual mode with one on the radio it adds
-**Select**, **Undo/Redo**, **Clear selection**, and **Delete**. While
-picking, it offers **Manual mode** (off, which exits picking), **Pick** (which
-finishes), **Snap**, **Undo/Redo**,
+interpretation holds the radio (manual mode), when it also adds **Select**,
+**Undo/Redo**, **Clear selection**, and **Delete**. While picking, it offers
+**Manual mode** (off: the radio goes to the MPE, which exits picking),
+**Pick** (which finishes), **Snap**, **Undo/Redo**,
 **Fault**, **Split**, and **Cancel**. On the canvas: one finger
 draws while picking (drag, lift to drop a pick), or **moves** a pick or block
 when picking is off (press it and drag); two fingers **pan and pinch-zoom**.

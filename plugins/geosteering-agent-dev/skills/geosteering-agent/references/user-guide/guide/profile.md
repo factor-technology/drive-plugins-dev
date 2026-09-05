@@ -34,13 +34,13 @@ The per-depth probability field from the computation, displayed as color or as w
 
 ### Interpretations
 
-Two tables, side by side and alike: **Computed**, the horizons the computation produced, and **Manual**, the ones you pick by hand. Every row reads the same way — a radio, a checkbox, a color swatch, its name — and a copy icon on a computed row saves an editable copy into Manual. The radio is one group across both tables: **what the cross section follows**. The checkbox is **what it shows**. Neither edits anything: editing is **manual mode**.
+Two tables, side by side and alike: **Computed**, the horizons the computation produced, and **Manual**, the ones you pick by hand. Every row reads the same way — a radio, a checkbox, a color swatch, its name — and a copy icon on a computed row saves an editable copy into Manual. The radio is one group across both tables: **what the cross section follows**. The checkbox is **what it shows**. A manual interpretation on the radio is **manual mode**: its picks show for editing.
 
-- **Following.** The row whose radio is lit is the structure the cross section hangs on: the formation bands, the log tracks' correlations and forward projections, the traces and the cursor readouts follow it. By default that is the MPE. Choose an auto-picked horizon or a manual interpretation to hang everything on it instead. A followed manual interpretation is drawn as a plain ribbon: the radio never puts it in edit.
-- **Editing.** Turn on **manual mode** (the checkbox at the top of the Manual table, or key `m`) to see the picks of the manual interpretation whose radio is lit: drag a pick to move it, drag a box to select, delete the selection. Manual mode is independent of the radio; with the MPE or an auto-picked horizon lit it has nothing to show until you choose a manual interpretation. **Enable picking** (key `p`) adds picks by clicking along the log; it needs a manual interpretation on the radio and turns manual mode on. Moving the radio to the MPE or an auto-picked horizon ends picking; manual mode stays on.
-- **Showing.** Each checkbox draws or hides its row's horizon, whatever the cross section follows and whether or not manual mode or picking is on. A followed auto-picked horizon or manual interpretation is always drawn; the MPE can be hidden while the cross section still hangs on it, and its formation bands hide with it. **Select all** / **Deselect all** at the top of the pane act on every checkbox — the MPE, the auto-picks and the manual interpretations; Deselect all leaves a followed auto-pick or manual interpretation displayed (key `0` brings the MPE back). Key `0` toggles the MPE's checkbox.
+- **Following.** The row whose radio is lit is the structure the cross section hangs on: the formation bands, the log tracks' correlations and forward projections, the traces and the cursor readouts follow it. By default that is the MPE. Choose an auto-picked horizon or a manual interpretation to hang everything on it instead.
+- **Editing.** A manual interpretation whose radio is lit is in **manual mode**: its picks show, and you can drag a pick to move it, drag a box to select, and delete the selection. The Manual table's **none** radio is manual mode off: it is lit while the MPE or an auto-picked horizon holds the radio, and choosing it from a manual interpretation returns the cross section to the MPE. Key `m` moves the radio between the MPE and the manual interpretation that last held it. **Enable picking** (key `p`) adds picks by clicking along the log; it needs a manual interpretation on the radio (with none yet it creates the first). Moving the radio to the MPE or an auto-picked horizon ends picking.
+- **Showing.** Each checkbox draws or hides its row's horizon, whatever the cross section follows and whether or not picking is on. A followed auto-picked horizon or manual interpretation is always drawn; the MPE can be hidden while the cross section still hangs on it, and its formation bands hide with it. **Select all** / **Deselect all** at the top of the pane act on every checkbox — the MPE, the auto-picks and the manual interpretations; Deselect all leaves a followed auto-pick or manual interpretation displayed (key `0` brings the MPE back). Key `0` toggles the MPE's checkbox.
 - **Computed** — the [MPE](./results.md#the-mpe) heads the table, and under it come the horizons Drive auto-picks after every run, grouped by the peak of the last marginal each one ends in, by probability mass: a group's tag, **P1** for the heaviest peak, **P2** next, sits to the left of its rows, which share a tint of one color. Its caret folds the alternatives away under the group's lead horizon. A lead row reads its end depth and the group's share of the last marginal; an alternative reads the measured depth where it forks from the lead. Keys `1`–`9` show or hide the lead horizon of group P1..P9. Hovering a row previews it on the cross section. A note appears when the picks come from an older run than the current computation.
-- **Manual** — create (**New**), **Import** (paste depth picks), recolor and rename manual interpretations; **Delete checked** removes every manual interpretation whose checkbox is checked (never the one whose radio is lit); toggle **manual mode**, **picking** and **snap to structure**.
+- **Manual** — create (**New**), **Import** (paste depth picks), recolor and rename manual interpretations; **Delete checked** removes every manual interpretation whose checkbox is checked (never the one whose radio is lit); toggle **picking** and **snap to structure**.
 
 ### Formations
 
@@ -66,7 +66,7 @@ The **active log track** — the horizontal strip across the top — shows the a
 
 ## Editing a manual interpretation
 
-Choose an interpretation with its radio (Interpretations → Manual), enable **picking**, and click along the cross section to place picks. With picking off the interpretation stays editable in **manual mode** — drag a pick, select and move blocks — as long as its radio is lit. While picking:
+Choose an interpretation with its radio (Interpretations → Manual) — that is **manual mode**: its picks show — enable **picking**, and click along the cross section to place picks. With picking off the interpretation stays editable — drag a pick, select and move blocks — as long as its radio is lit. While picking:
 
 - Hold **alt** to auto-pick (Drive refines your pick against the data).
 - Hold **f** to open a **fault** at the pick.
@@ -86,7 +86,7 @@ Undo/redo (Ctrl/⌘+Z, Ctrl/⌘+Shift+Z) applies to interpretation edits.
 | `shift` | Append to selection |
 | `a` | Apply auto-picking to picks in the selection |
 | `f` (held) | Open a fault while picking |
-| `m` | Manual mode: show / hide the picks of the manual interpretation whose radio is lit |
+| `m` | Manual mode: move the radio between the MPE and the manual interpretation that last held it |
 | `p` | Toggle picking (adds picks to the manual interpretation whose radio is lit) |
 | `r` | Make a new block from picks in the selection |
 | `z` | Toggle the zoom controls |

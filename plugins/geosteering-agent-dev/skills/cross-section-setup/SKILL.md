@@ -135,9 +135,9 @@ These are specific to this app and each one has bitten someone:
   pick undoes with Ctrl/⌘+Z.
 - **Useful keys:** `0` shows/hides the computed interpretation (the MPE);
   `1`–`9` show/hide the lead horizon of auto-picked group P1–P9; `m` toggles
-  manual mode (the pick handles of the manual interpretation on the radio —
-  editing, so leave it alone during setup); `?` opens the shortcut
-  reference.
+  manual mode (moves the radio between the MPE and the last manual
+  interpretation, whose pick handles then show — editing, so leave it alone
+  during setup); `?` opens the shortcut reference.
 - **Settings persist per project**, in browser localStorage under the key
   `<org>/<project>`. You are editing the geologist's saved scene, not a
   throwaway view: screenshot a pane before changing it so you can restore
@@ -323,11 +323,11 @@ hiding it.
 
 **Interpretations:** show the MPE, and leave the radio on it (the radio is
 what the cross section follows — formation bands, log tracks, traces,
-readouts; the checkboxes are display only; manual mode, off by default, is
-the only thing that edits). Uncheck the auto-picked horizons (every row
-shows when a run's picks first arrive) unless the user asks for
-alternatives; then show a group's lead (P1, P2, …), not a low-mass one,
-which quietly shows a structure nobody believes. Show a
+readouts; the checkboxes are display only; a manual interpretation on the
+radio is manual mode, the only thing that edits). Uncheck the auto-picked
+horizons (every row shows when a run's picks first arrive) unless the user
+asks for alternatives; then show a group's lead (P1, P2, …), not a low-mass
+one, which quietly shows a structure nobody believes. Show a
 manual interpretation if the project maintains one; hide a pile of stale
 copies that overprint the structure band.
 
