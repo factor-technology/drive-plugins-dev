@@ -99,58 +99,81 @@ a job has produced results.
 
 ## Interpretations
 
-Two columns.
+Two columns, one model. Every row reads the same way — radio, show
+checkbox, swatch, name — and the pane's legend says it: **radio = what the
+cross section follows; checkbox = what it shows.** Neither edits anything:
+editing is **manual mode** (under MANUAL below).
+
+- **The radio** is ONE group across both columns: the structure the cross
+  section hangs on. The formation stack, the log tracks' correlations and
+  forward projections, the traces and the cursor readouts follow the lit
+  row — the MPE (the default), an auto-picked horizon, or a manual
+  interpretation. A followed manual interpretation is a plain ribbon until
+  manual mode is on. **Leave it on the MPE during setup** unless the user
+  asks to see a horizon's correlations or to edit a manual interpretation;
+  moving it changes the formation bands and the tracks.
+- **The checkbox** is display only, never gated by the radio, manual mode or
+  picking. A followed auto-pick or manual interpretation is always drawn
+  (its checkbox is checked and disabled); the MPE can be hidden while the
+  cross section still hangs on it, and its formation bands hide with it.
+- **Select all** / **Deselect all** at the top of the pane act on every
+  checkbox — the MPE, the auto-picks and the manual interpretations;
+  Deselect all leaves a followed auto-pick or manual interpretation
+  displayed but unchecks the MPE (`0` brings it back).
 
 **COMPUTED** — one table of the run's computed horizons:
 
-- **MPE** row at the top: show checkbox (hotkey `0` toggles it too; the MPE
-  draws whether or not the Manual **show** flag is on), swatch, name, and a
-  copy icon that snapshots the MPE into a new manual interpretation. Not a
-  display setting; use only on request. The row has no tracks radio.
-- **show autopicks** row under the MPE — the Manual **show** flag itself,
-  mirrored here, governing the auto-picked rows as a group. Toggling it
-  here is the same act as toggling Manual **show** or pressing `m`. The row
-  appears once a run has picks.
+- **MPE** row at the top: radio (lit by default), show checkbox (hotkey `0`
+  toggles it too), swatch, name, and a copy icon that snapshots the MPE into
+  a new manual interpretation. The copy is creation, not display; use only
+  on request.
 - **Auto-picked rows** under the MPE — the horizons Drive picks after
   every run, grouped by the peak of the last marginal each ends in and
   ranked by mass. A group takes no row of its own: its rows share a hue
   wash, and its tag (`P1` is the heaviest peak) sits in a gutter left of
   the table with a caret that folds the alternatives under the lead row.
   The lead row reads `depth · pct%`; an alternative reads `MD nnnn` where
-  it forks. Per-row: tracks radio, show checkbox, swatch, name, copy icon
-  (an editable manual copy — creation, not display; only on request).
-  Every row shows when a run's picks first arrive; unchecks are remembered
-  per browser. **Select all** / **Deselect all** edit every row's show
-  checkbox. Hotkeys `1`–`9` show/hide group P1–P9's lead horizon. The rows
-  enable only while the Manual **show** flag is on (the **show autopicks**
-  row is that flag). A `stale` note means
-  the picks come from an older run than the computed result; "no horizons
-  picked" means the run picked nothing yet.
+  it forks. Per-row: radio, show checkbox, swatch, name, copy icon (an
+  editable manual copy — creation, not display; only on request). Every
+  row shows when a run's picks first arrive; unchecks are remembered per
+  browser. Hotkeys `1`–`9` show/hide group P1–P9's lead horizon. Hovering a
+  row previews it on the cross section. A `stale` note means the picks come from
+  an older run than the computed result; "no horizons picked" means the
+  run picked nothing yet.
 
 **MANUAL** — the hand-picked interpretations:
 
-- **show** checkbox — master visibility for manual interpretations (`m`).
-- **+** (create new) and **Import interpretation** (paste picks) — creation
-  tools, not display; only on request.
-- Per-interpretation rows: selection radio (which one is being edited),
-  show checkbox, color swatch, name field, a simplify button, a trash
-  button (deletes — never without explicit instruction).
-- **enable picking** — arms click-to-pick on the canvas. Leave OFF during
-  scene setup; a stray canvas click while armed drops a pick (Ctrl/⌘+Z
-  undoes).
+- **manual mode** — shows the pick handles of the manual interpretation on
+  the radio, to drag, select and delete picks (hotkey `m`). Independent of
+  the radio: on with the MPE or an auto lit it shows nothing. Leave OFF
+  during scene setup; a stray drag while on moves a pick (Ctrl/⌘+Z undoes).
+- **enable picking** — arms click-to-pick on the canvas: adds picks to the
+  manual interpretation on the radio (disabled until one holds it) and turns
+  manual mode on. Leave OFF during scene setup; a stray canvas click while
+  armed drops a pick (Ctrl/⌘+Z undoes).
 - **snap to structure** — picking aid; irrelevant while not picking.
+- **New…** and **Import…** (paste picks) — creation tools, not display; only
+  on request.
+- **Delete checked** — deletes every manual interpretation whose show
+  checkbox is checked (never the one on the radio). Never without explicit
+  instruction.
+- Per-interpretation rows: radio (lit on the interpretation the cross
+  section follows), show checkbox, color swatch, name field, a simplify
+  button (live for the interpretation on the radio), a trash button
+  (deletes — never without explicit instruction). None of them is disabled
+  by the radio; the edits need write permission.
 
 ## Formations
 
 One row per formation top: color swatch, name (e.g. H3, H4, H5, TOP, BASE),
 and a **FILL** checkbox. Fill shades the band below that top — filling the
 target (e.g. TOP) makes the target interval pop. One or two fills read
-well; filling everything turns the section into wallpaper.
+well; filling everything turns the cross section into wallpaper.
 
 ## Traces
 
 Interpolated type-log traces — the type log posted every 30 ft (10 m SI)
-along the well, warped onto the displayed structure, so the section reads
+along the well, warped onto the displayed structure, so the cross section reads
 like a correlation panel.
 
 - **TYPE LOG TRACES**: **display** checkbox (same as Components →
@@ -167,9 +190,10 @@ like a correlation panel.
 - **TRACE THROW** slider — trace width; 100% = the shared GR range spans
   one station interval.
 
-Traces render only along the displayed interpretation's lateral extent
-(the manual one when shown, else the selected computed structure) — they
-stop where it ends, and an uncomputed, unpicked project shows none at all.
+Traces hang on the structure the cross section follows (the active manual
+interpretation while its radio is lit, else the MPE) and render only along
+its lateral extent — they stop where it ends, and an uncomputed, unpicked
+project shows none at all.
 
 ## Derived
 
@@ -193,10 +217,10 @@ The keyboard shortcut reference.
 Opens a modal dialog (close with its X):
 
 - **Couple Well Log Scrolling to Cross-Section** checkbox — ties the track's
-  depth window to the section's. Leave this OFF: along an inclined wellbore
+  depth window to the cross section's. Leave this OFF: along an inclined wellbore
   the interesting part of the pilot track and the interesting part of the
   section are at different depths, so coupling forces one of them
-  off-screen. Position the track and the section independently.
+  off-screen. Position the track and the cross section independently.
 - **Depth axis** radios: TVDSS / TVDTL / TVD — the same three frames as the
   Scene pane, set independently for this track.
 - **Auto Scale** checkbox; **Min**/**Max** fields (enabled when Auto Scale
@@ -223,10 +247,11 @@ can be compared honestly.
 
 ## The floating on-canvas bar (bottom center)
 
-Interpretation-editing controls: show/hide (eye), Pick (pencil), extend
-target line, undo, redo, fault, delete. These arm live canvas gestures —
-scene setup never needs them. Don't click them; don't click the canvas
-while any of them is active.
+Interpretation-editing controls: Manual mode (highlighter — shows the picks
+of the manual interpretation on the radio, same as `m`), Pick (pencil),
+extend target line, undo, redo, fault, delete. These arm live canvas
+gestures — scene setup never needs them. Don't click them; don't click the
+canvas while any of them is active.
 
 ## Keyboard shortcuts
 
@@ -234,8 +259,8 @@ while any of them is active.
 |---|---|
 | `?` | Shortcuts reference |
 | `esc` | Cancel picking (does NOT close panes) |
-| `m` | Show/hide manual interpretations |
-| `p` | Toggle picking (avoid) |
+| `m` | Manual mode: show/hide the picks of the manual interpretation on the radio (avoid during setup) |
+| `p` | Toggle picking — adds picks to the manual interpretation on the radio (avoid) |
 | `z` | Toggle on-scene zoom controls |
 | `0` | Show/hide the computed interpretation (MPE) |
 | `1`–`9` | Show/hide auto-picked group P1–P9's lead horizon |

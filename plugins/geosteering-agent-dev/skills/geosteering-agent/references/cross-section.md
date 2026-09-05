@@ -17,8 +17,13 @@ alternative to the keys).
 other off (only one is active at a time):
 
 - **Pick** (manual interpretation) — the **Pick** button on the on-canvas bar,
-  or the `P` key. Separately, **Show/Hide** (or `M`) toggles whether
-  interpretations are visible at all.
+  or the `P` key: it adds picks to the manual interpretation whose radio is
+  lit in the Interpretations pane, and needs one there. Separately, **Manual
+  mode** (the bar's toggle, the Manual table's checkbox, or `M`) shows that
+  interpretation's pick handles for editing; the pane's radio — what the
+  formation bands, the log tracks, the traces and the readouts hang on —
+  never edits anything by itself. Display is each row's own checkbox,
+  whatever the cross section follows.
 - **Extend target line** — the **Extend target line** button on the on-canvas
   bar, the **extend** checkbox in the side panel's Target Line section, or the
   `T` key. Extending needs the well's azimuth set and a measured toe; the
@@ -30,24 +35,25 @@ picks to the computed structure; hold **F** to open a fault — a horizontal lin
 tracks the cursor depth from the nearest block edge, click once to set the
 throw, again to drop the offset block. (`A` auto-picks the current selection;
 `R` builds a new block from the selected picks.) With **Pick** off but
-interpretations shown you edit instead of draw: click a segment between two
-picks to insert one, drag a pick to move it, drag inside a block to shift the
+manual mode on and a manual interpretation on the radio you edit instead of draw:
+click a segment between two picks to insert one, drag a pick to move it, drag inside a block to shift the
 whole block, drag a box to select, `↑`/`↓` nudge the selected block by one
 depth unit, and **Delete**/**Backspace** removes the selection. `Ctrl/⌘-Z`
 undoes, `Ctrl/⌘-Shift-Z` redoes, **Esc** cancels the draw in progress; `0`
 shows or hides the computed top (the MPE) and `1`–`9` show or hide the lead
-horizon of auto-picked group P1–P9 (turning interpretations on if they were
-hidden); `?` lists every key. For the
+horizon of auto-picked group P1–P9; `?` lists every key. For the
 **target line**, turn **Extend** on and click to add points ahead of the bit;
 turn **Extend** off to adjust — hover a point and drag it.
 
 **By touch.** The same actions run through two floating button bars (taps on a
 bar never reach the canvas, so they can't drop a stray pick); long-press any
 button to read its label without firing it. Before picking, the bar offers
-**Show** and **Extend target line**; once interpretations are shown it adds
-**Pick**, **Select**, **Undo/Redo**, **Clear selection**, and **Delete**. While
-picking, it offers **Hide**, **Pick** (which finishes), **Snap**,
-**Undo/Redo**, **Fault**, **Split**, and **Cancel**. On the canvas: one finger
+**Manual mode** and **Extend target line**, plus **Pick** while a manual
+interpretation holds the radio; in manual mode with one on the radio it adds
+**Select**, **Undo/Redo**, **Clear selection**, and **Delete**. While
+picking, it offers **Manual mode** (off, which exits picking), **Pick** (which
+finishes), **Snap**, **Undo/Redo**,
+**Fault**, **Split**, and **Cancel**. On the canvas: one finger
 draws while picking (drag, lift to drop a pick), or **moves** a pick or block
 when picking is off (press it and drag); two fingers **pan and pinch-zoom**.
 **Fault** — tap **Fault** to arm, press a block edge, drag to the throw depth,
@@ -62,9 +68,10 @@ The cross-section can overlay the type log as small vertical GR traces, one
 every 30 ft (10 m SI) of measured depth along the well. Each trace is the
 effective type log at that position — between pilot wells it is the same
 distance-weighted, marker-warped blend the computation and the projections
-use — and each trace hangs on the currently displayed structure (the selected
-computed top, or the manual interpretation when shown), so the ensemble reads
-as the interpreted cross-section. Traces render only along that structure's
+use — and each trace hangs on the structure the cross section follows (the
+row whose radio is lit in the Interpretations pane: the computed top, an
+auto-picked horizon or a manual interpretation), so the ensemble reads as the
+interpreted cross-section. Traces render only along that structure's
 own lateral extent — they stop where it ends, and none render before any top
 is computed or picked. All traces share one GR scale — the type log track's
 manual display scale when the user has set one (Auto Scale off), else the
@@ -77,7 +84,7 @@ settings. **Trace throw** scales trace width (100% = the shared GR range
 spans one station interval). **Curve** toggles the thin trace line and
 **Color** sets its color; choosing black means the theme's proper foreground
 (near-black in light mode, near-white in dark). **Fill** paints each trace's
-full slot with color — adjacent slots tile the section with no gap, so the
+full slot with color — adjacent slots tile the cross section with no gap, so the
 filled ensemble reads as a continuous color panel — coloring every depth by
 its GR value through a chosen color table; the curve draws over the fill,
 and an **opacity** slider fades the fill. A similar color fill is available

@@ -305,9 +305,10 @@ peaks; the one carrying the most probability mass is P1, the next P2, and so
 on. Group P n's **lead** horizon is its first member: the endpoint-anchored
 trace that ends at that peak when the pick kept one, otherwise its
 lowest-numbered alternative. The other members are alternative threadings
-that fork from an anchor MD and end in the same basin. The pane labels
-each group "P n · terminal depth — pct% · count", pct being that peak's
-share of the bit marginal's probability (`weight_pct`). Horizons ending
+that fork from an anchor MD and end in the same basin. The pane tags
+each group "P n" beside its lead row, which reads "terminal depth · pct%",
+pct being that peak's share of the bit marginal's probability
+(`weight_pct`). Horizons ending
 below the mass bar are listed last, unranked. So the groups span the bit's
 depth distribution: P n is a rank, and a mode discarded as a fault candidate
 leaves a gap rather than renumbering.

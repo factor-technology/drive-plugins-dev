@@ -135,7 +135,9 @@ These are specific to this app and each one has bitten someone:
   pick undoes with Ctrl/⌘+Z.
 - **Useful keys:** `0` shows/hides the computed interpretation (the MPE);
   `1`–`9` show/hide the lead horizon of auto-picked group P1–P9; `m` toggles
-  manual interpretations; `?` opens the shortcut reference.
+  manual mode (the pick handles of the manual interpretation on the radio —
+  editing, so leave it alone during setup); `?` opens the shortcut
+  reference.
 - **Settings persist per project**, in browser localStorage under the key
   `<org>/<project>`. You are editing the geologist's saved scene, not a
   throwaway view: screenshot a pane before changing it so you can restore
@@ -268,15 +270,15 @@ Two concrete checks:
 Then scroll it onto that zone with the **mouse wheel over the track**,
 checking with a zoomed screenshot after each nudge.
 - **Leave "Couple Well Log Scrolling to Cross-Section" off** (track gear
-  dialog). It sounds helpful and isn't: the track and the section want
+  dialog). It sounds helpful and isn't: the track and the cross section want
   different depth windows. Along an inclined wellbore the interesting part of
-  the pilot track and the interesting part of the section sit at different
+  the pilot track and the interesting part of the cross section sit at different
   depths, so coupling them guarantees one of the two is off-screen. Position
   the two independently — that freedom is the point.
 
 **Track widths:** MEDIUM for the type log track (gear dialog) and SKINNY for
 the active log track along the top is a good working default — enough room
-to read the correlation without stealing width from the section.
+to read the correlation without stealing width from the cross section.
 
 ### GR scales — turn Auto Scale off, and match the two tracks
 
@@ -313,14 +315,17 @@ the data range changes.
 formations. **Off by default:** projected trajectory (useful while drilling),
 prior structure (show when there's no computed structure, or when
 prior-vs-computed is the point), interpolated type logs (turn on when a
-structure exists and the section is long enough that they read as a
+structure exists and the cross section is long enough that they read as a
 correlation panel rather than clutter). A registered **background image**
 (seismic) shows when it's part of the story; if it fights the marginals or
 the interpretation for the eye, lower its **opacity** slider rather than
 hiding it.
 
-**Interpretations:** show the MPE. Uncheck the auto-picked horizons (every
-row shows when a run's picks first arrive) unless the user asks for
+**Interpretations:** show the MPE, and leave the radio on it (the radio is
+what the cross section follows — formation bands, log tracks, traces,
+readouts; the checkboxes are display only; manual mode, off by default, is
+the only thing that edits). Uncheck the auto-picked horizons (every row
+shows when a run's picks first arrive) unless the user asks for
 alternatives; then show a group's lead (P1, P2, …), not a low-mass one,
 which quietly shows a structure nobody believes. Show a
 manual interpretation if the project maintains one; hide a pile of stale
@@ -378,7 +383,7 @@ Look at the last screenshot and ask:
   the correlation can actually be inspected rather than merely glimpsed?
 - Do both tracks share the same hand-set, round GR range, with the curves
   using the full width rather than squashed into a spike-driven axis?
-- Does the section fill the width with a little margin at each end, rather
+- Does the cross section fill the width with a little margin at each end, rather
   than being clipped flush or stranded in empty grey?
 - Are annotation boxes (survey stations, dip labels) piling into an
   unreadable heap?

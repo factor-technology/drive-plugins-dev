@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: 43d79b02018c9bf96852ccb874c4dfe247acbdc6
-source_commit_short: 43d79b02018c
-source_commit_date: 2026-09-02T17:57:37-05:00
-source_commit_subject: app: the Interpretations pane is two like tables, Computed and Manual
-skill_version: 0.5.8
-built_at: 2026-09-02T17:57:37-05:00
+source_commit: 5190e7cf597f2fc8937a03d118445a491dbf6818
+source_commit_short: 5190e7cf597f
+source_commit_date: 2026-09-04T19:37:00-05:00
+source_commit_subject: app: manual mode edits the interpretation on the radio; the radio only follows
+skill_version: 0.5.12
+built_at: 2026-09-04T19:37:00-05:00
 built_from_workspace_dirty: false
