@@ -44,5 +44,5 @@ so it can sit alongside the production plugin. Don't hand it to a customer.
 
 ---
 
-`geosteering-agent-dev` 0.5.14 · connector `https://drive-app-dev.factor.technology/mcp` ·
+`geosteering-agent-dev` 0.5.15 · connector `https://drive-app-dev.factor.technology/mcp` ·
 built from the drive-app monorepo with `yarn workspace agent build:plugin`.

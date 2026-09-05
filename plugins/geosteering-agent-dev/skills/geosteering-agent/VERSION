@@ -3,6 +3,6 @@ source_commit: 365a47bef38c9e48f0f21e35bde44a04252b1f7f
 source_commit_short: 365a47bef38c
 source_commit_date: 2026-09-05T09:40:26-05:00
 source_commit_subject: app: a "none" row heads the Interpretations pane's Manual list
-skill_version: 0.5.14
+skill_version: 0.5.15
 built_at: 2026-09-05T09:40:26-05:00
 built_from_workspace_dirty: false
