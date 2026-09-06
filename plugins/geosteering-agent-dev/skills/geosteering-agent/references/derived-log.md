@@ -1,102 +1,105 @@
 <!-- Hand-authored static reference for the geosteering-agent skill.
      Ships verbatim via build-skill.mjs copyRefs. Source of truth: this file
-     (agent/skill/references/derived-log.md), distilled from a coached
-     worked example on a sandbox project. -->
+     (agent/skill/references/derived-log.md). -->
 
-# Derived type log (the Profile tab's Derived pane)
+# Steering the well against itself (the derived type log)
 
-Back-project the active well's GR through an interpretation to synthesize a
-type log from the well itself, then make that the project's type log. This is
-the modern form of an old manual-geosteering move: when the given type log
-can't explain what the well is drilling, the geosteerer stops correlating
-against it and starts correlating the well **against itself** — each new
-encounter of a recognizable feature is lined up against the previous passes,
-building a local synthetic column as the lateral marches along. Drive needs
-an actual type log object to steer against, and the Derived pane is how you
-mint one.
+When the type log can't explain what the well is drilling, stop correlating
+against it and correlate the well **against itself**. Back-project the active
+GR through a short interpretation of the structure and make that curve the
+project's type log; from then on every new pass is lined up against the column
+the well itself established. Drive needs an actual type log object to steer
+against, and the Profile tab's **Derived** pane (or `derive_type_log`) mints
+one.
 
-## When to reach for it — the diagnosis
+The derived curve **terminates at the stratigraphy the wellbore has explored**:
+it starts at the wellbore's own depth at the first computed position and ends
+at the deepest depth the interpretation reached. Nothing is grafted on above
+or below. That is the mechanism, not a limitation. The computation reads a
+type log as ground truth over its whole length and treats a wellbore past
+either end of it as **impossible**, so the moment the well drills
+stratigraphically past an end the posterior is pressed against it, the
+marginals spread, and uncertainty climbs. **That is the alarm to derive
+again.**
 
-The signature is a **completed job whose type-log correlation stays bad**.
-The structure may look plausible — or may itself be contorted, with dips the
-geologist doesn't believe, precisely because the model is bending structure
-to accommodate stratigraphy the type log doesn't describe:
+So this is a **loop**, not a one-shot recipe: derive early, run, watch the
+alarm, extend the interpretation over the new footage, derive again. Each
+cycle grows the log by whatever new stratigraphy the footage just drilled
+crossed, and successive versions agree where they overlap — on one real
+lateral that deepened 250 ft of stratigraphy over 2,900 ft, ten cycles of
+about 300 ft agreed to within a couple of gAPI rms in the overlap. The loop
+converges on the log a geologist would draw at the end of the well, except
+you have it while drilling.
 
-- On the type log track, the backprojected MWD segments don't share character
-  with the type log — peaks with no counterparts, different amplitudes,
+## When to start
+
+**Right after the curve, early.** The derived log only helps footage still
+ahead. Interpret the first sufficient stretch of lateral, not the prettiest.
+
+Otherwise the trigger is a **completed run whose type-log correlation stays
+bad**. The structure may look plausible, or may itself be contorted with dips
+the geologist doesn't believe, precisely because the model is bending
+structure to accommodate stratigraphy the type log doesn't describe:
+
+- On the type log track, the backprojected MWD segments share no character
+  with the type log: peaks with no counterparts, different amplitudes,
   spiky-vs-smooth.
 - The active log carries distinctive local character — clean low-GR
   stringers, hot streaks, washed-out zones — that appears **nowhere** on the
-  type log. Those features are markers of the local stratigraphy; no amount
-  of warping the given type log will ever produce them.
-- The tuning history is a tell: if dip wiggle-room had to be opened up and
+  type log. No amount of warping the given log will produce them.
+- The tuning history is a tell. If dip wiggle-room had to be opened and
   curvature constraints dropped just to force markers to the right depths,
-  the model is compensating for stratigraphy the type log doesn't describe.
-  (A good fit achieved that way is the §1.4 "good fit, wrong setup" case.)
-
-Two ways the situation arrives: as a **surprise** mid-lateral, or
-**anticipated** — the geologist has seen the same character on neighboring
-wells and expects it. Either way the remedy is the same.
+  the model is compensating for stratigraphy the type log lacks (the §1.4
+  "good fit, wrong setup" case).
 
 The backprojections are the interpretation's own prediction turned into
-evidence: given the computed (or manual) structure, each active-log sample
-hangs back onto the type-log depth axis (TVDTL). If the structure were right
-AND the stratigraphy matched, the segments would overlay the type log. When
-they overlay each other but not the type log, the type log is the problem.
+evidence: given the structure, each active-log sample hangs back onto the type
+log's depth axis (TVDTL). When the segments overlay each other but not the
+type log, the type log is the problem.
 
-## The workflow
+**No usable pilot at all** is the extreme case and works the same way: the
+project bootstraps from the structure and one manual interpretation. A pilot
+well with no log and no calibration takes the identity frame, and the save
+creates the top-of-target marker at the interpretation's basepoint. No marker
+picking, no alignment sweep first.
 
-Six steps. The first is the geologist's judgment; the middle is the Derived
-pane; the tail is the ordinary pilot-log-replace machinery.
+## The first derivation
 
-### 1. Force a structural opinion first — a short manual interpretation, early
+1. **One short manual interpretation, from independent evidence.** The
+   computed interpretation is (by hypothesis) compromised, so the geologist
+   draws a manual one over the early lateral — long enough to capture the
+   characteristic features — and adjusts it until the backprojected segments
+   stack sensibly. The structural opinion comes from seismic, offset wells,
+   regional dip, never from the new features themselves: wherever they then
+   backproject through that structure is where they belong in the column. A
+   straight dipping segment is fine when seismic says the column is straight.
+2. **Derive bare.** Leave it un-spliced: in the pane the **Splice into
+   current type log** switch stays off, through the tool omit the initial type
+   log. Read the result on the type log track — orange correlations are the
+   backprojected passes, the light curve is the derived log.
+3. **Choose the statistic by reasoning** (below).
+4. **Save and replace, with approval.** Writing the curve onto the pilot well
+   replaces its log: destructive, so advisory-plus-approval. It keeps the
+   well's calibration and metadata, creates the top-of-target marker if
+   missing, and reports any marker now outside the log — a warning, not a
+   deletion, and usually a sign the interpretation should have gone further.
+5. **Reset, rerun, restore ingestion.** A replaced type log invalidates all
+   saved computation: `reset_job` then `trigger_job_rerun`, with approval,
+   recomputing the well from scratch in typically minutes. On a WITSML
+   project pause both pollers first and **re-enable them afterwards**
+   (§1.9.6); an email-fed project has nothing to pause.
 
-The derivation runs through an interpretation, and at the moment you need it
-the computed one is (by hypothesis) compromised. So the geologist picks a
-**short manual interpretation over the early lateral** — enough footage to
-capture the characteristic features — and adjusts it until the backprojected
-segments stack sensibly on the type log track.
+The derived log's depth axis is anchored so the wellbore at the first computed
+position sits at its own depth, and the interpretation's depth there is where
+the top-of-target marker lands. That is why markers keep their meaning across
+a replacement and no re-pick is needed.
 
-- The structural opinion comes from independent evidence (seismic, offset
-  wells, regional dip) — not from the new features. Wherever the features
-  then backproject through that structure is where they belong in the local
-  column. Don't reverse this.
-- Simple is fine. A straight dipping segment suffices when seismic says the
-  section is straight; the general case is a real hand-picked interp.
-- **Early matters.** The derived log only helps the lateral that remains
-  after it's made. Interpret the first sufficient stretch, not the prettiest
-  one.
+### Choosing the statistic
 
-Manual-interp gestures are cross-section coaching (`cross-section.md`); the
-cross-section-setup skill drives them in the browser when that's in play.
-
-### 2. Open the Derived pane and read it
-
-Profile tab → **Derived**. The pane is display-and-save only: nothing exists
-server-side until the upload step. What it shows:
-
-- A log track on the type log's own depth axis (TVDTL). **Correlations**
-  (orange) are the backprojected active-log passes through the currently
-  displayed interpretation — the manual one when shown, else the selected
-  computed structure. The white curve is the **derived type log** being
-  assembled. (Settings also offers the initial type log for comparison, a
-  legend, and the GR scale. Dark-mode quirk: the legend may swatch the
-  derived curve black; on screen it draws in the theme foreground.)
-- **Method radios** — Mean / Median / Shallowest MD / Deepest MD — the
-  statistic that combines overlapping passes (next step).
-- **Splice semantics:** the derived curve covers only the stratigraphic
-  range the wellbore actually explored — from the TVDTL that
-  `md_first_to_compute` maps to, down to the deepest depth any pass reached.
-  Above and below, the saved product keeps the **original** type log, with a
-  taper blending the seam. The wellbore is a one-dimensional sample of the
-  section; where it never went, the old log is still the best you have.
-
-### 3. Choose the statistic by reasoning, not habit
-
-Where the lateral crossed the same stratigraphic depth more than once, the
+Where the lateral crossed the same stratigraphic depth more than once the
 passes can disagree — a stringer developed at one lateral position and not
-another, or one pass's structural placement slightly off. The method decides
-**which lateral position's character represents the column**:
+another, or one pass placed slightly wrong. The method decides **which lateral
+position's character represents the column**:
 
 | Method | Meaning | Behavior on a disputed feature |
 |---|---|---|
@@ -106,108 +109,116 @@ another, or one pass's structural placement slightly off. The method decides
 | Median | majority across passes | robust; keeps features most passes agree on |
 
 There is no house default. Ask: **which choice best represents the
-stratigraphy the remainder of the lateral will see?** Click through the
-methods and watch the characteristic features — the choice is usually
-decided by whether they survive. (In the worked example, Deepest MD was
-defensible — most recent passes, guarantees the clean spikes — and Median
-captured the same character more robustly; Median won. On another pass at
-the same data a different statistic produced the better final answer:
-iterate, don't sanctify.)
+stratigraphy the rest of the lateral will see?** Compare at least two on the
+features that motivated the derivation and watch whether they survive.
+Disagreement between passes is itself information — say so when it is
+material rather than averaging it away silently.
 
-The disagreement between passes is itself information — say so if it's
-material, rather than silently averaging it away.
+## The loop
 
-### 4. Save the LAS
+Every later cycle is the same four moves:
 
-**Save as LAS...** opens a native OS save dialog — the one control in this
-workflow browser tools cannot drive. If you're driving, ask the geologist
-for that single click and where the file landed; if they're driving, it's
-just their save. Default name:
-`<scope>_<project>-derived-type-log.las`.
+1. **Read the alarm.** The coverage block on the latest job result says
+   whether the well has drilled past an end of the log, which end, and the
+   first MD where it showed. That MD is where the extension starts.
+2. **Extend the ONE manual interpretation to the bit, speculatively.** Carry
+   the previous cycle's interpretation over the new footage with a structure
+   that could plausibly have put the well where the alarm says it is — deeper
+   for a bottom alarm, shallower for a top alarm — using the prior or
+   regional dip, anchored on the picks you still believe. It is a guess and
+   is meant to be; the next run tests it. Stop at the bit. **Never** extend
+   it by copying the computed structure the previous derived log produced:
+   that structure was solved against this very log, so deriving through it
+   feeds the log its own output.
+3. **Derive bare again and replace.** Same statistic unless there is a reason
+   to change, same approval, same save. Compare the new log against the
+   previous one where they overlap and say so if they disagree by more than
+   the log's own noise.
+4. **Reset, rerun, resume, confirm.** On the next run the alarm should clear
+   and the margins reopen.
 
-The file is written in the canonical pilot frame — positive-down pilot TVD,
-with the GR values inverse-transformed through the pilot's current
-calibration. Consequence: re-uploaded **with calibration preserved**, the
-curve lands exactly where the pane displayed it, and the formation markers
-keep their depths (same TVDTL axis). No marker re-pick, no re-fit.
+Then keep watching. **You have no background process** (§1.1): monitoring
+means reading the coverage block whenever the geologist brings you a run, and
+offering to turn on the coverage notification (`set_notify_flags`) so Drive
+emails them when a run raises the alarm.
 
-### 5. Replace the pilot log through the connector
+## Reading the state
 
-This is a pilot-log re-upload — **advisory + approval** (§1.5.5 posture).
-It is also fully mechanical, so **offer to do it**: the geologist can
-equally replace the log themselves in the Setup UI, and who clicks is
-preference, not principle. Doing it yourself needs the file reachable from
-code execution (ask for the folder if you don't have it).
+The coverage block reads differently at each stage, and misreading it is the
+main way to get out of step:
 
-1. `create_upload` (kind `pilot_log`) → run the returned curl from code
-   execution → the response confirms the channel list.
-2. `upload_pilot_log` with `{upload_id, gr_mnemonic}` and **`reset_fit:
-   false`** — preserving `fit_params` is what makes step 4's frame
-   round-trip work. Do not "helpfully" reset the calibration.
-3. Note the contract: the stored align-logs warp is dropped with the
-   replaced log. Re-run alignment only if warp was actually in use.
+- **Freshly derived.** The log's bottom sits exactly on the deepest pass *by
+  construction*, so raw margins near zero mean nothing. The margins that
+  matter are measured only over footage drilled **since** the derivation;
+  until there is some, the block says so. Not an alarm.
+- **Healthy.** Tens of feet of log below and above the estimate at the bit,
+  entropy near its own baseline, marginals tight and single-peaked, a steady
+  uncertainty corridor on the cross section.
+- **Running out.** The estimate walks within a few feet of an end, or half
+  the posterior mass piles into that band, or recent entropy runs about twice
+  its baseline; the uncertainty band blooms toward the toe. The alarm names
+  the end (bottom = drilled stratigraphically deeper, top = shallower) or
+  entropy, and the MD it started.
+- **After a good re-derivation.** Margins reopen and entropy drops back. Fit
+  over the footage drilled *since* the previous derivation is a real test of
+  that cycle's speculation; fit over the footage the log was derived from
+  tests nothing, since the log was built to match it.
 
-### 6. Reset, run, verify
+Any type log can run out this way, derived or not — an original pilot ending a
+couple of feet below the deepest depth the lateral reaches raises the same
+alarm. The alarm also has a blind spot: new rock that mimics a feature already
+in the log, within reach of the dip prior, stays confidently wrong. Treat a
+clear alarm as reliable and a quiet one as "no evidence of trouble".
 
-A replaced type log invalidates all saved computation: `reset_job` then
-`trigger_job_rerun` (the UI's Reset and Run) — with approval, since it
-recomputes the well from scratch: visible churn, typically minutes on a
-lateral of ordinary reach. If WITSML polling is on, pause it around the
-manual run (§1.9.6); an email-fed project has nothing to pause.
+## The advisory reference log
 
-Then judge the result the way the diagnosis was made, on the picture, and
-**re-read project state before quoting any number — the geologist may have
-edited the project mid-session**:
+Replacing the type log does not discard the original: the first save shelves
+it as a **reference log**, an advisory copy nothing that computes ever reads —
+not the job builder, not the type-log interpolation, not the cross section. It
+is not a pilot well and it invalidates nothing. Later cycles shelve nothing,
+since the log they replace is itself derived.
 
-- **Type log track:** the local character should now repeat and line up —
-  the same low-GR spike (or other marker) recurring pass after pass, each
-  landing on the derived template's rendition of it. That recurrence is the
-  visual meaning of "steering it against itself".
-- **Active log strip:** the backprojection overlay should hug the measured
-  log along the whole lateral, not just the interpreted stretch.
-- **Cross-section:** the structural answer should be geologically plausible
-  — a tight corridor near the prior's trend, apparent dips near the prior's,
-  no uncertainty fan blooming toward the toe. And the loosened tuning that
-  motivated all this can often be tightened back up afterward.
-
-A mediocre outcome is cheap to retry: different statistic, better (or
-longer) manual interpretation, then derive-replace-rerun again.
+Use it for general-shape reasoning: roughly where in the column the wellbore
+sits, what the units above and below look like regionally. Never cite it as an
+input to a run, never transfer its marker depths, and name which log a claim
+came from when it came from the reference.
 
 ## Driving vs coaching
 
-Default to volunteering. Nearly all of this is mechanical — only the manual
-interp, the statistic, and the approvals are judgment, and those stay with
-the geologist. Everything else, offer to do.
+Default to volunteering. Only the manual interpretation, the statistic, and
+the approvals are judgment. The save goes straight through the connector, so
+a whole cycle — derive, save, reset, rerun, resume polling — is yours to offer
+end to end, with no file round-trip and no browser needed.
 
-With browser tools available, that means operating everything except the
-native save dialog: open the pane, set Settings, click through methods,
-compare, and ask for exactly one click. Without browser tools, coach the
-same sequence by pane and control name — the pane reads left-to-right
-exactly as §2 above describes it — while still offering the connector tail
-(steps 5–6) yourself, which needs no browser at all. User-facing language
-stays plain in both modes: "replace the type log with the derived one and
-re-run" — never tool names or field names.
+With browser tools you can also work the Derived pane itself and click
+through the methods to compare; without them, coach the same sequence by pane
+and control name. Either way user-facing language stays plain: "replace the
+type log with one derived from the well itself and re-run", never tool or
+field names.
 
 ## Pitfalls
 
-1. **Deriving through the compromised computed interp.** The point of step 1
-   is that the geologist's structural opinion, not the misfit computation,
-   defines the backprojection. Check which interpretation the scene displays
-   before opening the pane.
-2. **Late derivation.** A derived log made at the toe explains footage
-   already drilled and helps nothing. Raise the option as soon as the
-   diagnosis pattern appears.
-3. **Resetting the calibration on upload.** `reset_fit: true` breaks the
-   frame round-trip and orphans the markers' alignment. Preserve fit on
-   replace; the defaults are correct.
-4. **Treating a statistic as the default.** The method is a judgment about
-   the remainder of the lateral. Compare at least two on the features that
-   motivated the derivation.
-5. **Forgetting what's derived.** The project's type log is now synthetic
-   below/above the splice points only in the explored range — character
-   outside it is still the old pilot's, and deepening the well extends what
-   a future derivation could cover. Mention the provenance when the
-   geologist reasons from log character in the unexplored range.
-6. **Quoting stale project state.** A coached session edits the project
-   under you — pilot logs, tops, compute range can all change. Re-read
-   before asserting.
+1. **Deriving through the computed structure.** The manual interpretation
+   defines the backprojection, every cycle. From the second cycle on this is
+   a correctness rule, not a preference: the computed structure was solved
+   against the derived log. Check what the cross section is following first.
+2. **Splicing.** Leave the splice switch off. Spliced values are unconfirmed
+   values at depths this well never visited, and the computation reads them as
+   ground truth. Splicing also silences the alarm, which is the loop's clock.
+3. **Extending past the bit, or extending to quiet the alarm.** The extension
+   covers footage actually drilled and stops at the bit. Speculate about
+   structure, never about stratigraphy the well has not sampled.
+4. **Late derivation.** A log derived at the toe explains footage already
+   drilled. Raise the option as soon as the pattern appears.
+5. **Treating the alarm as an error.** It is the design working: the well
+   found rock the log doesn't cover yet. Report it that way and re-derive;
+   don't tune dip or log sigma to paper over it.
+6. **Resetting the calibration on replace.** The save writes in the pilot's
+   own frame, and preserving it is what keeps the markers where they are.
+   Re-run alignment only if a warp was actually in use (replacing drops it).
+7. **Forgetting to restore ingestion.** A project left with its pollers
+   paused after a manual rerun quietly stops being steered.
+8. **Treating a statistic as a default.** It is a judgment about the rest of
+   the lateral. Compare at least two.
+9. **Quoting stale project state.** A coached session edits the project under
+   you — logs, tops, compute range. Re-read before asserting a number.

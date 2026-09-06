@@ -183,10 +183,54 @@ more than one pilot well:
 **Deriving a type log** (the Profile InfoBar's **Derived** pane). When no
 good pilot exists near the lateral, `derive_type_log` back-projects the
 active log through an interpretation to synthesize one, with the same
-implementation the pane runs. It is functional and read-only: fetch the
-inputs first (interpretation, windowed active-log samples, raw trajectory
-stations, project fields, fit params — the tool schema lists the source of
-each) and pass them in; nothing on the project changes. The result comes
-back in canonical pilot TVD ready for `upload_pilot_log` (that replace is
-the destructive step, taken only with the geologist's approval) or for
+implementation the pane runs. Fetch the inputs first (interpretation,
+windowed active-log samples, raw trajectory stations, project fields — the
+tool schema lists the source of each) and pass them in.
+
+The derived curve **terminates at the range the wellbore has explored**:
+omit `type_log_samples` and it starts at the wellbore's own TVDSS at
+`md_first_to_compute` and ends at the deepest depth the interpretation
+reached. Leave it that way. The computation treats a type log as ground
+truth over its whole length, so splicing the derived section into the old
+pilot smuggles unconfirmed values back in; a curve that stops where the
+evidence stops instead makes entropy — and the MPE — misbehave at the
+derived bottom the moment the well drills into new rock. **That is the
+re-derive alarm**: extend the interpretation over the new footage and
+derive again.
+
+Saving is the destructive step, taken only with the geologist's approval.
+`save_to_pilot_well_id` writes the curve straight onto a pilot well in
+that well's own fit frame (no LAS round-trip), preserving its fit params
+and the rest of its metadata but dropping the align-logs warp, creating
+the top-of-target marker at the basepoint z0 if it is missing, and
+reporting markers that now fall outside the log. Nothing is lost: the
+type log being replaced is kept as an advisory **reference log** you can
+read with `read_reference_log` — never an input to the computation
+(`retain_replaced_as_reference`, default true; skipped when the log being
+replaced is itself derived). Follow with `reset_job` and
+`trigger_job_rerun`, or the run still uses the old type log. The result
+also comes back in canonical pilot TVD for `upload_pilot_log` or for
 writing a LAS.
+
+A save also stamps the log with the MD extent it was built from
+(`md_first`/`md_last`, alongside the interpretation name, statistic and
+depth range), and the next job carries it as
+`pilot_logs.*.derived_md_first` / `derived_md_last`. That matters when
+reading the alarm: right after a derivation the deepest pass *defines*
+the derived bottom, so an estimate sitting at the bottom means nothing
+until the well has drilled past `derived_md_last`. A plain
+`upload_pilot_log` clears the provenance — that log is no longer this
+derivation.
+
+Deriving is a **loop, not a one-shot**: each time a run reports the well has
+drilled past an end of the log, the geologist extends the *same* manual
+interpretation over the new footage with a speculative structure, and the
+log is derived and replaced again. Never derive through the computed
+structure the previous derived log produced. Before acting on any of this —
+the first derivation, the no-pilot bootstrap, choosing the statistic,
+reading the coverage states, the pitfalls — read `references/derived-log.md`
+in this skill; it is the whole workflow and this section is only its tool
+surface. You have **no background process** (§1.1), so "monitoring" here
+means reading `coverage` on the next run the geologist brings you, and
+offering `set_notify_flags` with `log_coverage` so Drive emails them when a
+run raises the alarm.

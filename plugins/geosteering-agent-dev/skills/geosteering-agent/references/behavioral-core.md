@@ -252,6 +252,11 @@ A job run produces:
 - **Auto-picked horizons** — threadings through the marginals, grouped by
   the peak of the bit marginal each ends in and ranked by probability mass
   (P1, P2, …). The server picks them a few seconds after every run.
+- A **type-log coverage report**, written alongside the picks — how much
+  type log is left below and above the wellbore's own stratigraphic
+  position, and whether the run is asking for the log to be re-derived.
+  `read_latest_job_result` carries it as `coverage`; `coverage.alarm` is
+  the re-derive signal (§1.9.1 and `references/derived-log.md`).
 
 ### 1.2.2 Marginals
 
@@ -615,7 +620,12 @@ is one plain sentence plus the cross-section link, not an essay:
    since the last run and stayed there.
 3. **The result stopped being settled**: alternatives that used to agree now
    split into distinct candidate structures.
-4. **Something known is coming up**: a fault, marker change, or target
+4. **The well has drilled past the end of its type log**: `coverage.alarm`
+   is set, so the result at the bit is being squeezed against a log that
+   doesn't cover the rock. Say it plainly ("the well is into rock the type
+   log doesn't cover") and offer to extend the interpretation and re-derive
+   (§1.9.1, `references/derived-log.md`).
+5. **Something known is coming up**: a fault, marker change, or target
    narrowing within ~50 ft ahead.
 
 ### 1.7.3 Trust posture

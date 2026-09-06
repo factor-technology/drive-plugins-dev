@@ -202,14 +202,17 @@ project shows none at all.
 
 Derives a new type log by back-projecting the active log through an
 interpretation (Settings: GR scale, correlations, initial type log, legend;
-Method radios: Mean / Median / Shallowest MD / Deepest MD; **Save as
-LAS...** opens a native OS dialog browser tools cannot drive — the
-geologist clicks it). A data-creation workflow, not a display pane — out of
-scope for scene setup unless the user explicitly asks. When they do ask,
-the full workflow (when to derive, the short early manual interp, choosing
-the statistic, replacing the type log, reset-and-run, verification) is
-`references/derived-log.md` in the geosteering-agent skill — read that
-rather than improvising from this pane summary.
+Method radios: Mean / Median / Shallowest MD / Deepest MD; **Splice into
+current type log** switch, default OFF and normally left off — off means the
+derived curve terminates at the stratigraphic range this wellbore has
+explored; **Save as LAS...** opens a native OS dialog browser tools cannot
+drive — the geologist clicks it). A data-creation workflow, not a display
+pane — out of scope for scene setup unless the user explicitly asks. When
+they do ask, the full workflow (when to derive, the short early manual
+interp, choosing the statistic, replacing the type log, reset-and-run, and
+the extend-and-re-derive loop that follows) is `references/derived-log.md`
+in the geosteering-agent skill — read that rather than improvising from this
+pane summary.
 
 ## Help
 

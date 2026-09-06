@@ -52,7 +52,11 @@ Interpolated type-log traces — copies of the type log posted periodically alon
 
 ### Derived
 
-Derive a new type log by back-projecting the active log through an interpretation — useful when no good pilot exists near the lateral. The pane works from the backprojections of whatever the cross section follows (the MPE, the auto-picked horizon or the manual interpretation whose radio is lit; windowed if the type-log window is on). Choose the statistic — **Mean**, **Median**, **Shallowest MD**, or **Deepest MD** — that picks the value where the interpretation maps more than one active-log sample to the same depth. The derived curve is merged into the current type log and **Save as LAS...** writes it in pilot TVD, calibrated so the pilot's fit params reproduce the active log. The same computation is available programmatically as the `derive_type_log` agent tool / `POST .../derive-type-log` API.
+Derive a new type log by back-projecting the active log through an interpretation — useful when no good pilot exists near the lateral. The pane works from the backprojections of whatever the cross section follows (the MPE, the auto-picked horizon or the manual interpretation whose radio is lit; windowed if the type-log window is on). Choose the statistic — **Mean**, **Median**, **Shallowest MD**, or **Deepest MD** — that picks the value where the interpretation maps more than one active-log sample to the same depth.
+
+By default the derived curve **terminates at the range this wellbore has explored** — it starts at the wellbore's own depth at the first computed position and ends at the deepest depth the interpretation reached. That is deliberate: depths outside that range were never confirmed by this well, and the computation reads a type log as ground truth over its whole length. A curve that stops where the evidence stops makes the marginals' uncertainty rise as soon as the well drills into new rock, which is your cue to extend the interpretation and derive again. Turn **Splice into current type log** on to graft the derived section into the existing type log with a taper instead, keeping the original values above and below.
+
+**Save as LAS...** writes whichever curve is showing, in pilot TVD, calibrated so the pilot's fit params reproduce the active log. The same computation is available programmatically as the `derive_type_log` agent tool / `POST .../derive-type-log` API, which can also save the curve straight onto a pilot well.
 
 ### Help
 

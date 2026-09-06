@@ -95,6 +95,12 @@ The catalog, by area (names only — contracts live in the schemas):
   `browse_witsml_crawl`, `list_witsml_pollers`,
   `set_witsml_trajectory_poller`, `set_witsml_log_poller`,
   `refresh_witsml_pollers`, `set_witsml_polling_enabled`
+- Reference logs — your own advisory shelf, read by nothing that computes:
+  `list_reference_logs`, `read_reference_log`, `upload_reference_log`,
+  `delete_reference_log`. A reference log is usually the ORIGINAL type log,
+  retained when the project switched to a derived one; keep it for
+  general-shape reasoning ("roughly where in the column are we?"), never
+  cite it as an input to the run
 - File ingest (§1.9.1): `create_upload`, `read_las`
 - Project backup/restore: `export_project_archive` — a one-shot download URL
   for the project's native archive (.tar.gz) — and `import_project_archive`,

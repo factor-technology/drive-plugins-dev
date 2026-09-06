@@ -78,10 +78,13 @@ Tools:
 7. `update_project({project_id, patch})` — the Step-6 plain fields with
    no dedicated tool: `is_full_trajectory` ("Compute to last MD in
    well") and the autotargeting fields (§1.10).
-8. `set_notify_flags({project_id, out_of_zone?, off_target?})` — the
-   Run Job step's "Notify me…" checkboxes: Drive's per-project
-   job-result email alerts for the calling user (independent of the
-   agent's watch feature).
+8. `set_notify_flags({project_id, out_of_zone?, off_target?,
+   log_coverage?})` — the Run Job step's "Notify me…" checkboxes plus
+   the derived-type-log coverage alarm: Drive's per-project job-result
+   email alerts for the calling user (independent of the agent's watch
+   feature). `log_coverage` fires when a run finds the well has drilled
+   past an end of the derived type log and the interpretation should be
+   extended and the log re-derived.
 
 `trigger_job_rerun(project_id)` actually kicks off the computation — that
 tool predates the wizard-step walk but belongs conceptually in Step
