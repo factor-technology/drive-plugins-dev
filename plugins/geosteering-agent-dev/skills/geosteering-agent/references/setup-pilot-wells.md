@@ -224,9 +224,13 @@ derivation.
 
 Deriving is a **loop, not a one-shot**: each time a run reports the well has
 drilled past an end of the log, the geologist extends the *same* manual
-interpretation over the new footage with a speculative structure, and the
-log is derived and replaced again. Never derive through the computed
-structure the previous derived log produced. Before acting on any of this —
+interpretation to the bit — the run's own picks
+(`copy_computed_interpretation`) over the footage it kept inside the log,
+revised at the trailing end where the geologist's own picks fit the new GR
+better, then a speculative structure past the first pressed position — and
+the log is derived and replaced again. Never derive through the computed
+structure over the footage the log was derived from: it was solved against
+this very log. Before acting on any of this —
 the first derivation, the no-pilot bootstrap, choosing the statistic,
 reading the coverage states, the pitfalls — read `references/derived-log.md`
 in this skill; it is the whole workflow and this section is only its tool

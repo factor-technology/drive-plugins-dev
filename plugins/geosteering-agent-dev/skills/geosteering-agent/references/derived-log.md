@@ -135,15 +135,34 @@ Every later cycle is the same four moves:
 1. **Read the alarm.** The coverage block on the latest job result says
    whether the well has drilled past an end of the log, which end, and the
    first MD where it showed. That MD is where the extension starts.
-2. **Extend the ONE manual interpretation to the bit, speculatively.** Two
-   kinds of footage lie between the last derivation and the bit, and the
-   line treats them differently:
+2. **Extend the ONE manual interpretation to the bit.** The line over the
+   footage the log was derived from stays as it is. From the last
+   derivation's MD to the bit the new picks come in three stretches, and
+   one construction governs all of them: a sample lands in the column at
+   its vertical distance from the line, so the line's depth at an MD is
+   fixed by the column depth you believe that MD's GR must sit at.
    - *Footage the run kept inside the log* — tight, single-peaked marginals,
      the estimate clear of both ends. There the run is a correlation of new
-     footage against the log, not an echo, and its structure is the picks to
-     carry. Trust it only where successive runs agree: a toe gets revised by
-     several feet, sometimes more than ten, as the next delivery lands, so the
-     last few hundred feet of any run are provisional.
+     footage against the column, not an echo, and its MPE **is** the line:
+     begin from those picks, appended to the manual line
+     (`copy_computed_interpretation` hangs the MPE at the top of target the
+     way a manual line is drawn; take the picks from that copy, not raw from
+     the MPE slice, which sits on the top of section). Restarting from the
+     last derivation's pick and carrying the prior across this footage
+     throws the correlation away — on one lateral every cycle's extension
+     began at that pick, and the tens of feet of correlated footage between
+     it and the first pressed position went to the prior each time.
+   - *The run's trailing footage* — the last few hundred feet of any run are
+     provisional (a toe gets revised by several feet, sometimes more than
+     ten, as the next delivery lands; trust it outright only where
+     successive runs agree), so the MPE there is a starting point, not a
+     boundary. Replace as much of it as the new GR justifies with trial
+     picks of your own: a bed the column already holds goes to the depth
+     the column holds it. Test a trial by deriving read-only through it (a
+     trial interpretation document rides into `derive_type_log` alongside
+     `use_project_data`) and keep the picks that make the new pass stack on
+     the column where it re-crosses covered rock; where it crosses only new
+     rock there is nothing to fit and the prior decides.
    - *Footage past the first pressed position* — mass piled against an end,
      the estimate at the wall. The run's structure there is the **deepest**
      (for a bottom alarm) structure that still keeps the well inside the log,
@@ -310,10 +329,14 @@ field names.
 
 ## Pitfalls
 
-1. **Deriving through the computed structure.** The manual interpretation
-   defines the backprojection, every cycle. From the second cycle on this is
-   a correctness rule, not a preference: the computed structure was solved
-   against the derived log. Check what the cross section is following first.
+1. **Deriving through the computed structure over the footage the log was
+   derived from.** The manual interpretation defines the backprojection,
+   every cycle. From the second cycle on this is a correctness rule, not a
+   preference: over that footage the computed structure was solved against
+   the derived log. Check what the cross section is following first. The
+   converse is as wrong: over the footage drilled since, the run *is* the
+   correlation, and restarting from the last derivation's pick with the
+   prior discards it.
 2. **Splicing.** Leave the splice switch off. Spliced values are unconfirmed
    values at depths this well never visited, and the computation reads them as
    ground truth. Splicing also silences the alarm, which is the loop's clock.
