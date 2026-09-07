@@ -202,17 +202,21 @@ main way to get out of step:
 - **Healthy.** Tens of feet of log below and above the estimate at the bit,
   entropy near its own baseline, marginals tight and single-peaked, a steady
   uncertainty corridor on the cross section.
-- **Running out.** The estimate walks within a few feet of an end, or half
-  the posterior mass piles into that band, or recent entropy runs about twice
-  its baseline; the uncertainty band blooms toward the toe. The alarm names
-  the end (bottom = drilled stratigraphically deeper, top = shallower) or
-  entropy, and the MD it started. The alarm's band is 10 ft, and a log
+- **Running out.** Over the recent footage drilled since the derivation the
+  estimate sits within 2 ft of an end, or half the posterior mass piles into
+  that band; or recent entropy runs about twice its baseline. The
+  uncertainty band blooms toward the toe. The alarm names the end (bottom =
+  drilled stratigraphically deeper, top = shallower) or entropy, and the MD
+  the pressed stretch began; it clears on its own once the well has climbed
+  away. Short of that the block reports a 10 ft *warning band*: a log
   derived right after the curve has only a few feet of lateral-derived
-  column at its bottom, so the flag stays up for as long as the well rides
-  that zone. Read the marginals before acting: tight, single-peaked, the
-  estimate a few feet clear of the end, entropy near its baseline is a
-  *near-end warning* — the well is in covered rock and there is nothing to
-  derive, since the log only grows when the well samples new rock. Mass at
+  column at its bottom, and a well riding that zone shows a few feet of log
+  below the estimate, all of the mass "near" the end, and a summary reading
+  "near the bottom ... not pressed" for as long as it stays there. That is
+  a *near-end warning* — the well is in covered rock and there is nothing
+  to derive, since the log only grows when the well samples new rock. When
+  in doubt read the marginals: tight, single-peaked, the estimate a few
+  feet clear of the end, entropy near its baseline is the warning. Mass at
   the wall, the estimate at the end, modes splitting, GR the log has no
   match for (hotter or cleaner than anything in the band) is the
   *excursion*, and the cue to extend.
