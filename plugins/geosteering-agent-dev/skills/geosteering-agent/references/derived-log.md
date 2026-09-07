@@ -168,17 +168,25 @@ Every later cycle is the same four moves:
      (for a bottom alarm) structure that still keeps the well inside the log,
      never the truth, and it bends toward the wellbore. Do not carry any of
      it, and do not draw the line so the well just reaches the end: start at
-     the last believed pick and carry the project's prior structure
+     the last believed pick and draw it along the project's prior structure
      (`read_structure`) or, where the well re-crossed the same rock at the
-     same depth, a flat line, and let the well go as far past the end as that
-     puts it. On one lateral a line drawn to meet the bottom at the last
-     pressed position left the well 5 ft below the log when it had drilled
-     24 ft of new rock under a flat structure; 2,000 ft of estimate were
-     13–20 ft off for it.
-     The prior is where that line *starts*, not where it ends. The alarm
-     and the GR have already said what the footage is: pressed at the
-     bottom, with GR hotter or cleaner than anything the column holds, is
-     new rock below the column, and the line has to put it there — over
+     same depth, a flat line, as a first guess, and let the well go as far
+     past the end as that puts it. On one lateral a line drawn to meet the
+     bottom at the last pressed position left the well 5 ft below the log
+     when it had drilled 24 ft of new rock under a flat structure; 2,000 ft
+     of estimate were 13–20 ft off for it.
+     The prior is where that line *starts*, not where it ends. It is
+     **advisory**: the geologist's regional belief, entered at setup, which
+     the computation itself holds only as a prior with a tolerance
+     (`dip_sigma`), never as a constraint — and the line gets the same
+     latitude. A line that departs from the prior by a few degrees over new
+     footage is the loop working, not a rule broken; the loop exists
+     because the prior and the type log did not describe this well. What
+     the line must honor is the evidence: the run over covered footage, the
+     alarm, and the GR — and they have already said what the footage is:
+     pressed at the bottom, with GR hotter or cleaner than anything the
+     column holds, is new rock below the column, and the line has to put it
+     there — over
      that footage the structure is *shallower* relative to the wellbore's
      course than the prior says (deeper, for a top alarm). Test before
      saving: derive read-only through the extension and read where the
