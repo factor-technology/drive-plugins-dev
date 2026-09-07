@@ -175,6 +175,25 @@ Every later cycle is the same four moves:
      pressed position left the well 5 ft below the log when it had drilled
      24 ft of new rock under a flat structure; 2,000 ft of estimate were
      13–20 ft off for it.
+     The prior is where that line *starts*, not where it ends. The alarm
+     and the GR have already said what the footage is: pressed at the
+     bottom, with GR hotter or cleaner than anything the column holds, is
+     new rock below the column, and the line has to put it there — over
+     that footage the structure is *shallower* relative to the wellbore's
+     course than the prior says (deeper, for a top alarm). Test before
+     saving: derive read-only through the extension and read where the
+     end landed. If it moved by less than the alarm band, the extension
+     has left the well where it was, the prior is wrong over that
+     footage, and saving it buys nothing: raise the line (lower it, for a
+     top alarm) until the pressed footage lands a bed's worth of column
+     past the end — feet, not tenths — and let the next run judge the
+     amount. On one lateral the prior ran parallel to a well riding a
+     foot or two above the derived bottom: four consecutive cycles
+     extended along it, each grew the column by a quarter foot, and each
+     next run alarmed again at the same bottom while the GR had run
+     hotter than anything in the column for fifty feet. A line 6 ft
+     shallower than the prior at the bit, tested read-only, grew the
+     column 6 ft and took that GR in.
    It is a guess and is meant to be; the next run tests it. Stop at the bit.
    **Never** copy the computed structure over the footage the log was derived
    from: that structure was solved against this very log, so deriving through
@@ -254,6 +273,25 @@ main way to get out of step:
   the log already holds, and the computation is correcting the guess. Accept
   the run. Re-derive only on the alarm, or when you change your mind about
   the structure over footage the log was derived from.
+- **Stuck at an end.** The same alarm on consecutive runs, a re-derivation
+  between each, and the log's end moving by less than the alarm band per
+  cycle: that is the loop spinning, not the well plateauing. The bit
+  marginal says the same — its support stops at the wall and the main
+  mode's range ends on it (on one run 47% of the mass sat in the last 3 ft
+  above the bottom). Two readings tempt you to wait it out, and both are
+  wrong. "The computed top agrees with my line within a foot" is forced,
+  not evidence: pressed at the bottom, the run cannot put the well any
+  deeper than the log allows, so its top of target lands wherever the
+  wall puts it — a foot or two below the wellbore, which is exactly where
+  a line drawn parallel to the well already sits. And "the well is above
+  the top of target, so the column cannot extend below it" mistakes the
+  line for a floor: the top-of-target marker is where the line's
+  basepoint landed in the column and nothing more; the column's bottom is
+  wherever the deepest sample landed, the well can be below the line, and
+  new rock is column below the marker. Waiting for the survey to carry
+  the well "into the target" does not fix it either — the well is in new
+  rock now, every run until then is wrong at the bit, and the column will
+  not grow until the line changes. Fix the line (step 2 of the loop).
 
 Any type log can run out this way, derived or not — an original pilot ending a
 couple of feet below the deepest depth the lateral reaches raises the same
@@ -373,3 +411,9 @@ field names.
    that kept the well inside the log adds no column (the well sampled
    nothing new) and, if the run has matched a look-alike, writes the new
    passes into the wrong beds. Derive on an excursion, not on the flag.
+12. **Saving an extension that adds no column.** A read-only derive through
+   the extension whose end moved by less than the alarm band will
+   reproduce the alarm when saved. The prior is a starting point; the
+   alarm and the GR decide where the footage sits. Never spend a cycle on a
+   line that leaves the pressed footage inside the log, and never wait for
+   the trajectory to take the well past the end on its own.

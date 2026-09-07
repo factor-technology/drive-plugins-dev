@@ -228,7 +228,12 @@ interpretation to the bit — the run's own picks
 (`copy_computed_interpretation`) over the footage it kept inside the log,
 revised at the trailing end where the geologist's own picks fit the new GR
 better, then a speculative structure past the first pressed position — and
-the log is derived and replaced again. Never derive through the computed
+the log is derived and replaced again. That structure has to move the
+pressed footage past the end: derive read-only through the extension first,
+and if the end moved by less than the alarm band the prior is wrong over
+that footage (a prior parallel to the wellbore adds no column, however many
+times it is re-derived) — shallower for a bottom alarm, deeper for a top
+alarm, until it does. Never derive through the computed
 structure over the footage the log was derived from: it was solved against
 this very log. Before acting on any of this —
 the first derivation, the no-pilot bootstrap, choosing the statistic,
