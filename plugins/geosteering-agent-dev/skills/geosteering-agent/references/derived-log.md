@@ -7,7 +7,7 @@
 When the type log can't explain what the well is drilling, stop correlating
 against it and correlate the well **against itself**. Back-project the active
 GR through a short interpretation of the structure and make that curve the
-project's type log; from then on every new pass is lined up against the column
+project's type log; from then on every new pass is lined up against the stratigraphic column
 the well itself established. Drive needs an actual type log object to steer
 against, and the Profile tab's **Derived** pane (or `derive_type_log`) mints
 one.
@@ -71,15 +71,22 @@ picking, no alignment sweep first.
    characteristic features — and adjusts it until the backprojected segments
    stack sensibly. The structural opinion comes from seismic, offset wells,
    regional dip, never from the new features themselves: wherever they then
-   backproject through that structure is where they belong in the column. A
-   straight dipping segment is fine when seismic says the column is straight.
-   Through the curve, the line's dip is also the column's *scale*: the
-   column's thickness is the wellbore's TVD descent minus the line's fall
-   over the same footage, so a prior dip twice too steep squeezes the column
-   by a few percent and every later estimate inherits a few feet of offset
-   at the bottom. With no pilot to check it against, prefer the gentler of
-   the prior and flat over the curve, and expect the lateral's re-crossings
-   to correct the rest.
+   backproject through that structure is where they belong in the stratigraphic column. A
+   straight dipping segment is fine when seismic says the stratigraphic column is straight.
+   The project's prior structure (`read_structure`) is that opinion, already
+   entered: draw the line at its dip. Only the dip is the signal — the
+   computation reads the polyline as a sequence of dips and never its
+   absolute depth, so where it sits relative to the wellbore or the markers
+   means nothing, and the line's own depth is set by the basepoint at the
+   wellbore. Through the curve that dip is also the stratigraphic column's *scale*: the
+   stratigraphic column's thickness is the wellbore's TVD descent minus the line's descent
+   over the same footage (a line rising relative to the wellbore's inclination adds
+   stratigraphic column, one falling relative to it removes it), so a prior dip off by a factor of two mis-scales the
+   stratigraphic column by that fraction of the line's rise or fall, and every later
+   estimate inherits some feet of offset at the bottom. A horizontal line is
+   not a safer default — it is a dip claim nobody made, and its error is the
+   whole of the prior's dip. With no pilot to check against, take the prior's
+   dip and expect the lateral's re-crossings to correct the scale.
 2. **Derive bare, from the project's own data.** Leave it un-spliced: in
    the pane the **Splice into current type log** switch stays off, through
    the tool omit the initial type log. Through the tool, name the saved
@@ -110,7 +117,7 @@ a replacement and no re-pick is needed.
 Where the lateral crossed the same stratigraphic depth more than once the
 passes can disagree — a stringer developed at one lateral position and not
 another, or one pass placed slightly wrong. The method decides **which lateral
-position's character represents the column**:
+position's character represents the stratigraphic column**:
 
 | Method | Meaning | Behavior on a disputed feature |
 |---|---|---|
@@ -138,12 +145,12 @@ Every later cycle is the same four moves:
 2. **Extend the ONE manual interpretation to the bit.** The line over the
    footage the log was derived from stays as it is. From the last
    derivation's MD to the bit the new picks come in three stretches, and
-   one construction governs all of them: a sample lands in the column at
+   one construction governs all of them: a sample lands in the stratigraphic column at
    its vertical distance from the line, so the line's depth at an MD is
-   fixed by the column depth you believe that MD's GR must sit at.
+   fixed by the stratigraphic column depth you believe that MD's GR must sit at.
    - *Footage the run kept inside the log* — tight, single-peaked marginals,
      the estimate clear of both ends. There the run is a correlation of new
-     footage against the column, not an echo, and its MPE **is** the line:
+     footage against the stratigraphic column, not an echo, and its MPE **is** the line:
      begin from those picks, appended to the manual line
      (`copy_computed_interpretation` hangs the MPE at the top of target the
      way a manual line is drawn; take the picks from that copy, not raw from
@@ -157,11 +164,11 @@ Every later cycle is the same four moves:
      ten, as the next delivery lands; trust it outright only where
      successive runs agree), so the MPE there is a starting point, not a
      boundary. Replace as much of it as the new GR justifies with trial
-     picks of your own: a bed the column already holds goes to the depth
-     the column holds it. Test a trial by deriving read-only through it (a
+     picks of your own: a bed the stratigraphic column already holds goes to the depth
+     the stratigraphic column holds it. Test a trial by deriving read-only through it (a
      trial interpretation document rides into `derive_type_log` alongside
      `use_project_data`) and keep the picks that make the new pass stack on
-     the column where it re-crosses covered rock; where it crosses only new
+     the stratigraphic column where it re-crosses covered rock; where it crosses only new
      rock there is nothing to fit and the prior decides.
    - *Footage past the first pressed position* — mass piled against an end,
      the estimate at the wall. The run's structure there is the **deepest**
@@ -170,10 +177,10 @@ Every later cycle is the same four moves:
      it, and do not draw the line so the well just reaches the end: start at
      the last believed pick and draw it along the project's prior structure
      (`read_structure`) or, where the well re-crossed the same rock at the
-     same depth, a flat line, as a first guess, and let the well go as far
-     past the end as that puts it. On one lateral a line drawn to meet the
-     bottom at the last pressed position left the well 5 ft below the log
-     when it had drilled 24 ft of new rock under a flat structure; 2,000 ft
+     same depth, a horizontal line, as a first guess, and let the well go as
+     far past the end as that puts it. On one lateral a line drawn to meet
+     the bottom at the last pressed position left the well 5 ft below the log
+     when it had drilled 24 ft of new rock under a horizontal structure; 2,000 ft
      of estimate were 13–20 ft off for it.
      The prior is where that line *starts*, not where it ends. It is
      **advisory**: the geologist's regional belief, entered at setup, which
@@ -185,7 +192,7 @@ Every later cycle is the same four moves:
      the line must honor is the evidence: the run over covered footage, the
      alarm, and the GR — and they have already said what the footage is:
      pressed at the bottom, with GR hotter or cleaner than anything the
-     column holds, is new rock below the column, and the line has to put it
+     stratigraphic column holds, is new rock below the stratigraphic column, and the line has to put it
      there — over
      that footage the structure is *shallower* relative to the wellbore's
      course than the prior says (deeper, for a top alarm). Test before
@@ -193,15 +200,15 @@ Every later cycle is the same four moves:
      end landed. If it moved by less than the alarm band, the extension
      has left the well where it was, the prior is wrong over that
      footage, and saving it buys nothing: raise the line (lower it, for a
-     top alarm) until the pressed footage lands a bed's worth of column
+     top alarm) until the pressed footage lands a bed's worth of stratigraphic column
      past the end — feet, not tenths — and let the next run judge the
      amount. On one lateral the prior ran parallel to a well riding a
      foot or two above the derived bottom: four consecutive cycles
-     extended along it, each grew the column by a quarter foot, and each
+     extended along it, each grew the stratigraphic column by a quarter foot, and each
      next run alarmed again at the same bottom while the GR had run
-     hotter than anything in the column for fifty feet. A line 6 ft
+     hotter than anything in the stratigraphic column for fifty feet. A line 6 ft
      shallower than the prior at the bit, tested read-only, grew the
-     column 6 ft and took that GR in.
+     stratigraphic column 6 ft and took that GR in.
    It is a guess and is meant to be; the next run tests it. Stop at the bit.
    **Never** copy the computed structure over the footage the log was derived
    from: that structure was solved against this very log, so deriving through
@@ -256,7 +263,7 @@ main way to get out of step:
   the pressed stretch began; it clears on its own once the well has climbed
   away. Short of that the block reports a 10 ft *warning band*: a log
   derived right after the curve has only a few feet of lateral-derived
-  column at its bottom, and a well riding that zone shows a few feet of log
+  stratigraphic column at its bottom, and a well riding that zone shows a few feet of log
   below the estimate, all of the mass "near" the end, and a summary reading
   "near the bottom ... not pressed" for as long as it stays there. That is
   a *near-end warning* — the well is in covered rock and there is nothing
@@ -292,13 +299,13 @@ main way to get out of step:
   deeper than the log allows, so its top of target lands wherever the
   wall puts it — a foot or two below the wellbore, which is exactly where
   a line drawn parallel to the well already sits. And "the well is above
-  the top of target, so the column cannot extend below it" mistakes the
+  the top of target, so the stratigraphic column cannot extend below it" mistakes the
   line for a floor: the top-of-target marker is where the line's
-  basepoint landed in the column and nothing more; the column's bottom is
+  basepoint landed in the stratigraphic column and nothing more; the stratigraphic column's bottom is
   wherever the deepest sample landed, the well can be below the line, and
-  new rock is column below the marker. Waiting for the survey to carry
+  new rock is stratigraphic column below the marker. Waiting for the survey to carry
   the well "into the target" does not fix it either — the well is in new
-  rock now, every run until then is wrong at the bit, and the column will
+  rock now, every run until then is wrong at the bit, and the stratigraphic column will
   not grow until the line changes. Fix the line (step 2 of the loop).
 
 Any type log can run out this way, derived or not — an original pilot ending a
@@ -316,11 +323,11 @@ lock-step with it, so that the well never leaves that bed, the structure is
 following the wellbore. On one lateral the computation drew a 20-ft syncline
 in 1,500 ft that way. The test is cheap: extend the line only through the
 pressed footage, derive, and let the footage after it judge — the true
-column correlates the climb with a smooth structure and the well moving
+stratigraphic column correlates the climb with a smooth structure and the well moving
 through the beds; the look-alike needs the structure to chase the well.
 
 There is a deeper limit to know about. The well can only *scale* its own
-column where it crosses the same stratigraphy more than once: a wrong dip
+stratigraphic column where it crosses the same stratigraphy more than once: a wrong dip
 over a stretch that only ever deepens produces a log that is stretched or
 squeezed there, the computation reproduces the line that made it, and no
 alarm and no conflict ever shows. On a lateral that walked 60 ft
@@ -335,16 +342,16 @@ own scale. Where the well does come back into covered rock the computation
 corrects the guess, and the loop converges. The well *can* scale a stretch
 where it crosses the same rock twice at the same depth — the same hot bed
 at the same TVDSS 500 ft apart with different rock between says the
-structure is flat there — and that is direct evidence, worth more than the
+structure is horizontal there — and that is direct evidence, worth more than the
 prior over that footage.
 
 Run blind on a 10,000-ft lateral with no pilot at all (prior polyline plus
 the well's own GR, three derivations), the loop finished within 5 ft of the
 geologist's answer over half the well and within 10 ft over five sixths of
 it, 3.5 ft at TD; the rest was one 2,000-ft stretch 13–20 ft off, the
-footage where the well drilled 24 ft of rock the column never held and the
+footage where the well drilled 24 ft of rock the stratigraphic column never held and the
 extension put it 5 ft below the bottom instead. That is the shape of the
-limit: right wherever the well re-crossed its own column, and off by
+limit: right wherever the well re-crossed its own stratigraphic column, and off by
 whatever the speculation missed where it did not.
 
 ## The advisory reference log
@@ -355,7 +362,7 @@ not the job builder, not the type-log interpolation, not the cross section. It
 is not a pilot well and it invalidates nothing. Later cycles shelve nothing,
 since the log they replace is itself derived.
 
-Use it for general-shape reasoning: roughly where in the column the wellbore
+Use it for general-shape reasoning: roughly where in the stratigraphic column the wellbore
 sits, what the units above and below look like regionally. Never cite it as an
 input to a run, never transfer its marker depths, and name which log a claim
 came from when it came from the reference.
@@ -416,10 +423,10 @@ field names.
    against the 0.25 ft grid) and keep full density through the curve; the
    result agrees with full density to well under 1 gAPI rms.
 11. **Deriving to quiet a near-end warning.** Re-deriving through a run
-   that kept the well inside the log adds no column (the well sampled
+   that kept the well inside the log adds no stratigraphic column (the well sampled
    nothing new) and, if the run has matched a look-alike, writes the new
    passes into the wrong beds. Derive on an excursion, not on the flag.
-12. **Saving an extension that adds no column.** A read-only derive through
+12. **Saving an extension that adds no stratigraphic column.** A read-only derive through
    the extension whose end moved by less than the alarm band will
    reproduce the alarm when saved. The prior is a starting point; the
    alarm and the GR decide where the footage sits. Never spend a cycle on a

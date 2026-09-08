@@ -233,9 +233,12 @@ pressed footage past the end: derive read-only through the extension first,
 and if the end moved by less than the alarm band the prior is wrong over
 that footage — the prior polyline is advisory, a regional belief the
 computation itself holds only within `dip_sigma`, and a prior parallel to
-the wellbore adds no column however many times it is re-derived — so the
+the wellbore adds no stratigraphic column however many times it is re-derived — so the
 line goes shallower for a bottom alarm, deeper for a top alarm, until it
-does. Never derive through the computed
+does. The first line, and every speculative stretch, takes its dip from
+that polyline, which carries dip and nothing else (§1.9.3); a horizontal
+line is not a safer guess than the prior, only a different dip that
+nobody claimed. Never derive through the computed
 structure over the footage the log was derived from: it was solved against
 this very log. Before acting on any of this —
 the first derivation, the no-pilot bootstrap, choosing the statistic,

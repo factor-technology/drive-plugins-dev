@@ -42,7 +42,7 @@ Between adjacent pilots Drive builds an interpolated type log by warping each la
 
 **VS azimuth.** The direction of the vertical-section plane — the plan-view direction the lateral is drilled. Drive can compute it from the trajectory, or you can set it explicitly.
 
-**Apparent dip.** The formation tilt as seen in the vertical-section view, expressed in *trajectory-inclination coordinates*: 90° is flat-lying, values below 90° dip one way, above 90° the other. This is the directional-drilling convention — not the textbook geology convention. Typical targets in horizontal plays present apparent dips between roughly 70° and 110°.
+**Apparent dip.** The formation tilt as seen in the vertical-section view, expressed in *trajectory-inclination coordinates*: 90° is horizontal, values below 90° dip one way, above 90° the other. This is the directional-drilling convention — not the textbook geology convention. Typical targets in horizontal plays present apparent dips between roughly 70° and 110°.
 
 **Dip prior.** The computation needs an expectation of how the formation tilts before it sees any data. You provide it either as **apparent dip** values (piecewise constant, per MD range) or as a **prior structure** — a VS/TVDSS polyline you upload or snapshot from an existing interpretation. The two are peers; choose whichever expresses your geologic knowledge better. See [Dip and Azimuth](./setup/dip-azimuth.md).
 

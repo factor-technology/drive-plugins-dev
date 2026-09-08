@@ -18,7 +18,7 @@ Choose between two peer forms of the dip prior:
 
 ### Apparent dip
 
-Piecewise-constant dip per MD range. Enter the dip in the directional-drilling convention: **90° is flat-lying**; a bed dipping ~2° toward the toe reads as ~88° or ~92° depending on direction. Typical horizontal-play targets fall between roughly 70° and 110°.
+Piecewise-constant dip per MD range. Enter the dip in the directional-drilling convention: **90° is horizontal**; a bed dipping ~2° toward the toe reads as ~88° or ~92° depending on direction. Typical horizontal-play targets fall between roughly 70° and 110°.
 
 The per-range grid has one column per MD range. Add or remove ranges with the buttons above the grid (*Add New MD Range* asks for the start MD). The single-range case — one dip for the whole well — is the common one.
 

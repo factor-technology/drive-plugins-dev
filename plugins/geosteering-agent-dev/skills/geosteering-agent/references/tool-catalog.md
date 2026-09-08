@@ -99,7 +99,7 @@ The catalog, by area (names only — contracts live in the schemas):
   `list_reference_logs`, `read_reference_log`, `upload_reference_log`,
   `delete_reference_log`. A reference log is usually the ORIGINAL type log,
   retained when the project switched to a derived one; keep it for
-  general-shape reasoning ("roughly where in the column are we?"), never
+  general-shape reasoning ("roughly where in the stratigraphic column are we?"), never
   cite it as an input to the run
 - File ingest (§1.9.1): `create_upload`, `read_las`
 - Project backup/restore: `export_project_archive` — a one-shot download URL

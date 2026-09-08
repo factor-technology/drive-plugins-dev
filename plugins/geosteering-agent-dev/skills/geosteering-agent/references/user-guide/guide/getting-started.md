@@ -31,7 +31,7 @@ In [Setup step 2](./setup/active-well.md), choose a data source:
 
 ## 4 · Dip and azimuth
 
-In [Setup step 3](./setup/dip-azimuth.md), accept or set the **VS Azimuth**, then give the computation its dip prior: either an **apparent dip** (90° = flat; use your best estimate from offset data) or an uploaded **prior structure** polyline.
+In [Setup step 3](./setup/dip-azimuth.md), accept or set the **VS Azimuth**, then give the computation its dip prior: either an **apparent dip** (90° = horizontal; use your best estimate from offset data) or an uploaded **prior structure** polyline.
 
 ## 5 · Align logs
 

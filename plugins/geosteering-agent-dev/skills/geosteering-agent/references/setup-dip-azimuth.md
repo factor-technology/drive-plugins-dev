@@ -32,7 +32,7 @@ propagates the value to every block.
 **Apparent dip convention.** The Drive form and the `set_apparent_dip`
 tool both accept apparent dip in **trajectory-inclination coordinates**:
 vertical = 0°, horizontal = 90°. This is the directional-drilling
-industry convention; a flat-lying target has apparent dip ≈ 90°, a
+industry convention; a horizontal target has apparent dip ≈ 90°, a
 2°-tilted bed ≈ 88°. **Do not use the textbook geological convention**
 (0° = horizontal, 90° = vertical) — they are complements, and flipping
 them inverts every sanity check. Typical hydrocarbon targets in
@@ -68,8 +68,11 @@ already exist.
 
 **Structure polyline endpoints are orthogonal to `dip_type`.** The
 server stores `vs`/`tvdss` regardless of mode; the computation only
-consults them when `dip_type="structure"`. `delete_structure` does NOT
-change `dip_type`. To move back to constants mode, pair
+consults them when `dip_type="structure"`, and then only as a sequence
+of segment dips looked up by VS — the polyline's absolute depth is never
+read, so it indicates dip and nothing else, and one drawn tens of feet
+off the markers constrains the run exactly as one drawn through them.
+`delete_structure` does NOT change `dip_type`. To move back to constants mode, pair
 `delete_structure` with `set_apparent_dip` (which implicitly flips
 `dip_type="constants"`).
 
