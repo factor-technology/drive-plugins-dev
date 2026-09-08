@@ -162,10 +162,21 @@ Every later cycle is the same four moves:
 1. **Read the alarm.** The coverage block on the latest job result says
    whether the well has drilled past an end of the log, which end, and the
    first MD where it showed. That MD is where the extension starts.
-2. **Extend the ONE manual interpretation to the bit.** The line over the
-   footage the log was derived from stays as it is. From the last
-   derivation's MD to the bit the new picks come in three stretches, and
-   one construction governs all of them: a sample lands in the stratigraphic column at
+2. **Extend the ONE manual interpretation to the bit — or reach back.**
+   The line over the footage the log was derived from usually stays as it
+   is, but the cycle is not confined to the newest stretch: any stretch of
+   the line, however far back along the lateral, may be revised when a
+   better log comes of it — passes that stack where they overlap, the same
+   bed at the same depth wherever the well re-crossed it, a prediction
+   with the measurement's character (below) — and the test is the same, a
+   read-only derive through the revised line before saving. The log
+   inherits the line's scale over the footage it was built from, and no
+   run rescales it: on one blind lateral a first line at twice the true
+   dip squeezed the stratigraphic column 4%, and the estimate over the
+   next 2,000 ft carried 4–6 ft of it that the runs only partly corrected.
+   Reach back with your own picks, never the computed structure
+   (pitfall 1). From the last derivation's MD to the bit the new picks
+   come in three stretches, and one construction governs all of them: a sample lands in the stratigraphic column at
    its vertical distance from the line, so the line's depth at an MD is
    fixed by the stratigraphic column depth you believe that MD's GR must sit at.
    - *Footage the run kept inside the log* — tight, single-peaked marginals,
@@ -475,7 +486,9 @@ field names.
    derived from.** The manual interpretation defines the backprojection,
    every cycle. From the second cycle on this is a correctness rule, not a
    preference: over that footage the computed structure was solved against
-   the derived log. Check what the cross section is following first. The
+   the derived log. Check what the cross section is following first. It
+   forbids the computed structure there, not your own picks: revising the
+   line over that footage by judgment is step 2's reach-back. The
    converse is as wrong: over the footage drilled since, the run *is* the
    correlation, and restarting from the last derivation's pick with the
    prior discards it.
