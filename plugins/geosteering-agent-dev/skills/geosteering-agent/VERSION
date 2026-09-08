@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: 5b0f9899a48cd9241bdb5dece6341b8af51198a8
-source_commit_short: 5b0f9899a48c
-source_commit_date: 2026-09-08T08:04:54-05:00
-source_commit_subject: skill: the line takes the prior structure's dip, never horizontal; say "horizontal" and "stratigraphic column"; 0.5.25
-skill_version: 0.5.25
-built_at: 2026-09-08T08:04:54-05:00
+source_commit: cd330c747e84f403f161ddb10bb9d3a7875d1b1f
+source_commit_short: cd330c747e84
+source_commit_date: 2026-09-08T08:15:36-05:00
+source_commit_subject: skill: the line's latitude from the prior is the block's dip tolerance, not "a few degrees"; 0.5.26
+skill_version: 0.5.26
+built_at: 2026-09-08T08:15:36-05:00
 built_from_workspace_dirty: false

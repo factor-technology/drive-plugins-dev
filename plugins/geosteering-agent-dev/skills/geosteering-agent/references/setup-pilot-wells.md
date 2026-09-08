@@ -232,7 +232,9 @@ the log is derived and replaced again. That structure has to move the
 pressed footage past the end: derive read-only through the extension first,
 and if the end moved by less than the alarm band the prior is wrong over
 that footage — the prior polyline is advisory, a regional belief the
-computation itself holds only within `dip_sigma`, and a prior parallel to
+computation itself holds only within `dip_sigma`, the dip tolerance set
+per parameter block, so how far the line may depart from the prior is a
+project setting that can differ along the lateral — and a prior parallel to
 the wellbore adds no stratigraphic column however many times it is re-derived — so the
 line goes shallower for a bottom alarm, deeper for a top alarm, until it
 does. The first line, and every speculative stretch, takes its dip from
