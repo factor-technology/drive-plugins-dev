@@ -74,9 +74,9 @@ picking, no alignment sweep first.
    backproject through that structure is where they belong in the stratigraphic column. A
    straight dipping segment is fine when seismic says the stratigraphic column is straight.
    The project's prior structure (`read_structure`) is that opinion, already
-   entered: draw the line at its dip, departing from it only as far as the
-   project's dip tolerance allows over that footage (the loop, step 2, says
-   how to read it). Only the dip is the signal — the
+   entered: draw the line at its dip, and move off it only as far as the
+   evidence pushes, weighed against the block's dip tolerance the way the
+   computation weighs it (the loop, step 2). Only the dip is the signal — the
    computation reads the polyline as a sequence of dips and never its
    absolute depth, so where it sits relative to the wellbore or the markers
    means nothing, and the line's own depth is set by the basepoint at the
@@ -188,12 +188,12 @@ Every later cycle is the same four moves:
      **advisory**: the geologist's regional belief, entered at setup, which
      the computation itself holds only as a prior with a tolerance
      (`dip_sigma`), never as a constraint — and the line gets the same
-     latitude. How much is a project setting, not a fixed figure: the dip
-     tolerance is set per parameter block (`read_job_params`; quote it as
-     the UI's 3σ value) and can differ along the lateral, so read the block
-     covering the footage and let the line depart from the prior by up to
-     that much. A line that departs within it over new
-     footage is the loop working, not a rule broken; the loop exists
+     latitude — a width, not a budget (§1.1): it says how stiff the prior
+     is over that footage, set per parameter block (`read_job_params`), so
+     the line moves off the prior only as far as the evidence pushes it,
+     and reaching the tolerance should be rare. A line that has moved off
+     the prior over new footage is the loop working, not a rule broken; the
+     loop exists
      because the prior and the type log did not describe this well. What
      the line must honor is the evidence: the run over covered footage, the
      alarm, and the GR — and they have already said what the footage is:
