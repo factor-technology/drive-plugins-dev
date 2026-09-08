@@ -41,8 +41,12 @@ bad**. The structure may look plausible, or may itself be contorted with dips
 the geologist doesn't believe, precisely because the model is bending
 structure to accommodate stratigraphy the type log doesn't describe:
 
-- On the type log track, the backprojected MWD segments share no character
-  with the type log: peaks with no counterparts, different amplitudes,
+- The log tracks disagree with the type log. On the active log track along
+  the top, the black curve — the type log read along the structure the
+  cross section follows, the GR that structure says the bit should have
+  measured — shares no character with the measured passes in color; on
+  the type log track, the backprojected MWD segments share none with the
+  type log: peaks with no counterparts, different amplitudes,
   spiky-vs-smooth.
 - The active log carries distinctive local character — clean low-GR
   stringers, hot streaks, washed-out zones — that appears **nowhere** on the
@@ -108,6 +112,20 @@ picking, no alignment sweep first.
    recomputing the well from scratch in typically minutes. On a WITSML
    project pause both pollers first and **re-enable them afterwards**
    (§1.9.6); an email-fed project has nothing to pause.
+6. **On a self-steered well, make an inadequate log fail loudly.** Set the
+   log tolerance tight on the lateral's parameter blocks — about 5 gAPI
+   (`update_param_block`, a block of its own from the landing if the
+   project has one block; §1.1 for the stored width). The log was recorded
+   by this bit, so in rock it holds the measurement matches it closely, and
+   a tolerance that tight leaves the computation no depth for footage it
+   does not hold: instead of piling up quietly at an end the run ends in
+   error and the job status reads **Impossible**, the alarm in its hard
+   form (*Reading the state*). Leave the curve's block at the usual
+   tolerance: through the build the computation smooths the GR over
+   several feet of TVD while the derivation filed the raw samples, and that
+   alone differs by more than a few gAPI. The number is a starting point —
+   too tight and covered rock fails on drift alone, and every failure
+   costs a full recompute.
 
 The derived log's depth axis is anchored so the wellbore at the first computed
 position sits at its own depth, and the interpretation's depth there is where
@@ -186,7 +204,12 @@ Every later cycle is the same four moves:
      5 ft below the log
      when it had drilled 24 ft of new rock under a horizontal structure; 2,000 ft
      of estimate were 13–20 ft off for it.
-     The prior is where that line *starts*, not where it ends. It is
+     The prior is where that line *starts*, not where it ends, and it
+     carries dip only: where that dip happens to run with the wellbore's
+     own inclination, a line drawn at it claims this well ran
+     bed-parallel — a claim about the well that a regional dip never
+     made — so read how much stratigraphic column it has the well cross
+     (below) before saving. It is
      **advisory**: the geologist's regional belief, entered at setup, which
      the computation itself holds only as a prior with a tolerance
      (`dip_sigma`), never as a constraint — and the line gets the same
@@ -208,9 +231,15 @@ Every later cycle is the same four moves:
      is enough to move the line: a run piled up at the bottom has already
      said the well has left what the stratigraphic column holds, whether or
      not the GR has spoken. The GR decides how far and how confidently: GR
-     with no match in the column licenses the move the footage asks for; a
-     featureless GR keeps it to the smallest move within the wiggle room
-     that lands the footage past the end. Test before
+     with no match in the stratigraphic column licenses the move the
+     footage asks for; a featureless GR keeps it to the smallest move
+     within the wiggle room that lands the footage past the end. A match
+     is a matter of character, not amplitude — the prediction against the
+     measurement (below), not the measurement against the stratigraphic
+     column's range: in a uniform shale nothing is ever hotter or cleaner
+     than the stratigraphic column holds, and that test passes silently
+     while a nearly constant prediction under a varying measurement still
+     fails. Test before
      saving: derive read-only through the extension and read where the
      end landed. If it moved by less than the alarm band, the extension
      has left the well where it was, the prior is wrong over that
@@ -224,6 +253,34 @@ Every later cycle is the same four moves:
      hotter than anything in the stratigraphic column for fifty feet. A line 6 ft
      shallower than the prior at the bit, tested read-only, grew the
      stratigraphic column 6 ft and took that GR in.
+   The line is a prediction, and that is the test: by that construction
+   it says what GR the bit should have measured at every MD — the derived
+   log read back at that MD's depth in the stratigraphic column — and
+   once the log is saved the active log track draws exactly that, the
+   black curve against the measured passes (*When to start*). On a
+   self-steered well they are the same samples, filed into the
+   stratigraphic column by the line and read back along it, so only the
+   line stands between them: detail may drift as the bit moves away from
+   the rock the log was built from, and more with distance, but the
+   character stays. Where the measurement swings and the prediction runs
+   nearly constant, the line is wrong over that footage whatever the
+   alarm says: it has laid a long stretch of MD across a thin slice of
+   the stratigraphic column, the statistic of hundreds of varying samples
+   at one depth is a single value, the log is smeared, and the run will
+   reproduce the smear. Before saving, with the cross section following
+   the trial line, the type log track shows the same fault as a pass
+   scattering sideways at one depth instead of tracing a curve down the
+   stratigraphic column. Through the tool there is no picture, only
+   arithmetic: the stratigraphic column a stretch crosses is the
+   wellbore's descent minus the line's over the same footage (the scale
+   rule of the first derivation), so set feet of stratigraphic column per
+   hundred feet of MD beside the GR's spread over that footage. The alarm
+   band is a floor, not the standard: on one lateral fed about a hundred
+   feet at a time, ten deliveries in a row cleared it while the line laid
+   1,000 ft of MD across less than half a foot of stratigraphic column,
+   and the GR over that footage varied more — 30 gAPI between its tenth
+   and ninetieth percentiles — than through the curve, where the same
+   well had crossed 200 ft of stratigraphic column in 500 ft.
    It is a guess and is meant to be; the next run tests it. Stop at the bit.
    **Never** copy the computed structure over the footage the log was derived
    from: that structure was solved against this very log, so deriving through
@@ -269,7 +326,9 @@ main way to get out of step:
   until there is some, the block says so. Not an alarm.
 - **Healthy.** Tens of feet of log below and above the estimate at the bit,
   entropy near its own baseline, marginals tight and single-peaked, a steady
-  uncertainty corridor on the cross section.
+  uncertainty corridor on the cross section, and on the active log track a
+  black curve that keeps the passes' character over the footage drilled
+  since the derivation.
 - **Running out.** Over the recent footage drilled since the derivation the
   estimate sits within 2 ft of an end, or half the posterior mass piles into
   that band; or recent entropy runs about twice its baseline. The
@@ -286,8 +345,20 @@ main way to get out of step:
   in doubt read the marginals: tight, single-peaked, the estimate a few
   feet clear of the end, entropy near its baseline is the warning. Mass at
   the wall, the estimate at the end, modes splitting, GR the log has no
-  match for (hotter or cleaner than anything in the band) is the
-  *excursion*, and the cue to extend.
+  match for (hotter or cleaner than anything in the band, or the black
+  curve on the active log track running nearly constant while the passes
+  keep swinging) is the *excursion*, and the cue to extend.
+- **Impossible.** The run ends in error and the job status reads
+  *Impossible*: at some position no structure within the tolerances puts
+  the measured GR anywhere the log holds (`read_job_status` carries the
+  reason and the last MD each pass reached). With the tight tolerance of a
+  self-steered well that is the alarm in its hard form — the log is
+  inadequate past that MD, not deep enough or no longer representative of
+  the rock the bit is in — and the answer is the loop, step 2, not a
+  looser tolerance (pitfall 5). A failed run leaves no picks over the new
+  footage, so the extension begins from the last completed run's; and a
+  failure in rock the log already holds says its character has drifted —
+  re-derive with the statistic that carries the latest passes forward.
 - **After a good re-derivation.** Margins reopen and entropy drops back. Fit
   over the footage drilled *since* the previous derivation is a real test of
   that cycle's speculation; fit over the footage the log was derived from
@@ -301,8 +372,11 @@ main way to get out of step:
   marginals, no alarm — is the loop's success case, even when the estimate
   sits tens of feet from your speculative line: the well came back into rock
   the log already holds, and the computation is correcting the guess. Accept
-  the run. Re-derive only on the alarm, or when you change your mind about
-  the structure over footage the log was derived from.
+  the run — with the active log track in view: a black curve gone nearly
+  constant under swinging passes over the new footage is an earlier cycle's
+  smear, not success. Re-derive only on the alarm, or when you change your
+  mind about the line over footage the log was derived from, which that
+  smear is.
 - **Stuck at an end.** The same alarm on consecutive runs, a re-derivation
   between each, and the log's end moving by less than the alarm band per
   cycle: that is the loop spinning, not the well plateauing. The bit
@@ -414,7 +488,8 @@ field names.
 4. **Late derivation.** A log derived at the toe explains footage already
    drilled. Raise the option as soon as the pattern appears.
 5. **Treating the alarm as an error.** It is the design working: the well
-   found rock the log doesn't cover yet. Report it that way and re-derive;
+   found rock the log doesn't cover yet (an *Impossible* on a self-steered
+   well says the same). Report it that way and re-derive;
    don't tune dip or log sigma to paper over it.
 6. **Resetting the calibration on replace.** The save writes in the pilot's
    own frame, and preserving it is what keeps the markers where they are.
@@ -441,9 +516,12 @@ field names.
    that kept the well inside the log adds no stratigraphic column (the well sampled
    nothing new) and, if the run has matched a look-alike, writes the new
    passes into the wrong beds. Derive on an excursion, not on the flag.
-12. **Saving an extension that adds no stratigraphic column.** A read-only derive through
-   the extension whose end moved by less than the alarm band will
-   reproduce the alarm when saved. The prior is a starting point; the
-   alarm says the footage moves, the GR how far. Never spend a cycle on a
-   line that leaves the piled-up footage inside the log, and never wait for
-   the trajectory to take the well past the end on its own.
+12. **Saving an extension that adds no stratigraphic column, or too little
+   for its GR.** A read-only derive through the extension whose end moved
+   by less than the alarm band will reproduce the alarm when saved; one
+   that clears the band but crosses near-zero stratigraphic column under a
+   GR that keeps varying will reproduce the smear (the loop, step 2). The
+   prior is a starting point; the alarm says the footage moves, the GR
+   how far. Never spend a cycle on a line that leaves the piled-up footage
+   inside the log, and never wait for the trajectory to take the well past
+   the end on its own.

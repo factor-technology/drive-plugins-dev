@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: 7a0592c0e482b505d20bcb94ae622c126a784328
-source_commit_short: 7a0592c0e482
-source_commit_date: 2026-09-08T08:39:15-05:00
-source_commit_subject: skill: "piled up" replaces "pressed"; the dip tolerance is wiggle room, a heuristic; the alarm alone moves the line, the GR says how far; 0.5.28
-skill_version: 0.5.28
-built_at: 2026-09-08T08:39:15-05:00
+source_commit: 6a8a653286d6c3bff7f3f15ef8cad43edb003b4d
+source_commit_short: 6a8a653286d6
+source_commit_date: 2026-09-08T11:25:28-05:00
+source_commit_subject: skill: the line is a prediction; the alarm band is a floor; tight log tolerance makes an inadequate log fail as Impossible; read_job_status carries the reason and last MDs; 0.5.29
+skill_version: 0.5.29
+built_at: 2026-09-08T11:25:28-05:00
 built_from_workspace_dirty: false

@@ -107,7 +107,10 @@ computation sees can diverge from the raw value the user sees. Across
 a strong GR contrast — canonically the Upper/Lower Bakken hot shales
 adjacent to Middle Bakken or Three Forks targets, but any sharp
 hot/cool interface qualifies — a tight `log_sigma` may then reject
-the survey as "Impossible". Shorten `interval` or loosen `log_sigma`.
+the survey as "Impossible". Shorten `interval` or loosen `log_sigma` —
+except on a self-steered well, where the tolerance is tight on purpose
+and an *Impossible* is the re-derive alarm, not a tuning fault
+(`references/derived-log.md`).
 
 **Writes round-trip the whole project.** Drive's UI does a
 `PUT /api/v2/{scope}/projects/{name}` with the full project body on

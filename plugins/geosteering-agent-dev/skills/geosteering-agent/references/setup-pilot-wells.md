@@ -239,7 +239,15 @@ the alarm alone is reason to use it, the GR says how far — and a prior
 parallel to
 the wellbore adds no stratigraphic column however many times it is re-derived — so the
 line goes shallower for a bottom alarm, deeper for a top alarm, until it
-does. The first line, and every speculative stretch, takes its dip from
+does. Clearing the band is a floor, not the test: the line is a
+prediction of the GR at every MD and must share the measurement's
+character — feet of stratigraphic column per hundred feet of MD against
+what the GR does there (`references/derived-log.md`, the loop, step 2). A
+self-steered well runs with a tight log tolerance (about 5 gAPI on the
+lateral's blocks) so an inadequate log fails the run as *Impossible*
+instead of piling up quietly; `read_job_status` carries the reason and
+the last MD each pass reached. The first line, and every speculative
+stretch, takes its dip from
 that polyline, which carries dip and nothing else (§1.9.3); a horizontal
 line is not a safer guess than the prior, only a different dip that
 nobody claimed. Never derive through the computed
