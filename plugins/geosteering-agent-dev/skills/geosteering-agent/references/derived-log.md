@@ -18,7 +18,7 @@ at the deepest depth the interpretation reached. Nothing is grafted on above
 or below. That is the mechanism, not a limitation. The computation reads a
 type log as ground truth over its whole length and treats a wellbore past
 either end of it as **impossible**, so the moment the well drills
-stratigraphically past an end the posterior is pressed against it, the
+stratigraphically past an end the estimate piles up at that end, the
 marginals spread, and uncertainty climbs. **That is the alarm to derive
 again.**
 
@@ -74,9 +74,9 @@ picking, no alignment sweep first.
    backproject through that structure is where they belong in the stratigraphic column. A
    straight dipping segment is fine when seismic says the stratigraphic column is straight.
    The project's prior structure (`read_structure`) is that opinion, already
-   entered: draw the line at its dip, and move off it only as far as the
-   evidence pushes, weighed against the block's dip tolerance the way the
-   computation weighs it (the loop, step 2). Only the dip is the signal — the
+   entered: draw the line at its dip; the block's dip tolerance is the
+   wiggle room you have to adjust it (the loop, step 2). Only the dip is
+   the signal — the
    computation reads the polyline as a sequence of dips and never its
    absolute depth, so where it sits relative to the wellbore or the markers
    means nothing, and the line's own depth is set by the basepoint at the
@@ -160,7 +160,8 @@ Every later cycle is the same four moves:
      last derivation's pick and carrying the prior across this footage
      throws the correlation away — on one lateral every cycle's extension
      began at that pick, and the tens of feet of correlated footage between
-     it and the first pressed position went to the prior each time.
+     it and the first position the run had piled up at the bottom went to the
+     prior each time.
    - *The run's trailing footage* — the last few hundred feet of any run are
      provisional (a toe gets revised by several feet, sometimes more than
      ten, as the next delivery lands; trust it outright only where
@@ -172,8 +173,8 @@ Every later cycle is the same four moves:
      `use_project_data`) and keep the picks that make the new pass stack on
      the stratigraphic column where it re-crosses covered rock; where it crosses only new
      rock there is nothing to fit and the prior decides.
-   - *Footage past the first pressed position* — mass piled against an end,
-     the estimate at the wall. The run's structure there is the **deepest**
+   - *Footage from the point where the estimate piled up at an end of the
+     log* — the run's structure there is the **deepest**
      (for a bottom alarm) structure that still keeps the well inside the log,
      never the truth, and it bends toward the wellbore. Do not carry any of
      it, and do not draw the line so the well just reaches the end: start at
@@ -181,33 +182,41 @@ Every later cycle is the same four moves:
      (`read_structure`) or, where the well re-crossed the same rock at the
      same depth, a horizontal line, as a first guess, and let the well go as
      far past the end as that puts it. On one lateral a line drawn to meet
-     the bottom at the last pressed position left the well 5 ft below the log
+     the bottom of the log at the last position piled up there left the well
+     5 ft below the log
      when it had drilled 24 ft of new rock under a horizontal structure; 2,000 ft
      of estimate were 13–20 ft off for it.
      The prior is where that line *starts*, not where it ends. It is
      **advisory**: the geologist's regional belief, entered at setup, which
      the computation itself holds only as a prior with a tolerance
      (`dip_sigma`), never as a constraint — and the line gets the same
-     latitude — a width, not a budget (§1.1): it says how stiff the prior
-     is over that footage, set per parameter block (`read_job_params`), so
-     the line moves off the prior only as far as the evidence pushes it,
-     and reaching the tolerance should be rare. A line that has moved off
+     latitude. Use the tolerance as a heuristic, not a statistic: it is
+     the wiggle room the trial line has around the prior's dip over that
+     footage, set per parameter block (`read_job_params`), so adjust the
+     dip within it as far as the evidence asks, and treat its edge as far.
+     A line that has moved off
      the prior over new footage is the loop working, not a rule broken; the
      loop exists
      because the prior and the type log did not describe this well. What
      the line must honor is the evidence: the run over covered footage, the
      alarm, and the GR — and they have already said what the footage is:
-     pressed at the bottom, with GR hotter or cleaner than anything the
+     piled up at the bottom, with GR hotter or cleaner than anything the
      stratigraphic column holds, is new rock below the stratigraphic column, and the line has to put it
      there — over
      that footage the structure is *shallower* relative to the wellbore's
-     course than the prior says (deeper, for a top alarm). Test before
+     course than the prior says (deeper, for a top alarm). The alarm alone
+     is enough to move the line: a run piled up at the bottom has already
+     said the well has left what the stratigraphic column holds, whether or
+     not the GR has spoken. The GR decides how far and how confidently: GR
+     with no match in the column licenses the move the footage asks for; a
+     featureless GR keeps it to the smallest move within the wiggle room
+     that lands the footage past the end. Test before
      saving: derive read-only through the extension and read where the
      end landed. If it moved by less than the alarm band, the extension
      has left the well where it was, the prior is wrong over that
      footage, and saving it buys nothing: raise the line (lower it, for a
-     top alarm) until the pressed footage lands a bed's worth of stratigraphic column
-     past the end — feet, not tenths — and let the next run judge the
+     top alarm) until the footage that piled up at the end lands a bed's worth
+     of stratigraphic column past it — feet, not tenths — and let the next run judge the
      amount. On one lateral the prior ran parallel to a well riding a
      foot or two above the derived bottom: four consecutive cycles
      extended along it, each grew the stratigraphic column by a quarter foot, and each
@@ -266,7 +275,7 @@ main way to get out of step:
   that band; or recent entropy runs about twice its baseline. The
   uncertainty band blooms toward the toe. The alarm names the end (bottom =
   drilled stratigraphically deeper, top = shallower) or entropy, and the MD
-  the pressed stretch began; it clears on its own once the well has climbed
+  where the pile-up began; it clears on its own once the well has climbed
   away. Short of that the block reports a 10 ft *warning band*: a log
   derived right after the curve has only a few feet of lateral-derived
   stratigraphic column at its bottom, and a well riding that zone shows a few feet of log
@@ -301,7 +310,7 @@ main way to get out of step:
   mode's range ends on it (on one run 47% of the mass sat in the last 3 ft
   above the bottom). Two readings tempt you to wait it out, and both are
   wrong. "The computed top agrees with my line within a foot" is forced,
-  not evidence: pressed at the bottom, the run cannot put the well any
+  not evidence: piled up at the bottom, the run cannot put the well any
   deeper than the log allows, so its top of target lands wherever the
   wall puts it — a foot or two below the wellbore, which is exactly where
   a line drawn parallel to the well already sits. And "the well is above
@@ -320,7 +329,7 @@ alarm. The alarm also has a blind spot: new rock that mimics a feature already
 in the log, within reach of the dip prior, stays confidently wrong. Treat a
 clear alarm as reliable and a quiet one as "no evidence of trouble".
 
-The look-alike has a signature of its own. A pressed toe that the next
+The look-alike has a signature of its own. A toe piled up at the bottom that the next
 delivery "resolves" — confidence back to a single peak, entropy down — by
 revising already-confident footage by ten or more feet, or by drawing a fold
 the prior structure does not have, has most likely matched new rock to a bed
@@ -328,7 +337,7 @@ higher in the log; and when the well then climbs and the structure rises in
 lock-step with it, so that the well never leaves that bed, the structure is
 following the wellbore. On one lateral the computation drew a 20-ft syncline
 in 1,500 ft that way. The test is cheap: extend the line only through the
-pressed footage, derive, and let the footage after it judge — the true
+footage that piled up, derive, and let the footage after it judge — the true
 stratigraphic column correlates the climb with a smooth structure and the well moving
 through the beds; the look-alike needs the structure to chase the well.
 
@@ -435,6 +444,6 @@ field names.
 12. **Saving an extension that adds no stratigraphic column.** A read-only derive through
    the extension whose end moved by less than the alarm band will
    reproduce the alarm when saved. The prior is a starting point; the
-   alarm and the GR decide where the footage sits. Never spend a cycle on a
-   line that leaves the pressed footage inside the log, and never wait for
+   alarm says the footage moves, the GR how far. Never spend a cycle on a
+   line that leaves the piled-up footage inside the log, and never wait for
    the trajectory to take the well past the end on its own.

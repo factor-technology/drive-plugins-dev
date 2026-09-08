@@ -227,14 +227,16 @@ drilled past an end of the log, the geologist extends the *same* manual
 interpretation to the bit — the run's own picks
 (`copy_computed_interpretation`) over the footage it kept inside the log,
 revised at the trailing end where the geologist's own picks fit the new GR
-better, then a speculative structure past the first pressed position — and
-the log is derived and replaced again. That structure has to move the
-pressed footage past the end: derive read-only through the extension first,
+better, then a speculative structure from where the estimate piled up at an end of
+the log — and
+the log is derived and replaced again. That structure has to move that
+footage past the end: derive read-only through the extension first,
 and if the end moved by less than the alarm band the prior is wrong over
 that footage — the prior polyline is advisory, a regional belief the
 computation itself holds only as a prior of width `dip_sigma`, set per
-parameter block, and the line moves off it only as far as the evidence
-pushes, weighed as the computation weighs it — and a prior parallel to
+parameter block, which is the wiggle room the line has to adjust its dip;
+the alarm alone is reason to use it, the GR says how far — and a prior
+parallel to
 the wellbore adds no stratigraphic column however many times it is re-derived — so the
 line goes shallower for a bottom alarm, deeper for a top alarm, until it
 does. The first line, and every speculative stretch, takes its dip from

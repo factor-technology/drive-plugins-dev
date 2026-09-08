@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: 60a4d28b786425d0c6f362f9f74b4542c8218869
-source_commit_short: 60a4d28b7864
-source_commit_date: 2026-09-08T08:26:24-05:00
-source_commit_subject: skill: the dip tolerance is a width, not a budget - the line moves off the prior only as far as the evidence pushes; 0.5.27
-skill_version: 0.5.27
-built_at: 2026-09-08T08:26:24-05:00
+source_commit: 7a0592c0e482b505d20bcb94ae622c126a784328
+source_commit_short: 7a0592c0e482
+source_commit_date: 2026-09-08T08:39:15-05:00
+source_commit_subject: skill: "piled up" replaces "pressed"; the dip tolerance is wiggle room, a heuristic; the alarm alone moves the line, the GR says how far; 0.5.28
+skill_version: 0.5.28
+built_at: 2026-09-08T08:39:15-05:00
 built_from_workspace_dirty: false
