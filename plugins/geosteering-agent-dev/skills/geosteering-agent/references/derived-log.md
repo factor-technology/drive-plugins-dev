@@ -201,97 +201,77 @@ Every later cycle is the same four moves:
      trial interpretation document rides into `derive_type_log` alongside
      `use_project_data`) and keep the picks that make the new pass stack on
      the stratigraphic column where it re-crosses covered rock; where it crosses only new
-     rock there is nothing to fit and the prior decides.
+     rock there is nothing to fit and the dip is chosen as below.
    - *Footage from the point where the estimate piled up at an end of the
-     log* — the run's structure there is the **deepest**
-     (for a bottom alarm) structure that still keeps the well inside the log,
-     never the truth, and it bends toward the wellbore. Do not carry any of
-     it, and do not draw the line so the well just reaches the end: start at
-     the last believed pick and draw it along the project's prior structure
-     (`read_structure`) or, where the well re-crossed the same rock at the
-     same depth, a horizontal line, as a first guess, and let the well go as
-     far past the end as that puts it. On one lateral a line drawn to meet
-     the bottom of the log at the last position piled up there left the well
-     5 ft below the log
-     when it had drilled 24 ft of new rock under a horizontal structure; 2,000 ft
-     of estimate were 13–20 ft off for it.
-     The prior is where that line *starts*, not where it ends, and it
-     carries dip only: where that dip happens to run with the wellbore's
-     own inclination, a line drawn at it claims this well ran
-     bed-parallel — a claim about the well that a regional dip never
-     made — so read how much stratigraphic column it has the well cross
-     (below) before saving. It is
-     **advisory**: the geologist's regional belief, entered at setup, which
-     the computation itself holds only as a prior with a tolerance
-     (`dip_sigma`), never as a constraint — and the line gets the same
-     latitude. Use the tolerance as a heuristic, not a statistic: it is
-     the wiggle room the trial line has around the prior's dip over that
-     footage, set per parameter block (`read_job_params`), so adjust the
-     dip within it as far as the evidence asks, and treat its edge as far.
-     A line that has moved off
-     the prior over new footage is the loop working, not a rule broken; the
-     loop exists
-     because the prior and the type log did not describe this well. What
-     the line must honor is the evidence: the run over covered footage, the
-     alarm, and the GR — and they have already said what the footage is:
-     piled up at the bottom, with GR hotter or cleaner than anything the
-     stratigraphic column holds, is new rock below the stratigraphic column, and the line has to put it
-     there — over
-     that footage the structure is *shallower* relative to the wellbore's
-     course than the prior says (deeper, for a top alarm). The alarm alone
-     is enough to move the line: a run piled up at the bottom has already
-     said the well has left what the stratigraphic column holds, whether or
-     not the GR has spoken. The GR decides how far and how confidently: GR
-     with no match in the stratigraphic column licenses the move the
-     footage asks for; a featureless GR keeps it to the smallest move
-     within the wiggle room that lands the footage past the end. A match
-     is a matter of character, not amplitude — the prediction against the
-     measurement (below), not the measurement against the stratigraphic
-     column's range: in a uniform shale nothing is ever hotter or cleaner
-     than the stratigraphic column holds, and that test passes silently
-     while a nearly constant prediction under a varying measurement still
-     fails. Test before
-     saving: derive read-only through the extension and read where the
-     end landed. If it moved by less than the alarm band, the extension
-     has left the well where it was, the prior is wrong over that
-     footage, and saving it buys nothing: raise the line (lower it, for a
-     top alarm) until the footage that piled up at the end lands a bed's worth
-     of stratigraphic column past it — feet, not tenths — and let the next run judge the
-     amount. On one lateral the prior ran parallel to a well riding a
-     foot or two above the derived bottom: four consecutive cycles
-     extended along it, each grew the stratigraphic column by a quarter foot, and each
-     next run alarmed again at the same bottom while the GR had run
-     hotter than anything in the stratigraphic column for fifty feet. A line 6 ft
-     shallower than the prior at the bit, tested read-only, grew the
-     stratigraphic column 6 ft and took that GR in.
-   The line is a prediction, and that is the test: by that construction
-   it says what GR the bit should have measured at every MD — the derived
-   log read back at that MD's depth in the stratigraphic column — and
-   once the log is saved the active log track draws exactly that, the
-   black curve against the measured passes (*When to start*). On a
-   self-steered well they are the same samples, filed into the
-   stratigraphic column by the line and read back along it, so only the
-   line stands between them: detail may drift as the bit moves away from
-   the rock the log was built from, and more with distance, but the
-   character stays. Where the measurement swings and the prediction runs
-   nearly constant, the line is wrong over that footage whatever the
-   alarm says: it has laid a long stretch of MD across a thin slice of
-   the stratigraphic column, the statistic of hundreds of varying samples
-   at one depth is a single value, the log is smeared, and the run will
-   reproduce the smear. Before saving, with the cross section following
-   the trial line, the type log track shows the same fault as a pass
-   scattering sideways at one depth instead of tracing a curve down the
-   stratigraphic column. Through the tool there is no picture, only
-   arithmetic: the stratigraphic column a stretch crosses is the
-   wellbore's descent minus the line's over the same footage (the scale
-   rule of the first derivation), so set feet of stratigraphic column per
-   hundred feet of MD beside the GR's spread over that footage. The alarm
-   band is a floor, not the standard: on one lateral fed about a hundred
-   feet at a time, ten deliveries in a row cleared it while the line laid
-   1,000 ft of MD across less than half a foot of stratigraphic column,
-   and the GR over that footage varied more — 30 gAPI between its tenth
-   and ninetieth percentiles — than through the curve, where the same
-   well had crossed 200 ft of stratigraphic column in 500 ft.
+     log* — the run's structure there is the **deepest** (for a bottom
+     alarm) structure that still keeps the well inside the log, never the
+     truth, and it bends toward the wellbore. Carry none of it, and do not
+     draw the line so the well just reaches the end (on one lateral that
+     left the well 5 ft below the log when it had drilled 24 ft of new
+     rock). From the last believed pick the line's dip is chosen by the
+     procedure below.
+
+   **Choosing the dip of an extension.** The line is a prediction: by the
+   construction above it says what GR the bit should have measured at
+   every MD — the derived log read back at that MD's depth in the
+   stratigraphic column — and once the log is saved the active log track
+   draws exactly that, the black curve against the measured passes
+   (*When to start*). On a self-steered well they are the same samples,
+   filed into the stratigraphic column by the line and read back along
+   it, so only the line stands between them: detail may drift as the bit
+   moves away from the rock the log was built from, and more with
+   distance, but the character stays. A line that lays a long stretch of
+   MD across a thin slice of the stratigraphic column turns the statistic
+   of hundreds of varying samples into one value: the log is smeared, the
+   run reproduces the smear, and nothing alarms. So before saving, with
+   the survey (`read_active_trajectory`), the GR (`read_active_log`), the
+   prior (`read_structure`) and the block's dip tolerance
+   (`read_job_params`):
+   1. *Measure the well.* The wellbore's rise per hundred feet of MD over
+      the new footage. It is not a candidate dip; it is what every
+      candidate is measured against.
+   2. *Count the beds.* Each clean or hot excursion in the new GR with
+      different rock between counts as a bed.
+   3. *Compute the room each candidate gives.* Stratigraphic column
+      crossed is the line's rise minus the wellbore's, per hundred feet,
+      times the footage (the scale rule of the first derivation). The
+      candidates are the prior's dip and moves off it within the wiggle
+      room — the prior polyline carries dip only — and horizontal, only
+      where the well re-crossed the same rock at the same depth.
+   4. *Reject candidates without room.* Beds counted times a bed's
+      thickness — feet, not tenths — is the least stratigraphic column the
+      footage needs. A candidate that gives less has filed unlike rock at
+      one depth.
+   5. *Place the features and check them against the log at that depth.*
+      A clean spike must land on a clean bed the log holds, or past an
+      end. Landing on shale in covered rock rejects the candidate. Past
+      the end is allowed and expected: that is the alarm arriving, and the
+      tight log tolerance (the first derivation, step 6) makes the
+      computation run this check itself.
+   6. *Take the survivor nearest the prior.* If nothing survives inside
+      the wiggle room the prior is wrong here: go past it in the direction
+      the beds demand, and say so. The alarm alone is reason to move and
+      the beds say how far; with none to count — a featureless GR — make
+      the smallest move within the wiggle room that lands the footage past
+      the end.
+   7. *Audit the dip change against the survey.* The line changes dip on
+      the rock's evidence only. A change that coincides with a survey
+      inclination change and nothing else is the line following the well.
+   8. *Derive read-only through the choice, save, run, read the verdict.*
+      An end that moved by less than the alarm band, or a pass scattering
+      sideways at one depth on the type log track with the cross section
+      following the trial line, sends you back to step 3. After the run,
+      an alarm or an *Impossible* means extend further along the same dip;
+      new footage inside the log with matching character means keep.
+   On one lateral fed about a hundred feet at a time the survey eased
+   twice, from 12 to 8 ft of rise per hundred, and the line eased with it
+   both times until it ran parallel to the well: ten deliveries in a row
+   cleared the alarm band while 1,000 ft of MD went into less than half a
+   foot of stratigraphic column, and three clean spikes 130–180 ft apart,
+   with hot shale between, were filed at one depth. The prior read 12.5
+   the whole way. Three beds over 300 ft need 10–15 ft of room, so the
+   line had to rise at least 11 per hundred; the geologist's answer was
+   11.3, and under it the spikes are three beds 4–6 ft apart.
    It is a guess and is meant to be; the next run tests it. Stop at the bit.
    **Never** copy the computed structure over the footage the log was derived
    from: that structure was solved against this very log, so deriving through

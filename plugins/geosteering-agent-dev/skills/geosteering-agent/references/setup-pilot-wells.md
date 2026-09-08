@@ -241,8 +241,9 @@ the wellbore adds no stratigraphic column however many times it is re-derived �
 line goes shallower for a bottom alarm, deeper for a top alarm, until it
 does. Clearing the band is a floor, not the test: the line is a
 prediction of the GR at every MD and must share the measurement's
-character — feet of stratigraphic column per hundred feet of MD against
-what the GR does there (`references/derived-log.md`, the loop, step 2). A
+character — the beds the GR counts over the new footage need their room
+in feet of stratigraphic column, and the dip that gives it is chosen by
+the procedure in `references/derived-log.md` (the loop, step 2). A
 self-steered well runs with a tight log tolerance (about 5 gAPI on the
 lateral's blocks) so an inadequate log fails the run as *Impossible*
 instead of piling up quietly; `read_job_status` carries the reason and

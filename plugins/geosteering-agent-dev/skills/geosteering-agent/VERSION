@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: 2125a2283ab93fd8e61b38c77737fa054037c517
-source_commit_short: 2125a2283ab9
-source_commit_date: 2026-09-08T12:11:36-05:00
-source_commit_subject: skill: the loop may reach back along the lateral; 0.5.30
-skill_version: 0.5.30
-built_at: 2026-09-08T12:11:36-05:00
+source_commit: 2931b21ea280a281fd9e7f52c42ef5bb3c7a1a14
+source_commit_short: 2931b21ea280
+source_commit_date: 2026-09-08T15:58:29-05:00
+source_commit_subject: skill: choosing the dip of an extension is a procedure — measure the well, count the beds, give them room, check them against the log; 0.5.31
+skill_version: 0.5.31
+built_at: 2026-09-08T15:58:29-05:00
 built_from_workspace_dirty: false
