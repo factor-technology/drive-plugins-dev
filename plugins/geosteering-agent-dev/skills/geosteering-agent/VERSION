@@ -3,6 +3,6 @@ source_commit: 2931b21ea280a281fd9e7f52c42ef5bb3c7a1a14
 source_commit_short: 2931b21ea280
 source_commit_date: 2026-09-08T15:58:29-05:00
 source_commit_subject: skill: choosing the dip of an extension is a procedure — measure the well, count the beds, give them room, check them against the log; 0.5.31
-skill_version: 0.5.31
+skill_version: 0.5.32
 built_at: 2026-09-08T15:58:29-05:00
 built_from_workspace_dirty: false

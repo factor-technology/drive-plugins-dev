@@ -113,19 +113,23 @@ picking, no alignment sweep first.
    project pause both pollers first and **re-enable them afterwards**
    (§1.9.6); an email-fed project has nothing to pause.
 6. **On a self-steered well, make an inadequate log fail loudly.** Set the
-   log tolerance tight on the lateral's parameter blocks — about 5 gAPI
-   (`update_param_block`, a block of its own from the landing if the
-   project has one block; §1.1 for the stored width). The log was recorded
-   by this bit, so in rock it holds the measurement matches it closely, and
-   a tolerance that tight leaves the computation no depth for footage it
-   does not hold: instead of piling up quietly at an end the run ends in
-   error and the job status reads **Impossible**, the alarm in its hard
-   form (*Reading the state*). Leave the curve's block at the usual
-   tolerance: through the build the computation smooths the GR over
-   several feet of TVD while the derivation filed the raw samples, and that
-   alone differs by more than a few gAPI. The number is a starting point —
-   too tight and covered rock fails on drift alone, and every failure
-   costs a full recompute.
+   log tolerance on the lateral's parameter blocks as tight as the log's
+   own noise allows (`update_param_block`, a block of its own from the
+   landing if the project has one block; §1.1 for the stored width). The
+   number is measured, not quoted: smooth the GR over about 5 ft of MD
+   along the near-horizontal footage, take the rms of the samples against
+   that smooth, and set the block at about three times it — 5 gAPI on a
+   quiet log, 15 on one that scatters 4 gAPI rms, where 5 would be half
+   the log's own residual and covered rock would fail on drift alone,
+   each failure costing a full recompute. The log was recorded by this
+   bit, so in rock it holds the measurement matches it to within that
+   noise, and a tolerance that tight leaves the computation no depth for
+   footage it does not hold: instead of piling up quietly at an end the
+   run ends in error and the job status reads **Impossible**, the alarm
+   in its hard form (*Reading the state*). Leave the curve's block at the
+   usual tolerance: through the build the computation smooths the GR
+   over several feet of TVD while the derivation filed the raw samples,
+   and that alone differs by more than a few gAPI.
 
 The derived log's depth axis is anchored so the wellbore at the first computed
 position sits at its own depth, and the interpretation's depth there is where
@@ -159,9 +163,15 @@ band on one lateral differed by 29 gAPI between its first and latest pass).
 
 Every later cycle is the same four moves:
 
-1. **Read the alarm.** The coverage block on the latest job result says
-   whether the well has drilled past an end of the log, which end, and the
-   first MD where it showed. That MD is where the extension starts.
+1. **Read the alarm — the whole block, not the reason.** The coverage
+   block on the latest job result says whether the well has drilled past
+   an end of the log, which end, and the first MD where it showed. That
+   MD is where the extension starts. Read the margins and the mass at
+   each end beside the reason (*Reading the state*: an end approached
+   but not yet reached reports as entropy), and diff this run's
+   structure against the last run's over footage both were confident
+   about: a revision of ten feet or more where nothing new was drilled
+   is the look-alike's tell, and the alarm does not see it.
 2. **Extend the ONE manual interpretation to the bit — or reach back.**
    The line over the footage the log was derived from usually stays as it
    is, but the cycle is not confined to the newest stretch: any stretch of
@@ -314,7 +324,10 @@ main way to get out of step:
 - **Freshly derived.** The log's bottom sits exactly on the deepest pass *by
   construction*, so raw margins near zero mean nothing. The margins that
   matter are measured only over footage drilled **since** the derivation;
-  until there is some, the block says so. Not an alarm.
+  until there is some, the block says so. Not an alarm. The entropy leg
+  has no such gate and can raise the alarm on the first run after a
+  derivation, before any new footage exists: not an alarm either, and it
+  clears on the next delivery.
 - **Healthy.** Tens of feet of log below and above the estimate at the bit,
   entropy near its own baseline, marginals tight and single-peaked, a steady
   uncertainty corridor on the cross section, and on the active log track a
@@ -338,7 +351,37 @@ main way to get out of step:
   the wall, the estimate at the end, modes splitting, GR the log has no
   match for (hotter or cleaner than anything in the band, or the black
   curve on the active log track running nearly constant while the passes
-  keep swinging) is the *excursion*, and the cue to extend.
+  keep swinging) is the *excursion*, and the cue to extend. Mass in the
+  warning band climbing toward all of it over successive deliveries,
+  the estimate still settled and single-peaked, is the well closing on
+  an end and not yet past it: nothing to derive, since the run has not
+  put the well past the end, but the moment to say so and to have the
+  extension's dip already chosen (the loop, step 2) so the cycle runs on
+  the delivery the alarm fires. It may also resolve on its own — the
+  structure falls away, the margin reopens — and an alarm that clears
+  with nothing done is exactly that.
+- **Entropy.** The entropy leg fires when the marginals over the bit's
+  last few positions carry about twice the entropy of the run's earlier
+  ones, and it is reported as the reason only when neither end has been
+  reached (the estimate within 2 ft of an end, or half the mass there).
+  So an entropy alarm is a symptom with three causes, and the margins
+  tell them apart. Mass piling toward an end — most of it inside the
+  warning band, some at the wall, the estimate a few feet off the end —
+  is that end arriving before its own leg fires: the computation is
+  clipping the posterior there, and the clipping is what flattens it.
+  Read it as the end alarm. The bit tens of feet clear of both ends, one
+  mode carrying most of the mass, a GR with no countable bed, is
+  featureless rock: the posterior spreads because nothing in the log pins
+  it, not because the log is wrong where the bit is, and it clears by
+  itself when the next bed arrives (one lateral raised it six times over
+  40 bedless deliveries, and every one cleared on the next delivery
+  without a derivation). The test, when it matters: derive read-only
+  from the footage drilled since the derivation alone, line its curve up
+  with the project's log on the same depth axis, and compare the two
+  over the depths the bit occupies — a match within a few gAPI says the
+  log is right there and there is nothing to derive. Confident footage
+  revised by ten feet or more with the structure moving in step with the
+  wellbore is the look-alike (below).
 - **Impossible.** The run ends in error and the job status reads
   *Impossible*: at some position no structure within the tolerances puts
   the measured GR anywhere the log holds (`read_job_status` carries the
@@ -387,6 +430,21 @@ main way to get out of step:
   the well "into the target" does not fix it either — the well is in new
   rock now, every run until then is wrong at the bit, and the stratigraphic column will
   not grow until the line changes. Fix the line (step 2 of the loop).
+- **The end will not move.** A read-only derive through an extension
+  whose end moves by less than the alarm band (pitfall 12) is a verdict
+  on the line, never on the log. The log's extent is the line's: its top
+  is the wellbore's own depth at the first computed position, its bottom
+  the deepest stratigraphic depth any sample landed at along the line,
+  and nothing else bounds it — not the markers, not the footage drilled,
+  not how many times it has been derived. An extension spliced from the
+  run's structure cannot move the end, by construction: the run was
+  confined to the log, so every one of its picks keeps the well inside
+  it, and a derive through them adds no stratigraphic column however far
+  the well has drilled. One lateral concluded from three such tests that
+  the log's window was fixed by the markers and that running out was not
+  recoverable inside the loop; it was the line. Over footage the run
+  piled up, only picks of your own, at a dip that puts the footage past
+  the end (step 2), grow the log.
 
 Any type log can run out this way, derived or not — an original pilot ending a
 couple of feet below the deepest depth the lateral reaches raises the same
@@ -423,7 +481,13 @@ corrects the guess, and the loop converges. The well *can* scale a stretch
 where it crosses the same rock twice at the same depth — the same hot bed
 at the same TVDSS 500 ft apart with different rock between says the
 structure is horizontal there — and that is direct evidence, worth more than the
-prior over that footage.
+prior over that footage. In featureless rock the prior is all the line
+has, and the structure can change sign under it unseen: on one lateral
+the stratigraphic column rose 12 ft per hundred, crested, and fell 4 per
+hundred, and 40 deliveries of bedless shale gave nothing to count. The
+crest was found late, by the run in covered rock (the loop's success
+case), never by the line. When the GR gives nothing, say the prior is
+being carried rather than confirmed; do not tune.
 
 Run blind on a 10,000-ft lateral with no pilot at all (prior polyline plus
 the well's own GR, three derivations), the loop finished within 5 ft of the
@@ -477,7 +541,13 @@ field names.
    ground truth. Splicing also silences the alarm, which is the loop's clock.
 3. **Extending past the bit, or extending to quiet the alarm.** The extension
    covers footage actually drilled and stops at the bit. Speculate about
-   structure, never about stratigraphy the well has not sampled.
+   structure, never about stratigraphy the well has not sampled. The line
+   is not an input to the computation unless the project's extend target
+   names it, so extending it without a derivation changes nothing in the
+   next run: a quieter alarm on the delivery after an extension alone is
+   the rock, not the line, and no evidence for it (on one lateral the
+   entropy halved for one delivery after a 2,300 ft extension and came
+   back higher on the next).
 4. **Late derivation.** A log derived at the toe explains footage already
    drilled. Raise the option as soon as the pattern appears.
 5. **Treating the alarm as an error.** It is the design working: the well
@@ -509,6 +579,9 @@ field names.
    that kept the well inside the log adds no stratigraphic column (the well sampled
    nothing new) and, if the run has matched a look-alike, writes the new
    passes into the wrong beds. Derive on an excursion, not on the flag.
+   The same holds for an entropy alarm with the bit clear of both ends
+   (*Reading the state*): the alarm says look, and the margins say
+   whether there is anything to derive.
 12. **Saving an extension that adds no stratigraphic column, or too little
    for its GR.** A read-only derive through the extension whose end moved
    by less than the alarm band will reproduce the alarm when saved; one
