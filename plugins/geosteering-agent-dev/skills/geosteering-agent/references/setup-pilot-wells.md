@@ -257,12 +257,16 @@ stretch, takes its dip from
 that polyline, which carries dip and nothing else (§1.9.3); a horizontal
 line is not a safer guess than the prior, only a different dip that
 nobody claimed. Never derive through the computed
-structure over the footage the log was derived from: it was solved against
-this very log. The line over that footage does not move at all: it
-grows at one end, as the log does, and the extension is the footage
-since the alarm's first MD, a delivery or a few, never earlier; a first
-line drawn at the wrong dip is repaired by a new first derivation, not
-from inside the loop. Before acting on any of this —
+structure over confirmed footage: it was solved against this very log.
+The line over that footage does not move at all: it grows at one end,
+as the log does, and the extension is the footage since the alarm's
+first MD (the 2 ft band's, not the warning band's), a delivery or a few,
+never earlier. An extension is provisional until a run reproduces it:
+where the run leaves it, the depths it did not reproduce come out by
+re-deriving through the run's structure over that footage, which can
+only shorten the log. A first line drawn at the wrong dip is repaired by
+a new first derivation, not from inside the loop. Before acting on any
+of this —
 the first derivation, the no-pilot bootstrap, the statistic,
 reading the coverage states, the pitfalls — read `references/derived-log.md`
 in this skill; it is the whole workflow and this section is only its tool

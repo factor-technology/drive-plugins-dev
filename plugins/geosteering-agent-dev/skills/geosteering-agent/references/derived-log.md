@@ -143,10 +143,12 @@ Shallowest MD, always (`least md`; the tool defaults to mean, so pass it).
 A self-steered well assumes the stratigraphic column is the same at every
 lateral position, so every pass through a stratigraphic depth sees the
 same rock and the first pass is as good as any. Shallowest MD keeps the
-first sample in MD order at each depth, which makes the log append-only: a
-re-derivation gives back every depth the earlier derivations covered
-unchanged, so long as the line over that footage is unchanged, and only
-adds the depths the new footage reached. That matters because every
+first sample in MD order at each depth, which makes the log append-only
+over confirmed footage: a re-derivation gives back every depth the
+earlier derivations covered unchanged, so long as the line over that
+footage is unchanged, and only adds the depths the new footage reached.
+The depths the last extension added are provisional until a run has
+reproduced them (the loop, step 4). That matters because every
 replace recomputes the whole well against the new log. Mean and median let
 a later pass at the same depth — hundreds of samples on a long horizontal
 stretch — outvote or dilute the first, so if the stratigraphic column ever
@@ -164,28 +166,32 @@ Every later cycle is the same four moves:
 1. **Read the alarm — the whole block, not the reason.** The coverage
    block on the latest job result says whether the well has drilled past
    an end of the log, which end, and the first MD where it showed. That
-   MD is where the extension starts. Read the margins and the mass at
+   MD is where the extension starts: the first MD of the 2 ft alarm band,
+   never the first MD of the 10 ft warning band, where the well is still
+   in covered rock. Read the margins and the mass at
    each end beside the reason (*Reading the state*: an end approached
    but not yet reached reports as entropy), and diff this run's
    structure against the last run's over footage both were confident
    about: a revision of ten feet or more where nothing new was drilled
    is the look-alike's tell, and the alarm does not see it.
 2. **Extend the ONE manual interpretation to the bit.** The line grows at
-   one end, as the log does. Over the footage the log was derived from it
-   stands as it was, every cycle: a line moved there re-files samples the
-   log already holds, and an append-only log needs an append-only line.
+   one end, as the log does. Over confirmed footage — every depth a run
+   has reproduced — it stands as it was, every cycle: a line moved there
+   re-files samples the log already holds, and an append-only log needs
+   an append-only line. The last extension is confirmed only when step 4
+   says so.
    The log carries the line's scale over that footage and no run rescales
    it (on one blind lateral a first line at twice the true dip squeezed
    the stratigraphic column 4%, and the estimate over the next 2,000 ft
    carried 4–6 ft of it), but a first line drawn at the wrong dip is not
    repaired from inside the loop: the repair is a new first derivation
    from independent evidence, which rewrites the whole log and is proposed
-   as that. From the last derivation's MD to the bit the line comes in two
+   as that. From the last confirmed MD to the bit the line comes in two
    stretches, and one construction governs both: a sample lands in the
    stratigraphic column at its vertical distance from the line, so the
    line's depth at an MD is fixed by the stratigraphic column depth you
    believe that MD's GR must sit at.
-   - *Footage the run kept inside the log*, from the last derivation's MD
+   - *Footage the run kept inside the log*, from the last confirmed MD
      to the alarm's first MD — tight, single-peaked marginals, the
      estimate clear of both ends. There the run is a correlation of new
      footage against the stratigraphic column, not an echo, and its MPE
@@ -294,17 +300,40 @@ Every later cycle is the same four moves:
    line had to rise at least 11 per hundred; the geologist's answer was
    11.3, and under it the spikes are three beds 4–6 ft apart.
    It is a guess and is meant to be; the next run tests it. Stop at the bit.
-   **Never** copy the computed structure over the footage the log was derived
-   from: that structure was solved against this very log, so deriving through
-   it feeds the log its own output.
+   **Never** copy the computed structure over confirmed footage: that
+   structure was solved against this very log, so deriving through it
+   feeds the log its own output. Over the last extension it is the test
+   (step 4), and there it can only take depths out.
 3. **Derive bare again and replace.** Shallowest MD again, same approval,
-   same save. Where the new log and the previous one overlap they agree
-   exactly; a difference there says the line moved over covered footage,
-   and the cycle goes back to step 2 before anything is saved.
-4. **Reset, rerun, resume, confirm.** The replaced log invalidates the
-   saved computation, so this run is Reset and Run (`reset_job`, then
+   same save. Over confirmed footage the new log and the previous one
+   agree exactly; a difference there says the line moved over covered
+   footage, and the cycle goes back to step 2 before anything is saved.
+4. **Reset, rerun, confirm.** The replaced log invalidates the saved
+   computation, so this run is Reset and Run (`reset_job`, then
    `trigger_job_rerun`). On the next run the alarm should clear and the
-   margins reopen.
+   margins reopen. That run also tests the extension, and the depths it
+   added are provisional until one does: over the extension's footage,
+   where the run's structure left the line, the depths the run did not
+   reproduce are the well's own GR filed where no run has put it. Take
+   them out: make the run's structure the line over that footage
+   (`copy_computed_interpretation`, as in step 2), derive bare and
+   replace, Reset and Run. Under Shallowest MD nothing confirmed moves,
+   the depths with no MD left mapping to them drop, and if that leaves
+   the well at the log's bottom the next run alarms and a new extension
+   starts from the run's last pick — the ordinary move. Repeat after each
+   delivery until the run reproduces the line over the extension's
+   footage with its picks a delivery or two behind the toe; then that
+   footage is confirmed, the line stands there for good, and the loop
+   waits for the next alarm. A run that reproduces the whole extension
+   leaves the log unchanged, and an unchanged log needs no reset. The
+   test is weak by construction — the extension's samples are the well's
+   own GR, so a run reproduces a segment at a plausible dip as a matter
+   of course and leaves one only where the dip tolerance or the
+   stratigraphic column already confirmed beats it — and it is the only
+   test there is: on one lateral a 300 ft segment that rose while the
+   well dropped added 13 ft of stratigraphic column, the run took 3, and
+   the 10 it did not take stood in the log to the base with nothing able
+   to remove them.
 
 Between derivations, run without resetting. A delivery that extends the
 active log and survey and leaves the type log as it is — on a replay fed
@@ -312,7 +341,8 @@ segment by segment as much as on a live feed — runs as a plain **Extend**
 (`trigger_job_rerun` alone): it computes only the footage past the pointer
 on the saved state and reaches the same result as a full recompute in a
 fraction of the time. Reset and Run is the price of a modified type log,
-paid once per derivation; a log you have not touched never needs it.
+paid once per derivation; a log you have not touched never needs it, and
+neither does a confirmation pass (step 4) whose log came back unchanged.
 
 Then keep watching. **You have no background process** (§1.1): monitoring
 means reading the coverage block whenever the geologist brings you a run, and
@@ -416,12 +446,13 @@ main way to get out of step:
   footage at the wrong depth — the same step, not another statistic.
 - **After a good re-derivation.** Margins reopen and entropy drops back. Fit
   over the footage drilled *since* the previous derivation is a real test of
-  that cycle's speculation; fit over the footage the log was derived from
-  tests nothing, since the log was built to match it. The toe of a fresh log
-  is its least trustworthy stretch: the log there came through the
-  speculative part of the line, so the bit marginal often splits between
-  your line and an alternative a few tens of feet away (P1 against P2).
-  Leave it; the next footage decides.
+  that cycle's speculation; fit over confirmed footage tests nothing,
+  since the log was built to match it. The toe of a fresh log is its
+  least trustworthy stretch: the log there came through the speculative
+  part of the line, so the bit marginal often splits between your line
+  and an alternative a few tens of feet away (P1 against P2). Do not
+  choose between them by hand: the confirmation pass (the loop, step 4)
+  follows the run there each cycle, and the next footage decides.
 - **Back in covered rock.** Footage drilled since the derivation that fits
   inside the log — margins in the tens of feet, tight single-peaked
   marginals, no alarm — is the loop's success case, even when the estimate
@@ -429,9 +460,11 @@ main way to get out of step:
   the log already holds, and the computation is correcting the guess. Accept
   the run — with the active log track in view: a black curve gone nearly
   constant under swinging passes over the new footage is an earlier cycle's
-  smear, not success. Re-derive only on the alarm, or when you change your
-  mind about the line over footage the log was derived from, which that
-  smear is.
+  smear, not success — and then take the guess out of the log: the
+  confirmation pass (the loop, step 4) re-derives through the run over
+  the extension, and the depths the well never reached drop. Beyond that,
+  re-derive only on the alarm, or when you change your mind about the
+  line over confirmed footage, which that smear is.
 - **Stuck at an end.** The same alarm on consecutive runs, a re-derivation
   between each, and the log's end moving by less than the alarm band per
   cycle: that is the loop spinning, not the well plateauing. The bit
@@ -547,15 +580,18 @@ field names.
 
 ## Pitfalls
 
-1. **Moving the line over the footage the log was derived from.** The
-   manual interpretation defines the backprojection, every cycle, and over
-   that footage it stands. The computed structure there was solved against
-   the derived log, so deriving through it feeds the log its own output;
-   picks of your own there re-file samples the log already holds (the
-   loop, step 2). Check what the cross section is following first. The
-   converse is as wrong: over the footage drilled since, up to the alarm's
-   first MD, the run *is* the correlation, and restarting from the last
-   derivation's pick with the prior discards it.
+1. **Moving the line over confirmed footage.** The manual interpretation
+   defines the backprojection, every cycle, and over every depth a run
+   has reproduced it stands. The computed structure there was solved
+   against the derived log, so deriving through it feeds the log its own
+   output; picks of your own there re-file samples the log already holds
+   (the loop, step 2). Check what the cross section is following first.
+   The converse is as wrong: over the footage drilled since, up to the
+   alarm's first MD, the run *is* the correlation, and restarting from
+   the last derivation's pick with the prior discards it. The last
+   extension is neither until a run has tested it: its depths are the
+   run's to confirm or drop (the loop, step 4), and a line that stands
+   there keeps speculative rock in the log for good.
 2. **Splicing.** Leave the splice switch off. Spliced values are unconfirmed
    values at depths this well never visited, and the computation reads them as
    ground truth. Splicing also silences the alarm, which is the loop's clock.
@@ -602,7 +638,9 @@ field names.
    passes into the wrong beds. Derive on an excursion, not on the flag.
    The same holds for an entropy alarm with the bit clear of both ends
    (*Reading the state*): the alarm says look, and the margins say
-   whether there is anything to derive.
+   whether there is anything to derive. The confirmation pass (the loop,
+   step 4) is not this: it derives through the run over the last
+   extension only, and it can only take stratigraphic column out.
 12. **Saving an extension that adds no stratigraphic column, or too little
    for its GR.** A read-only derive through the extension whose end moved
    by less than the alarm band will reproduce the alarm when saved; one
@@ -624,9 +662,10 @@ field names.
    structure made from that variation, and the black curve fits either way
    (the loop, step 2).
 15. **Extending from the wrong MD.** The extension starts at the alarm's
-   first MD and covers the footage since, a delivery or a few. A line that
-   leaves the run's structure earlier files covered rock as new: on one
-   lateral a line that left it 1,600 ft before the alarm rose a foot per
-   hundred while the well dropped, and a delivery that should have added a
-   few feet of stratigraphic column added thirty and reached the base
-   (the loop, step 2).
+   first MD — the 2 ft band's, not the 10 ft warning band's — and covers
+   the footage since, a delivery or a few. A line that leaves the run's
+   structure earlier files covered rock as new: on one lateral a line
+   that left it where the margin entered the warning band, 1,300 ft
+   before the alarm, rose a foot per hundred while the well dropped, and
+   a delivery that should have added a few feet of stratigraphic column
+   added thirty and reached the base (the loop, steps 1 and 2).
