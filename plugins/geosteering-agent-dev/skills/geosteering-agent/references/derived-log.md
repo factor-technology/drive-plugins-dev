@@ -101,7 +101,8 @@ picking, no alignment sweep first.
    crosses the connector. Read the result on the type log track — orange
    correlations are the backprojected passes, the light curve is the derived
    log.
-3. **Choose the statistic by reasoning** (below).
+3. **Derive with Shallowest MD** (`least md`; the tool defaults to mean,
+   so pass it — *The statistic*, below).
 4. **Save and replace, with approval.** Writing the curve onto the pilot well
    replaces its log: destructive, so advisory-plus-approval. It keeps the
    well's calibration and metadata, creates the top-of-target marker if
@@ -136,28 +137,25 @@ position sits at its own depth, and the interpretation's depth there is where
 the top-of-target marker lands. That is why markers keep their meaning across
 a replacement and no re-pick is needed.
 
-### Choosing the statistic
+### The statistic
 
-Where the lateral crossed the same stratigraphic depth more than once the
-passes can disagree — a stringer developed at one lateral position and not
-another, or one pass placed slightly wrong. The method decides **which lateral
-position's character represents the stratigraphic column**:
-
-| Method | Meaning | Behavior on a disputed feature |
-|---|---|---|
-| Shallowest MD | earliest (heelward) pass wins | may miss character encountered later |
-| Deepest MD | latest (toeward) pass wins | most current; carries recent features forward |
-| Mean | average across passes | dilutes — a clean spike survives at half strength |
-| Median | majority across passes | robust; keeps features most passes agree on |
-
-There is no house default. Ask: **which choice best represents the
-stratigraphy the rest of the lateral will see?** Compare at least two on the
-features that motivated the derivation and watch whether they survive — a
-read-only derive per method and an rms over the overlap is enough, and with
-only two passes mean and median are the same curve, so the comparison starts
-at the first re-derivation. Disagreement between passes is itself information
-— say so when it is material rather than averaging it away silently (one
-band on one lateral differed by 29 gAPI between its first and latest pass).
+Shallowest MD, always (`least md`; the tool defaults to mean, so pass it).
+A self-steered well assumes the stratigraphic column is the same at every
+lateral position, so every pass through a stratigraphic depth sees the
+same rock and the first pass is as good as any. Shallowest MD keeps the
+first sample in MD order at each depth, which makes the log append-only: a
+re-derivation gives back every depth the earlier derivations covered
+unchanged, so long as the line over that footage is unchanged, and only
+adds the depths the new footage reached. That matters because every
+replace recomputes the whole well against the new log. Mean and median let
+a later pass at the same depth — hundreds of samples on a long horizontal
+stretch — outvote or dilute the first, so if the stratigraphic column ever
+does change along the lateral they rewrite depths whose structure was
+already right and the recompute moves it; under Shallowest MD the change
+shows where it belongs, as a residual over the new footage, and the log
+before it stands. The other statistics are for a lateral whose
+stratigraphic column does vary, out of scope here (that case takes several
+pilots); a disagreement between passes is not a reason to reach for them.
 
 ## The loop
 
@@ -232,9 +230,10 @@ Every later cycle is the same four moves:
    it, so only the line stands between them: detail may drift as the bit
    moves away from the rock the log was built from, and more with
    distance, but the character stays. A line that lays a long stretch of
-   MD across a thin slice of the stratigraphic column turns the statistic
-   of hundreds of varying samples into one value: the log is smeared, the
-   run reproduces the smear, and nothing alarms. So before saving, with
+   MD across a thin slice of the stratigraphic column files hundreds of
+   varying samples at a few depths, and the log keeps only the first at
+   each: the run then finds the rest elsewhere in the log, drawing
+   structure the rock does not have, or fails there. So before saving, with
    the survey (`read_active_trajectory`), the GR (`read_active_log`), the
    prior (`read_structure`) and the block's dip tolerance
    (`read_job_params`):
@@ -246,7 +245,8 @@ Every later cycle is the same four moves:
       no match for it at the depth the prior's dip files it. A pass that
       stays within the block's log tolerance of what the log already holds
       at that depth is the same rock varying along the lateral, not a bed:
-      the next derivation's statistic carries it, and it is owed no room.
+      the log keeps its value there, the tolerance carries the residual,
+      and it is owed no room.
       Unlike rock at one depth is the smear; the same rock at another
       level is not.
    3. *Compute the room each candidate gives.* Stratigraphic column
@@ -295,10 +295,10 @@ Every later cycle is the same four moves:
    **Never** copy the computed structure over the footage the log was derived
    from: that structure was solved against this very log, so deriving through
    it feeds the log its own output.
-3. **Derive bare again and replace.** Same statistic unless there is a reason
-   to change, same approval, same save. Compare the new log against the
-   previous one where they overlap and say so if they disagree by more than
-   the log's own noise.
+3. **Derive bare again and replace.** Shallowest MD again, same approval,
+   same save. Where the new log and the previous one overlap they agree
+   exactly unless the line over that footage moved; say so if they differ
+   anywhere the line did not.
 4. **Reset, rerun, resume, confirm.** The replaced log invalidates the
    saved computation, so this run is Reset and Run (`reset_job`, then
    `trigger_job_rerun`). On the next run the alarm should clear and the
@@ -410,8 +410,8 @@ main way to get out of step:
   the rock the bit is in — and the answer is the loop, step 2, not a
   looser tolerance (pitfall 5). A failed run leaves no picks over the new
   footage, so the extension begins from the last completed run's; and a
-  failure in rock the log already holds says its character has drifted —
-  re-derive with the statistic that carries the latest passes forward.
+  failure in rock the log already holds says the line filed the new
+  footage at the wrong depth — the same step, not another statistic.
 - **After a good re-derivation.** Margins reopen and entropy drops back. Fit
   over the footage drilled *since* the previous derivation is a real test of
   that cycle's speculation; fit over the footage the log was derived from
@@ -532,8 +532,8 @@ came from when it came from the reference.
 
 ## Driving vs coaching
 
-Default to volunteering. Only the manual interpretation, the statistic, and
-the approvals are judgment. The save goes straight through the connector, so
+Default to volunteering. Only the manual interpretation and the approvals
+are judgment. The save goes straight through the connector, so
 a whole cycle — derive, save, reset, rerun, resume polling — is yours to offer
 end to end, with no file round-trip and no browser needed.
 
@@ -578,8 +578,9 @@ field names.
    Re-run alignment only if a warp was actually in use (replacing drops it).
 7. **Forgetting to restore ingestion.** A project left with its pollers
    paused after a manual rerun quietly stops being steered.
-8. **Treating a statistic as a default.** It is a judgment about the rest of
-   the lateral. Compare at least two.
+8. **Deriving with mean or median.** A later pass at a depth the log holds
+   then rewrites it, and every replace recomputes the whole well against
+   the rewritten log. Shallowest MD, always (*The statistic*).
 9. **Quoting stale project state.** A coached session edits the project under
    you — logs, tops, compute range. Re-read before asserting a number.
 10. **Shipping the lateral through the connector.** Inline samples are for
@@ -617,7 +618,7 @@ field names.
    changed, or a stalled job holds the pointer.
 14. **Bending the line to explain GR the log already holds.** A pass within
    the log tolerance of what the log holds at the depth the prior's dip
-   gives it is the rock varying along the lateral, and the next derivation
-   absorbs it; a bend to chase it, however far inside the wiggle room, is
+   gives it is the rock varying along the lateral, and the tolerance
+   carries it; a bend to chase it, however far inside the wiggle room, is
    structure made from that variation, and the black curve fits either way
    (the loop, step 2).

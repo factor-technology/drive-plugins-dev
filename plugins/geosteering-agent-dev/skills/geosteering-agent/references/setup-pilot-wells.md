@@ -263,7 +263,7 @@ revise: any stretch of it, however far back along the lateral, may be
 moved when a read-only derive through the revision gives a better log —
 passes stacking where they overlap — since the log carries the line's
 scale there and no run corrects it. Before acting on any of this —
-the first derivation, the no-pilot bootstrap, choosing the statistic,
+the first derivation, the no-pilot bootstrap, the statistic,
 reading the coverage states, the pitfalls — read `references/derived-log.md`
 in this skill; it is the whole workflow and this section is only its tool
 surface. You have **no background process** (§1.1), so "monitoring" here

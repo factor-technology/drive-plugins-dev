@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: ea45de3c9daa007121829975fb3f0933cf070622
-source_commit_short: ea45de3c9daa
-source_commit_date: 2026-09-10T11:46:31-05:00
-source_commit_subject: skill: reset only when the type log changed; new footage is a plain Extend; 0.5.33
-skill_version: 0.5.34
-built_at: 2026-09-10T11:46:31-05:00
+source_commit: b448c9c208c69d76a16420e841c7a8cceba00996
+source_commit_short: b448c9c208c6
+source_commit_date: 2026-09-10T13:13:28-05:00
+source_commit_subject: skill: the derived log is append-only; derive with Shallowest MD, always; 0.5.35
+skill_version: 0.5.35
+built_at: 2026-09-10T13:13:28-05:00
 built_from_workspace_dirty: false
