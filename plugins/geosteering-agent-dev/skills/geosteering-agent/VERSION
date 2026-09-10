@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: b448c9c208c69d76a16420e841c7a8cceba00996
-source_commit_short: b448c9c208c6
-source_commit_date: 2026-09-10T13:13:28-05:00
-source_commit_subject: skill: the derived log is append-only; derive with Shallowest MD, always; 0.5.35
-skill_version: 0.5.35
-built_at: 2026-09-10T13:13:28-05:00
+source_commit: d35d5f9e1413120a70f4e1c0ba7de1761246efce
+source_commit_short: d35d5f9e1413
+source_commit_date: 2026-09-10T15:03:08-05:00
+source_commit_subject: skill: no reach-back; the line grows at one end as the log does; the extension is the footage since the alarm's first MD; 0.5.36
+skill_version: 0.5.36
+built_at: 2026-09-10T15:03:08-05:00
 built_from_workspace_dirty: false
