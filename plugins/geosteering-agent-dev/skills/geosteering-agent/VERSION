@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: 2931b21ea280a281fd9e7f52c42ef5bb3c7a1a14
-source_commit_short: 2931b21ea280
-source_commit_date: 2026-09-08T15:58:29-05:00
-source_commit_subject: skill: choosing the dip of an extension is a procedure — measure the well, count the beds, give them room, check them against the log; 0.5.31
-skill_version: 0.5.32
-built_at: 2026-09-08T15:58:29-05:00
+source_commit: ea45de3c9daa007121829975fb3f0933cf070622
+source_commit_short: ea45de3c9daa
+source_commit_date: 2026-09-10T11:46:31-05:00
+source_commit_subject: skill: reset only when the type log changed; new footage is a plain Extend; 0.5.33
+skill_version: 0.5.34
+built_at: 2026-09-10T11:46:31-05:00
 built_from_workspace_dirty: false

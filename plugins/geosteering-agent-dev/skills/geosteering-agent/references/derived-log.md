@@ -207,7 +207,8 @@ Every later cycle is the same four moves:
      successive runs agree), so the MPE there is a starting point, not a
      boundary. Replace as much of it as the new GR justifies with trial
      picks of your own: a bed the stratigraphic column already holds goes to the depth
-     the stratigraphic column holds it. Test a trial by deriving read-only through it (a
+     the stratigraphic column holds it, and when that is the depth the line already
+     gives, the pick stays. Test a trial by deriving read-only through it (a
      trial interpretation document rides into `derive_type_log` alongside
      `use_project_data`) and keep the picks that make the new pass stack on
      the stratigraphic column where it re-crosses covered rock; where it crosses only new
@@ -241,7 +242,13 @@ Every later cycle is the same four moves:
       the new footage. It is not a candidate dip; it is what every
       candidate is measured against.
    2. *Count the beds.* Each clean or hot excursion in the new GR with
-      different rock between counts as a bed.
+      different rock between counts as a bed — but only where the log has
+      no match for it at the depth the prior's dip files it. A pass that
+      stays within the block's log tolerance of what the log already holds
+      at that depth is the same rock varying along the lateral, not a bed:
+      the next derivation's statistic carries it, and it is owed no room.
+      Unlike rock at one depth is the smear; the same rock at another
+      level is not.
    3. *Compute the room each candidate gives.* Stratigraphic column
       crossed is the line's rise minus the wellbore's, per hundred feet,
       times the footage (the scale rule of the first derivation). The
@@ -258,7 +265,9 @@ Every later cycle is the same four moves:
       the end is allowed and expected: that is the alarm arriving, and the
       tight log tolerance (the first derivation, step 6) makes the
       computation run this check itself.
-   6. *Take the survivor nearest the prior.* If nothing survives inside
+   6. *Take the survivor nearest the prior.* Where every feature lands on
+      matching rock under the prior, that is the prior itself, and the
+      line does not move. If nothing survives inside
       the wiggle room the prior is wrong here: go past it in the direction
       the beds demand, and say so. The alarm alone is reason to move and
       the beds say how far; with none to count — a featureless GR — make
@@ -290,8 +299,18 @@ Every later cycle is the same four moves:
    to change, same approval, same save. Compare the new log against the
    previous one where they overlap and say so if they disagree by more than
    the log's own noise.
-4. **Reset, rerun, resume, confirm.** On the next run the alarm should clear
-   and the margins reopen.
+4. **Reset, rerun, resume, confirm.** The replaced log invalidates the
+   saved computation, so this run is Reset and Run (`reset_job`, then
+   `trigger_job_rerun`). On the next run the alarm should clear and the
+   margins reopen.
+
+Between derivations, run without resetting. A delivery that extends the
+active log and survey and leaves the type log as it is — on a replay fed
+segment by segment as much as on a live feed — runs as a plain **Extend**
+(`trigger_job_rerun` alone): it computes only the footage past the pointer
+on the saved state and reaches the same result as a full recompute in a
+fraction of the time. Reset and Run is the price of a modified type log,
+paid once per derivation; a log you have not touched never needs it.
 
 Then keep watching. **You have no background process** (§1.1): monitoring
 means reading the coverage block whenever the geologist brings you a run, and
@@ -591,3 +610,14 @@ field names.
    how far. Never spend a cycle on a line that leaves the piled-up footage
    inside the log, and never wait for the trajectory to take the well past
    the end on its own.
+13. **Reset and Run on a delivery that left the type log alone.** Between
+   derivations an extended log and survey run as a plain Extend, which
+   reaches the same result in a fraction of the time (the loop, step 4).
+   Reset only when the type log changed, a state-invalidating parameter
+   changed, or a stalled job holds the pointer.
+14. **Bending the line to explain GR the log already holds.** A pass within
+   the log tolerance of what the log holds at the depth the prior's dip
+   gives it is the rock varying along the lateral, and the next derivation
+   absorbs it; a bend to chase it, however far inside the wiggle room, is
+   structure made from that variation, and the black curve fits either way
+   (the loop, step 2).

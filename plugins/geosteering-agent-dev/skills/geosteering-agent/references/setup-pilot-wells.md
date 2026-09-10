@@ -208,9 +208,14 @@ type log being replaced is kept as an advisory **reference log** you can
 read with `read_reference_log` — never an input to the computation
 (`retain_replaced_as_reference`, default true; skipped when the log being
 replaced is itself derived). Follow with `reset_job` and
-`trigger_job_rerun`, or the run still uses the old type log. The result
-also comes back in canonical pilot TVD for `upload_pilot_log` or for
-writing a LAS.
+`trigger_job_rerun`, or the run still uses the old type log. That reset
+belongs to the replacement: a delivery that extends the active log and
+survey and leaves the type log alone runs as a plain Extend
+(`trigger_job_rerun`, no reset), which computes the new footage on the
+saved state and reaches the same result in a fraction of the time. A
+modified type log calls for Reset and Run; an unmodified one never does.
+The result also comes back in canonical pilot TVD for `upload_pilot_log`
+or for writing a LAS.
 
 A save also stamps the log with the MD extent it was built from
 (`md_first`/`md_last`, alongside the interpretation name, statistic and

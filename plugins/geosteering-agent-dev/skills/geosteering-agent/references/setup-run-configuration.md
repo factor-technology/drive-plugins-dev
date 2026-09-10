@@ -100,15 +100,19 @@ Step 6 exposes this as three buttons, which map onto the agent's tools:
   from `md_first_to_compute`) and **Extend** once a prior computation
   exists and the active log/trajectory has grown past the pointer
   (continuing from where the last run stopped). With nothing new beyond
-  the pointer it has nothing to do and is rejected.
+  the pointer it has nothing to do and is rejected. New footage — an
+  uploaded or polled log and survey, the type log untouched — is exactly
+  its case: Extend alone, no reset, reaches the same result as a full
+  recompute in a fraction of the time.
 - **Reset Job** (`reset_job`) — rewinds the pointer to 0 and discards the
   computed interpretation (the loaded log and trajectory are kept),
   interrupting any running job. It does **not** start a run. Use it to
   stop a run, or to rewind before re-running as-is.
 - **Reset and Run** (`reset_job` then `trigger_job_rerun`) — the two
   together: rewind, then recompute the whole well from
-  `md_first_to_compute`. Use it to re-run as-is, or to apply a tuning
-  change across the whole well.
+  `md_first_to_compute`. Use it to re-run as-is, to apply a tuning
+  change across the whole well, or after replacing the type log
+  (§1.9.1) — never merely because the log and trajectory grew.
 
 §1.5.5 requires that same reset for state-invalidating edits; Reset and
 Run is the same mechanism for a different reason (recompute, not

@@ -41,6 +41,9 @@ Cross-tool rules:
   scheduled poll restarts the manual run mid-computation (§1.9.6).
 - **State-invalidating edits pair with a reset** — `reset_job` then
   `trigger_job_rerun`, advisory + approval (§1.5.5, §1.9.6).
+- **New footage extends; it does not reset.** After the active log and
+  trajectory grow, `trigger_job_rerun` alone; `reset_job` only when the
+  type log or a state-invalidating parameter changed (§1.9.6).
 - **Prefer clone-then-experiment.** For any change you'd otherwise gate
   behind approval, `copy_project` to a clearly-named sandbox, experiment
   there, report back.
