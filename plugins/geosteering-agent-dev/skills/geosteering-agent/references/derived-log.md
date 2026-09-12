@@ -104,7 +104,10 @@ picking, no alignment sweep first.
    estimate inherits some feet of offset at the bottom. A horizontal line is
    not a safer default — it is a dip claim nobody made, and its error is the
    whole of the prior's dip. With no pilot to check against, take the prior's
-   dip and expect the lateral's re-crossings to correct the scale.
+   dip and expect the lateral's re-crossings to correct the scale. There is
+   nothing to try dips against here: no log exists yet, so a read-only
+   derive under any dip reports geometry and nothing else, and the first
+   run is the only test the first line gets.
 2. **Derive bare, from the project's own data.** Leave it un-spliced: in
    the pane the **Splice into current type log** switch stays off, through
    the tool omit the initial type log. Through the tool, name the saved
@@ -305,6 +308,18 @@ Every later cycle is the same four moves:
       structure. After the run,
       an alarm or an *Impossible* means extend further along the same dip;
       new footage inside the log with matching character means keep.
+   Read-only derives may measure the candidates — a trial through each
+   reports the room it gives (its end movement, step 3) and, with the
+   samples, where its features land (step 5) — but they do not choose:
+   the choice is still the survivor nearest the prior (step 6). A ladder
+   that keeps the dip whose end moves most always keeps the steepest, and
+   one that keeps the dip whose new samples best match the covered rock
+   has correlated the new GR against the log to find structure, the
+   computation's own job, and the run then confirms a log built to match
+   it. Each extension's dip is chosen afresh from the prior over its
+   footage; the line has no standing dip it "now runs at", and a move
+   past the wiggle room is said aloud each time it is made, never carried
+   into the next.
    On one lateral fed about a hundred feet at a time the survey eased
    twice, from 12 to 8 ft of rise per hundred, and the line eased with it
    both times until it ran parallel to the well: ten deliveries in a row
@@ -683,7 +698,8 @@ field names.
    the tools report is the prior in degrees from horizontal (90°), not
    an angle to compare with the wellbore's inclination; convert it to
    rise per hundred and draw the line on it (the first derivation,
-   step 1).
+   step 1). Nothing tests the first line but the first run; there is no
+   log yet for a trial dip to be judged against.
 16. **Extending from the wrong MD.** The extension starts at the alarm's
    first MD — the 2 ft band's, not the 10 ft warning band's — and covers
    the footage since, a delivery or a few. A line that leaves the run's
@@ -692,3 +708,11 @@ field names.
    before the alarm, rose a foot per hundred while the well dropped, and
    a delivery that should have added a few feet of stratigraphic column
    added thirty and reached the base (the loop, steps 1 and 2).
+17. **Letting the trials choose the dip.** Read-only derives through the
+   candidates measure them — room and landings — and that is all. A
+   ladder that keeps the dip whose end moves most keeps the steepest;
+   one that keeps the best match to the covered rock has done the
+   computation's job by hand and then confirmed it against itself. The
+   choice is the survivor nearest the prior (extend, step 6), and a line
+   that has settled on some rate "ever since" has stopped starting each
+   extension from the prior.

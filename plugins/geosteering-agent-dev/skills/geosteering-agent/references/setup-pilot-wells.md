@@ -235,7 +235,10 @@ revised at the trailing end where the geologist's own picks fit the new GR
 better, then a speculative structure from where the estimate piled up at an end of
 the log — and
 the log is derived and replaced again. That structure has to move that
-footage past the end: derive read-only through the extension first,
+footage past the end: derive read-only through the extension first —
+trials through the candidates measure their room and landings, but the
+choice is the survivor nearest the prior, never the steepest or the
+best match to the covered rock, which is the computation's own job —
 and if the end moved by less than the alarm band the prior is wrong over
 that footage — the prior polyline is advisory, a regional belief the
 computation itself holds only as a prior of width `dip_sigma`, set per
