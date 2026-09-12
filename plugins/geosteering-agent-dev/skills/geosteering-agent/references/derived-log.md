@@ -86,10 +86,13 @@ picking, no alignment sweep first.
    dip as `apparent_dip_deg` — the number in the Dip form, 90° horizontal,
    above 90° the stratigraphic column rising ahead along the vertical
    section — with the `rise_per_100_ft` it implies (91.5° is 2.6 ft of
-   rise per hundred). Draw the line at that rise — the polyline's, or the
-   block's over each block's footage, so a line under block dips changes
-   dip where the blocks do — and the block's dip tolerance is the wiggle
-   room you have to adjust it (the loop, step 2). A brief that says to
+   rise per hundred). Draw the line at that rise, per hundred feet of
+   vertical section and not of MD (through the curve the two differ, and
+   a line drawn per MD rises more than the prior says) — the polyline's,
+   or the block's over each block's footage, so a line under block dips
+   changes dip where the blocks do — and the block's dip tolerance is the
+   wiggle room you have to adjust it (the loop, step 2). A brief that says
+   to
    start flat, or at some dip of its own, is not independent evidence;
    the prior is the geologist's claim, and the line starts on it.
    Only the dip is the signal — the
@@ -123,14 +126,10 @@ picking, no alignment sweep first.
    well's calibration and metadata, creates the top-of-target marker if
    missing, and reports any marker now outside the log — a warning, not a
    deletion, and usually a sign the interpretation should have gone further.
-5. **Reset, rerun, restore ingestion.** A replaced type log invalidates all
-   saved computation: `reset_job` then `trigger_job_rerun`, with approval,
-   recomputing the well from scratch in typically minutes. On a WITSML
-   project pause both pollers first and **re-enable them afterwards**
-   (§1.9.6); an email-fed project has nothing to pause.
-6. **On a self-steered well, make an inadequate log fail loudly.** Set the
-   log tolerance on the lateral's parameter blocks as tight as the log's
-   own noise allows (`update_param_block`, a block of its own from the
+5. **On a self-steered well, make an inadequate log fail loudly — before
+   the reset, so the first run already has it.** Set the log tolerance on
+   the lateral's parameter blocks as tight as the log's own noise allows
+   (`update_param_block`, a block of its own from the
    landing if the project has one block; §1.1 for the stored width). The
    number is measured, not quoted: smooth the GR over about 5 ft of MD
    along the near-horizontal footage, take the rms of the samples against
@@ -146,11 +145,19 @@ picking, no alignment sweep first.
    usual tolerance: through the build the computation smooths the GR
    over several feet of TVD while the derivation filed the raw samples,
    and that alone differs by more than a few gAPI.
+6. **Reset, rerun, restore ingestion.** A replaced type log invalidates all
+   saved computation: `reset_job` then `trigger_job_rerun`, with approval,
+   recomputing the well from scratch in typically minutes. On a WITSML
+   project pause both pollers first and **re-enable them afterwards**
+   (§1.9.6); an email-fed project has nothing to pause.
 
 The derived log's depth axis is anchored so the wellbore at the first computed
 position sits at its own depth, and the interpretation's depth there is where
-the top-of-target marker lands. That is why markers keep their meaning across
-a replacement and no re-pick is needed.
+the top-of-target marker lands when the save creates one; an existing marker
+keeps its depth. That is why markers keep their meaning across a replacement
+and no re-pick is needed. The bit's position against the top of target is
+measured from that marker, never from the log's top, which is only where the
+well was at the first computed position.
 
 ### The statistic
 
@@ -188,7 +195,11 @@ Every later cycle is the same four moves:
    but not yet reached reports as entropy), and diff this run's
    structure against the last run's over footage both were confident
    about: a revision of ten feet or more where nothing new was drilled
-   is the look-alike's tell, and the alarm does not see it.
+   is the look-alike's tell, and the alarm does not see it. A lateral
+   block still at its default log tolerance mutes the alarm — smeared
+   cells near the passes' mean then match every pass — so a quiet block
+   over such footage says nothing until the tolerance is set (the first
+   derivation, step 5) and the well reset and run.
 2. **Extend the ONE manual interpretation to the bit.** The line grows at
    one end, as the log does. Over confirmed footage — every depth a run
    has reproduced — it stands as it was, every cycle: a line moved there
@@ -211,10 +222,13 @@ Every later cycle is the same four moves:
      estimate clear of both ends. There the run is a correlation of new
      footage against the stratigraphic column, not an echo, and its MPE
      **is** the line, all the way to the alarm's first MD: append those
-     picks to the manual line (`copy_computed_interpretation` hangs the
-     MPE at the top of target the way a manual line is drawn; take the
-     picks from that copy, not raw from the MPE slice, which sits on the
-     top of section). The last delivery or two of it are provisional — a
+     picks to the manual line, in the frame the line was drawn in: a
+     line drawn from the wellbore at the first computed position lives in
+     the MPE's own top-of-section frame and takes the MPE slice raw; a
+     line drawn at the top of target takes them from
+     `copy_computed_interpretation`, which hangs the MPE there. Mixing
+     the two puts a step of hundreds of feet in the line. The last
+     delivery or two of it are provisional — a
      toe gets revised by several feet as the next delivery lands — which
      is a reason to expect the next run to move them, not to replace them
      with picks of your own: that footage is in the log and is owed no
@@ -261,15 +275,21 @@ Every later cycle is the same four moves:
    1. *Measure the well.* The wellbore's rise per hundred feet of MD over
       the new footage. It is not a candidate dip; it is what every
       candidate is measured against.
-   2. *Count the beds.* Each clean or hot excursion in the new GR with
-      different rock between counts as a bed — but only where the log has
-      no match for it at the depth the prior's dip files it. A pass that
-      stays within the block's log tolerance of what the log already holds
-      at that depth is the same rock varying along the lateral, not a bed:
-      the log keeps its value there, the tolerance carries the residual,
-      and it is owed no room.
-      Unlike rock at one depth is the smear; the same rock at another
-      level is not.
+   2. *Count the beds.* Each clean or hot excursion in the new GR larger
+      than the block's log tolerance, with different rock between, is a
+      bed, and it is owed room unless the log **as it stood before this
+      extension** holds a matching excursion within a bed's thickness of
+      the depth the prior's dip files it: then it is the same rock varying
+      along the lateral, the log keeps its value there, the tolerance
+      carries the residual, and it is owed no room. The log's average
+      level is not a match, a cell the last extension filed from long
+      footage is not covered rock, and at the default tolerance everything
+      matches and nothing counts — which is why the tolerance is set at
+      the first derivation (step 5), before the loop begins. On one
+      lateral five extensions in a row counted no beds against a log
+      whose cells held the passes' own mean, while the passes swung
+      30 gAPI. Unlike rock at one depth is the smear; the same rock at
+      another level is not.
    3. *Compute the room each candidate gives.* Stratigraphic column
       crossed is the line's rise minus the wellbore's, per hundred feet,
       times the footage (the scale rule of the first derivation). The
@@ -278,15 +298,18 @@ Every later cycle is the same four moves:
       a block boundary inside the footage changes the prior's dip there —
       and horizontal, only
       where the well re-crossed the same rock at the same depth.
-   4. *Reject candidates without room.* Beds counted times a bed's
-      thickness — feet, not tenths — is the least stratigraphic column the
-      footage needs. A candidate that gives less has filed unlike rock at
-      one depth.
+   4. *Reject candidates without room.* The least stratigraphic column
+      the footage needs is the alarm band and a foot more, and with beds
+      counted a bed's thickness — feet, not tenths — for each of them. A
+      candidate that gives less has filed unlike rock at one depth, and
+      the prior is rejected like any other: on one lateral it was kept
+      five times for half a foot to three feet of room per delivery,
+      and the alarm came back on every delivery after.
    5. *Place the features and check them against the log at that depth.*
       A clean spike must land on a clean bed the log holds, or past an
       end. Landing on shale in covered rock rejects the candidate. Past
       the end is allowed and expected: that is the alarm arriving, and the
-      tight log tolerance (the first derivation, step 6) makes the
+      tight log tolerance (the first derivation, step 5) makes the
       computation run this check itself.
    6. *Take the survivor nearest the prior.* Where every feature lands on
       matching rock under the prior, that is the prior itself, and the
@@ -294,8 +317,8 @@ Every later cycle is the same four moves:
       the wiggle room the prior is wrong here: go past it in the direction
       the beds demand, and say so. The alarm alone is reason to move and
       the beds say how far; with none to count — a featureless GR — make
-      the smallest move within the wiggle room that lands the footage past
-      the end.
+      the smallest move within the wiggle room that gives the least room
+      of step 4.
    7. *Audit the dip change against the survey.* The line changes dip on
       the rock's evidence only. A change that coincides with a survey
       inclination change and nothing else is the line following the well.
@@ -697,8 +720,9 @@ field names.
    against the bottom before the alarm can say why. The apparent dip
    the tools report is the prior in degrees from horizontal (90°), not
    an angle to compare with the wellbore's inclination; convert it to
-   rise per hundred and draw the line on it (the first derivation,
-   step 1). Nothing tests the first line but the first run; there is no
+   rise per hundred feet of vertical section and draw the line on it
+   (the first derivation, step 1). Nothing tests the first line but the
+   first run; there is no
    log yet for a trial dip to be judged against.
 16. **Extending from the wrong MD.** The extension starts at the alarm's
    first MD — the 2 ft band's, not the 10 ft warning band's — and covers

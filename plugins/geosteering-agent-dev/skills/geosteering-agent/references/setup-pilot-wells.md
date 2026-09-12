@@ -252,9 +252,11 @@ prediction of the GR at every MD and must share the measurement's
 character — the beds the GR counts over the new footage need their room
 in feet of stratigraphic column, and the dip that gives it is chosen by
 the procedure in `references/derived-log.md` (the loop, step 2). A
-self-steered well runs with a tight log tolerance (about 5 gAPI on the
-lateral's blocks) so an inadequate log fails the run as *Impossible*
-instead of piling up quietly; `read_job_status` carries the reason and
+self-steered well runs with a tight log tolerance (three times the GR's
+measured noise on the lateral's blocks, set at the first derivation before
+its reset) so an inadequate log fails the run as *Impossible* instead of
+piling up quietly — at the default tolerance the alarm is muted and beds
+read as lateral variation; `read_job_status` carries the reason and
 the last MD each pass reached. The first line, and every speculative
 stretch, takes its dip from
 the dip prior, which carries dip and nothing else (§1.9.3): the polyline
