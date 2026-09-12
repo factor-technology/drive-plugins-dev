@@ -10,7 +10,10 @@ selected by `project.dip_type`:
   `param_block` carries its own `dip_constant` (true-dip degrees) that
   applies from that block's MD up to the next block's MD (or Infinity
   for the last block). Common case: one block at `md=0` covering the
-  whole well.
+  whole well. `read_job_params` and `read_user_prior` decode each
+  block's `dip_constant` back to `apparent_dip_deg` (the Dip form's
+  number) and `rise_per_100_ft`; reason in those, never in the raw
+  true dip.
 - `"structure"`: a project-wide 2D (vs, tvdss) polyline uploaded
   separately. `dip_constant` is irrelevant in this mode and the tools
   clear it to null across every block when the mode flips.
@@ -116,4 +119,7 @@ Tools:
    above). Pair with `set_dip_structure_mode` when `dip_type` isn't
    already `"structure"`.
 6. `read_structure(project_id)` — returns `{vs, tvdss}` or null.
+   `read_user_prior(project_id)` returns the prior in whichever form is
+   stored: `structure` and/or `blocks` `[{md, apparent_dip_deg,
+   rise_per_100_ft}]`, with `dip_type` saying which one computes.
 7. `delete_structure(project_id)` — removes the stored polyline.

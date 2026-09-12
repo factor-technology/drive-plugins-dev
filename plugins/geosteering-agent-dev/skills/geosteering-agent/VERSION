@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: f63fe52a9c60e680ac380d7affcc031f6fd47b00
-source_commit_short: f63fe52a9c60
-source_commit_date: 2026-09-11T18:29:44-05:00
-source_commit_subject: agent: stage the survey file via create_upload; upload_active_trajectory takes upload_id; 0.5.40
-skill_version: 0.5.40
-built_at: 2026-09-11T18:29:44-05:00
+source_commit: 8eff9f36e5e834db88dbc9bda4ee7d6dae14efc3
+source_commit_short: 8eff9f36e5e8
+source_commit_date: 2026-09-11T20:30:14-05:00
+source_commit_subject: agent: read_job_params and read_user_prior report each block's apparent dip and rise per 100 ft; skill: the first line starts on the prior's rise, a flat brief is not evidence; 0.5.41
+skill_version: 0.5.41
+built_at: 2026-09-11T20:30:14-05:00
 built_from_workspace_dirty: false

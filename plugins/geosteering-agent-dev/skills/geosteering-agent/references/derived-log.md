@@ -78,14 +78,20 @@ picking, no alignment sweep first.
    backproject through that structure is where they belong in the stratigraphic column. A
    straight dipping segment is fine when seismic says the stratigraphic column is straight.
    The project's dip prior is that opinion, already entered, in one of two
-   forms (`read_job_params` says which, as `dip_type`): in structure mode
-   the prior structure (`read_structure`), a polyline; in constants mode
-   there is no polyline, and each parameter block's apparent dip
-   (`dip_constant`, from `read_job_params`) is the prior from that block's
-   MD to the next block's. Draw the line at the prior's dip — the
-   polyline's, or the block's over each block's footage, so a line under
-   block dips can change dip where the blocks do — and the block's dip
-   tolerance is the wiggle room you have to adjust it (the loop, step 2).
+   forms (`read_user_prior` returns whichever the project holds, and
+   `dip_type` says which the computation uses): in structure mode the
+   prior structure (`read_structure`), a polyline; in constants mode there
+   is no polyline, and each parameter block's apparent dip is the prior
+   from that block's MD to the next block's. The tools report a block's
+   dip as `apparent_dip_deg` — the number in the Dip form, 90° horizontal,
+   above 90° the stratigraphic column rising ahead along the vertical
+   section — with the `rise_per_100_ft` it implies (91.5° is 2.6 ft of
+   rise per hundred). Draw the line at that rise — the polyline's, or the
+   block's over each block's footage, so a line under block dips changes
+   dip where the blocks do — and the block's dip tolerance is the wiggle
+   room you have to adjust it (the loop, step 2). A brief that says to
+   start flat, or at some dip of its own, is not independent evidence;
+   the prior is the geologist's claim, and the line starts on it.
    Only the dip is the signal — the
    computation reads the polyline as a sequence of dips and never its
    absolute depth, so where it sits relative to the wellbore or the markers
@@ -670,7 +676,15 @@ field names.
    carries it; a bend to chase it, however far inside the wiggle room, is
    structure made from that variation, and the black curve fits either way
    (the loop, step 2).
-15. **Extending from the wrong MD.** The extension starts at the alarm's
+15. **A first line at a dip the prior does not hold.** A near-flat first
+   line under a prior of 91.5° gives up 2.6 ft of stratigraphic column
+   per hundred feet from the first delivery, and the estimate presses
+   against the bottom before the alarm can say why. The apparent dip
+   the tools report is the prior in degrees from horizontal (90°), not
+   an angle to compare with the wellbore's inclination; convert it to
+   rise per hundred and draw the line on it (the first derivation,
+   step 1).
+16. **Extending from the wrong MD.** The extension starts at the alarm's
    first MD — the 2 ft band's, not the 10 ft warning band's — and covers
    the footage since, a delivery or a few. A line that leaves the run's
    structure earlier files covered rock as new: on one lateral a line
