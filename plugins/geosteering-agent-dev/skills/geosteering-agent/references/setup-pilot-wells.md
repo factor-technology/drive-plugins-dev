@@ -254,7 +254,9 @@ lateral's blocks) so an inadequate log fails the run as *Impossible*
 instead of piling up quietly; `read_job_status` carries the reason and
 the last MD each pass reached. The first line, and every speculative
 stretch, takes its dip from
-that polyline, which carries dip and nothing else (§1.9.3); a horizontal
+the dip prior, which carries dip and nothing else (§1.9.3): the polyline
+in structure mode, or in constants mode the apparent dip of the parameter
+block covering that footage, which can change from block to block; a horizontal
 line is not a safer guess than the prior, only a different dip that
 nobody claimed. Never derive through the computed
 structure over confirmed footage: it was solved against this very log.

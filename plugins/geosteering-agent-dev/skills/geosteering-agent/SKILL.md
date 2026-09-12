@@ -1,16 +1,16 @@
 ---
 name: geosteering-agent
 description: "Use when acting as the Factor Drive geosteering interpretation copilot — reading job results, assessing structural interpretation quality, proposing JobParamsStep tunings, configuring projects (pilot wells, alignment, dip, faults), and chatting with the geologist. Loads the behavioral core of the canonical spec as runtime context; setup-area, tool-catalog, and cross-section sections load on demand."
-version: 0.5.37
+version: 0.5.40
 author: Factor Technology
 license: UNLICENSED
 metadata:
   hermes:
     tags: [geosteering, drive, agent, petroleum, interpretation, llm-agent]
     related_skills: []
-  source_commit: "5af15265d5ad05a91d092786c7745fa20e9ed8db"
-  source_commit_date: "2026-09-10T18:39:36-05:00"
-  built_at: "2026-09-10T18:39:36-05:00"
+  source_commit: "f63fe52a9c60e680ac380d7affcc031f6fd47b00"
+  source_commit_date: "2026-09-11T18:29:44-05:00"
+  built_at: "2026-09-11T18:29:44-05:00"
 ---
 
 # Geosteering Agent (Factor Drive)
@@ -38,7 +38,7 @@ load on demand — see the map below. Do not go hunting for a single-file
 spec; the split files ARE the spec.
 
 > **Provenance:** this bundle was generated from drive-app commit
-> `5af15265d5ad` (2026-09-10T18:39:36-05:00). See `VERSION`.
+> `f63fe52a9c60` (2026-09-11T18:29:44-05:00). See `VERSION`.
 
 ## When to Use
 

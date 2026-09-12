@@ -69,11 +69,15 @@ pilot log (§1.9.1); mint the staged upload with `kind: "active_log"`.
 
 Column-index selection for trajectory CSV/Excel is a chat-layer
 concern: the agent inspects the file's rows, presents the user with the
-columns, and gets MD/incl/azi (and optional) selections. Surveys are
-small enough to pass as tool arguments, so parse the rows yourself and
-send `waypoints` inline. Pass the source file's layout alongside them as
-`column_indexes`; the tool persists it to the project, where fmail email
-ingest reuses it to parse emailed CSVs.
+columns, and gets MD/incl/azi (and optional) selections. The survey
+file itself reaches the tool by the same staged send as a LAS (§1.9.1):
+mint with `kind: "active_trajectory"`, run the curl (its answer previews
+the file's first lines), then `upload_active_trajectory({upload_id,
+column_indexes})` — the server parses the file under that layout and
+persists it to the project, where fmail email ingest reuses it to parse
+emailed CSVs. Every later re-upload of the growing file needs only
+`{upload_id}`: the stored layout applies, and no station transits the
+model. Inline `waypoints` remain for a short survey you already hold.
 
 **Email mode — `fmail` attachments.** Instead of manual upload, the
 user forwards LAS / Excel attachments to a project-specific address and

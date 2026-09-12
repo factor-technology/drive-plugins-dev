@@ -77,10 +77,16 @@ picking, no alignment sweep first.
    regional dip, never from the new features themselves: wherever they then
    backproject through that structure is where they belong in the stratigraphic column. A
    straight dipping segment is fine when seismic says the stratigraphic column is straight.
-   The project's prior structure (`read_structure`) is that opinion, already
-   entered: draw the line at its dip; the block's dip tolerance is the
-   wiggle room you have to adjust it (the loop, step 2). Only the dip is
-   the signal — the
+   The project's dip prior is that opinion, already entered, in one of two
+   forms (`read_job_params` says which, as `dip_type`): in structure mode
+   the prior structure (`read_structure`), a polyline; in constants mode
+   there is no polyline, and each parameter block's apparent dip
+   (`dip_constant`, from `read_job_params`) is the prior from that block's
+   MD to the next block's. Draw the line at the prior's dip — the
+   polyline's, or the block's over each block's footage, so a line under
+   block dips can change dip where the blocks do — and the block's dip
+   tolerance is the wiggle room you have to adjust it (the loop, step 2).
+   Only the dip is the signal — the
    computation reads the polyline as a sequence of dips and never its
    absolute depth, so where it sits relative to the wellbore or the markers
    means nothing, and the line's own depth is set by the basepoint at the
@@ -240,8 +246,9 @@ Every later cycle is the same four moves:
    each: the run then finds the rest elsewhere in the log, drawing
    structure the rock does not have, or fails there. So before saving, with
    the survey (`read_active_trajectory`), the GR (`read_active_log`), the
-   prior (`read_structure`) and the block's dip tolerance
-   (`read_job_params`):
+   prior (the polyline from `read_structure`, or in constants mode the
+   apparent dip of the block covering the new footage) and the block's dip
+   tolerance (`read_job_params`):
    1. *Measure the well.* The wellbore's rise per hundred feet of MD over
       the new footage. It is not a candidate dip; it is what every
       candidate is measured against.
@@ -258,7 +265,9 @@ Every later cycle is the same four moves:
       crossed is the line's rise minus the wellbore's, per hundred feet,
       times the footage (the scale rule of the first derivation). The
       candidates are the prior's dip and moves off it within the wiggle
-      room — the prior polyline carries dip only — and horizontal, only
+      room — the prior carries dip only, polyline or block constant, and
+      a block boundary inside the footage changes the prior's dip there —
+      and horizontal, only
       where the well re-crossed the same rock at the same depth.
    4. *Reject candidates without room.* Beds counted times a bed's
       thickness — feet, not tenths — is the least stratigraphic column the

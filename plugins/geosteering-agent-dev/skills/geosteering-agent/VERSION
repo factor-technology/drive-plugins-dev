@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: 5af15265d5ad05a91d092786c7745fa20e9ed8db
-source_commit_short: 5af15265d5ad
-source_commit_date: 2026-09-10T18:39:36-05:00
-source_commit_subject: skill: an extension is provisional until a run reproduces it; the confirmation pass takes unreproduced depths out; the alarm's first MD is the 2 ft band's; 0.5.37
-skill_version: 0.5.37
-built_at: 2026-09-10T18:39:36-05:00
+source_commit: f63fe52a9c60e680ac380d7affcc031f6fd47b00
+source_commit_short: f63fe52a9c60
+source_commit_date: 2026-09-11T18:29:44-05:00
+source_commit_subject: agent: stage the survey file via create_upload; upload_active_trajectory takes upload_id; 0.5.40
+skill_version: 0.5.40
+built_at: 2026-09-11T18:29:44-05:00
 built_from_workspace_dirty: false
