@@ -200,7 +200,11 @@ Every later cycle is the same four moves:
    an end of the log, which end, and the first MD where it showed. That
    MD is where the extension starts: the first MD of the 2 ft alarm band,
    never the first MD of the 10 ft warning band, where the well is still
-   in covered rock. Read the margins and the mass at
+   in covered rock. An alarm whose first MD is the bit itself has no
+   footage past it: the run's picks to the bit go onto the line and the
+   extension waits for the next delivery, since a derive through picks
+   the run kept inside the log adds no depth and costs a recompute.
+   Read the margins and the mass at
    each end beside the reason (*Reading the state*: an end approached
    but not yet reached reports as entropy), and diff this run's
    structure against the last run's over footage both were confident
@@ -234,12 +238,14 @@ Every later cycle is the same four moves:
      estimate clear of both ends. There the run is a correlation of new
      footage against the stratigraphic column, not an echo, and its MPE
      **is** the line, all the way to the alarm's first MD: append those
-     picks to the manual line through `copy_computed_interpretation`,
-     which returns them in the line's own frame and reports the shift it
-     applied (`tot_shift_tvdss`, hundreds of feet on a line drawn at the
-     top of target); `read_mpe_slice` is for reading, never for
-     appending, since its raw values put a step of hundreds of feet in
-     the line. Footage the run kept inside the log but inside the
+     picks to the manual line in the frame the line was drawn in. A line
+     drawn from the wellbore at the first computed position lives in the
+     MPE's own top-of-section frame and takes the MPE slice as it is; a
+     line drawn at the top of target takes them from
+     `copy_computed_interpretation`, which hangs the MPE there and
+     reports the shift (`tot_shift_tvdss`, hundreds of feet). Check the
+     first appended pick against the line's last before saving: a step
+     of hundreds of feet is the other frame. Footage the run kept inside the log but inside the
      warning band is appended the same way and stays provisional with
      the extension: the run there had the well as deep as the log
      allows, and the next run tests both together. The last
@@ -341,8 +347,16 @@ Every later cycle is the same four moves:
       into a cell or two — the prior is rejected like any other, and on
       one lateral it was kept five times while three clean spikes
       130–180 ft apart with hot shale between went into one depth, a bed
-      each unroomed. A line that crosses no column at all, parallel to
-      the well, is not a candidate: it grows nothing.
+      each unroomed. With no bed counted and the prior giving the footage
+      less than nothing — the well climbing faster than the prior's rise
+      while the alarm holds it at the bottom — the beds rise at least as
+      fast as the well: the line runs parallel to the well, the smallest
+      claim the alarm allows, and it grows nothing. Save that line and
+      derive nothing (a derive through it changes no depth), no reset;
+      the well is riding the log's end in covered rock, the alarm stands,
+      and the next bed or excursion is what moves the line. Under a GR
+      that keeps swinging beyond the tolerance a parallel line is the
+      smear, and the beds it files at one depth are the room it owes.
    5. *Place the features and check them against the log at that depth.*
       A clean spike must land on a clean bed the log holds, or past an
       end. Landing on shale in covered rock rejects the candidate. Past
@@ -355,11 +369,9 @@ Every later cycle is the same four moves:
       the wiggle room the prior is wrong here: go past it in the direction
       the beds demand, and say so. The alarm alone is reason to move and
       the beds say how far; with none to count — a featureless GR — the
-      prior stands with whatever room it gives, and only where it gives
-      the footage no column at all while the alarm says the well drilled
-      past the end is the prior wrong here: then make the smallest move
-      within the wiggle room that gives the footage a foot per hundred,
-      and say so.
+      prior stands with whatever room it gives, and where it gives less
+      than nothing the line runs parallel to the well (step 4), never a
+      foot per hundred squeezed from a ladder of trials.
    7. *Audit the dip change against the survey.* The line changes dip on
       the rock's evidence only. A change that coincides with a survey
       inclination change and nothing else is the line following the well.
@@ -452,8 +464,10 @@ Every later cycle is the same four moves:
 Between derivations a delivery whose run raises no alarm is first the test
 of the last extension, while one stands unconfirmed: read the run's
 structure over the extension's footage against the line (`read_mpe_slice`
-over those MDs, or the cross section). Within a couple of feet the
-extension is confirmed; further, and this delivery is the confirmation
+over those MDs, or the cross section). Within a couple of feet over the
+extension's body the
+extension is confirmed, its last pick alone may sit further and is the
+next run's to settle; further over the body, and this delivery is the confirmation
 pass (the loop, step 4) before anything else, and a plain Extend is not on
 offer. Footage a pass replaced stands unconfirmed like an extension until
 the next run reproduces it: read the run's structure over it against the
@@ -773,8 +787,10 @@ field names.
    step 4) is not this: it derives through the run over the last
    extension only, and it can only take stratigraphic column out.
 12. **Saving an extension that adds no stratigraphic column, or too little
-   for its GR.** A line parallel to the well grows nothing, and one that
-   crosses near-zero stratigraphic column under a GR that keeps swinging
+   for its GR.** A line parallel to the well grows nothing, which is
+   right only where the well runs parallel to the beds with no bed to
+   count (step 4 of the extension); one that crosses near-zero
+   stratigraphic column under a GR that keeps swinging
    beyond the tolerance files the smear (the loop, step 2). The alarm
    says the footage moves; the prior says how far when the GR is quiet,
    the beds when it is not. An alarm that returns on the delivery after
