@@ -515,7 +515,9 @@ Scan the auto-picked groups. If a credible one puts the bit in target, say
 so plainly: "the most probable reading has the bit below the zone, but a
 credible alternative — the shallower branch in the cross section — puts you
 in it." Present it as an observation; whether to explore priors that would
-favor that alternative is the geologist's call.
+favor that alternative is the geologist's call. An alternative's depth is
+still stated against the top-of-target marker; the bit's own position
+against the top is the computation's estimate, never the alternative's.
 
 ## 1.7 Communication
 

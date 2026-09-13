@@ -128,9 +128,9 @@ picking, no alignment sweep first.
    deletion, and usually a sign the interpretation should have gone further.
 5. **On a self-steered well, make an inadequate log fail loudly — before
    the reset, so the first run already has it.** Set the log tolerance on
-   the lateral's parameter blocks as tight as the log's own noise allows
-   (`update_param_block`, a block of its own from the
-   landing if the project has one block; §1.1 for the stored width). The
+   a block of the lateral's own, from the landing (`add_param_block` when
+   the project has one block, then `update_param_block` on it; §1.1 for
+   the stored width), as tight as the log's own noise allows. The
    number is measured, not quoted: smooth the GR over about 5 ft of MD
    along the near-horizontal footage, take the rms of the samples against
    that smooth, and set the block at about three times it — 5 gAPI on a
@@ -155,9 +155,16 @@ The derived log's depth axis is anchored so the wellbore at the first computed
 position sits at its own depth, and the interpretation's depth there is where
 the top-of-target marker lands when the save creates one; an existing marker
 keeps its depth. That is why markers keep their meaning across a replacement
-and no re-pick is needed. The bit's position against the top of target is
-measured from that marker, never from the log's top, which is only where the
-well was at the first computed position.
+and no re-pick is needed. The bit against the top of target is one
+subtraction: the bit's own position in the stratigraphic column,
+`coverage.last.tvdtl_mpe` on the latest run, minus the top-of-target
+marker's depth (`tot_name` from the project, its depth from the pilot
+well's markers, read after the save that creates it), both on the derived
+log's own axis. An auto-picked group's terminal depth against the survey,
+the log's top or bottom, and the coverage margin are not that number (an
+alternative's depth is still stated against the marker). When this reading
+moves more than the well did between deliveries, the computation's
+correlation moved, not the well: say so.
 
 ### The statistic
 
@@ -205,7 +212,9 @@ Every later cycle is the same four moves:
    has reproduced — it stands as it was, every cycle: a line moved there
    re-files samples the log already holds, and an append-only log needs
    an append-only line. The last extension is confirmed only when step 4
-   says so.
+   says so; its end is not the last confirmed MD until then, and the
+   footage from its start is the run's to confirm, not yours to extend
+   from.
    The log carries the line's scale over that footage and no run rescales
    it (on one blind lateral a first line at twice the true dip squeezed
    the stratigraphic column 4%, and the estimate over the next 2,000 ft
@@ -275,7 +284,9 @@ Every later cycle is the same four moves:
    1. *Measure the well.* The wellbore's rise per hundred feet of MD over
       the new footage. It is not a candidate dip; it is what every
       candidate is measured against.
-   2. *Count the beds.* Each clean or hot excursion in the new GR larger
+   2. *Count the beds.* First read the log over the depths the prior's
+      dip files the new footage at (`read_pilot_log` over that range);
+      only then count. Each clean or hot excursion in the new GR larger
       than the block's log tolerance, with different rock between, is a
       bed, and it is owed room unless the log **as it stood before this
       extension** holds a matching excursion within a bed's thickness of
@@ -293,14 +304,21 @@ Every later cycle is the same four moves:
    3. *Compute the room each candidate gives.* Stratigraphic column
       crossed is the line's rise minus the wellbore's, per hundred feet,
       times the footage (the scale rule of the first derivation). The
+      room is the extension's own, from the run's last pick; what the
+      appended picks did to the log's end upstream is theirs, not the
+      extension's to make up. The
       candidates are the prior's dip and moves off it within the wiggle
       room — the prior carries dip only, polyline or block constant, and
       a block boundary inside the footage changes the prior's dip there —
       and horizontal, only
       where the well re-crossed the same rock at the same depth.
    4. *Reject candidates without room.* The least stratigraphic column
-      the footage needs is the alarm band and a foot more, and with beds
-      counted a bed's thickness — feet, not tenths — for each of them. A
+      an extension needs is the alarm band and a foot on a hundred feet
+      of footage, pro rata below that and never under a foot, and no more
+      above it, and with beds counted a bed's thickness — feet, not
+      tenths — for each of them; a candidate whose footage files more
+      than a few samples into each cell of the log has too little room
+      whatever the floor says. A
       candidate that gives less has filed unlike rock at one depth, and
       the prior is rejected like any other: on one lateral it was kept
       five times for half a foot to three feet of room per delivery,
@@ -361,13 +379,29 @@ Every later cycle is the same four moves:
    same save. Over confirmed footage the new log and the previous one
    agree exactly; a difference there says the line moved over covered
    footage, and the cycle goes back to step 2 before anything is saved.
+   The end moves by at most the room the extension's geometry gives (the
+   line's rise minus the wellbore's, times the footage, step 2's
+   procedure): a derive that moves it further has filed stratigraphic
+   column the well never crossed, whatever produced it, and is not saved
+   either.
 4. **Reset, rerun, confirm.** The replaced log invalidates the saved
    computation, so this run is Reset and Run (`reset_job`, then
    `trigger_job_rerun`). On the next run the alarm should clear and the
    margins reopen. That run also tests the extension, and the depths it
    added are provisional until one does: over the extension's footage,
    where the run's structure left the line, the depths the run did not
-   reproduce are the well's own GR filed where no run has put it. Take
+   reproduce are the well's own GR filed where no run has put it. The
+   confirmation pass follows every extension, on the first run that
+   keeps the well inside the log, with no exception for a quiet alarm:
+   footage left provisional is not confirmed by the deliveries that pass
+   over it. The tell is the run's structure standing feet away from the
+   line over the extension's footage, on the cross section or in the MPE
+   slice; it needs no later extension to show (on one lateral twelve
+   deliveries ran past a 12 ft gap between line and structure, and on
+   another a derive rang through the step it left). An alarm whose first
+   MD lies inside the last extension is that extension failing its test:
+   the pass comes first, and the new extension starts from the run's last
+   pick after it. Take
    them out: make the run's structure the line over that footage
    (`copy_computed_interpretation`, as in step 2), derive bare and
    replace, Reset and Run. Under Shallowest MD nothing confirmed moves,
@@ -388,7 +422,13 @@ Every later cycle is the same four moves:
    the 10 it did not take stood in the log to the base with nothing able
    to remove them.
 
-Between derivations, run without resetting. A delivery that extends the
+Between derivations a delivery whose run raises no alarm is first the test
+of the last extension, while one stands unconfirmed: read the run's
+structure over the extension's footage against the line (`read_mpe_slice`
+over those MDs, or the cross section). Within a couple of feet the
+extension is confirmed; further, and this delivery is the confirmation
+pass (the loop, step 4) before anything else, and a plain Extend is not on
+offer. With nothing unconfirmed, a delivery that extends the
 active log and survey and leaves the type log as it is — on a replay fed
 segment by segment as much as on a live feed — runs as a plain **Extend**
 (`trigger_job_rerun` alone): it computes only the footage past the pointer
@@ -431,7 +471,10 @@ main way to get out of step:
   until there is some, the block says so. Not an alarm. The entropy leg
   has no such gate and can raise the alarm on the first run after a
   derivation, before any new footage exists: not an alarm either, and it
-  clears on the next delivery.
+  clears on the next delivery. The tool's `alarm.rederive` can read true
+  on that run, with `post_derivation` null: that is the artifact, not an
+  alarm, and nothing is derived until footage drilled since the
+  derivation has been run.
 - **Healthy.** Tens of feet of log below and above the estimate at the bit,
   entropy near its own baseline, marginals tight and single-peaked, a steady
   uncertainty corridor on the cross section, and on the active log track a
@@ -695,19 +738,21 @@ field names.
    step 4) is not this: it derives through the run over the last
    extension only, and it can only take stratigraphic column out.
 12. **Saving an extension that adds no stratigraphic column, or too little
-   for its GR.** A read-only derive through the extension whose end moved
-   by less than the alarm band will reproduce the alarm when saved; one
+   for its GR.** A read-only derive through an extension that gives less
+   room than step 4 asks will reproduce the alarm when saved; one
    that clears the band but crosses near-zero stratigraphic column under a
    GR that keeps varying will reproduce the smear (the loop, step 2). The
    prior is a starting point; the alarm says the footage moves, the GR
    how far. Never spend a cycle on a line that leaves the piled-up footage
    inside the log, and never wait for the trajectory to take the well past
    the end on its own.
-13. **Reset and Run on a delivery that left the type log alone.** Between
-   derivations an extended log and survey run as a plain Extend, which
-   reaches the same result in a fraction of the time (the loop, step 4).
-   Reset only when the type log changed, a state-invalidating parameter
-   changed, or a stalled job holds the pointer.
+13. **Reset and Run on a delivery that left the type log alone.** A log
+   whose last extension is still provisional is not "left alone": the
+   delivery's run is its test, and the confirmation pass follows (the
+   loop, step 4). Once it is confirmed, an extended log and survey run as
+   a plain Extend, which reaches the same result in a fraction of the
+   time. Reset only when the type log changed, a state-invalidating
+   parameter changed, or a stalled job holds the pointer.
 14. **Bending the line to explain GR the log already holds.** A pass within
    the log tolerance of what the log holds at the depth the prior's dip
    gives it is the rock varying along the lateral, and the tolerance

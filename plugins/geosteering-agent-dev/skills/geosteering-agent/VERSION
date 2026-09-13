@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: 139031883616fbfdd3bf45401c4a680baf7f9732
-source_commit_short: 139031883616
-source_commit_date: 2026-09-12T15:11:35-05:00
-source_commit_subject: skill: a bed is an excursion above the tolerance, matched against the log as it stood before the extension; the least room is the alarm band and a foot plus a bed per bed, the prior rejected like any candidate; the tolerance is set before the first reset, and a default tolerance mutes the alarm; rise per hundred feet of vertical section; bit vs top of target from the marker; appended picks in the line's own frame; 0.5.44
-skill_version: 0.5.45
-built_at: 2026-09-12T15:11:35-05:00
+source_commit: d37b019921804943e1e35bbd9085b897f43d9c14
+source_commit_short: d37b01992180
+source_commit_date: 2026-09-12T21:55:20-05:00
+source_commit_subject: skill: 0.5.47, the r3 proposals; bit vs top of target is the run's bit position minus the marker, never an auto-pick against the survey; an alarm-free delivery is first the test of an unconfirmed extension, the tell being the run's structure against the line over its footage, and an alarm inside the last extension is that extension failing; the room floor is pro rata per hundred feet with the old three feet as its ceiling and is the extension's own; read the log before counting beds; the alarm flag true on the freshly derived run is the artifact; the tolerance goes on a lateral block of its own
+skill_version: 0.5.47
+built_at: 2026-09-12T21:55:20-05:00
 built_from_workspace_dirty: false
