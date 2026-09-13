@@ -136,7 +136,10 @@ picking, no alignment sweep first.
    that smooth, and set the block at about three times it — 5 gAPI on a
    quiet log, 15 on one that scatters 4 gAPI rms, where 5 would be half
    the log's own residual and covered rock would fail on drift alone,
-   each failure costing a full recompute. The log was recorded by this
+   each failure costing a full recompute. Never under 5 gAPI (a stored
+   sigma of 1.7): at 3 the first run fails at its first MD before any
+   footage is judged. On a first delivery still in the curve the block
+   starts at the first computed MD, and the floor holds there too. The log was recorded by this
    bit, so in rock it holds the measurement matches it to within that
    noise, and a tolerance that tight leaves the computation no depth for
    footage it does not hold: instead of piling up quietly at an end the

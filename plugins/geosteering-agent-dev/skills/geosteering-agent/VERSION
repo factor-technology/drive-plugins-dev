@@ -3,6 +3,6 @@ source_commit: d37b019921804943e1e35bbd9085b897f43d9c14
 source_commit_short: d37b01992180
 source_commit_date: 2026-09-12T21:55:20-05:00
 source_commit_subject: skill: 0.5.47, the r3 proposals; bit vs top of target is the run's bit position minus the marker, never an auto-pick against the survey; an alarm-free delivery is first the test of an unconfirmed extension, the tell being the run's structure against the line over its footage, and an alarm inside the last extension is that extension failing; the room floor is pro rata per hundred feet with the old three feet as its ceiling and is the extension's own; read the log before counting beds; the alarm flag true on the freshly derived run is the artifact; the tolerance goes on a lateral block of its own
-skill_version: 0.5.47
+skill_version: 0.5.48
 built_at: 2026-09-12T21:55:20-05:00
 built_from_workspace_dirty: false
