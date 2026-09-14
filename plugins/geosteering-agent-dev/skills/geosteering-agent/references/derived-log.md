@@ -210,7 +210,26 @@ Every later cycle is the same four moves:
    but not yet reached reports as entropy), and diff this run's
    structure against the last run's over footage both were confident
    about: a revision of ten feet or more where nothing new was drilled
-   is the look-alike's tell, and the alarm does not see it. A lateral
+   is the look-alike's tell, and the alarm does not see it. So is a run
+   that puts the bit shallower in the log than the prior predicts by
+   more than the wiggle room, and that check is arithmetic, made on
+   every delivery until the next derivation: from the last derivation's
+   end the bit descends into the stratigraphic column at the prior's
+   rise minus the wellbore's, per hundred feet, times the footage since
+   (the survey gives the wellbore's; a flat well under a prior of 2 ft
+   per hundred is 2 ft deeper after a hundred feet, past the end of a
+   log that ended at it). Read `coverage.last.tvdtl_mpe` against that
+   prediction; shallower by more than the block's dip sigma as rise per
+   hundred times the same footage — the stored sigma, a third of the
+   tolerance the Job Parameters form shows, so a sigma of 2° is 3.5 ft
+   per hundred and 3.3 ft on a 94 ft delivery, never the form's 6° —
+   and the run has lifted the well out
+   of new rock onto a match higher in the log, usually by re-drawing
+   the last delivery's footage a few feet lower: the margin that
+   reopened is the look-alike, not covered rock, and a quiet alarm says
+   nothing about it. The footage since the derivation is then the
+   extension (step 2) at the prior's dip, derived and run, and the
+   deliveries after it judge. A lateral
    block still at its default log tolerance mutes the alarm — smeared
    cells near the passes' mean then match every pass — so a quiet block
    over such footage says nothing until the tolerance is set (the first
@@ -462,7 +481,17 @@ Every later cycle is the same four moves:
    the 10 it did not take stood in the log to the base with nothing able
    to remove them.
 
-Between derivations a delivery whose run raises no alarm is first the test
+Between derivations a delivery whose run raises no alarm is first the
+prior check of the loop's step 1, every time and before anything else:
+the bit's `coverage.last.tvdtl_mpe` against where the prior puts it
+since the last derivation (the derivation's end, plus the prior's rise
+minus the wellbore's per hundred feet, times the footage since), the
+difference said in feet against the room the stored dip sigma gives over
+that footage (a third of the form's tolerance, as rise per hundred, times
+the footage). Shallower by more than that room is the look-alike, and
+this delivery extends at the prior from the derivation's end and derives;
+a quiet alarm does not excuse the check, since the look-alike is what a
+quiet alarm looks like. Within the room, the delivery is next the test
 of the last extension, while one stands unconfirmed: read the run's
 structure over the extension's footage against the line (`read_mpe_slice`
 over those MDs, or the cross section). Within a couple of feet over the
@@ -600,7 +629,10 @@ main way to get out of step:
   inside the log — margins in the tens of feet, tight single-peaked
   marginals, no alarm — is the loop's success case, even when the estimate
   sits tens of feet from your speculative line: the well came back into rock
-  the log already holds, and the computation is correcting the guess. Accept
+  the log already holds, and the computation is correcting the guess. Not
+  when the bit sits shallower than the prior's prediction from the last
+  derivation by more than the wiggle room: that is the look-alike (the
+  loop, step 1), whatever the alarm says. Accept
   the run — with the active log track in view: a black curve gone nearly
   constant under swinging passes over the new footage is an earlier cycle's
   smear, not success — and then take the guess out of the log: the
@@ -655,7 +687,8 @@ clear alarm as reliable and a quiet one as "no evidence of trouble".
 The look-alike has a signature of its own. A toe piled up at the bottom that the next
 delivery "resolves" — confidence back to a single peak, entropy down — by
 revising already-confident footage by ten or more feet, or by drawing a fold
-the prior structure does not have, has most likely matched new rock to a bed
+the prior structure does not have (over one delivery, a departure from the
+prior's dip beyond the wiggle room), has most likely matched new rock to a bed
 higher in the log; and when the well then climbs and the structure rises in
 lock-step with it, so that the well never leaves that bed, the structure is
 following the wellbore. On one lateral the computation drew a 20-ft syncline
