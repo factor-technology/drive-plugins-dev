@@ -128,8 +128,9 @@ picking, no alignment sweep first.
    deletion, and usually a sign the interpretation should have gone further.
 5. **On a self-steered well, make an inadequate log fail loudly — before
    the reset, so the first run already has it.** Set the log tolerance on
-   a block of the lateral's own, from the landing (`add_param_block` when
-   the project has one block, then `update_param_block` on it; §1.1 for
+   a block of the lateral's own, from the landing: the block that starts
+   there when the project has one, else `add_param_block` at the landing;
+   then `update_param_block` on it and on every block after it (§1.1 for
    the stored width), as tight as the log's own noise allows. The
    number is measured, not quoted: smooth the GR over about 5 ft of MD
    along the near-horizontal footage, take the rms of the samples against
