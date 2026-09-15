@@ -3,6 +3,6 @@ source_commit: 78f96c92ed674bc71eda6170393c22091461574d
 source_commit_short: 78f96c92ed67
 source_commit_date: 2026-09-15T16:10:57-05:00
 source_commit_subject: skill: 0.5.57; the tools serve TVDTL positive-down, since that is what TVDTL means and what the log's own samples and its markers already are
-skill_version: 0.5.57
+skill_version: 0.5.58
 built_at: 2026-09-15T16:10:57-05:00
 built_from_workspace_dirty: false
