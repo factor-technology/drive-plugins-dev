@@ -91,7 +91,14 @@ picking, no alignment sweep first.
    a line drawn per MD rises more than the prior says) — the polyline's,
    or the block's over each block's footage, so a line under block dips
    changes dip where the blocks do — and the block's dip tolerance is the
-   wiggle room you have to adjust it (the loop, step 2). A brief that says
+   wiggle room you have to adjust it (the loop, step 2). The line's
+   positions are `[MD, TVDSS]`, negative down: a rise of r feet per
+   hundred makes the second number grow toward zero by r per hundred
+   feet of vertical section (−13494 to −13493 is a foot of rise), and a
+   segment whose number drops further below zero is drawn falling. A
+   trial at the prior's rise that moves the log's bottom by nothing has
+   been drawn falling, or parallel; check the sign before reading it as
+   "no room". A brief that says
    to
    start flat, or at some dip of its own, is not independent evidence;
    the prior is the geologist's claim, and the line starts on it.
@@ -110,7 +117,31 @@ picking, no alignment sweep first.
    dip and expect the lateral's re-crossings to correct the scale. There is
    nothing to try dips against here: no log exists yet, so a read-only
    derive under any dip reports geometry and nothing else, and the first
-   run is the only test the first line gets.
+   run is the only test the first line gets on the day it is drawn.
+   One later test exists. Where the well comes to ride a bed — the GR
+   holding within the form's log tolerance of one value over forty feet
+   or more of MD, at the landing or after it — the bed's apparent dip
+   there is the wellbore's inclination over that footage, measured, and
+   it is the one dip the well ever measures directly (*Riding a bed*,
+   step 4 of the extension). Judge the difference by what it is worth
+   over the first line, not by the size of the dip: the two dips'
+   difference as rise per hundred, times the first line's own vertical
+   section, is the stratigraphic column at stake, and when that exceeds
+   the alarm band the first line was drawn on an opinion the well has
+   since tested. Then redraw it once, from the first computed MD to the
+   MD where the well came onto the bed, at the measured dip, derive bare
+   and replace, Reset and Run. That is the one replacement of covered
+   footage the loop allows, since the first line had no test when it was
+   drawn and the log below the landing is its scale; say the two dips,
+   the column at stake and the footage ridden in the entry, and after it
+   the loop is append-only again. The dip sigma is the wrong gate here
+   and reads as the right one: a first line runs for hundreds of feet of
+   vertical section, so a difference well inside a single sigma — a
+   degree or two, which no delivery's wiggle room would notice — is
+   already tens of feet of column in the log. On one lateral the dip
+   measured at the landing sat just inside the sigma and the first line
+   it was drawn against had put twenty feet of stratigraphic column into
+   the log that the rock did not have.
 2. **Derive bare, from the project's own data.** Leave it un-spliced: in
    the pane the **Splice into current type log** switch stays off, through
    the tool omit the initial type log. Through the tool, name the saved
@@ -377,6 +408,30 @@ Every later cycle is the same four moves:
       and the next bed or excursion is what moves the line. Under a GR
       that keeps swinging beyond the tolerance a parallel line is the
       smear, and the beds it files at one depth are the room it owes.
+      *Riding a bed.* A GR that holds within the form's log tolerance of
+      one value over forty feet or more of the new footage is the well
+      riding one bed, and the bed's dip over that footage is the
+      wellbore's inclination there, measured. The run reports the test:
+      `coverage.new_footage` gives `riding_a_bed` over the footage since
+      the last derivation, with `gr_max_dev` — the largest departure of
+      any of the log's own intervals from their mean — beside the
+      `interval_ft` they were taken at. Say the spread and the feet in
+      the entry. Do not retake it from the raw log foot by foot: a
+      logging tool's foot-to-foot scatter is its own and not the rock's,
+      and against it the same footage reads as one bed or as none
+      depending on where the tolerance happens to sit. Whatever the prior says, the line
+      runs parallel to the well over that footage and grows nothing. The
+      measured dip governs the footage it was measured over and no
+      further: past the bed the prior stands again. It is the rock and
+      the prior is a claim, but it is the rock the well lay along, and
+      carried into footage the well crosses at another inclination it
+      takes stratigraphic column out of the log — on one lateral a dip
+      measured along a bed at the landing, carried through a lateral
+      that climbed away from it, subtracted ten feet of column from a
+      log the rock owed nine. Say in every entry which dip the line is
+      on and, where a bed was ridden, over what footage. Footage shorter
+      than forty feet, or a GR that leaves the tolerance, measures
+      nothing: no bed is counted, and the prior gives the room.
    5. *Place the features and check them against the log at that depth.*
       A clean spike must land on a clean bed the log holds, or past an
       end. Landing on shale in covered rock rejects the candidate. Past
@@ -390,7 +445,8 @@ Every later cycle is the same four moves:
       the beds demand, and say so. The alarm alone is reason to move and
       the beds say how far; with none to count — a featureless GR — the
       prior stands with whatever room it gives, and where it gives less
-      than nothing the line runs parallel to the well (step 4), never a
+      than nothing, or the well is riding a bed, the line runs parallel
+      to the well (step 4), never a
       foot per hundred squeezed from a ladder of trials.
    7. *Audit the dip change against the survey.* The line changes dip on
       the rock's evidence only. A change that coincides with a survey
@@ -482,16 +538,46 @@ Every later cycle is the same four moves:
    to remove them.
 
 Between derivations a delivery whose run raises no alarm is first the
-prior check of the loop's step 1, every time and before anything else:
-the bit's `coverage.last.tvdtl_mpe` against where the prior puts it
-since the last derivation (the derivation's end, plus the prior's rise
-minus the wellbore's per hundred feet, times the footage since), the
-difference said in feet against the room the stored dip sigma gives over
-that footage (a third of the form's tolerance, as rise per hundred, times
-the footage). Shallower by more than that room is the look-alike, and
-this delivery extends at the prior from the derivation's end and derives;
-a quiet alarm does not excuse the check, since the look-alike is what a
-quiet alarm looks like. Within the room, the delivery is next the test
+prior check of the loop's step 1, every time and before anything else.
+The run reports it, so read it rather than rebuild it:
+`coverage.prior_check` gives the bit against where the prior puts it
+since the last derivation as `shallower_than_prior_ft` — positive for
+shallower, less column drilled than the prior expected — beside the
+`room_ft` the stored dip sigma allows over that footage, and
+`look_alike` when the one exceeds the other. Say both numbers in the
+entry. Where the block prior is not what governs, the field comes back
+absent and the check is yours to make on the same terms. Shallower by
+more than that room is the look-alike: the run has
+explained the new GR by lifting the well up the log over footage it had
+already placed, and the other explanation — the well deeper in section
+from where the lifting began, the new GR as new rock below the log — is
+the one the prior supports. Both fit the GR, so the prior is the only
+arbiter the well offers, and this delivery reaches back and extends at
+the prior; the runs that follow test that extension, and the
+confirmation pass can take it back out. How far back is measured, not
+chosen: read the run's structure against the line over the covered
+footage (`read_mpe_slice` against the saved interpretation), from the
+bit backward, and the reach-back MD is the last one where the two
+still agree within the alarm band, with the footage before it agreeing
+too. Usually that is the last derivation's end, where the well sat at
+the log's bottom and the run had nothing to lift; it can lie earlier,
+inside footage an earlier run confirmed, and then that confirmation is
+withdrawn — the run that gave it has been contradicted by this one.
+The run reports that MD as `coverage.reach_back.md`, with `basis`
+saying how it was found or why it could not be; an absent one is read
+off the slice as above, not guessed at.
+From the reach-back MD the line runs at the prior's dip to the bit,
+through the run's picks up to it and none after; derive bare and
+replace (under Shallowest MD the depths the lifted footage used to
+fill drop out and the footage files below the log's end instead),
+Reset and Run, and say the reach-back MD and the feet in the entry.
+Reaching back further than the departure is filing covered rock as
+new, and reaching back less leaves the lift in place; the departure
+itself is the only measure. A drift within the room is not this: it is
+the prior's own uncertainty, undetectable from inside the well, and
+the line carries it. A quiet
+alarm does not excuse the check, since the look-alike is what a quiet
+alarm looks like. Within the room, the delivery is next the test
 of the last extension, while one stands unconfirmed: read the run's
 structure over the extension's footage against the line (`read_mpe_slice`
 over those MDs, or the cross section). Within a couple of feet over the
@@ -707,7 +793,9 @@ extension left the estimate more than 100 ft from the answer at the toe, and
 nothing in the run said so. Over such footage the dip has to come from
 outside the well — the prior structure, offsets, seismic, or a correlation of
 the new footage against the original pilot (the retained reference log is
-there for exactly this) — and a line lifted from a run against a
+there for exactly this) — or from the one place the well measures it,
+the footage where it rides a bed (the extension, step 4, and the first
+derivation's later test) — and a line lifted from a run against a
 *differently derived* log does not transfer either, since that log had its
 own scale. Where the well does come back into covered rock the computation
 corrects the guess, and the loop converges. The well *can* scale a stretch
@@ -822,8 +910,10 @@ field names.
    extension only, and it can only take stratigraphic column out.
 12. **Saving an extension that adds no stratigraphic column, or too little
    for its GR.** A line parallel to the well grows nothing, which is
-   right only where the well runs parallel to the beds with no bed to
-   count (step 4 of the extension); one that crosses near-zero
+   right only where the well is riding a bed — the log at the job's own
+   interval holding within the tolerance over forty feet or more — or the
+   prior gives the footage less than nothing (step 4 of the extension);
+   one that crosses near-zero
    stratigraphic column under a GR that keeps swinging
    beyond the tolerance files the smear (the loop, step 2). The alarm
    says the footage moves; the prior says how far when the GR is quiet,
@@ -853,12 +943,19 @@ field names.
    the tools report is the prior in degrees from horizontal (90°), not
    an angle to compare with the wellbore's inclination; convert it to
    rise per hundred feet of vertical section and draw the line on it
-   (the first derivation, step 1). Nothing tests the first line but the
-   first run; there is no
-   log yet for a trial dip to be judged against.
+   (the first derivation, step 1). Nothing tests the first line on the
+   day it is drawn but the first run; there is no log yet for a trial
+   dip to be judged against. The test comes when the well rides a bed:
+   the dip measured there, where the difference from the prior's is worth
+   more than the alarm band over the first line's own vertical section,
+   redraws the first line once (the first derivation, step 1). The gate is
+   that column, not the dip sigma, which a first line's length makes far
+   too coarse.
 16. **Extending from the wrong MD.** The extension starts at the alarm's
    first MD — the 2 ft band's, not the 10 ft warning band's — and covers
-   the footage since, a delivery or a few. A line that leaves the run's
+   the footage since, a delivery or a few; on a look-alike, with no
+   alarm, it starts at the reach-back MD, where the run left the line
+   (*Between derivations*). A line that leaves the run's
    structure earlier files covered rock as new: on one lateral a line
    that left it where the margin entered the warning band, 1,300 ft
    before the alarm, rose a foot per hundred while the well dropped, and
