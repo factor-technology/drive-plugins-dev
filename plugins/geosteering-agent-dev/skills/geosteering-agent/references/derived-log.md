@@ -157,6 +157,18 @@ picking, no alignment sweep first.
    well's calibration and metadata, creates the top-of-target marker if
    missing, and reports any marker now outside the log — a warning, not a
    deletion, and usually a sign the interpretation should have gone further.
+   Set the **Depth Offset** on the Align Logs pane before the first save,
+   and set it by hand: on a derived log it is not something to solve for.
+   A real type log comes from another well, and the offset is the depth tie
+   that carries it into this well's frame — that is what Align Logs solves.
+   A derived log is already this well's own rock, so there is nothing to tie:
+   its offset is the active log's own reference elevation, and set that way
+   the log's depths read as this well's TVD. A pilot with no fit yet is saved
+   at the identity, offset zero, which hangs the log's axis at sea level —
+   right only where the elevation is zero, and anywhere else the whole log,
+   its markers and every bit-against-top reading sit one ground elevation
+   away from the well they describe. Set it once, on the bootstrap; later
+   saves keep it.
 5. **On a self-steered well, make an inadequate log fail loudly — before
    the reset, so the first run already has it.** Set the log tolerance on
    a block of the lateral's own, from the landing: the block that starts
@@ -195,7 +207,12 @@ subtraction: the bit's own position in the stratigraphic column,
 `coverage.last.tvdtl_mpe` on the latest run, minus the top-of-target
 marker's depth (`tot_name` from the project, its depth from the pilot
 well's markers, read after the save that creates it), both on the derived
-log's own axis. An auto-picked group's terminal depth against the survey,
+log's own axis, TVDTL, positive-down: the type log's own TVD. A derived
+log is this well's own rock, so there is no second well here, but its
+axis is hung at sea level by the identity fit, and the well's own TVD is
+counted from its datum elevation — the same kind of number from a
+different zero. Subtract on one axis, never across two, and a positive
+answer is the bit below the top. An auto-picked group's terminal depth against the survey,
 the log's top or bottom, and the coverage margin are not that number (an
 alternative's depth is still stated against the marker). When this reading
 moves more than the well did between deliveries, the computation's

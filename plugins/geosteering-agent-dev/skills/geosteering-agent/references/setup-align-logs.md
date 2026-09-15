@@ -85,7 +85,13 @@ the geologist's language:
   of the pilot's TVD-zero point (`TVDSS = datum_tvdss − pilotTvd`), i.e.
   the vertical placement that carries the pilot log into the active
   well's depth frame. Judge it by how the aligned logs look, not by its
-  magnitude.
+  magnitude. A DERIVED type log is the exception: it is this well's own
+  rock, so there is no second well to tie to and nothing for the solver
+  to find. Its Depth Offset is set by hand to the active log's reference
+  elevation, which makes the derived log's depths the active well's own
+  TVD; left at the bootstrap identity of zero it sits one ground
+  elevation off, and so do its markers and every bit-against-top reading
+  taken from it.
 - **GR Offset** (`gr_offset`, GR units): a baseline GR correction — the
   active log reads systematically higher or lower than the pilot, common
   when tool generations or borehole conditions differ.
