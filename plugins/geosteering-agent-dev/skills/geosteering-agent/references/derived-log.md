@@ -182,16 +182,30 @@ picking, no alignment sweep first.
    the log's own residual and covered rock would fail on drift alone,
    each failure costing a full recompute. Never under 5 gAPI (a stored
    sigma of 1.7): at 3 the first run fails at its first MD before any
-   footage is judged. On a first delivery still in the curve the block
-   starts at the first computed MD, and the floor holds there too. The log was recorded by this
+   footage is judged. The block starts at the landing — the first MD
+   where the survey comes within about five degrees of horizontal and
+   stays there — and never earlier. A first delivery whose bit is still
+   in the curve waits: add the block on the delivery the well lands, at
+   the landing, before that delivery's run; until then the curve runs at
+   the usual tolerance with its alarm muted, and nothing on that footage
+   is the lateral's to judge. The log was recorded by this
    bit, so in rock it holds the measurement matches it to within that
    noise, and a tolerance that tight leaves the computation no depth for
    footage it does not hold: instead of piling up quietly at an end the
    run ends in error and the job status reads **Impossible**, the alarm
-   in its hard form (*Reading the state*). Leave the curve's block at the
+   in its hard form (*Reading the state*). The curve's block stays at the
    usual tolerance: through the build the computation smooths the GR
    over several feet of TVD while the derivation filed the raw samples,
-   and that alone differs by more than a few gAPI.
+   and where the well descends fast that alone differs by more than a
+   few gAPI. An *Impossible* whose last MD lies in the curve under the
+   tight block is that — the block's start, not the log: move the start
+   to the landing (`move_param_block`) and rerun. Never delete the block
+   or loosen it for that error. The ride test (the extension, step 4)
+   runs at this block's tolerance, and at the usual one every delivery
+   reads as a ride: on one lateral the block was deleted for an
+   *Impossible* at the heel, the lateral ran at the form's 30 gAPI, every
+   delivery rode, the line ran parallel for 1,400 ft and the log ended
+   6 ft short of the rock.
 6. **Reset, rerun, restore ingestion.** A replaced type log invalidates all
    saved computation: `reset_job` then `trigger_job_rerun`, with approval,
    recomputing the well from scratch in typically minutes. On a WITSML
@@ -448,7 +462,22 @@ Every later cycle is the same four moves:
       log the rock owed nine. Say in every entry which dip the line is
       on and, where a bed was ridden, over what footage. Footage shorter
       than forty feet, or a GR that leaves the tolerance, measures
-      nothing: no bed is counted, and the prior gives the room.
+      nothing: no bed is counted, and the prior gives the room. The
+      test's footage is the run's, since the last derivation to the
+      bit, and a ride derives nothing, so while it lasts that footage
+      grows a delivery at a time and its spread with it; the ride ends
+      on the delivery the spread leaves the tolerance. The footage
+      ridden stands as drawn, parallel through the last delivery that
+      reported the ride, and the prior gives the room from that
+      delivery's bit — never further back, since a line redrawn at the
+      prior over ridden footage puts in column the well measured as
+      absent. A fresh alarm MD while the ride holds is the same alarm,
+      the well at the log's end in covered rock, and gets the same
+      answer: the run's picks to the alarm's MD, the parallel line to
+      the bit, saved, nothing derived, no reset (on one lateral three
+      full recomputes through a parallel line moved the log's end by
+      nothing). At a tolerance never set (the first derivation, step 5)
+      the test passes everything.
    5. *Place the features and check them against the log at that depth.*
       A clean spike must land on a clean bed the log holds, or past an
       end. Landing on shale in covered rock rejects the candidate. Past
@@ -563,7 +592,13 @@ shallower, less column drilled than the prior expected — beside the
 `room_ft` the stored dip sigma allows over that footage, and
 `look_alike` when the one exceeds the other. Say both numbers in the
 entry. Where the block prior is not what governs, the field comes back
-absent and the check is yours to make on the same terms. Shallower by
+absent and the check is yours to make on the same terms. Over footage
+the well is riding (the extension, step 4) the prior is not the
+predictor: the parallel line puts the bit at the log's bottom still,
+so read `coverage.last.tvdtl_mpe` against `coverage.log.bottom` on that
+axis instead, and shallower than that by more than the room is the
+lift; against the prior the number only grows with the ride, by the
+column the ride declined to add. Shallower by
 more than that room is the look-alike: the run has
 explained the new GR by lifting the well up the log over footage it had
 already placed, and the other explanation — the well deeper in section
@@ -893,7 +928,9 @@ field names.
 5. **Treating the alarm as an error.** It is the design working: the well
    found rock the log doesn't cover yet (an *Impossible* on a self-steered
    well says the same). Report it that way and re-derive;
-   don't tune dip or log sigma to paper over it.
+   don't tune dip or log sigma to paper over it, and don't delete the
+   tight block for an *Impossible* in the curve — its start moves to the
+   landing (the first derivation, step 5).
 6. **Resetting the calibration on replace.** The save writes in the pilot's
    own frame, and preserving it is what keeps the markers where they are.
    Re-run alignment only if a warp was actually in use (replacing drops it).

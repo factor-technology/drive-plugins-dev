@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: 78f96c92ed674bc71eda6170393c22091461574d
-source_commit_short: 78f96c92ed67
-source_commit_date: 2026-09-15T16:10:57-05:00
-source_commit_subject: skill: 0.5.57; the tools serve TVDTL positive-down, since that is what TVDTL means and what the log's own samples and its markers already are
-skill_version: 0.5.58
-built_at: 2026-09-15T16:10:57-05:00
+source_commit: d6109c1dc7ea6bd078c88e410c18f78fe00459d6
+source_commit_short: d6109c1dc7ea
+source_commit_date: 2026-09-16T09:18:16-05:00
+source_commit_subject: skill: 0.5.59; the tight tolerance block starts at the landing and never inside the curve, an Impossible in the curve moves its start rather than deleting it, a ride ends on the delivery its spread leaves the tolerance with the prior taking over from that delivery's bit, a fresh alarm MD on a ride is saved parallel with no derive and no reset, and the prior check on a ride reads the bit against the log's bottom (r12 deleted the block for a curve Impossible, rode the whole lateral at 30 gAPI, recomputed three times through a parallel line, and ended 6 ft short)
+skill_version: 0.5.59
+built_at: 2026-09-16T09:18:16-05:00
 built_from_workspace_dirty: false
