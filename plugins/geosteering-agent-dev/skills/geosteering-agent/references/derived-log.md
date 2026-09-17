@@ -259,7 +259,9 @@ guessed dip, and the run that follows is confined to the log built from
 that guess, so its structure over that footage gives the guess back and
 refines nothing; the runs after it, computed through more of the well,
 are what carry information about those depths, and wherever the well
-crosses them again the later pass rewrites them. Under Shallowest MD, the
+crosses them again the later pass rewrites them — written by the loop's
+second step, on the first delivery after the extension whose GR has
+changed (the loop, step 4), not at the next alarm. Under Shallowest MD, the
 loop's earlier choice, the first pass at each depth stood for the rest of
 the well and the extension's samples were never revised. The cost is a
 log that changes over covered footage wherever a later pass revisits a
@@ -284,8 +286,10 @@ Every later cycle is the same four moves:
    never the first MD of the 10 ft warning band, where the well is still
    in covered rock. An alarm whose first MD is the bit itself has no
    footage past it: the line is the run's picks to the bit, saved, and
-   the derivation waits for the next delivery, since a derive through
-   picks the run kept inside the log adds no depth and costs a recompute.
+   the extension waits for the next delivery, since a derive through
+   picks the run kept inside the log adds no depth; whether the log is
+   derived through those picks anyway is the second step's question
+   (step 4).
    Read the margins and the mass at
    each end beside the reason (*Reading the state*: an end approached
    but not yet reached reports as entropy), and diff this run's
@@ -402,7 +406,7 @@ Every later cycle is the same four moves:
    moves away from the rock the log was built from, and more with
    distance, but the character stays. A line that lays a long stretch of
    MD across a thin slice of the stratigraphic column files hundreds of
-   varying samples at a few depths, and the log keeps only the first at
+   varying samples at a few depths, and the log keeps only the last at
    each: the run then finds the rest elsewhere in the log, drawing
    structure the rock does not have, or fails there. So before saving, with
    the survey (`read_active_trajectory`), the GR (`read_active_log`), the
@@ -568,8 +572,8 @@ Every later cycle is the same four moves:
    It is a guess and is meant to be; the next run tests it. Stop at the bit.
    The run's structure over the new footage is not the line there: it was
    confined to the log, so a derive through it grows nothing (*The end
-   will not move*), and the next derivation takes what the runs since
-   have made of that footage.
+   will not move*), and the second step takes what the next run makes
+   of that footage (step 4).
 3. **Derive bare again and replace.** Deepest MD again, same approval,
    same save. Over covered footage the new log differs from the previous
    one wherever the run moved its structure since the last derivation:
@@ -582,15 +586,30 @@ Every later cycle is the same four moves:
 4. **Reset and rerun.** The replaced log invalidates the saved
    computation, so this run is Reset and Run (`reset_job`, then
    `trigger_job_rerun`). On the next run the alarm should clear and the
-   margins reopen. That run also tests the extension: where its structure
-   leaves the line over the extension's footage, on the cross section or
-   in the MPE slice, say the feet in the entry, and the next derivation
-   takes the run's structure there like any computed footage — the
-   depths the extension filed are refiled through the run's structure
-   there, and those no pass reaches drop out — and nothing is derived for
-   that alone. An alarm whose first MD lies inside the last extension is
-   the ordinary move: the run's structure to that MD, the hand line from
-   it.
+   margins reopen. That run tests nothing: it is confined to the log
+   built from the extension and gives the guess back. The test is the
+   **second step**, which every derivation with a hand segment owes, and
+   it is taken on the first delivery after the derivation whose GR has
+   changed — the spread of the GR drilled since the derivation has left
+   the block's log tolerance. While it holds within it (a ride, or
+   simply flat rock) the step waits: the parallel line is saved if the
+   alarm stands, nothing is derived, no reset. On that delivery, after
+   its Extend, read the coverage block before rebuilding anything,
+   because it chooses where the run's structure is cut; then rebuild the
+   line through the run's structure to the cut, derive Deepest MD,
+   replace, Reset and Run. The cut is the bit on a quiet delivery, with
+   no hand segment; the alarm's first MD on an alarm, with the extension
+   from there — after a ride, the ride's end, never the alarm's pinned
+   first MD; the reach-back MD on a look-alike (*Between derivations*),
+   with the prior's dip from there. The depths the extension filed are
+   refiled through the run's structure, those no pass reaches drop out,
+   and the delivery's own footage enters the log for the first time; say
+   the feet the run moved off the line in the entry. A second step cut
+   short of the bit carries a hand segment and owes a second step of its
+   own; one cut at the bit ends the chain, and the deliveries after it
+   are plain Extends until the next alarm. An alarm whose first MD lies
+   inside the last extension is that same move: the run's structure to
+   that MD, the hand line from it.
 
 Between derivations a delivery whose run raises no alarm is first the
 prior check of the loop's step 1, every time and before anything else.
@@ -600,7 +619,12 @@ since the last derivation as `shallower_than_prior_ft` — positive for
 shallower, less column drilled than the prior expected — beside the
 `room_ft` the stored dip sigma allows over that footage, and
 `look_alike` when the one exceeds the other. Say both numbers in the
-entry. Where the block prior is not what governs, the field comes back
+entry. After a second step cut at the bit the well sits above the log's
+bottom, and the check, which extrapolates from the bottom, reads that
+standoff as a lift for a delivery or two: a `look_alike` whose
+`reach_back.md` is the bit is the standoff, not a lift, and the
+departure is measured from the bit's `tvdtl_mpe` at the derivation
+instead. Where the block prior is not what governs, the field comes back
 absent and the check is yours to make on the same terms. Over footage
 the well is riding (the extension, step 4) the prior is not the
 predictor: the parallel line puts the bit at the log's bottom still,
@@ -644,8 +668,9 @@ alarm looks like. Within the room, read the run's structure over the
 footage since the last derivation against the line (`read_mpe_slice`
 over those MDs, or the cross section) and say the feet in the entry on
 every alarm-free delivery: where it stands off the line is what the
-next derivation writes into the log, and nothing is derived for it
-alone. A delivery that extends the
+second step writes into the log on the delivery that owes it (the
+loop, step 4), and nothing is derived for it alone on any other. A
+delivery that extends the
 active log and survey and leaves the type log as it is — on a replay fed
 segment by segment as much as on a live feed — runs as a plain **Extend**
 (`trigger_job_rerun` alone): it computes only the footage past the pointer
@@ -766,8 +791,8 @@ main way to get out of step:
   least trustworthy stretch: the log there came through the speculative
   part of the line, so the bit marginal often splits between your line
   and an alternative a few tens of feet away (P1 against P2). Do not
-  choose between them by hand: the next derivation takes the run's
-  structure there (the loop, step 2), and the next footage decides.
+  choose between them by hand: the second step takes the run's
+  structure there (the loop, step 4), and the next footage decides.
 - **Back in covered rock.** Footage drilled since the derivation that fits
   inside the log — margins in the tens of feet, tight single-peaked
   marginals, no alarm — is the loop's success case, even when the estimate
@@ -780,9 +805,9 @@ main way to get out of step:
   constant under swinging passes over the new footage is an earlier cycle's
   smear, not success, and at a tolerance never set the run cannot say so
   (the first derivation, step 5). The guess comes out of the log at the
-  next derivation, which takes the run's structure over the extension
-  and drops the depths the well never reached; re-derive only on the
-  alarm or the look-alike.
+  second step (the loop, step 4), which takes the run's structure over
+  the extension and drops the depths the well never reached; after it,
+  re-derive only on the alarm or the look-alike.
 - **Stuck at an end.** The same alarm on consecutive runs, a re-derivation
   between each, and the log's end not moving, the line drawn parallel to
   the well while the GR keeps swinging: that is the loop spinning, not
@@ -959,7 +984,9 @@ field names.
 11. **Deriving to quiet a near-end warning.** Re-deriving through a run
    that kept the well inside the log adds no stratigraphic column (the well sampled
    nothing new) and, if the run has matched a look-alike, writes the new
-   passes into the wrong beds. Derive on an excursion, not on the flag.
+   passes into the wrong beds. Derive on an excursion, not on the flag;
+   the one derivation through such a run is the second step (the loop,
+   step 4), owed once per hand segment.
    The same holds for an entropy alarm with the bit clear of both ends
    (*Reading the state*): the alarm says look, and the margins say
    whether there is anything to derive.
@@ -981,8 +1008,9 @@ field names.
 13. **Reset and Run on a delivery that left the type log alone.** An
    extended active log and survey with the type log untouched run as a
    plain Extend, which reaches the same result in a fraction of the time;
-   a run that leaves the line over the last extension changes nothing
-   until the next derivation (the loop, step 4). Reset only when the type
+   a run that leaves the line over the last extension is written in by
+   the second step, on the first delivery whose GR has changed (the loop,
+   step 4), and by nothing before it. Reset only when the type
    log changed, a state-invalidating parameter changed, or a stalled job
    holds the pointer.
 14. **Bending the line to explain GR the log already holds.** A pass within

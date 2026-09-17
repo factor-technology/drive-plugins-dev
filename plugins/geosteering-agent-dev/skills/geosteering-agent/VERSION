@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: e2daf7a32843f0deedeb2b6ebea9e6fe7409a6b6
-source_commit_short: e2daf7a32843
-source_commit_date: 2026-09-17T09:11:56-05:00
-source_commit_subject: skill: 0.5.61; the derived type log is built with Deepest MD, not Shallowest, so the last pass through a stratigraphic depth fills it and the samples the hand extension guessed are rewritten wherever the well crosses them again
-skill_version: 0.5.61
-built_at: 2026-09-17T09:11:56-05:00
+source_commit: 878c2c294c9c96049ac8576e1e83a463a51b6c3a
+source_commit_short: 878c2c294c9c
+source_commit_date: 2026-09-17T16:18:16-05:00
+source_commit_subject: skill: 0.5.62; every derivation with a hand segment owes a second step, a rederivation through the run on the first delivery after it whose GR has changed
+skill_version: 0.5.62
+built_at: 2026-09-17T16:18:16-05:00
 built_from_workspace_dirty: false

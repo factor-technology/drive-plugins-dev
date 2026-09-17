@@ -234,7 +234,14 @@ interpretation to the bit — the run's own structure
 first MD, taken whole and never hand-edited, then a speculative structure
 from there to the bit — and
 the log is derived (Deepest MD, `stat_method: 'highest md'`; the tool
-defaults to mean) and replaced again. That structure has to move that
+defaults to mean) and replaced again. Every derivation with a hand
+segment is answered by a second step on the first delivery after it
+whose GR has changed: the line rebuilt through that run's structure —
+to the bit on a quiet delivery, to the alarm's first MD or the
+reach-back MD otherwise, the hand segment only past those — derived and
+replaced again, so the guess lives one delivery, not until the next
+alarm; while the GR since the derivation holds within the tolerance the
+second step waits. That structure has to move that
 footage past the end: derive read-only through the extension first —
 trials through the candidates measure their room and landings, but the
 choice is the survivor nearest the prior, never the steepest or the
@@ -269,8 +276,8 @@ there wherever the run moved since the last derivation — the design, not
 an error, and the entry reports the largest such revision; only the
 extension grows the log, and it is the footage since the alarm's first
 MD (the 2 ft band's, not the warning band's), a delivery or a few, never
-earlier. Where a run leaves the last extension, the next derivation
-takes the run's structure over it. A first line drawn at the wrong dip
+earlier. Where a run leaves the last extension, the second step takes
+the run's structure over it. A first line drawn at the wrong dip
 is repaired by the landing-ride redraw or a new first derivation, not
 from inside the loop. Before acting on any
 of this —
