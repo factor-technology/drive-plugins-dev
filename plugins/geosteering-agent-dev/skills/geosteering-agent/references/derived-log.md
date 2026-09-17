@@ -165,7 +165,7 @@ picking, no alignment sweep first.
    crosses the connector. Read the result on the type log track — orange
    correlations are the backprojected passes, the light curve is the derived
    log.
-3. **Derive with Shallowest MD** (`least md`; the tool defaults to mean,
+3. **Derive with Deepest MD** (`highest md`; the tool defaults to mean,
    so pass it — *The statistic*, below).
 4. **Save and replace, with approval.** Writing the curve onto the pilot well
    replaces its log: destructive, so advisory-plus-approval. It keeps the
@@ -249,24 +249,29 @@ correlation moved, not the well: say so.
 
 ### The statistic
 
-Shallowest MD, always (`least md`; the tool defaults to mean, so pass it).
+Deepest MD, always (`highest md`; the tool defaults to mean, so pass it).
 A self-steered well assumes the stratigraphic column is the same at every
 lateral position, so every pass through a stratigraphic depth sees the
-same rock and the first pass is as good as any. Shallowest MD keeps the
-first sample in MD order at each depth: wherever the line is the same as
-at the last derivation a re-derivation gives those depths back unchanged,
-and a depth changes only where the line over the footage that files it
-moved — the run's structure revised since the last derivation, or the new
-footage reaching depths no pass had. That matters because every
-replace recomputes the whole well against the new log. Mean and median let
-a later pass at the same depth — hundreds of samples on a long horizontal
-stretch — outvote or dilute the first, so if the stratigraphic column ever
-does change along the lateral they rewrite depths whose structure was
-already right and the recompute moves it; under Shallowest MD the change
-shows where it belongs, as a residual over the new footage, and the log
-before it stands. The other statistics are for a lateral whose
-stratigraphic column does vary, out of scope here (that case takes several
-pilots); a disagreement between passes is not a reason to reach for them.
+same rock, and the statistic only decides which pass fills a depth that
+several reached. Deepest MD keeps the last sample in MD order at each
+depth. The depths at the log's end are filed by the hand extension at a
+guessed dip, and the run that follows is confined to the log built from
+that guess, so its structure over that footage gives the guess back and
+refines nothing; the runs after it, computed through more of the well,
+are what carry information about those depths, and wherever the well
+crosses them again the later pass rewrites them. Under Shallowest MD, the
+loop's earlier choice, the first pass at each depth stood for the rest of
+the well and the extension's samples were never revised. The cost is a
+log that changes over covered footage wherever a later pass revisits a
+depth — the extension itself rewrites the covered depths its footage
+crosses near the old end — and every replace recomputes the whole well
+against the new log: the entry reports the largest such revision (the
+loop, step 2), and a derivation that took a look-alike lift has rewritten
+covered depths until the reach-back undoes it. Mean and median let
+hundreds of samples on a long horizontal stretch dilute every pass, so
+beds file as a smear; they are for a lateral whose stratigraphic column
+does vary, out of scope here (that case takes several pilots), and a
+disagreement between passes is not a reason to reach for them.
 
 ## The loop
 
@@ -565,7 +570,7 @@ Every later cycle is the same four moves:
    confined to the log, so a derive through it grows nothing (*The end
    will not move*), and the next derivation takes what the runs since
    have made of that footage.
-3. **Derive bare again and replace.** Shallowest MD again, same approval,
+3. **Derive bare again and replace.** Deepest MD again, same approval,
    same save. Over covered footage the new log differs from the previous
    one wherever the run moved its structure since the last derivation:
    that is the design, not an error, and the entry carries the largest
@@ -581,8 +586,8 @@ Every later cycle is the same four moves:
    leaves the line over the extension's footage, on the cross section or
    in the MPE slice, say the feet in the entry, and the next derivation
    takes the run's structure there like any computed footage — the
-   depths the extension filed that no pass reaches through the run's
-   structure drop then, under Shallowest MD — and nothing is derived for
+   depths the extension filed are refiled through the run's structure
+   there, and those no pass reaches drop out — and nothing is derived for
    that alone. An alarm whose first MD lies inside the last extension is
    the ordinary move: the run's structure to that MD, the hand line from
    it.
@@ -625,8 +630,9 @@ saying how it was found or why it could not be; an absent one is read
 off the slice as above, not guessed at.
 From the reach-back MD the line runs at the prior's dip to the bit,
 through the run's picks up to it and none after; derive bare and
-replace (under Shallowest MD the depths the lifted footage used to
-fill drop out and the footage files below the log's end instead),
+replace (a derivation that took the lift had, under Deepest MD, written
+the lifted footage over the look-alike depths; refiled below the log's
+end it gives them back to the passes that own them),
 Reset and Run, and say the reach-back MD and the feet in the entry.
 Reaching back further than the departure is filing covered rock as
 new, and reaching back less leaves the lift in place; the departure
@@ -932,9 +938,10 @@ field names.
    Re-run alignment only if a warp was actually in use (replacing drops it).
 7. **Forgetting to restore ingestion.** A project left with its pollers
    paused after a manual rerun quietly stops being steered.
-8. **Deriving with mean or median.** A later pass at a depth the log holds
-   then rewrites it, and every replace recomputes the whole well against
-   the rewritten log. Shallowest MD, always (*The statistic*).
+8. **Deriving with mean, median or Shallowest MD.** Mean and median let a
+   long horizontal stretch dilute every pass at a depth; Shallowest MD
+   freezes the extension's guessed samples for the rest of the well.
+   Deepest MD, always (*The statistic*).
 9. **Quoting stale project state.** A coached session edits the project under
    you — logs, tops, compute range. Re-read before asserting a number.
 10. **Shipping the lateral through the connector.** Inline samples are for

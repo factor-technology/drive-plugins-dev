@@ -233,7 +233,8 @@ interpretation to the bit — the run's own structure
 (`copy_computed_interpretation`) from the first computed MD to the alarm's
 first MD, taken whole and never hand-edited, then a speculative structure
 from there to the bit — and
-the log is derived and replaced again. That structure has to move that
+the log is derived (Deepest MD, `stat_method: 'highest md'`; the tool
+defaults to mean) and replaced again. That structure has to move that
 footage past the end: derive read-only through the extension first —
 trials through the candidates measure their room and landings, but the
 choice is the survivor nearest the prior, never the steepest or the

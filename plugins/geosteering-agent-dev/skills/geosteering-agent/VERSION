@@ -1,8 +1,8 @@
 source: drive-app/agent/geosteering-agent.md
-source_commit: 68bb49702cae33dd862fcb2e00eb2e5713c871cd
-source_commit_short: 68bb49702cae
-source_commit_date: 2026-09-16T19:12:43-05:00
-source_commit_subject: skill: 0.5.60; the manual interpretation is rebuilt at every derivation, never extended: from the first computed MD to the alarm's first MD it is the latest run's structure (copy_computed_interpretation, never hand-edited), from there to the bit the hand extension as before, and the log is expected to change over covered footage wherever the run moved since the last derivation, with the largest revision reported; append-only footage, provisional picks and the confirmation pass are gone, and the first line is drawn at the expected top-of-target depth rather than at the wellbore (EF-2H-self-steer: the run walked 6 to 10 ft off a hand line held over 13,786 to 15,050 with nothing to pull them together, picks stitched from two runs left an 8 ft step at 15,202, and a wellbore-drawn first line plus a 514.5 ft marker move displaced H1 and default in follow mode)
-skill_version: 0.5.60
-built_at: 2026-09-16T19:12:43-05:00
+source_commit: e2daf7a32843f0deedeb2b6ebea9e6fe7409a6b6
+source_commit_short: e2daf7a32843
+source_commit_date: 2026-09-17T09:11:56-05:00
+source_commit_subject: skill: 0.5.61; the derived type log is built with Deepest MD, not Shallowest, so the last pass through a stratigraphic depth fills it and the samples the hand extension guessed are rewritten wherever the well crosses them again
+skill_version: 0.5.61
+built_at: 2026-09-17T09:11:56-05:00
 built_from_workspace_dirty: false
