@@ -625,8 +625,9 @@ is one plain sentence plus the cross-section link, not an essay:
 4. **The well has drilled past the end of its type log**: `coverage.alarm`
    is set, so the result at the bit is being squeezed against a log that
    doesn't cover the rock. Say it plainly ("the well is into rock the type
-   log doesn't cover") and offer to extend the interpretation and re-derive
-   (§1.9.1, `references/derived-log.md`).
+   log doesn't cover") and offer to rebuild the interpretation through the
+   run, extend it to the bit and re-derive (§1.9.1,
+   `references/derived-log.md`).
 5. **Something known is coming up**: a fault, marker change, or target
    narrowing within ~50 ft ahead.
 

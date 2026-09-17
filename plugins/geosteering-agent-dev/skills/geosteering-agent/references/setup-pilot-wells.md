@@ -228,12 +228,11 @@ until the well has drilled past `derived_md_last`. A plain
 derivation.
 
 Deriving is a **loop, not a one-shot**: each time a run reports the well has
-drilled past an end of the log, the geologist extends the *same* manual
-interpretation to the bit — the run's own picks
-(`copy_computed_interpretation`) over the footage it kept inside the log,
-revised at the trailing end where the geologist's own picks fit the new GR
-better, then a speculative structure from where the estimate piled up at an end of
-the log — and
+drilled past an end of the log, the geologist rebuilds the *same* manual
+interpretation to the bit — the run's own structure
+(`copy_computed_interpretation`) from the first computed MD to the alarm's
+first MD, taken whole and never hand-edited, then a speculative structure
+from there to the bit — and
 the log is derived and replaced again. That structure has to move that
 footage past the end: derive read-only through the extension first —
 trials through the candidates measure their room and landings, but the
@@ -263,16 +262,16 @@ the dip prior, which carries dip and nothing else (§1.9.3): the polyline
 in structure mode, or in constants mode the apparent dip of the parameter
 block covering that footage, which can change from block to block; a horizontal
 line is not a safer guess than the prior, only a different dip that
-nobody claimed. Never derive through the computed
-structure over confirmed footage: it was solved against this very log.
-The line over that footage does not move at all: it grows at one end,
-as the log does, and the extension is the footage since the alarm's
-first MD (the 2 ft band's, not the warning band's), a delivery or a few,
-never earlier. An extension is provisional until a run reproduces it:
-where the run leaves it, the depths it did not reproduce come out by
-re-deriving through the run's structure over that footage, which can
-only shorten the log. A first line drawn at the wrong dip is repaired by
-a new first derivation, not from inside the loop. Before acting on any
+nobody claimed. Over the footage a run has computed the line is that
+run's structure, taken whole at every derivation, so the log changes
+there wherever the run moved since the last derivation — the design, not
+an error, and the entry reports the largest such revision; only the
+extension grows the log, and it is the footage since the alarm's first
+MD (the 2 ft band's, not the warning band's), a delivery or a few, never
+earlier. Where a run leaves the last extension, the next derivation
+takes the run's structure over it. A first line drawn at the wrong dip
+is repaired by the landing-ride redraw or a new first derivation, not
+from inside the loop. Before acting on any
 of this —
 the first derivation, the no-pilot bootstrap, the statistic,
 reading the coverage states, the pitfalls — read `references/derived-log.md`
