@@ -21,6 +21,7 @@ Two checkboxes ask Drive to alert you when the computed interpretation indicates
 
 - **Extend existing interpretation** — wire a saved manual interpretation for the computation to extend, instead of extending its own prior result.
 - **Autotargeting** (experimental) — proposes steering targets: enable it and set the centerline depth below top of target, the corridor above/below the centerline, and a dogleg-severity penalty coefficient.
+- **Auto-derive type log** — after each run, re-derives the type log through an auto-picked horizon that deepens it, then resets and reruns; each re-derivation is a full rerun. It needs a type log you have already [derived](../profile.md#derived) from this well (the first derivation is always yours), and acts only when a horizon follows the computed structure behind the bit and carries the well below the log's bottom without changing the log above it. Turning it on subscribes you to its notifications; uncheck it to stop.
 - **Executor** — the compute tier: **Standard**, **Large**, or **Extra Large**. Stay on Standard unless a run actually fails with an out-of-memory or timeout error; a generic runtime error is *not* an out-of-memory signal, and escalating the tier won't fix it.
 
 ## WITSML polling
