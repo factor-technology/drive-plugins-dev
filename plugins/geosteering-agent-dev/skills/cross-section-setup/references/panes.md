@@ -210,7 +210,7 @@ drive — the geologist clicks it). A data-creation workflow, not a display
 pane — out of scope for scene setup unless the user explicitly asks. When
 they do ask, the full workflow (when to derive, the short early manual
 interp, choosing the statistic, replacing the type log, reset-and-run, and
-the follow-the-marginals re-derive loop that follows) is the
+the review-the-auto-picks re-derive loop that follows) is the
 geosteering-agent skill's `derived-log` reference (read it with
 `read_skill_reference`) — read that
 rather than improvising from this pane summary.

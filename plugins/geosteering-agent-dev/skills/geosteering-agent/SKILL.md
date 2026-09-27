@@ -1,16 +1,16 @@
 ---
 name: geosteering-agent
-description: "Use when acting as the Factor Drive geosteering copilot: reading and judging job results (marginals, MPE, the auto-picked horizons, whether the well is in the target), setting up or changing a Drive project (pilot wells and type logs, formation markers, the active well's survey and logs, alignment, dip, faults, job parameters, WITSML, reruns and resets), tuning a run, or answering how Drive works. Also use when the type log correlates poorly with the lateral, when a run's coverage alarm asks for the log to be re-derived, when a run's marginals show probability below the derived type log's bottom, or when the user wants to derive a type log from the well itself and steer against it. Its guidance is read from the Factor Drive connector, which must be connected."
-version: 0.5.66
+description: "Use when acting as the Factor Drive geosteering copilot: reading and judging job results (marginals, MPE, the auto-picked horizons, whether the well is in the target), setting up or changing a Drive project (pilot wells and type logs, formation markers, the active well's survey and logs, alignment, dip, faults, job parameters, WITSML, reruns and resets), tuning a run, or answering how Drive works. Also use when the type log correlates poorly with the lateral, when a run's coverage alarm asks for the log to be re-derived, when a run's auto-picked horizons show one ending below the derived type log's bottom, or when the user wants to derive a type log from the well itself and steer against it. Its guidance is read from the Factor Drive connector, which must be connected."
+version: 0.5.67
 author: Factor Technology
 license: UNLICENSED
 metadata:
   hermes:
     tags: [geosteering, drive, agent, petroleum, interpretation, llm-agent]
     related_skills: []
-  source_commit: "403212d8fd784f27d7c54975c39d371bf637c112"
-  source_commit_date: "2026-09-26T14:56:37-05:00"
-  built_at: "2026-09-26T14:56:37-05:00"
+  source_commit: "1cf7d6405ecea2a43da5ebe0a72fbcbe5bef6450"
+  source_commit_date: "2026-09-27T09:49:40-05:00"
+  built_at: "2026-09-27T09:49:40-05:00"
 ---
 
 # Geosteering Agent (Factor Drive)
@@ -28,7 +28,7 @@ sign-in, so it is always the guidance that matches the tools the connector
 serves.
 
 > **Provenance:** this bundle was generated from drive-app commit
-> `403212d8fd78` (2026-09-26T14:56:37-05:00). See `VERSION`.
+> `1cf7d6405ece` (2026-09-27T09:49:40-05:00). See `VERSION`.
 
 ## When to Use
 
@@ -44,8 +44,9 @@ serves.
   discretization) or asks what a job reset will cost.
 - The type log correlates poorly with the lateral, local log character is
   missing from it, a run's coverage alarm asks for a re-derivation, a run's
-  marginals show probability below the derived type log's bottom, or the
-  user wants to derive a type log from the well itself and steer against it.
+  auto-picked horizons show one ending below the derived type log's bottom,
+  or the user wants to derive a type log from the well itself and steer
+  against it.
 
 Don't use for: general LLM-agent design questions, or geosteering math with
 no Drive project behind it.
@@ -75,7 +76,7 @@ no Drive project behind it.
 | Run configuration: executor, triggers, WITSML polling, reruns, job reset | `setup-run-configuration` |
 | Multi-step Drive workflows — before your first write of a session | `tool-catalog` |
 | Coaching cross-section gestures (hand-picking, target line) or the Traces overlay | `cross-section` |
-| Poor type-log correlation (structure plausible or not); local log character (e.g. clean stringers) absent from the type log; deriving a type log from the well itself (the Derived pane) and replacing the project's type log with it; a run whose coverage alarm asks for a re-derivation or whose marginals show probability below the log's bottom, and the derive → run → follow-the-marginals → re-derive loop that follows | `derived-log` |
+| Poor type-log correlation (structure plausible or not); local log character (e.g. clean stringers) absent from the type log; deriving a type log from the well itself (the Derived pane) and replacing the project's type log with it; a run whose coverage alarm asks for a re-derivation or whose auto-picked horizons show one ending below the log's bottom, and the derive → run → review the auto-picks → re-derive loop that follows | `derived-log` |
 
 ## Situational References
 
