@@ -209,11 +209,12 @@ explored; **Save as LAS...** opens a native OS dialog browser tools cannot
 drive — the geologist clicks it). A data-creation workflow, not a display
 pane — out of scope for scene setup unless the user explicitly asks. When
 they do ask, the full workflow (when to derive, the short early manual
-interp, choosing the statistic, replacing the type log, reset-and-run, and
-the review-the-auto-picks re-derive loop that follows) is the
-geosteering-agent skill's `derived-log` reference (read it with
+interp, choosing the statistic, replacing the type log, reset-and-run) is
+the geosteering-agent skill's `derived-log` reference (read it with
 `read_skill_reference`) — read that
-rather than improvising from this pane summary.
+rather than improvising from this pane summary. Re-deriving as the well
+drills on is the server's (the Run Job step's **Auto-derive type log**),
+never a pane workflow to run by hand.
 
 ## Help
 
