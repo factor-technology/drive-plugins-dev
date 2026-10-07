@@ -1,16 +1,16 @@
 ---
 name: geosteering-agent
-description: "Use when acting as the Factor Drive geosteering copilot: reading and judging job results (marginals, MPE, the auto-picked horizons, whether the well is in the target), setting up or changing a Drive project (pilot wells and type logs, formation markers, the active well's survey and logs, alignment, dip, faults, job parameters, WITSML, reruns and resets), tuning a run, or answering how Drive works. Also use when the type log correlates poorly with the lateral, when a run raises a coverage alarm on a derived type log, when the user wants to derive a type log from the well itself and steer against it, or when auto-derive is armed, reports a derivation, or needs undoing. Its guidance is read from the Factor Drive connector, which must be connected."
-version: 0.5.70
+description: "Use when acting as the Factor Drive geosteering copilot: reading and judging job results (marginals, MPE, the auto-picked horizons, whether the well is in the target), setting up or changing a Drive project (pilot wells and type logs, formation markers, the active well's survey and logs, alignment, dip, faults, job parameters, WITSML, reruns and resets), tuning a run, or answering how Drive works. Also use when the type log correlates poorly with the lateral, or when the user wants to derive a type log from the well itself. Its guidance is read from the Factor Drive connector, which must be connected."
+version: 0.5.71
 author: Factor Technology
 license: UNLICENSED
 metadata:
   hermes:
     tags: [geosteering, drive, agent, petroleum, interpretation, llm-agent]
     related_skills: []
-  source_commit: "f7b6b4a56c1e1ae109925483ec2c6a570ba2c889"
-  source_commit_date: "2026-09-27T18:44:41-05:00"
-  built_at: "2026-09-27T18:44:41-05:00"
+  source_commit: "06f017a4e8b40e10d8c9fe1a7b69b23bb492cbe0"
+  source_commit_date: "2026-10-07T09:16:29-05:00"
+  built_at: "2026-10-07T09:16:29-05:00"
 ---
 
 # Geosteering Agent (Factor Drive)
@@ -28,7 +28,7 @@ sign-in, so it is always the guidance that matches the tools the connector
 serves.
 
 > **Provenance:** this bundle was generated from drive-app commit
-> `f7b6b4a56c1e` (2026-09-27T18:44:41-05:00). See `VERSION`.
+> `06f017a4e8b4` (2026-10-07T09:16:29-05:00). See `VERSION`.
 
 ## When to Use
 
@@ -43,9 +43,8 @@ serves.
 - The user wants a run tuned (dip tolerance, log tolerance, faults,
   discretization) or asks what a job reset will cost.
 - The type log correlates poorly with the lateral, local log character is
-  missing from it, a run raises a coverage alarm on a derived type log, the
-  user wants to derive a type log from the well itself and steer against
-  it, or auto-derive is armed, reports a derivation, or needs undoing.
+  missing from it, or the user wants to derive a type log from the well
+  itself.
 
 Don't use for: general LLM-agent design questions, or geosteering math with
 no Drive project behind it.
@@ -75,7 +74,7 @@ no Drive project behind it.
 | Run configuration: executor, triggers, WITSML polling, reruns, job reset | `setup-run-configuration` |
 | Multi-step Drive workflows — before your first write of a session | `tool-catalog` |
 | Coaching cross-section gestures (hand-picking, target line) or the Traces overlay | `cross-section` |
-| Poor type-log correlation (structure plausible or not); local log character (e.g. clean stringers) absent from the type log; deriving a type log from the well itself (the Derived pane) and replacing the project's type log with it; a run's coverage alarm on a derived log; auto-derive (arming it, its record, undoing one) | `derived-log` |
+| Poor type-log correlation (structure plausible or not); local log character (e.g. clean stringers) absent from the type log; deriving a type log from the well itself (the Derived pane) and replacing the project's type log with it | `derived-log` |
 
 ## Situational References
 
