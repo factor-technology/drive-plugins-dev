@@ -8,11 +8,11 @@ The Profile tab is Drive's main working view: an interactive cross section of th
 
 ### Scene
 
-Overall display: the **Lateral Domain** (MD or VS along the horizontal axis), toggles for the active log, type log, correlations, cursor info, legend and names, and the **Depth axis** — **TVDSS**, **TVDTL** (type-log TVD), or **TVD** (see [depth frames](./concepts.md#depth-frames)).
+Overall display: the **Lateral Domain** (MD, VS, or MAPD along the horizontal axis), toggles for the active log, type log, correlations, cursor info, legend and the project name, and the **Depth axis** — **TVDSS**, **TVDTL** (type-log TVD), or **TVD** (see [depth frames](./concepts.md#depth-frames)).
 
 ### Components
 
-Show/hide each element of the scene: wellbore, well plan, projected trajectory, pilot wells, interpolated type logs, formations, prior structure — and the background image (once one is uploaded on the [Background tab](./background.md)), with a crop toggle and an **opacity** slider that fades the image so the overlays read against a busy cross section.
+Show/hide each element of the scene: wellbore, well plan, projected trajectory, pilot wells, interpolated type logs, formations, prior structure — and the background image (uploaded on the [Background tab](./background.md)), with a crop toggle and an **opacity** slider that fades the image so the overlays read against a busy cross section.
 
 ### Zoom
 
@@ -22,11 +22,11 @@ Three rows of framing controls, plus a **Toe** button (center the view on the tr
 - **V Exaggeration** — the vertical stretch as a multiplier (e.g. **8.0 ×**).
 - **Horizontal** — the horizontal scale in real-world units per screen inch (e.g. **1 in = 200 ft**); editing it keeps the vertical exaggeration.
 
-The two numbers are click-to-edit (Enter or Tab commits and moves to the next field) and together define the cross section's scale — to match another scene, copy its two numbers. Keyboard and mouse-wheel equivalents are listed under [keyboard shortcuts](#keyboard-shortcuts).
+The two numbers are click-to-edit (Enter or Tab commits and moves to the next field) and together define the cross section's scale — to match another scene, copy its two numbers. Mouse-wheel equivalents are listed under [keyboard shortcuts](#keyboard-shortcuts).
 
 ### Target
 
-The target line: display and picking toggles, the corridor above/below the line, colors, and an optional **horizon extension** drawn out to a chosen ending VS. The target line is drawn by hand — enable picking here and click along the cross section.
+The target line is drawn by hand. The **Target Line** section has **display**, **extend** (key `t`) — click along the cross section to add to the line — a color picker, a delete control, **annotate**, and **history**, which shows the superseded segments of the line; by default only the current line draws. **extend** needs a VS azimuth on the project and is unavailable once the line reaches the toe. The **Drilling Window** section draws a corridor **above** and **below** the line. The horizon extension projects the line out to an **Ending VS** — set from the well plan or the prior structure when the project has one, editable otherwise.
 
 ### Marginals
 
@@ -37,14 +37,14 @@ The per-depth probability field from the computation, displayed as color or as w
 Two tables, side by side and alike: **Computed**, the horizons the computation produced, and **Manual**, the ones you pick by hand. Every row reads the same way — a radio, a checkbox, a color swatch, its name — and a copy icon on a computed row saves an editable copy into Manual. The radio is one group across both tables: **what the cross section follows**. The checkbox is **what it shows**. A manual interpretation on the radio is **manual mode**: its picks show for editing.
 
 - **Following.** The row whose radio is lit is the structure the cross section hangs on: the formation bands, the log tracks' correlations and forward projections, the traces and the cursor readouts follow it. By default that is the MPE. Choose an auto-picked horizon or a manual interpretation to hang everything on it instead. After a new run an auto-picked horizon on the radio gives way to that run's most probable pick (P1); a run with no picks at all hands the radio back to the MPE.
-- **Editing.** A manual interpretation whose radio is lit is in **manual mode**: its picks show, and you can drag a pick to move it, drag a box to select, and delete the selection. The Manual table's **none** radio is manual mode off: it is lit while the MPE or an auto-picked horizon holds the radio, and choosing it from a manual interpretation returns the cross section to the MPE. Key `m` moves the radio between the MPE and the manual interpretation that last held it. **Enable picking** (key `p`) adds picks by clicking along the log; it needs a manual interpretation on the radio (with none yet it creates the first). Moving the radio to the MPE or an auto-picked horizon ends picking.
+- **Editing.** A manual interpretation whose radio is lit is in **manual mode**: its picks show, and you can drag a pick to move it, drag a box to select, and delete the selection. The Manual table's **none** radio is manual mode off: it is lit while the MPE or an auto-picked horizon holds the radio, and choosing it from a manual interpretation returns the cross section to the MPE. Key `m` moves the radio between the MPE and the manual interpretation that last held it. **enable picking** (key `p`) adds picks by clicking along the log; it needs a manual interpretation on the radio (with none yet, key `p` or the **Pick** button creates the first). Moving the radio to the MPE or an auto-picked horizon ends picking.
 - **Showing.** Each checkbox draws or hides its row's horizon, whatever the cross section follows and whether or not picking is on. A followed auto-picked horizon or manual interpretation is always drawn; the MPE can be hidden while the cross section still hangs on it, and its formation bands hide with it. **Select all** / **Deselect all** at the top of the pane act on every checkbox — the MPE, the auto-picks and the manual interpretations; Deselect all leaves a followed auto-pick or manual interpretation displayed (key `0` brings the MPE back). Key `0` toggles the MPE's checkbox.
-- **Computed** — the [MPE](./results.md#the-mpe) heads the table, and under it come the horizons Drive auto-picks after every run, grouped by the peak of the last marginal each one ends in, by probability mass: a group's tag, **P1** for the heaviest peak, **P2** next, sits to the left of its rows, which share a tint of one color. Its caret folds the alternatives away under the group's lead horizon. A lead row reads its end depth and the group's share of the last marginal; an alternative reads the measured depth where it forks from the lead. Keys `1`–`9` show or hide the lead horizon of group P1..P9. Hovering a row previews it on the cross section. A note appears when the picks come from an older run than the current computation.
-- **Manual** — create (**New**), **Import** (paste depth picks), recolor and rename manual interpretations; **Delete checked** removes every manual interpretation whose checkbox is checked (never the one whose radio is lit); toggle **picking** and **snap to structure**.
+- **Computed** — the [MPE](./results.md#the-mpe) heads the table, and under it come the horizons Drive auto-picks after every run, grouped by the peak of the last marginal each one ends in, by probability mass: a group's tag, **P1** for the heaviest peak, **P2** next, sits to the left of its rows, which share a tint of one color. Its caret folds the alternatives away under the group's lead horizon. A lead row reads its end depth and the group's share of the last marginal; an alternative reads the measured depth where it forks from the lead. A grey **P?** group holds alternatives that end in a lobe carrying under 0.1 % of the mass. Keys `1`–`9` show or hide the lead horizon of group P1..P9. Hovering an auto-picked row previews it on the cross section. The header notes when picking is still running, when there are no picks yet, and when the picks come from an older run than the current computation.
+- **Manual** — **New…**, **Import…** (a two-column CSV of MD and depth), and on each row recolor, rename, **Simplify** (on the row holding the radio) and delete. **Delete checked** removes every manual interpretation whose checkbox is checked (never the one whose radio is lit). **enable picking** and **snap to structure** toggle picking and snapping. Until the first manual interpretation exists the list reads *No manual interpretations* and these controls stay hidden.
 
 ### Formations
 
-Fill and color controls for the formation bands, and the top-of-target display.
+Per-formation color and **Fill** toggles for the formation bands.
 
 ### Traces
 
@@ -52,15 +52,21 @@ Interpolated type-log traces — copies of the type log posted periodically alon
 
 ### Derived
 
-Derive a new type log by back-projecting the active log through an interpretation — useful when no good pilot exists near the lateral. The pane works from the backprojections currently displayed (the selected computed interpretation, or the manual interpretation when shown, windowed if the type-log window is on). Choose the statistic — **Mean**, **Median**, **Shallowest MD**, or **Deepest MD** — that picks the value where the interpretation maps more than one active-log sample to the same depth. The derived curve is merged into the current type log and **Save as LAS...** writes it in pilot TVD, calibrated so the pilot's fit params reproduce the active log. The same computation is available programmatically as the `derive_type_log` agent tool / `POST .../derive-type-log` API.
+Derive a new type log by back-projecting the active log through an interpretation — useful when no good pilot exists near the lateral. The pane works from the backprojections of whatever the cross section follows (the row whose radio is lit: the MPE, an auto-picked horizon or a manual interpretation), windowed if the type-log window is on; Scene → **correlations** must be on for there to be any. Under **Method**, choose the statistic — **Mean**, **Median**, **Shallowest MD**, or **Deepest MD** — that picks the value where the interpretation maps more than one active-log sample to the same depth. The derived curve is merged into the current type log and shown in a log track with its own scale and zoom; **Settings** toggles the correlations, the initial type log, and a legend. **Save as LAS...** writes the curve in pilot TVD, calibrated so the pilot's fit params reproduce the active log. The same computation is available programmatically as the `derive_type_log` agent tool / `POST .../derive-type-log` API.
 
 ### Help
 
-The keyboard shortcut reference (also reproduced below).
+A link to this guide, and the keyboard shortcut reference (also reproduced below).
+
+## Sharing a view
+
+The **Share** button at the bottom right copies a link to the project: **Copy link**, or **Copy link with view settings**, which reproduces your display geometry, track settings, and Interpretations selections. Opening such a link shows a banner, *Viewing shared view settings*, with **Keep these settings** to adopt them and **Back to my view** to drop them; your own saved view is untouched until you keep.
 
 ## The log tracks
 
 The **type log track** — the vertical track on the left edge of the cross section — shows the pilot type log (and, when shown, the active log hung beside it). Its gear icon opens the track settings: the GR display scale (**Auto Scale**, or a manual **Min**/**Max** — a manual scale also fixes the GR-to-color mapping of the color fills, on the track and traces alike), a **Color fill** of the log — on/off, **Left**/**Right** side, and color table — plus scroll coupling, the depth-axis choice, and the track width. The fill's color table is shared with the [Traces](#traces) fill; the side and the on/off switch are the track's own.
+
+Beneath the track, **Effective Type Log** has a **show** checkbox with an MD slider — it draws the type log in effect at that MD, which on a multi-pilot project is the interpolation between pilots there — and a **window** checkbox with a ± width slider that limits the back-projected correlations to that MD window.
 
 The **active log track** — the horizontal strip across the top — shows the active well's gamma log along the lateral. Its gear icon holds just the GR display scale and the track height.
 
@@ -70,17 +76,18 @@ Choose an interpretation with its radio (Interpretations → Manual) — that is
 
 - Hold **alt** to auto-pick (Drive refines your pick against the data).
 - Hold **f** to open a **fault** at the pick.
-- Select picks or blocks and use the arrow keys to move blocks up/down, **delete** to remove, **r** to form a new block from selected picks, **shift** to extend a selection.
+- Select picks or blocks and use the arrow keys to move blocks up/down, **delete** to remove, **r** to form a new block from selected picks (or merge selected blocks), **shift** to extend a selection.
 - **Snap to structure** makes picks snap onto the computed structure.
 
-Undo/redo (Ctrl/⌘+Z, Ctrl/⌘+Shift+Z) applies to interpretation edits.
+A floating edit bar on the cross section mirrors these: **Manual mode**, **Pick**, and **Target** (extend the target line), then **Undo**, **Redo**, **Deselect**, and **Delete** while editing. While picking, a bar offers **Snap**, **Fault**, and **Cancel**, plus **Split** on touch devices; extending the target line ends with **Done**.
+
+Undo/redo (Ctrl/⌘+Z, Ctrl/⌘+Shift+Z) applies to interpretation and target-line edits. A warning appears when the target line has changed elsewhere — another tab, or an automatic update — since you loaded it.
 
 ## Keyboard shortcuts
 
 | Keys | Action |
 |---|---|
-| `?` | Open the shortcuts reference |
-| `esc` | Cancel picking |
+| `esc` | Cancel picking or target-line extension; clear the selection |
 | `alt` (held) | Apply auto-picking while picking |
 | `delete` / `backspace` | Delete selection (picks or blocks) |
 | `shift` | Append to selection |
@@ -89,11 +96,10 @@ Undo/redo (Ctrl/⌘+Z, Ctrl/⌘+Shift+Z) applies to interpretation edits.
 | `m` | Manual mode: move the radio between the MPE and the manual interpretation that last held it |
 | `p` | Toggle picking (adds picks to the manual interpretation whose radio is lit) |
 | `r` | Make a new block from picks in the selection |
-| `z` | Toggle the zoom controls |
+| `t` | Extend the target line |
 | `↑` / `↓` | Move selected block(s) up / down |
 | `Ctrl/⌘ + z` | Undo |
 | `Ctrl/⌘ + shift + z` | Redo |
-| `Ctrl/⌘ + +` / `Ctrl/⌘ + −` | Zoom in / out |
 | mouse wheel | Scroll up/down |
 | `shift` + wheel | Scroll left/right |
 | `Ctrl/⌘` + wheel | Zoom in/out |

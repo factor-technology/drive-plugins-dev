@@ -4,7 +4,7 @@
 
 Factor Drive is a geosteering interpretation system. Given a reference ("type") gamma-ray log from a nearby pilot well and the live gamma-ray log and survey trajectory from a well being drilled horizontally, Drive computes where the top of the target formation sits in depth all along the lateral — together with the uncertainty of that answer.
 
-Rather than producing a single line on a cross section, the computation produces a full probability distribution of structure-top depth at every measured depth, a single most-probable structural interpretation, and a set of alternative interpretations each with its own probability. See [Understanding the Results](./results.md).
+Rather than producing a single line on a cross section, the computation produces a full probability distribution of structure-top depth at every measured depth, a single most-probable structural interpretation, and a set of auto-picked alternative interpretations grouped by how much probability each group carries at the bit. See [Understanding the Results](./results.md).
 
 ## How the application is organized
 
@@ -15,7 +15,9 @@ Factor Drive opens on the **Projects** page, a list of every project you can see
 | **Setup** | A six-step wizard that collects everything the computation needs: pilot wells and formation tops, active-well data, dip and azimuth, log alignment, job parameters, and run configuration. |
 | **Profile** | The interactive cross section — the main working view for reading computed interpretations and drawing manual ones. |
 | **Background** | Upload and register a background (for example seismic) image behind the cross section. |
-| **Inventory** | Browse and download every data object in the project: logs, trajectories, interpretations. |
+| **Inventory** | Browse and download every data object in the project: logs, trajectories, interpretations, the latest job file and log. |
+
+Drive also comes with a [Claude agent](./agent.md): a skill and connector that let Claude read results and operate a project, with the same permissions you have.
 
 ## The basic workflow
 

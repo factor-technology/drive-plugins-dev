@@ -20,6 +20,8 @@ How to read them:
 - If they form **two clusters**, the data genuinely supports two competing interpretations; look at where they diverge, and what (a fault? a dip change?) distinguishes them.
 - Three or more scattered groups mean high ambiguity: treat any single line, including the MPE, with caution.
 
+A grey **P?** group collects traces that end in a lobe carrying under 0.1 % of the mass. When no trace can be threaded at all, the pane says so and counts the peaks of the last marginal that could not be followed back to the start of the well — a sign of a possible fault.
+
 The picks are anchored at the current end of the wellbore — each group ends at one peak of the last marginal, so together they span the plausible depths of the structure at the bit — which makes them directly useful for the "where is the bit relative to the target *right now*" question.
 
 ## Marginals

@@ -22,7 +22,7 @@ Drive works in two depth frames, and the cross section can display three depth a
 - **TVDSS** — true vertical depth subsea, the shared frame of the active well's trajectory and the computed structure. Negative values are below sea level.
 - **TVD** — the active well's own vertical depth, positive down: the active well's reference elevation minus TVDSS.
 
-Pilot wells carry no reference elevation. The **Depth Offset** fit parameter (see [Align Logs](./setup/align-logs.md)) is the single bridge between the frames: it places the pilot's depth zero in the shared frame, carrying the type log into the active well's depth frame.
+Pilot wells carry no reference elevation. The **Depth Datum (TVDSS)** fit parameter (see [Align Logs](./setup/align-logs.md)) is the single bridge between the frames: it is the TVDSS of the pilot's depth zero (TVDSS = datum − TVDTL), carrying the type log into the active well's depth frame.
 
 ::: tip Datum elevation
 The active well's reference elevation is optional: set it if you want subsea depths, for example to compare against a regional structure map or to import a TVDSS-referenced interpretation.
@@ -48,7 +48,7 @@ Between adjacent pilots Drive builds an interpolated type log by warping each la
 
 ## The job
 
-A project is not one computation — it is a series of jobs over time, one per data extension. Drive keeps prior job state, so when new survey and log data arrive it **extends** the interpretation incrementally from where it left off. **Reset Job** discards the computed state (keeping your data and settings) so the next run recomputes the whole well; this is required after edits that invalidate prior state, notably changes to fit parameters. See [Run Job](./setup/run-job.md).
+A project is not one computation — it is a series of jobs over time, one per data extension. Drive keeps prior job state, so when new survey and log data arrive it **extends** the interpretation incrementally from where it left off. **Reset** (on the Run Job step) discards the computed state (keeping your data and settings) so the next run recomputes the whole well; this is required after edits that invalidate prior state, notably changes to fit parameters. See [Run Job](./setup/run-job.md).
 
 ## Interpretations
 

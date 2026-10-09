@@ -2,14 +2,14 @@
 
 # Step 6 · Run Job
 
-The final step configures and launches the computation. A readiness message at the top tells you whether the project can run and what, if anything, is missing.
+The final step configures and launches the computation. A readiness message just above the buttons tells you whether the project can run and what, if anything, is missing.
 
 ## Compute range
 
 | Field | Meaning |
 |---|---|
-| **First MD to Compute** | Where the computation starts. Align Logs sets this automatically; otherwise start a little above where the well enters the zone of interest. |
-| **Last MD to Compute** | Optional stop point. Typical use: test a parameter change on a short stretch before committing to a whole-well recompute. |
+| **First MD to Compute** | Where the computation starts. Align Logs sets this automatically; otherwise start a little above where the well enters the zone of interest. Set by the interpretation when one is chosen under *Extend existing interpretation*. |
+| **Last MD to Compute** | Optional stop point. Typical use: test a parameter change on a short stretch before committing to a whole-well recompute. Disabled while *Compute to last MD in well* is ticked. |
 | **Extrapolate trajectory distance** | Projects the trajectory this far past the last survey so gamma data beyond the last survey still yields a provisional structure ahead of the bit. 0 disables. |
 | **Compute to last MD in well** | Convenience checkbox: always compute to the end of the data. |
 
@@ -17,15 +17,15 @@ The final step configures and launches the computation. A readiness message at t
 
 Two checkboxes ask Drive to alert you when the computed interpretation indicates trouble: **Notify me if wellbore out of zone** and **Notify me if wellbore off target line**. Alerts are delivered through the channels configured on your [account page](../../admin/account.md).
 
-## Advanced options
+## Other settings
 
-- **Extend existing interpretation** — wire a saved manual interpretation for the computation to extend, instead of extending its own prior result.
-- **Autotargeting** (experimental) — proposes steering targets: enable it and set the centerline depth below top of target, the corridor above/below the centerline, and a dogleg-severity penalty coefficient.
+- **Extend existing interpretation** — pick a saved manual interpretation for the computation to extend, instead of extending its own prior result.
+- **Autotargeting** (experimental; a collapsible panel) — proposes steering targets: enable it and set the centerline depth below top of target, the corridor above/below the centerline, and a dogleg-severity penalty coefficient.
 - **Executor** — the compute tier: **Standard**, **Large**, or **Extra Large**. Stay on Standard unless a run actually fails with an out-of-memory or timeout error; a generic runtime error is *not* an out-of-memory signal, and escalating the tier won't fix it.
 
-## WITSML polling
+## Live updates
 
-On WITSML projects, a polling control shows whether polling is running or paused. When polling is on and new data arrives mid-run, the job restarts with the updated data — so for a deliberate one-shot run, pause polling first, run, then resume.
+On WITSML and email projects, a pause/resume control shows whether live updates are running or paused. WITSML polling starts paused: start it here once the connection is set up. While live updates are on, the **Run** button is disabled — Drive runs the job itself when data arrives — so for a deliberate run, pause, run, then resume. In WITSML mode pausing stops data retrieval; in email mode it stops only the automatic runs, and emailed data still lands.
 
 ## Running
 

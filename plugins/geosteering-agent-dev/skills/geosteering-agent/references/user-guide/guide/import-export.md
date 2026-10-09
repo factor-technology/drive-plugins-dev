@@ -6,25 +6,13 @@ Drive can move whole projects between systems, and export project data for use i
 
 ## Native archive
 
-A **native archive** is a complete, portable copy of a project: settings, pilot wells and markers, active-well data, and interpretations.
+A **native archive** is a complete, portable copy of a project: settings, pilot wells and markers, active-well data, well plan, prior structure, target line, interpretations, notes, the background image with its registration, and the latest job file. Computed results — the MPE and the marginals — are not included; run the imported project to recompute them.
 
-- **Export** — from a project's **Inventory** tab, choose **Export to Native Archive**, which opens the export page and downloads the archive.
-- **Import** — from the Projects page sidebar, choose **Import**, then supply an archive file. The project is recreated under your chosen owner and name.
+- **Export** — from a project's **Inventory** tab, choose **Export to Native Archive**, then press **Export Project** on the page that opens to download the archive.
+- **Import** — from the Projects page sidebar, choose **Import**, then supply the archive file, an owner, and a new project name.
 
 Native archives are the right tool for backup, for moving a project between deployments, and for sending a complete project to support.
 
-## CSV export
-
-The CSV export page (reachable from a project) writes project data — trajectory, logs, and any interpretations you tick — into a single delimited file:
-
-| Option | Meaning |
-|---|---|
-| **Resample interval** | The MD spacing rows are resampled onto. |
-| **Delimiter** | Comma, tab, etc. |
-| **Interpretations** | Checkboxes selecting which computed/manual interpretations to include as columns. |
-
-Press **Download** to generate the file.
-
 ## Individual objects
 
-The [Inventory tab](./inventory.md) lets you inspect and download individual objects — the active log, measured and planned trajectories, each pilot log, the computed interpretation, and each manual interpretation.
+The [Inventory tab](./inventory.md) shows each data object — the active log, measured and planned trajectories, each pilot log, the computed interpretation, and each manual interpretation — as a table with a CSV download, and also offers the latest run's job file and engine log.

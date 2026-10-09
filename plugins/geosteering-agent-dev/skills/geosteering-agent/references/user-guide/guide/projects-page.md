@@ -21,7 +21,7 @@ All columns sort; click a header. The search box above the table filters as you 
 
 At the right of each row:
 
-- **Clone** — copies the project (settings, pilot wells, logs, markers, active-well data, interpretations, notes, background image) into a new name and owner of your choice. The clone starts *un-run*: computed results are not copied. Cloning is the recommended way to experiment with parameter changes without disturbing a live project.
+- **Clone** — copies the project into a new name (*name*-clone by default) and owner of your choice: settings, pilot wells, logs, markers, active-well data, well plan, prior structure, interpretations, notes, background image, and your view settings for the cross section. Not copied: the target line, WITSML pollers, the email address, notification choices, and project members. The clone starts *un-run*: computed results are not copied. Cloning is the recommended way to experiment with parameter changes without disturbing a live project.
 - **Project members** — opens the access-control dialog, where you add or remove users and set their permission level. Requires ADMIN permission on the project; see [Sharing and Permissions](../admin/permissions.md).
 - **Delete** — permanently deletes the project after confirmation. Requires WRITE permission.
 
@@ -35,7 +35,11 @@ At the right of each row:
 | **Name** | Must be unique within the owner; no slashes. The well name is the project name. |
 | **Description** | Free text; editable later in the Setup wizard. |
 | **Spatial Measurements** | Feet or meters. Remembered as your default for next time. |
-| **Setup style** | **Full** — the six-step wizard. **Quick** — a one-page setup: pilot log, active well files, run. |
+| **Setup style** | **Full** — the six-step wizard. **Quick** — a one-page setup: pilot log, active-well files, an optional formation top with VS azimuth and dip, then run; Drive aligns the logs for you. |
+
+::: tip Free trial
+A free-trial account gets one project, in its own scope, with 20 runs and 20 alignments over 72 hours. Contact support@factor.technology to upgrade.
+:::
 
 ## The sidebar
 

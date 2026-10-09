@@ -32,11 +32,11 @@ The data supports two stories that part ways at that depth. A fault near the div
 
 ### Run fails with out-of-memory or timeout
 
-This — and only this — is the signal to raise the [Executor](./setup/run-job.md#advanced-options) tier, or alternatively to reduce cost: coarser **Depth Resolution** / **MD Interval**, more aggressive **Prune**, or a smaller **Dip Tolerance**. A generic runtime error is not an out-of-memory signal.
+This — and only this — is the signal to raise the [Executor](./setup/run-job.md#other-settings) tier, or alternatively to reduce cost: coarser **Depth Resolution** / **MD Interval**, more aggressive **Prune**, or a smaller **Dip Tolerance**. A generic runtime error is not an out-of-memory signal.
 
-### A one-shot run keeps restarting on a WITSML project
+### Run is disabled on a WITSML or email project
 
-Polling delivered new data mid-run, which restarts the job. Pause [polling](./setup/run-job.md#witsml-polling), run, then resume.
+Live updates are on: Drive runs the job itself when data arrives, and the Run button stays disabled meanwhile. For a deliberate run, pause [live updates](./setup/run-job.md#live-updates), run, then resume — this also keeps new data from restarting a one-shot run.
 
 ## When you change things
 
