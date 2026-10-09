@@ -17,7 +17,7 @@ Factor Drive opens on the **Projects** page, a list of every project you can see
 | **Background** | Upload and register a background (for example seismic) image behind the cross section. |
 | **Inventory** | Browse and download every data object in the project: logs, trajectories, interpretations, the latest job file and log. |
 
-Drive also comes with a [Claude agent](./agent.md): a skill and connector that let Claude read results and operate a project, with the same permissions you have.
+Drive also comes with a [geosteering agent](./agent.md) for Claude, ChatGPT and other AI hosts: a connector (plus a skill, on hosts that take one) that lets the assistant read results and operate a project, with the same permissions you have.
 
 ## The basic workflow
 

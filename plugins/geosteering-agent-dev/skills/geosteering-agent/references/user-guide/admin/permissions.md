@@ -39,4 +39,4 @@ Use a group scope for team-owned projects, and direct project membership for one
 
 Automation and integrations authenticate with a token obtained from **Account → Get API Token**. A token carries *your* identity: anything using it can do exactly what you can do, on exactly the projects you can access, and nothing more. You hold one token at a time; it does not expire, and generating a new one revokes the old.
 
-The [Claude agent](../guide/agent.md) does not use this token: connecting it signs you in to Drive through your browser.
+The [geosteering agent](../guide/agent.md) for Claude, ChatGPT and other hosts does not use this token: connecting it signs you in to Drive through your browser.
