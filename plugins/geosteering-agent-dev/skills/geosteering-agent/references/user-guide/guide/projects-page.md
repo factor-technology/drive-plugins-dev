@@ -15,7 +15,22 @@ The Projects page is Factor Drive's landing page: every project you can read, in
 | **Run Time** | Duration of the latest job run. |
 | **Status** | Latest job status. |
 
-All columns sort; click a header. The search box above the table filters as you type. The footer shows the total count, a page-size selector (25/50/100), and pagination. The list refreshes itself every minute, and search, sort, page, and page size are all reflected in the URL, so a filtered view can be bookmarked or shared.
+All columns sort; click a header. The footer shows the total count, a page-size selector (25/50/100), and pagination. The list refreshes itself every minute.
+
+## Filtering
+
+The controls above the table narrow the list. They combine: a project must match all of them.
+
+| Control | Keeps projects… |
+|---|---|
+| **Search** | whose name contains the text, as you type. |
+| **Owner** | owned by any of the chosen scopes. |
+| **Last** | whose last activity (latest run, or creation if never run) falls in the window: **Today**, **Since yesterday**, **This week**, **This month**, or **Custom range…**, which opens a calendar to pick a first and last day (both included). |
+| **Status** | whose latest job is any of the chosen states: running, complete, error, or not run. |
+
+Clear a control with its ✕. Search, filters, sort, page, and page size are all reflected in the URL, so a filtered view can be bookmarked or shared. A preset such as **Today** stays relative: the bookmark shows today's projects whenever it is opened.
+
+You can also ask the agent: "my projects that errored this week" uses the same filters, and its reply links to this page with them applied.
 
 ## Per-row actions
 
