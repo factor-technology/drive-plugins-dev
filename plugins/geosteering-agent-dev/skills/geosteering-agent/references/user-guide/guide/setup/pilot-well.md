@@ -10,15 +10,16 @@ Throughout the wizard, the right-hand track shows the pilot type log (and, once 
 
 The **Pilot Log Ranges** grid shows one column per pilot well, each covering a contiguous MD range of the lateral. A single pilot starting at MD 0 is the common case; add further ranges only when the geology changes enough along the lateral to warrant a second reference log — see [Key Concepts](../concepts.md#multiple-pilot-wells) for the rules multi-pilot projects must observe.
 
-- **Upload LAS…** (**Replace LAS…** once a log is loaded) opens the *Define Log Curve Input: Pilot* dialog for that range.
-- **Add Range…** opens the same dialog with a **Start MD** field for the new range.
+- **Upload LAS…** (**Replace LAS…** once a log is loaded) opens the *Upload Pilot Log* dialog for that range.
+- **Add Range…** opens the same dialog as *Add Pilot Range*, with a **Start MD** field for the new range.
 - **Delete** removes a range; the first range cannot be deleted. A range with no log of its own is ignored by the computation.
 
-In the dialog:
+The dialog takes everything in one place. Its **Upload** button stays disabled, with a hint naming what is still missing, until the dialog is complete, so a log cannot go in without its survey, nor a survey without its log.
 
-- Choose the LAS file. The first channel is taken as measured depth.
-- Pick the **gamma-ray curve** by mnemonic.
-- If the pilot's source well was not vertical, tick **This well is deviated.** and supply its trajectory so Drive can straighten the log. The trajectory is used once at upload and then discarded.
+- **Pilot log (LAS).** Choose the LAS file. The first channel is taken as measured depth. Pick the **gamma-ray curve** from the list that appears; Drive preselects the curve the project used last, or the one gamma-ray-looking mnemonic.
+- **Well path.** Leave **Vertical well** selected when the LAS depth index is already true vertical depth. Choose **Deviated well** when the log came from a deviated hole: the survey CSV picker and its column designation appear right below, and Upload waits until the MD, inclination and azimuth columns are designated. Drive straightens the log once at upload and does not keep the survey.
+
+A pilot uploaded as deviated remembers that. When you later **Replace LAS…** on it, the dialog opens on **Deviated well** and asks for the survey again, since only the straightened log was kept.
 
 Pilot wells have no reference elevation — the stored log is in plain type-log TVD (TVDTL), positive and measured down.
 
