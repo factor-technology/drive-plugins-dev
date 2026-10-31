@@ -1,12 +1,16 @@
 {
   "name": "geosteering-agent-dev",
-  "version": "0.5.75",
+  "displayName": "Factor Drive Geosteering (dev)",
+  "version": "0.5.76",
   "description": "Factor Drive geosteering copilot — the interpretation skill, the cross-section scene-setup skill, and the Drive tool connector (the dev backend). Project setup, pilot/active logs, alignment, dip & faults, job runs, and WITSML.",
   "author": {
-    "name": "Factor Technology"
+    "name": "Factor Technology",
+    "email": "support@factor.technology",
+    "url": "https://www.factor.technology"
   },
   "homepage": "https://drive-app-dev.factor.technology",
-  "license": "UNLICENSED",
+  "privacyPolicyUrl": "https://www.factor.technology/privacy",
+  "license": "LicenseRef-Factor-Technology",
   "keywords": [
     "geosteering",
     "drive",
