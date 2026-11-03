@@ -12,7 +12,7 @@ Factor Drive opens on the **Projects** page, a list of every project you can see
 
 | Tab | Purpose |
 |---|---|
-| **Setup** | A six-step wizard that collects everything the computation needs: pilot wells and formation tops, active-well data, dip and azimuth, log alignment, job parameters, and run configuration. |
+| **Setup** | Guided Setup: six stages that ask a question each and collect that area's files and settings under it. Every stage has an All controls link to the full panel. A control at the top of the rail opens every stage that way. |
 | **Profile** | The interactive cross section — the main working view for reading computed interpretations and drawing manual ones. |
 | **Background** | Upload and register a background (for example seismic) image behind the cross section. |
 | **Inventory** | Browse and download every data object in the project: logs, trajectories, interpretations, the latest job file and log. |
@@ -22,7 +22,7 @@ Drive also comes with a [geosteering agent](./agent.md) for Claude, ChatGPT and 
 ## The basic workflow
 
 1. **Create a project** from the Projects page.
-2. **Set up** the project in the wizard: upload a pilot log and enter formation tops, load the active well's trajectory and gamma log (by file upload, WITSML connection, or email), set the vertical-section azimuth and a dip prior, align the logs, and review job parameters.
+2. **Set up** the project in the Setup tab: upload a pilot log and enter formation tops, load the active well's trajectory and gamma log (by file upload, WITSML connection, or email), set the vertical-section azimuth and a dip prior, align the logs, and review job parameters.
 3. **Run the job.** Drive computes on a GPU backend; progress appears in the project's tab bar.
 4. **Read the results** on the Profile tab: the most probable explanation, the alternatives, and the per-depth marginals.
 5. **Extend as drilling progresses.** New trajectory and log data — polled from WITSML, emailed in, or uploaded — extend the interpretation incrementally rather than recomputing from scratch.

@@ -12,10 +12,9 @@ This walkthrough takes a new project from creation to a computed interpretation.
 
 ## 1 · Create the project
 
-On the [Projects page](./projects-page.md), choose **Add Project**. Pick an owner (yourself, or a group you can write to), a unique name, an optional description, the **Spatial Measurements** unit (feet or meters), and a setup style:
+On the [Projects page](./projects-page.md), choose **Add Project**. On the New project page pick an owner (yourself, or a group you can write to), a unique name, an optional description, and the **Spatial Measurements** unit (feet or meters), then press **Create project**. The new project opens on its Setup tab.
 
-- **Full** — the six-step wizard described below. Recommended.
-- **Quick** — a single page: upload the pilot log and the active well's files, optionally type one formation top with the VS azimuth and dip, and run. Drive aligns the logs for you. Good for a fast trial.
+The Setup tab guides you through the six stages below; the All controls link on each stage opens the full panel described here. The **Guided | All controls** control at the top of the Setup rail opens every stage on its full panel.
 
 ## 2 · Pilot well
 

@@ -13,7 +13,7 @@ The grid has one column per MD range (**Split Range** and **Delete Range** above
 | **Log Tolerance** | How far the active gamma reading may sit from the (scaled) type-log value — the 99.7% bound, in gamma units. Much of what looks like noise is real geological divergence between pilot and active well; prefer widening this tolerance over dismissing data as noisy. |
 | **Outlier Handling** | **Strict** expects well-behaved readings; **Forgiving** tolerates occasional wild spikes (heavier-tailed model) — useful for noisy LWD. |
 | **Dip Tolerance** | How far the local dip may wander from the dip prior. Raise it to let the data override the prior; lower it to hew to the prior. Higher values cost memory and compute — raise one step at a time. |
-| **Expected faults** | Expected number of faults per 10,000 ft of lateral. **0 disables fault modeling.** |
+| **Expected faults** | Expected number of faults per 10,000 ft of lateral. **0 disables fault modeling.** If you expect faults, start at 10. |
 | **Min fault throw** / **Max fault throw** | Bounds on modeled fault throw. Throws follow a power law: small throws are common, max-throw faults rare. |
 | **Upward fault bias** | Prior on throw direction: 1 = all up toward the bit, 0 = all down, 0.5 = even. |
 | **Prune** | How aggressively low-probability outcomes are discarded, in dB. Less pruning (or *No pruning*) preserves fidelity at the cost of memory and time. |

@@ -21,7 +21,7 @@ Two checkboxes ask Drive to alert you when the computed interpretation indicates
 
 - **Extend existing interpretation** — pick a saved manual interpretation for the computation to extend, instead of extending its own prior result.
 - **Autotargeting** (experimental; a collapsible panel) — proposes steering targets: enable it and set the centerline depth below top of target, the corridor above/below the centerline, and a dogleg-severity penalty coefficient.
-- **Executor** — the compute tier: **Standard**, **Large**, or **Extra Large**. Stay on Standard unless a run actually fails with an out-of-memory or timeout error; a generic runtime error is *not* an out-of-memory signal, and escalating the tier won't fix it.
+- **Executor** — the compute tier: **Standard**, **Large**, or **Extra Large**. Use **Large** whenever fault modeling is on (Expected faults above 0 on any range); otherwise use Standard. Beyond that, go up a tier only when a run actually fails with an out-of-memory or timeout error; a generic runtime error is *not* an out-of-memory signal, and escalating the tier won't fix it.
 
 ## Live updates
 

@@ -8,7 +8,7 @@ The Projects page is Factor Drive's landing page: every project you can read, in
 
 | Column | Meaning |
 |---|---|
-| **Name** | Two links: the cross-section icon opens the project's Profile view directly; the name opens the Setup wizard. |
+| **Name** | Two links: the cross-section icon opens the project's Profile view directly; the name opens the project's Setup tab. |
 | **Owner** | The scope the project lives in — a user or a group. |
 | **Depth** | Total depth of the active well. |
 | **Last** | Most recent activity on the project. |
@@ -42,15 +42,16 @@ At the right of each row:
 
 ## Creating a project
 
-**Add Project** in the sidebar opens the *Create a New Project* dialog:
+**Add Project** in the sidebar opens the **New project** page, which asks for:
 
 | Field | Notes |
 |---|---|
 | **Owner** | Your personal scope, or any group scope you can write to. |
 | **Name** | Must be unique within the owner; no slashes. The well name is the project name. |
-| **Description** | Free text; editable later in the Setup wizard. |
+| **Description** | Free text; editable later in the Setup tab. |
 | **Spatial Measurements** | Feet or meters. Remembered as your default for next time. |
-| **Setup style** | **Full** — the six-step wizard. **Quick** — a one-page setup: pilot log, active-well files, an optional formation top with VS azimuth and dip, then run; Drive aligns the logs for you. |
+
+**Create project** opens the new project's Setup tab. The page also lists what you'll need.
 
 ::: tip Free trial
 A free-trial account gets one project, in its own scope, with 20 runs and 20 alignments over 72 hours. Contact support@factor.technology to upgrade.
@@ -58,4 +59,4 @@ A free-trial account gets one project, in its own scope, with 20 runs and 20 ali
 
 ## The sidebar
 
-The left sidebar is the application's main navigation: **Add Project**, **Import** (restore a project from a native archive — see [Import and Export](./import-export.md)), your account (see [Account and Notifications](../admin/account.md)), **Groups** (see [Sharing and Permissions](../admin/permissions.md)), **API** (the REST API reference), **Help** (this guide), a theme toggle (light / auto / dark), **Logout**, and the version number, which links to the release notes.
+The left sidebar is the application's main navigation: **Add Project** (the New project page), **Import** (restore a project from a native archive — see [Import and Export](./import-export.md)), your account (see [Account and Notifications](../admin/account.md)), **Groups** (see [Sharing and Permissions](../admin/permissions.md)), **API** (the REST API reference), **Help** (this guide), a theme toggle (light / auto / dark), **Logout**, and the version number, which links to the release notes.

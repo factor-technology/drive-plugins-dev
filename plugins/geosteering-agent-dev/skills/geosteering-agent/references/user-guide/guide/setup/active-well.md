@@ -6,7 +6,7 @@ The second step loads the well being drilled: its survey trajectory and its LWD 
 
 Two status boxes at the top, **Trajectory** and **Active Log**, show whether each is loaded, with details and a delete control. In Manual mode they also hold the upload buttons.
 
-**Reference elevation** — optionally set the active well's datum elevation. Leave it at 0 to work in plain TVD; set it if you want depths referenced subsea (TVDSS), for example to compare against a regional structure map.
+**Reference elevation** — the height of the active well's depth reference (KB or rig floor) above sea level. Enter it to work in subsea depths (TVDSS), which line up with subsea maps, structure files and interpretations. Leave it at 0 only if you don't have it or don't need subsea depths; depths then read below the rig (TVD). Set it before you align the logs: alignment centers on it, so changing it later means aligning again.
 
 ## Data sources
 

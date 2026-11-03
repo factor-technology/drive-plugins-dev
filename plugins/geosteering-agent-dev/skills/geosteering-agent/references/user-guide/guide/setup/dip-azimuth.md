@@ -6,7 +6,7 @@ The computation needs a *prior* — an expectation, before seeing the gamma data
 
 ## VS Azimuth
 
-The **VS Azimuth** is the plan-view direction of the vertical-section plane, in degrees. If unset, Drive computes it from the trajectory; you can override it.
+The **VS Azimuth** is the plan-view direction of the vertical-section plane, in degrees. While it is unset, Drive suggests the well plan's azimuth, or the survey's when there is no plan; press **Use**, or type your own. The **Apparent Dip** row appears once the azimuth is set, since apparent dip is measured along it. The job cannot run without an azimuth.
 
 ::: warning Changing VS azimuth later
 Apparent dip is measured in the vertical-section plane. Drive keeps the dip values you entered when the azimuth changes, so re-check that they still describe the structure in the new plane.

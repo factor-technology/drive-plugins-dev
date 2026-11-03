@@ -2,13 +2,13 @@
 
 # Step 1 · Pilot Well
 
-The first wizard step defines the reference data the computation matches against: one or more pilot wells, each with a vertical gamma-ray log and a set of formation tops.
+The first stage defines the reference data the computation matches against: one or more pilot wells, each with a vertical gamma-ray log and a set of formation tops.
 
-Throughout the wizard, the right-hand track shows the pilot type log (and, once loaded, the active log) so you can see the effect of your edits immediately.
+Throughout setup, the right-hand track shows the pilot type log (and, once loaded, the active log) so you can see the effect of your edits immediately.
 
 ## Pilot log ranges
 
-The **Pilot Log Ranges** grid shows one column per pilot well, each covering a contiguous MD range of the lateral. A single pilot starting at MD 0 is the common case; add further ranges only when the geology changes enough along the lateral to warrant a second reference log — see [Key Concepts](../concepts.md#multiple-pilot-wells) for the rules multi-pilot projects must observe.
+The **Pilot Log Ranges** grid shows one column per pilot well, each starting at its own MD along the lateral. A pilot's log applies in full at its start MD, and Drive blends gradually from one pilot's log to the next between their start MDs. A single pilot starting at MD 0 is the common case; add further ranges only when the geology changes enough along the lateral to warrant a second reference log — see [Key Concepts](../concepts.md#multiple-pilot-wells) for the rules multi-pilot projects must observe.
 
 - **Upload LAS…** (**Replace LAS…** once a log is loaded) opens the *Upload Pilot Log* dialog for that range.
 - **Add Range…** opens the same dialog as *Add Pilot Range*, with a **Start MD** field for the new range.

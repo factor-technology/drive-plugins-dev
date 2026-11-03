@@ -25,16 +25,16 @@ Drive works in two depth frames, and the cross section can display three depth a
 Pilot wells carry no reference elevation. The **Depth Datum (TVDSS)** fit parameter (see [Align Logs](./setup/align-logs.md)) is the single bridge between the frames: it is the TVDSS of the pilot's depth zero (TVDSS = datum − TVDTL), carrying the type log into the active well's depth frame.
 
 ::: tip Datum elevation
-The active well's reference elevation is optional: set it if you want subsea depths, for example to compare against a regional structure map or to import a TVDSS-referenced interpretation.
+Enter the active well's reference elevation to work in subsea depths, which line up with regional structure maps and TVDSS-referenced interpretations. Without it (0), depths read below the rig (TVD).
 :::
 
 ## Multiple pilot wells
 
-Most projects use one pilot. When the geology changes character along a long lateral you can add pilots, each covering a contiguous MD range. Three rules apply, and Drive relies on you to observe them:
+Most projects use one pilot. When the geology changes character along a long lateral you can add pilots, each with its own start MD along the lateral. A later pilot's log applies in full at its start MD (the first pilot's at First MD to Compute); between two adjacent start MDs Drive blends the two logs gradually, half and half midway. So put each start MD where the lateral best matches that pilot, not where the change begins. Three rules apply:
 
 1. The first pilot (MD 0) defines the project depth frame.
-2. The top-of-target marker must be entered at the same TVDTL depth on every pilot (flattened on ToT).
-3. Every formation named on the first pilot must appear, by the same name, on every other pilot.
+2. Pick the top-of-target marker where it is on each pilot's own log. Drive moves each later pilot up or down so its top-of-target lines up with the first pilot's (flattened on ToT); a pilot without the marker is not moved.
+3. Every formation named on the first pilot must appear, by the same name, on every other pilot. Drive relies on you to observe this one.
 
 Between adjacent pilots Drive builds an interpolated type log by warping each layer's thickness and blending gamma values.
 
