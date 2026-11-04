@@ -2,7 +2,7 @@
 
 # Step 2 · Active Well
 
-The second step loads the well being drilled: its survey trajectory and its LWD gamma-ray log, plus an optional well plan.
+The second step loads the well being drilled: its survey trajectory and its LWD gamma-ray log, plus an optional well plan. The guided stage first asks whether you have a well plan: on a well still to be drilled, the plan lets Drive lay out the cross section and set the VS azimuth before the first survey arrives. The computation never uses it, so a resteer of a finished well can answer No.
 
 Two status boxes at the top, **Trajectory** and **Active Log**, show whether each is loaded, with details and a delete control. In Manual mode they also hold the upload buttons.
 
@@ -16,7 +16,7 @@ Drive ingests active-well data three ways; pick a tab. Switching tabs keeps the 
 
 - **Upload Trajectory…** (in the Trajectory box) — a CSV with at least MD, inclination, and azimuth columns; the *Define Trajectory Input* dialog maps the columns. Each upload replaces the whole trajectory, so re-upload the full file as the well grows.
 - **Upload LAS File…** (in the Active Log box) — the LWD gamma log; pick the gamma curve mnemonic in the *Define Log Curve Input: Active* dialog, and optionally tick **Apply despiking filter.** with a window length in samples. Also full-replace.
-- **Upload Well Plan…** — optional CSV of the planned path. The plan is a visual aid on the cross section; it is not used by the computation.
+- **Upload Well Plan…** — optional CSV of the planned path. The plan is drawn on the cross section beyond the last survey station and is Drive's first source for the suggested VS azimuth and dip; it is not used by the computation.
 
 ### WITSML connection
 

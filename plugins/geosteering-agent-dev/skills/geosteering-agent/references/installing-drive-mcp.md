@@ -75,9 +75,8 @@ Two notes worth knowing:
 - Pilot wells / active well: pilot create + log upload, markers, top
   of target, active trajectory + plan + log, email config, ignore
   ranges, data-source mode.
-- Dip & azimuth (Step 3), Align Logs (Step 4), Job Parameters (Step 5),
-  Run Configuration (Step 6).
-- WITSML server registration + per-project pollers + sync toggle.
+- Dip & azimuth, log alignment, job settings, run configuration.
+- WITSML servers (read and refresh), per-project pollers, sync toggle.
 - `trigger_job_rerun`.
 - Async long-runners: `start_align_logs`, `start_refresh_witsml_server`,
   `get_operation_status` — the timeout-safe front ends.
