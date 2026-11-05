@@ -1,0 +1,31 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "factor-drive-dev",
+  "version": "0.5.81",
+  "description": "Factor Drive geosteering copilot for Hermes (the dev backend): the geosteering skill plus a remote OAuth connector to your Factor Drive projects. Read job results, and set up, tune and run Drive projects.",
+  "author": {
+    "name": "Factor Technology",
+    "email": "support@factor.technology",
+    "url": "https://www.factor.technology"
+  },
+  "homepage": "https://drive-app-dev.factor.technology/help/guide/agent.html",
+  "repository": "https://github.com/factor-technology/drive-plugins-dev/tree/main/hermes/factor-drive-dev",
+  "license": "LicenseRef-Factor-Technology",
+  "keywords": [
+    "geosteering",
+    "drive",
+    "petroleum",
+    "well-log",
+    "witsml",
+    "mcp"
+  ],
+  "extensions": {
+    "com.nousresearch.hermes": {
+      "servers": {
+        "factor-drive-dev": {
+          "trust": "untrusted"
+        }
+      }
+    }
+  }
+}

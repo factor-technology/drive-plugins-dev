@@ -1,7 +1,7 @@
 source: drive-app/agent/skill (the public stub; its references are served by the Drive connector)
-source_commit: ffdb6c2e15b7a329f705cd505a34027c513db075
-source_commit_short: ffdb6c2e15b7
-source_commit_date: 2026-11-04T17:06:34-06:00
-skill_version: 0.5.80
-built_at: 2026-11-04T17:06:34-06:00
+source_commit: 0282277b7af23c361a53c8615db714a3ea502ba0
+source_commit_short: 0282277b7af2
+source_commit_date: 2026-11-04T19:11:56-06:00
+skill_version: 0.5.81
+built_at: 2026-11-04T19:11:56-06:00
 built_from_workspace_dirty: false

@@ -1,6 +1,7 @@
-# Factor Drive plugins for Claude
+# Factor Drive plugins
 
-A Claude plugin marketplace published by [Factor Technology](https://factor.technology).
+A Claude plugin marketplace published by [Factor Technology](https://factor.technology),
+plus the same copilot packaged for Hermes Agent ([below](#hermes-agent)).
 It carries the **geosteering copilot**: the interpretation skill, the
 cross-section scene-setup skill, plus a live connector to your Factor Drive
 projects. Nothing is installed on your machine and there is no key to paste —
@@ -10,7 +11,7 @@ you sign in to Drive the first time a tool runs.
 | --- | --- |
 | `geosteering-agent-dev` | https://drive-app-dev.factor.technology |
 
-Current release: **0.5.80**.
+Current release: **0.5.81**.
 
 ## Install
 
@@ -62,6 +63,13 @@ It works through the Drive server, so it cannot read files on your own
 computer: point it at a LAS or survey file on disk and it will ask you to
 upload it instead. Alignment and WITSML refreshes run in the background and are
 polled rather than waited on.
+
+## Hermes Agent
+
+- [`hermes/factor-drive-dev/`](hermes/factor-drive-dev/README.md) connects to https://drive-app-dev.factor.technology
+
+Each package's README has its install steps. Hermes doesn't read this repo's
+marketplace manifest, so auto-update doesn't apply: its catalog pins a commit.
 
 ---
 

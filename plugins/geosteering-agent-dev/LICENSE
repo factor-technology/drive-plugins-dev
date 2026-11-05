@@ -4,8 +4,10 @@ This plugin (its skills, their reference files, and its connector
 configuration) is provided for use with Factor Drive, under the Factor Drive
 User Services Agreement at https://www.factor.technology/tos.html.
 
-You may install the plugin and use it with Claude to work with the Factor
-Drive projects your Drive account can access. Any other use, and any
+You may install the plugin and use it with any AI agent or assistant, such as
+Hermes Agent, Claude or ChatGPT, to work with the Factor Drive projects your
+Drive account can access. Installing the plugin from a public catalog or
+repository that lists it is not redistribution. Any other use, and any
 modification or redistribution of the plugin or its contents, requires
 written permission from Factor Technology LLC.
 

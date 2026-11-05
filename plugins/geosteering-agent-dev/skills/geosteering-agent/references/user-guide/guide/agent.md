@@ -27,12 +27,9 @@ Optionally, on the factor-drive connector set its two tool-permission groups —
 
 ChatGPT takes the connector but not the skill, so there are no slash commands; ask in plain language and the agent works the same way.
 
-Factor Drive has been submitted to the ChatGPT app directory. Once it is listed there, install it from the directory instead. Until then, add it as a custom connector:
-
-1. Turn on **Developer mode**: **Settings → Apps & Connectors → Advanced settings** (OpenAI has moved this toggle; if it is not there, look under **Settings → Security**). Custom connectors are gated by plan, and on a Business, Enterprise, or Edu workspace an administrator may have to enable them.
-2. **Settings → Apps & Connectors → Create**. Name it `factor-drive`, enter the `/mcp` URL above, and leave authentication as OAuth with no client ID or secret. ChatGPT discovers the sign-in flow on its own.
-3. Sign in to Drive in the browser window that opens and allow the permissions.
-4. In a conversation, enable **factor-drive** from the tools menu (the **+** button) and ask away.
+1. Install **Factor Drive** from the ChatGPT app directory.
+2. Sign in to Drive in the browser window that opens and allow the permissions.
+3. In a conversation, enable **Factor Drive** from the tools menu (the **+** button) and ask away.
 
 ### Other hosts
 
