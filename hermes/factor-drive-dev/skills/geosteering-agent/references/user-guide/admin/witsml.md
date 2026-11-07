@@ -8,7 +8,7 @@ Drive can act as a WITSML *client*, polling an external WITSML server for new tr
 
 WITSML servers are registered **per user**, not per project: once added, a server is available to all of your projects. Manage them from **Account → Manage WITSML Servers**; a project's WITSML tab links there.
 
-Registration takes the server URL, your credentials, and the WITSML version (**1.3.x**, or **1.4.x** in beta). Drive reads the new server's catalog in the background, so its wells may take a minute or two to appear. The servers page lists each registered server with per-row **Refresh** and **Delete** actions. Delete asks no confirmation and removes the pollers of every project that uses the server.
+Registration takes the server URL, your credentials, and the WITSML version (**1.3.x**, or **1.4.x** in beta). Drive reads the new server's catalog in the background, so its wells may take a minute or two to appear. The servers page lists each registered server with per-row **Refresh** and **Delete** actions. When pollers use a server, **Delete** first says how many and asks you to confirm. Deleting pauses those pollers and keeps their settings; someone with Write access to each well must choose another server to resume polling. If one of them is the last source of live data for its well, that well stops receiving new data. A poller whose server was deleted shows as "No server (the server was deleted)" on its WITSML tab.
 
 ## The well list and refreshing
 
@@ -21,7 +21,7 @@ Each WITSML-connected project has two pollers, configured in [Setup step 2](../g
 - a **trajectory poller** — *Standard* (fetches a WITSML Trajectory object) or *Continuous Inc/Azi* (synthesizes surveys from inclination/azimuth log curves, for MWD services that publish no Trajectory object), and
 - a **log poller** — fetches the designated gamma-ray curve.
 
-Pollers start **paused**. The live-updates control in [Setup step 6](../guide/setup/run-job.md#live-updates) turns both on or off together. While on, Drive fetches every ten minutes and, on new data, re-runs the job automatically to extend the interpretation; the Run button is disabled meanwhile.
+Pollers start **paused**, and can run only while WITSML is the project's data source: choose it with **Use WITSML for this project** on the WITSML tab. Saving a poller's settings needs a server of your own; anyone with Write access to the project can pause polling. The live-updates control in [Setup step 6](../guide/setup/run-job.md#live-updates) turns both on or off together. While on, Drive fetches every ten minutes and, on new data, re-runs the job automatically to extend the interpretation; the Run button is disabled meanwhile.
 
 Points to know:
 

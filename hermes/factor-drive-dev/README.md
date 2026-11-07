@@ -95,5 +95,5 @@ so it can sit alongside the production plugin. Don't hand it to a customer.
 
 ---
 
-`factor-drive-dev` 0.5.81 · connector `https://drive-app-dev.factor.technology/mcp` ·
+`factor-drive-dev` 0.5.82 · connector `https://drive-app-dev.factor.technology/mcp` ·
 built from the drive-app monorepo with `yarn workspace agent build:plugin`.

@@ -9,7 +9,7 @@ Drive can move whole projects between systems, and export project data for use i
 A **native archive** is a complete, portable copy of a project: settings, pilot wells and markers, active-well data, well plan, prior structure, target line, interpretations, notes, the background image with its registration, and the latest job file. Computed results — the MPE and the marginals — are not included; run the imported project to recompute them.
 
 - **Export** — from a project's **Inventory** tab, choose **Export to Native Archive**, then press **Export Project** on the page that opens to download the archive.
-- **Import** — from the Projects page sidebar, choose **Import**, then supply the archive file, an owner, and a new project name.
+- **Import** — from the Projects page sidebar, choose **Import**, then supply the archive file, an owner, and a new project name. The imported project starts at manual file upload: an archive holds no WITSML pollers or email address. It gets a new well of its own, with the identifier in the archive; if that identifier is taken in the owner's namespace, a suffix such as (2) is added and the import says so. The job file is not imported: run the project to compute it from the start.
 
 Native archives are the right tool for backup, for moving a project between deployments, and for sending a complete project to support.
 

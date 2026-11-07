@@ -32,6 +32,6 @@ On WITSML and email projects, a pause/resume control shows whether live updates 
 - **Run / Extend** — the main button. It reads **Run** on a fresh (or reset) project and **Extend** when prior computed state exists; extending continues incrementally from where the last job stopped, which is why routine updates are fast. It is disabled when there is nothing new to extend.
 - **Reset** — rewinds the computation to the beginning: discards computed results (your data and settings are kept) and interrupts any running job. It does not start a run by itself.
 - **Reset and Run** — reset, then recompute the whole well. Required after state-invalidating edits (notably [fit parameters](./align-logs.md#fit-parameters)) and the normal way to apply a tuning change to the entire well.
-- **Clear Well Data** — deletes the active well's trajectory and log from the project. Confirmation required.
+- **Clear Well Data** — deletes the active well's trajectory and log, for every project on the well. It needs Write access to the well. Confirmation required.
 
 Starting a run navigates to the Profile tab; progress appears at the right of the tab bar.

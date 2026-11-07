@@ -8,7 +8,7 @@ The Profile tab is Drive's main working view: an interactive cross section of th
 
 ### Scene
 
-Overall display: the **Lateral Domain** (MD, VS, or MAPD along the horizontal axis), toggles for the active log, type log, correlations, cursor info, legend and the project name, and the **Depth axis** — **TVDSS**, **TVDTL** (type-log TVD), or **TVD** (see [depth frames](./concepts.md#depth-frames)).
+Overall display: the **Lateral Domain** (MD, VS, or MAPD along the horizontal axis), toggles for the active log, type log, correlations, cursor info, legend and the project name (under the name, the project's well; with Write access to the well, the pencil beside it renames the well for every project that uses it), and the **Depth axis** — **TVDSS**, **TVDTL** (type-log TVD), or **TVD** (see [depth frames](./concepts.md#depth-frames)).
 
 ### Components
 
