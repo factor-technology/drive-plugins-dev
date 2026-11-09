@@ -25,7 +25,7 @@ In [Setup step 1](./setup/pilot-well.md), upload the pilot's LAS file and pick t
 In [Setup step 2](./setup/active-well.md), say whether you have a well plan (on a well still to be drilled it lets Drive lay out the cross section before the first survey arrives), then choose a data source:
 
 - **Manual File Upload** — upload the trajectory CSV and the LAS gamma log (and optionally a well plan).
-- **WITSML Connection** — pick a server, well, wellbore, trajectory, and log curve. Polling starts paused; you start it on the Run Job step.
+- **WITSML Connection** — pick a server, well, wellbore, trajectory, and log curve. Polling starts paused; the first Run on the Run Job step turns it on.
 - **Email** — generate a project email address and have your data provider send LAS/CSV/Excel attachments to it.
 
 ## 4 · Dip and azimuth

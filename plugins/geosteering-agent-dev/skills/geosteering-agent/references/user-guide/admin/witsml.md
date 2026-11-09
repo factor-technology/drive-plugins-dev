@@ -21,10 +21,10 @@ Each WITSML-connected project has two pollers, configured in [Setup step 2](../g
 - a **trajectory poller** — *Standard* (fetches a WITSML Trajectory object) or *Continuous Inc/Azi* (synthesizes surveys from inclination/azimuth log curves, for MWD services that publish no Trajectory object), and
 - a **log poller** — fetches the designated gamma-ray curve.
 
-Pollers start **paused**, and can run only while WITSML is the project's data source: choose it with **Use WITSML for this project** on the WITSML tab. Saving a poller's settings needs a server of your own; anyone with Write access to the project can pause polling. The live-updates control in [Setup step 6](../guide/setup/run-job.md#live-updates) turns both on or off together. While on, Drive fetches every ten minutes and, on new data, re-runs the job automatically to extend the interpretation; the Run button is disabled meanwhile.
+Pollers start **paused**, and can run only while WITSML is the project's data source: choose it with **Use WITSML for this project** on the WITSML tab. Saving a poller's settings needs a server of your own; anyone with Write access to the project can pause polling. The live-updates control in [Setup step 6](../guide/setup/run-job.md#live-updates) turns both on or off together; on a project that has not run yet, the first Run turns them on once the run has started. While on, Drive fetches every few minutes and, on new data, re-runs the job automatically to extend the interpretation; the Run button is disabled meanwhile.
 
 Points to know:
 
 - A poll failure (unreachable server, changed identifiers) surfaces as an error rather than a silent retry — check the project's status and the server registration.
-- New data arriving mid-run restarts the job.
+- New data arriving mid-run restarts the job, as a run capped at nine minutes of reverse phase that recomputes from the last saved state. Before a run's first result, every poll restarts it, new data or not.
 - **Refresh Log and Trajectory** on the project's WITSML tab fetches the latest data once, using the saved poller configuration, without running the job.

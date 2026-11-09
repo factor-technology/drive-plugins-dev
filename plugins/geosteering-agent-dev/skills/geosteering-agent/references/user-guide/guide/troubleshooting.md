@@ -36,7 +36,7 @@ This — and only this — is the signal to raise the [Executor](./setup/run-job
 
 ### Run is disabled on a WITSML or email project
 
-Live updates are on: Drive runs the job itself when data arrives, and the Run button stays disabled meanwhile. For a deliberate run, pause [live updates](./setup/run-job.md#live-updates), run, then resume — this also keeps new data from restarting a one-shot run.
+Live updates are on: Drive runs the job itself when data arrives, and the Run button stays disabled meanwhile. For a deliberate run, pause [live updates](./setup/run-job.md#live-updates), run, then resume. While they are on, a poll with new data replaces a run still in progress with a WITSML run capped at nine minutes of reverse phase, which recomputes from the last saved state; to let a one-shot run finish uncapped, resume once it has finished.
 
 ## When you change things
 

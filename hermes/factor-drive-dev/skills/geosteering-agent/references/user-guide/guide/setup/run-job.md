@@ -25,7 +25,7 @@ Two checkboxes ask Drive to alert you when the computed interpretation indicates
 
 ## Live updates
 
-On WITSML and email projects, a pause/resume control shows whether live updates are running or paused. WITSML polling starts paused: start it here once the connection is set up. While live updates are on, the **Run** button is disabled — Drive runs the job itself when data arrives — so for a deliberate run, pause, run, then resume. In WITSML mode pausing stops data retrieval; in email mode it stops only the automatic runs, and emailed data still lands.
+On WITSML and email projects, a pause/resume control shows whether live updates are running or paused. WITSML polling starts paused. On a project that has not run yet (or was just reset), where you can write the well, the first **Run** turns live updates on once the run has started: in the guided Run step the main button reads **Run and turn on live updates** (a link, **Run without live updates**, keeps the run one-shot), and under All run controls the first **Run** does the same. After that first run, **Extend** leaves live updates as they are. While live updates are on, the **Run** button is disabled — Drive runs the job itself when data arrives — so for a deliberate run, pause, run, then resume. Before a run's first result, each WITSML poll or arriving email restarts it, new data or not; after that, only new data does. In WITSML mode pausing stops data retrieval; in email mode it stops only the automatic runs, and emailed data still lands.
 
 ## Running
 
@@ -34,4 +34,4 @@ On WITSML and email projects, a pause/resume control shows whether live updates 
 - **Reset and Run** — reset, then recompute the whole well. Required after state-invalidating edits (notably [fit parameters](./align-logs.md#fit-parameters)) and the normal way to apply a tuning change to the entire well.
 - **Clear Well Data** — deletes the active well's trajectory and log, for every project on the well. It needs Write access to the well. Confirmation required.
 
-Starting a run navigates to the Profile tab; progress appears at the right of the tab bar.
+Starting a run opens the Profile tab, whatever the project's data source; progress appears at the right of the tab bar.

@@ -14,7 +14,7 @@ The well has its own name, which you can rename with Write access to the well (i
 
 Drive takes active-well data three ways, one tab each. Looking at a tab changes nothing: the tab marked **In force** is this project's data source. To change it, open another tab and press its button (**Use WITSML for this project**, and so on), then confirm.
 
-The change keeps the data you already loaded. Leaving WITSML pauses this project's pollers. Leaving email stops automatic runs on emailed data; files sent to the project's address still update the well. Entering a source starts nothing: WITSML polling stays paused until you resume it, and email runs stay paused until the project has run.
+The change keeps the data you already loaded. Leaving WITSML pauses this project's pollers. Leaving email stops automatic runs on emailed data; files sent to the project's address still update the well. Entering a source starts nothing: WITSML polling stays paused until you turn it on, and automatic runs on emailed data stay paused until the project has run. On a project that has not run yet, its first Run can turn either on.
 
 The guided stage's source question is the same change: answering it sets the data source. A cloned or imported project starts at manual file upload.
 
@@ -26,7 +26,7 @@ The guided stage's source question is the same change: answering it sets the dat
 
 ### WITSML connection
 
-Drive polls a WITSML server every ten minutes for new trajectory and log data and extends the interpretation as data arrives. Servers are registered on your [WITSML Servers page](../../admin/witsml.md); here, select the server, then drill down: well → wellbore → trajectory and log → curves.
+Drive polls a WITSML server every few minutes for new trajectory and log data and extends the interpretation as data arrives. Servers are registered on your [WITSML Servers page](../../admin/witsml.md); here, select the server, then drill down: well → wellbore → trajectory and log → curves.
 
 Settings of note:
 
@@ -37,7 +37,7 @@ Settings of note:
 | **Mnemonic** | The gamma-ray curve to ingest (optionally with a separate depth-index curve). |
 | **Splice Overlap (ft)** | How each fetch joins the stored data: empty replaces it entirely, 0 appends, and a positive value replaces the stored data over that overlap. |
 
-You can look at and save these settings while another data source is in force, and they stay paused. Polling starts paused; start it on the [Run Job step](./run-job.md#live-updates). **Refresh Log and Trajectory** fetches the latest data once, without running the job; it and resuming need WITSML to be the data source. If a well or curve you expect is missing from the pulldowns, refresh the server on the WITSML Servers page so Drive re-reads its well list.
+You can look at and save these settings while another data source is in force, and they stay paused. Polling starts paused; on a project that has not run yet, the first Run on the [Run Job step](./run-job.md#live-updates) turns it on, or you can start it there yourself. **Refresh Log and Trajectory** fetches the latest data once, without running the job; it and resuming need WITSML to be the data source. If a well or curve you expect is missing from the pulldowns, refresh the server on the WITSML Servers page so Drive re-reads its well list.
 
 ### Email
 
