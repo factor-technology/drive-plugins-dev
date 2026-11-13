@@ -8,7 +8,7 @@ Rather than producing a single line on a cross section, the computation produces
 
 ## How the application is organized
 
-Factor Drive opens on the **Projects** page, a list of every project you can see. Each project corresponds to one active well. From a project's row you open the project itself, which has four tabs:
+Factor Drive opens on the **Projects** page, a list of every project you can see. Each project is one interpretation of an active well, which several projects can share. From a project's row you open the project itself, which has four tabs:
 
 | Tab | Purpose |
 |---|---|

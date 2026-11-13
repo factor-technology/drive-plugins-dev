@@ -34,9 +34,9 @@ The data supports two stories that part ways at that depth. A fault near the div
 
 This — and only this — is the signal to raise the [Executor](./setup/run-job.md#other-settings) tier, or alternatively to reduce cost: coarser **Depth Resolution** / **MD Interval**, more aggressive **Prune**, or a smaller **Dip Tolerance**. A generic runtime error is not an out-of-memory signal.
 
-### Run is disabled on a WITSML or email project
+### Run is disabled while Automatic runs are on
 
-Live updates are on: Drive runs the job itself when data arrives, and the Run button stays disabled meanwhile. For a deliberate run, pause [live updates](./setup/run-job.md#live-updates), run, then resume. While they are on, a poll with new data replaces a run still in progress with a WITSML run capped at nine minutes of reverse phase, which recomputes from the last saved state; to let a one-shot run finish uncapped, resume once it has finished.
+The project's [Automatic runs](./setup/run-job.md#automatic-runs) are on and its well is receiving data: Drive will run the job itself when the well grows, and the Run button stays disabled meanwhile. For a deliberate run, turn them off, run, then turn them on again once the run has finished. While they are on, a WITSML delivery with new data will replace a run still in progress with one capped at nine minutes of reverse phase, which recomputes from the last saved state. The switch is this project's alone; the well will go on receiving data for the others.
 
 ## When you change things
 

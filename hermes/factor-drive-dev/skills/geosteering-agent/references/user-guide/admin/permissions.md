@@ -21,6 +21,8 @@ Access to a project is granted at one of these levels; higher levels include the
 
 Your effective permission on a project is the *strongest* of: a direct grant on the project, a grant through group membership, and ownership (project in your own scope).
 
+A well has an access list of its own, with Read, Write and Admin, shown by **Well access** in the Active Well step. Changing the well's data, its data source or its **Receiving data** switch needs Write on the well. A project's Automatic runs need Write on the project and Read on the well.
+
 ## Project members
 
 On the Projects page, the **Project members** action on a row opens the access-control dialog (available to project ADMINs). Press **+** to add a row, type or pick the user — the suggestions are the members of your company's group; for anyone else, type the exact user name — choose their level (new rows start at READ), and save. Your own row is locked. The table shows direct grants only, not access that comes through a group.

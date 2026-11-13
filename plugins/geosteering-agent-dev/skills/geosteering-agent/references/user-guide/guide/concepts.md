@@ -6,7 +6,7 @@ This page defines the terms Drive uses. The definitions are precise; several dif
 
 ## Wells and logs
 
-**Active well.** The well currently being geosteered. It carries a measured **trajectory** (surveys: MD, inclination, azimuth — growing as drilling progresses), a growing LWD **active log** (gamma ray, in the well's own measured-depth frame), an optional **well plan** (the intended path — a visual aid only, not used in the computation), and an optional set of **ignore ranges** (MD intervals excised from the computation, for example around a tool malfunction).
+**Active well.** The well currently being geosteered. It carries a measured **trajectory** (surveys: MD, inclination, azimuth — growing as drilling progresses), a growing LWD **active log** (gamma ray, in the well's own measured-depth frame), an optional **well plan** (the intended path — a visual aid only, not used in the computation), and one data source that brings its data in. Several projects can use one well, each an interpretation of it with its own optional set of **ignore ranges** (MD intervals excised from the computation, for example around a tool malfunction).
 
 **Pilot well** (also called an offset well). A reference well whose vertical gamma-ray log serves as the **type log** the computation matches against. Each pilot carries a vertical gamma log, formation tops, and the MD range of the lateral over which it applies. Every project has at least one pilot; the first starts at MD 0 and defines the project's depth frame. Pilot logs are stored vertically, in the pilot's own TVD (positive, measured down) — if the source well was deviated, Drive straightens the log at upload time using a trajectory you supply, then discards that trajectory.
 
@@ -48,7 +48,7 @@ Between adjacent pilots Drive builds an interpolated type log by warping each la
 
 ## The job
 
-A project is not one computation — it is a series of jobs over time, one per data extension. Drive keeps prior job state, so when new survey and log data arrive it **extends** the interpretation incrementally from where it left off. **Reset** (on the Run Job step) discards the computed state (keeping your data and settings) so the next run recomputes the whole well; this is required after edits that invalidate prior state, notably changes to fit parameters. See [Run Job](./setup/run-job.md).
+A project is not one computation — it is a series of jobs over time, one per data extension. Drive keeps prior job state, so when the well's survey and log grow, a run **extends** the interpretation incrementally from where it left off. **Reset** (on the Run Job step) discards the computed state (keeping your data and settings) so the next run recomputes the whole well; this is required after edits that invalidate prior state, notably changes to fit parameters. See [Run Job](./setup/run-job.md).
 
 ## Interpretations
 

@@ -11,7 +11,7 @@ you sign in to Drive the first time a tool runs.
 | --- | --- |
 | `geosteering-agent-dev` | https://drive-app-dev.factor.technology |
 
-Current release: **0.5.83**.
+Current release: **0.5.84**.
 
 ## Install
 

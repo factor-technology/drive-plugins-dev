@@ -1,6 +1,6 @@
 # Connecting the Drive Tool Catalog
 
-The geosteering agent needs the Drive tool catalog (~82 tools: UI parity for
+The geosteering agent needs the Drive tool catalog (~90 tools: UI parity for
 project setup, tuning, alignment, runs, WITSML). It is served over HTTP by the
 Drive server itself — there is **nothing to install on the user's machine and
 no token to paste**. There are **two ways to get it**:
@@ -50,8 +50,9 @@ the equivalent):
    a permission scope.
 
 The authorization is the user's own Drive login, so the tools inherit exactly
-that user's project permissions. Drive's middleware enforces per-project access
-on every call; the connector cannot do anything the underlying user couldn't.
+that user's permissions on each project and on each well. Drive's middleware
+enforces them on every call; the connector cannot do anything the underlying
+user couldn't.
 
 Two notes worth knowing:
 
@@ -73,10 +74,11 @@ Two notes worth knowing:
   server/poller/crawl.
 - Project lifecycle: `create_project`, `delete_project`.
 - Pilot wells / active well: pilot create + log upload, markers, top
-  of target, active trajectory + plan + log, email config, ignore
-  ranges, data-source mode.
+  of target, active trajectory + plan + log, the well's email settings
+  and data source, ignore ranges.
 - Dip & azimuth, log alignment, job settings, run configuration.
-- WITSML servers (read and refresh), per-project pollers, sync toggle.
+- WITSML servers (read and refresh), the well's pollers and its
+  receiving switch, and each project's Automatic runs (`set_auto_run`).
 - `trigger_job_rerun`.
 - Async long-runners: `start_align_logs`, `start_refresh_witsml_server`,
   `get_operation_status` — the timeout-safe front ends.
@@ -101,9 +103,9 @@ every user, so it carries no filesystem readers and no raw HTTP escape hatch:
   Reconnect in the host's connector settings; there is no token file to edit.
 - **A call refused naming a permission** — the granted scopes don't cover it.
   Reconnect and approve the fuller set.
-- **Subset of tools 4xx** — the user's project permissions don't cover the
-  operation. The tool returns `{"error": true, "status": 403, ...}` rather
-  than crash.
+- **Subset of tools 4xx** — the user's permissions on the project, or on its
+  well, don't cover the operation. The tool returns
+  `{"error": true, "status": 403, ...}` rather than crash.
 - **No tools at all** — no connector is configured (or the plugin didn't
   install). Point the user at §1 or §2; do not guess the Drive host for them.
 - **The large-file send fails with a network error** — code-execution egress is
