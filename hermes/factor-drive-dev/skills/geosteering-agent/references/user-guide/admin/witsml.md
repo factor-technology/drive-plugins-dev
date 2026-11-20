@@ -12,7 +12,7 @@ Registration takes the server URL, your credentials, and the WITSML version (**1
 
 ## The well list and refreshing
 
-When a server is added, Drive reads its catalog of wells, wellbores, trajectories, logs, and curves; the WITSML tab's pulldowns are populated from that snapshot. If a newly available well or curve is missing from the pulldowns, use **Refresh** to re-read the server. Refresh waits up to 90 seconds; on a large server the crawl may still be running after that, so try the pulldowns again a little later.
+When a server is added, Drive reads its catalog of wells, wellbores, trajectories, logs, and curves; the pulldowns of a well's WITSML connection are populated from that snapshot. If a newly available well or curve is missing from the pulldowns, use **Refresh** to re-read the server. Refresh waits up to 90 seconds; on a large server the crawl may still be running after that, so try the pulldowns again a little later.
 
 ## Pollers
 
@@ -27,4 +27,4 @@ Points to know:
 
 - A poll failure (unreachable server, changed identifiers) surfaces as an error rather than a silent retry: check the well's status in the well panel and the server registration.
 - New data arriving mid-run restarts the job of a project with Automatic runs on, as a run capped at nine minutes of reverse phase that recomputes from the last saved state. A poll that brings nothing new leaves a running job alone.
-- **Refresh Log and Trajectory** on the WITSML tab fetches the latest data once, with the well's saved pollers, without running any job.
+- **Refresh Log and Trajectory**, on the Active Well step of a well whose data source is WITSML, fetches the latest data once, with the well's saved pollers, without running any job.

@@ -2,7 +2,7 @@
 
 # Step 6 · Run Job
 
-The final step configures and launches the computation. A readiness message just above the buttons tells you whether the project can run and what, if anything, is missing.
+The final step configures and launches the computation. It opens on the **Run** box: a readiness message tells you whether the project can run and what, if anything, is missing, with the run buttons and **Automatic runs** under it. The run options, the notifications and autotargeting follow.
 
 ## Compute range
 

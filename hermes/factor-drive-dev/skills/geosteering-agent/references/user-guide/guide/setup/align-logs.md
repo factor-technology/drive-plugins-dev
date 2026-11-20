@@ -18,7 +18,7 @@ The run takes from a few seconds up to a couple of minutes. On success it fills 
 
 If *no* windows agree, Drive changes nothing and reports that alignment failed. That is a deliberate fail-safe, not an error to retry blindly — inspect the log quality and, if appropriate, align manually.
 
-The **Alignment** switch chooses between **Auto (depth-warped)** and **Manual (offset)**. In Auto the depth datum is the solver's and its box is disabled; switch to Manual to set your own, which is remembered if you switch back. Running Auto-align again returns the switch to Auto.
+The **Alignment** switch chooses between **Auto (depth-warped)** and **Manual (offset)**. In Auto the depth datum is the solver's and its box is disabled; switch to Manual to set your own datum, which is remembered if you switch back. Running Auto-align again returns the switch to Auto.
 
 ::: tip Always review
 Whatever the solver reports, verify the alignment visually on the log track before running the job. In strongly characterized sections (a hot shale, say) many users align by eye and type the depth datum directly — that is a perfectly good workflow.

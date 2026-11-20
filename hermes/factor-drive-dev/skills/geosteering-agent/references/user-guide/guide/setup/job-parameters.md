@@ -29,6 +29,10 @@ The grid has one column per MD range (**Split Range** and **Delete Range** above
 
 **Reset to Defaults** restores the shipped parameter set; apparent dip and curvature belong to the Dip and Azimuth step and are left as they are.
 
+## Ignored ranges
+
+If a stretch of the active log is unusable — a tool malfunction, an obvious spike — press **Ignore…** and define **Ignore Log Ranges**: MD intervals the computation skips without editing the raw log. The ranges belong to this project, not to its well: another project on the same well keeps its own ranges. Use ignore ranges for bad data; use the tolerances above for data that is merely noisy.
+
 ::: tip Defaults first
 The defaults are well-tested starting values. Run with them, look at the result, and only then tune — one parameter at a time, ideally on a [cloned project](../projects-page.md#per-row-actions) or a bounded compute range so experiments stay cheap.
 :::
