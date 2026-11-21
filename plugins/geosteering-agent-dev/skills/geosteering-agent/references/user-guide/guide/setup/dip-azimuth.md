@@ -2,7 +2,7 @@
 
 # Step 3 · Dip and Azimuth
 
-The computation needs a *prior* — an expectation, before seeing the gamma data, of how the target formation tilts along the lateral. This step provides it.
+The computation needs a *prior* — an expectation, before seeing the gamma data, of how the target formation dips along the lateral. This step provides it.
 
 ## VS Azimuth
 

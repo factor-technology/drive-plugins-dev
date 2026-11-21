@@ -12,7 +12,7 @@ Factor Drive opens on the **Projects** page, a list of every project you can see
 
 | Tab | Purpose |
 |---|---|
-| **Setup** | Guided Setup: six stages that ask a question each and collect that area's files and settings under it. Every stage has an All controls link to the full panel. A control at the top of the rail opens every stage that way. |
+| **Setup** | Guided Setup: six stages that ask a question each and collect that area's files and settings under it. Under its title, every stage has an All options link to the full panel. A control at the top of the rail opens every stage that way. |
 | **Profile** | The interactive cross section — the main working view for reading computed interpretations and drawing manual ones. |
 | **Background** | Upload and register a background (for example seismic) image behind the cross section. |
 | **Inventory** | Browse and download every data object in the project: logs, trajectories, interpretations, the latest job file and log. |
