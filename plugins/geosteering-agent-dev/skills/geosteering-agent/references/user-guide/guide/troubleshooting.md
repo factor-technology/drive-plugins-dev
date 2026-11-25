@@ -38,6 +38,10 @@ This — and only this — is the signal to raise the [Executor](./setup/run-job
 
 The project's [Automatic runs](./setup/run-job.md#automatic-runs) are on and its well is receiving data: Drive will run the job itself when the well grows, and the Run button stays disabled meanwhile. For a deliberate run, turn them off, run, then turn them on again once the run has finished. While they are on, a WITSML delivery with new data will replace a run still in progress with one capped at nine minutes of reverse phase, which recomputes from the last saved state. The switch is this project's alone; the well will go on receiving data for the others.
 
+### An automatic run did not start
+
+With [Automatic runs](./setup/run-job.md#automatic-runs) on, a banner at the top of the project page and a warning under the switch in Setup say why the last start did not go through, with the time. The usual causes are that the user the project runs as can no longer write it, that the account cannot run now, and that **First MD to Compute** is not set. When First MD to Compute is not set, align the logs in the Align stage of Setup, or enter First MD to Compute under All run options; the next delivery will then try again. A project on an email well will wait for the next mail.
+
 ## When you change things
 
 - **Fit parameters** invalidate computed state: follow with **Reset and Run**.
